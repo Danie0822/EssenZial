@@ -1,0 +1,45 @@
+.form-control {
+    border-radius: 0;
+    /* Bordes sin redondear */
+    border: 1px solid #ccc;
+    /* Borde sólido */
+    background-color: transparent;
+    /* Fondo transparente */
+    color: #333;
+    /* Color del texto */
+    font-size: 1rem;
+    /* Tamaño de fuente */
+    padding: 10px;
+    /* Espaciado interno */
+    transition: border-color 0.3s ease;
+    /* Transición suave del color del borde */
+}
+
+.form-control:focus {
+    border-color: #0b0b0b;
+    /* Color del borde al estar enfocado */
+    box-shadow: none;
+    /* Sin sombra */
+}
+
+.form-control::placeholder {
+    color: #999;
+    /* Color del marcador de posición */
+}
+
+.form-label {
+    font-weight: normal;
+    /* Texto normal */
+    color: #555;
+    /* Color de la etiqueta */
+}
+
+.forgot-password a {
+    color: black;
+    /* Color del texto normal */
+}
+
+.forgot-password a:focus {
+    color: blue;
+    /* Color del texto cuando está enfocado */
+}
