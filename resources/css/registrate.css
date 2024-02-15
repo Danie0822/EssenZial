@@ -43,3 +43,6 @@
     color: blue;
     /* Color del texto cuando está enfocado */
 }
+  hr {
+    margin-bottom: 0;
+  }

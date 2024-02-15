@@ -101,9 +101,7 @@ CREATE TABLE IF NOT EXISTS tb_pedidos (
     fecha_pedido DATE NOT NULL, 
     estado_pedido VARCHAR(250),
     tipo_pago BOOLEAN DEFAULT TRUE,
-    id_cliente INT NOT NULL,
     id_direccion INT NOT NULL, 
-    FOREIGN KEY (id_cliente) REFERENCES tb_clientes(id_cliente), 
     FOREIGN KEY (id_direccion) REFERENCES tb_direcciones(id_direccion)
 ) ENGINE=InnoDB;
 
