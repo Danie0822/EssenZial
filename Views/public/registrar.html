@@ -7,14 +7,8 @@
   <title>Tu Página</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../resources/css/registrate.css">
-  <style>
-    /* Estilo adicional si es necesario */
-    .imagen-full-height {
-      height: 100%;
-      object-fit: cover; /* Esto asegura que la imagen cubra todo el contenedor */
-    }
-  </style>
 </head>
+
 <body>
   <div class="container-xxl">
     <div class="row mt-3">
@@ -27,30 +21,54 @@
         </nav>
       </div>
       <div class="col-md-8 text-right">
-        <button type="button" class="btn btn btn-dark">Registrarse</button>
-        <button type="button" class="btn btn-light">Iniciar Sesión</button>
+        <button type="button" class="btn btn-light">Registrarse</button>
+        <button type="button" class="btn btn btn-dark">Iniciar sesión</button>
       </div>
     </div>
     <hr>
-    <div class="row padding  grid gap-0 row-gap-3">
-        <div class="col-md-6">
-          <img src="../../resources/img/mujer-caucasica.png" class="img-fluid" alt="Imagen Grande">
-        </div>
-        <div class="col-md-6">
-        <form class="p-2 g-col-6">
+    <div class="row">
+      <div class="col-md-6 fondo">
+      </div>
+      <div class="col-md-6">
+        <form class="formulario">
           <h2>Iniciar Sesión</h2>
+          <p>Registrate gratis para acceder a todos nuestros productos</p>
           <div class="form-group">
-            <label for="correo">Correo electrónico</label>
+            <label for="correo">Nombre</label>
+            <input type="email" class="form-control" id="correo" placeholder="Daniel">
+          </div>
+          <div class="form-group">
+            <label for="correo">Apellido</label>
+            <input type="email" class="form-control" id="correo" placeholder="Morales">
+          </div>
+          <div class="form-group">
+            <label for="correo">Teléfono</label>
+            <input type="email" class="form-control" id="correo" placeholder="75963208">
+          </div>
+          <div class="form-group">
+            <label for="correo">Correo</label>
             <input type="email" class="form-control" id="correo" placeholder="correo@example.com">
           </div>
           <div class="form-group">
             <label for="contrasena">Contraseña</label>
             <input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
-            <small class="forgot-password"><a href="#">Olvidé mi contraseña</a> </small>
+            <small class="forgot-password">Usa 8 o más caracteres con una combinacion de letras, números y símbolos</small>
+          </div>
+          <div class="form-group">
+            <label for="contrasena">Confirmar contraseña</label>
+            <input type="password" class="form-control" id="contrasena" placeholder="Confirmar">
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+              <label class="form-check-label" for="flexCheckDefault">
+                Aceptas nuestros Términos de uso y Políticas de Privacidad
+              </label>
+            </div>
           </div>
           <button type="button" class="btn  btn-dark">Ingresar</button>
         </form>
-        <p class="forgot-password" class="mt-3">¿No tienes una cuenta? <a href="#">Regístrate</a></p>
+        <p class="forgot-password" class="mt-3">¿Ya tienes una cuenta? <a href="#">Inicia sesión</a></p>
       </div>
     </div>
   </div>
