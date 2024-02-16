@@ -4,6 +4,7 @@ const config = require('./config');
 const clientes = require('./modulos/clientes/rutas');
 const usuario = require('./modulos/usuarios/rutas');
 const Login = require('./modulos/Login/rutas');
+const Admin = require('./modulos/admin/rutas');
 const app = express(); 
 const error = require('./red/errors'); 
 const cors = require('cors');
@@ -20,7 +21,8 @@ app.set('port', config.app.port);
 //rutas 
 app.use('/api/clientes', clientes); 
 app.use('/api/usuarios', usuario); 
-app.use('/api', Login); 
+app.use('/Login', Login); 
+app.use('/api/admin', Admin)
 app.use(error); 
 
 module.exports = app; 

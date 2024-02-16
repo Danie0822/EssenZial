@@ -63,15 +63,15 @@ function agregar(tabla, data) {
     return ejecutarConsulta(sql, data);
 }
 
-function actualizar(tabla, data) {
-    const sql = `UPDATE ${tabla} SET ? WHERE id= ?`;
-    return ejecutarConsulta(sql, [data, data.id]);
+function actualizar(tabla, data, campoIdentificacion) {
+    const sql = `UPDATE ${tabla} SET ? WHERE ${campoIdentificacion} = ?`;
+    return ejecutarConsulta(sql, [data, data[campoIdentificacion]]);
 }
 
 
 
-function eliminar(tabla, id) {
-    const sql = `DELETE FROM ${tabla} WHERE id = ?`;
+function eliminar(tabla, id, nombreid) {
+    const sql = `DELETE FROM ${tabla} WHERE ${nombreid} = ?`;
     return ejecutarConsulta(sql, [id]);
 }
 
