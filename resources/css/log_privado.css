@@ -1,0 +1,66 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.form-control:focus {
+  border-color: #0b0b0b;
+  /* Color del borde al estar enfocado */
+  box-shadow: none;
+  /* Sin sombra */
+}
+
+.form-label {
+  color: #555;
+  /* Color de la etiqueta */
+}
+.fondo {
+  background-image: url('../../resources/img/pef-logo.png');
+  height: 739px;
+  background-repeat: no-repeat;
+}
+
+.form-control {
+  border-radius: 10px;
+}
+
+.lb-Bienvenido {/* Movimiento de Textto*/ 
+  margin-left: 120px;
+  margin-top: 90px;
+}
+.lb-Ingresar {/* Movimiento de Textto*/ 
+  margin-left: 120px;
+  color: #555;
+}
+.lb-correo/* Movimiento de Textto*/ 
+{
+  margin-top: 50px;
+  margin-left: 120px;
+  margin-bottom: 20px; 
+  color: #555;
+}
+.txt-correo /* Movimiento de txt y cambio de tamaño*/ 
+{
+  height: 50px;
+  width: 450px;
+  margin-left: 120px;
+}
+.lb-clave /* Movimiento de Textto*/ 
+{
+  margin-left: 120px;
+  margin-bottom: 20px;
+  color: #555;
+}
+.txt-clave { /* Movimiento de txt y cambio de tamaño*/ 
+  height: 50px;
+  width: 450px;
+  margin-left: 120px;
+}
+.btn-ingresar
+{
+  border-radius: 10px;
+  margin-left: 120px;
+  margin-top: 20px;
+  width: 160px;
+  height: 50px;
+}
