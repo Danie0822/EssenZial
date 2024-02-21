@@ -5,11 +5,11 @@ const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
 
 // Rutas
-router.get('/',seguridad(), todos);
-router.get('/:id', seguridad(), id);
-router.delete('/delete/:id', seguridad(), eliminar);
-router.post('/save', seguridad(), agregar);
-router.put('/update', seguridad(), actualizar);
+router.get('/',seguridad('admin'), todos);
+router.get('/:id', seguridad('admin'), id);
+router.delete('/delete/:id', seguridad('admin'), eliminar);
+router.post('', seguridad('admin'), agregar);
+router.put('/update', seguridad('admin'), actualizar);
 
 // Funciones
 

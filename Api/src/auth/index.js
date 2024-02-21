@@ -1,12 +1,32 @@
 const jwt = require('jsonwebtoken');
 const config = require('../config');
-const secret = config.jwt.secret;
+const secretAdmin = config.jwt.secretAdmin;
+const secretCliente = config.jwt.secretCliente;
 
-function asignarToken(data) {
-    return jwt.sign(data, secret, { expiresIn: '1h' }); // Agregar tiempo de expiración
+function asignarToken(data, tipoUsuario) {
+    let secret;
+    if (tipoUsuario === 'admin') {
+        secret = secretAdmin;
+    } else if (tipoUsuario === 'cliente') {
+        secret = secretCliente;
+    } else {
+        throw new Error('Tipo de usuario inválido');
+    }
+
+    const tokenData = { ...data, userType: tipoUsuario };
+    return jwt.sign(tokenData, secret, { expiresIn: '60m' });
 }
 
-function verificarToken(token) {
+function verificarToken(token, tipoUsuario) {
+    let secret;
+    if (tipoUsuario === 'admin') {
+        secret = secretAdmin;
+    } else if (tipoUsuario === 'cliente') {
+        secret = secretCliente;
+    } else {
+        throw new Error('Tipo de usuario inválido');
+    }
+
     try {
         const decoded = jwt.verify(token, secret);
         return decoded;
@@ -15,30 +35,7 @@ function verificarToken(token) {
     }
 }
 
-function confirmarToken(req) {
-    const decodificado = decodificarCabecera(req);
-    return decodificado;
-}
-
-function obtenerToken(autorizacion) {
-    if (!autorizacion) {
-        throw new Error('No se proporcionó un token');
-    }
-    if (!autorizacion.startsWith('Bearer ')) {
-        throw new Error('Formato de token inválido');
-    }
-
-    return autorizacion.substring(7);
-}
-
-function decodificarCabecera(req) {
-    const autorizacion = req.headers.authorization || '';
-    const token = obtenerToken(autorizacion);
-    const decodificado = verificarToken(token);
-    return decodificado;
-}
-
 module.exports = {
     asignarToken,
-    confirmarToken
+    verificarToken
 };

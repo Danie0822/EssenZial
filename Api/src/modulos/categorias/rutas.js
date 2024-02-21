@@ -28,7 +28,7 @@ async function uno(req, res, next) {
 async function eliminar(req, res, next) {
     try {
         await controlador.eliminar(req.params.id);
-        respuestas.success(req, res, 'Categoria eliminado correctamente', 200);
+        respuestas.success(req, res, 'Categoria eliminada correctamente', 200);
     } catch (error) {
         next(error);
     }
@@ -39,38 +39,36 @@ async function agregar(req, res, next) {
         const categoriaData = req.body;
         let filePath = null;
         if (req.file) {
-            filePath = `uploads/${req.file.filename}`; // Concatena 'uploads/' con el nombre del archivo
+            filePath = `uploads/${req.file.filename}`;
             categoriaData.imagen_categoria = filePath;
         }
         await controlador.agregar(categoriaData, filePath);
-        respuestas.success(req, res, 'Cliente agregado correctamente', 200);
+        respuestas.success(req, res, 'Categoria agregada correctamente', 200);
     } catch (error) {
         next(error);
     }
 }
-
-
 
 async function actualizar(req, res, next) {
     try {
         const clienteData = req.body;
         let filePath = null;
         if (req.file) {
-            filePath = `uploads/${req.file.filename}`; // Concatena 'uploads/' con el nombre del archivo
+            filePath = `uploads/${req.file.filename}`;
             clienteData.ruta_imagen = filePath;
         }
-        await controlador.actualizar(clienteData.id,clienteData);
-        respuestas.success(req, res, 'Cliente actualizado correctamente', 200);
+        await controlador.actualizar(clienteData.id, clienteData);
+        respuestas.success(req, res, 'Categoria actualizada correctamente', 200);
     } catch (error) {
         next(error);
     }
 }
 
 // Rutas
-router.get('/', seguridad(), todos);
-router.get('/:id', seguridad(), uno);
-router.delete('/delete/:id', seguridad(), eliminar);
-router.post('/save', upload.single('imagen'), agregar); // Usamos multer con un solo archivo y el campo 'imagen'
-router.put('/update', seguridad(), upload.single('imagen'), actualizar); // Usamos multer con un solo archivo y el campo 'imagen'
+router.get('/', seguridad('admin'), todos);
+router.get('/:id', seguridad('admin'), uno);
+router.delete('/delete/:id', seguridad('admin'), eliminar);
+router.post('/save', seguridad('admin'), upload.single('imagen'), agregar);
+router.put('/update', seguridad('admin'), upload.single('imagen'), actualizar);
 
 module.exports = router;

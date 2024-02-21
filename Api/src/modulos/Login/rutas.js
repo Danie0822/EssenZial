@@ -5,6 +5,7 @@ const controlador = require('./index');
 
 // rutas
 router.get('/admin', loginAdmin);
+router.get('/cliente', loginCliente);
 
 
 // Funciones
@@ -25,5 +26,20 @@ async function loginAdmin(req, res, next) {
     }
 }
 
+async function loginCliente(req, res, next) {
+    try {
+        const { correo, clave } = req.query;
+        const result = await controlador.Cliente(correo, clave);
+       ;
+
+        if (result.token) {
+            respuestas.success(req, res, result.token, 200);
+        } else {
+            respuestas.error(req, res, result.error, 401);
+        }
+    } catch (error) {
+        next(error);
+    }
+}
 
 module.exports = router; 
