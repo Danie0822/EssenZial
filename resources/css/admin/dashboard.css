@@ -1,6 +1,39 @@
 .lateral{
     background-color: #F5F5F5;
 }
-.row-side{
-    margin-top: 20px;
+.row{
+    margin-top:10px;
+    margin-left: 10px;
+}
+.col-2{
+    border-radius: 2%;
+    align-items: center;
+    text-align: start;   
+}
+.nav-item{
+    margin-left: 15%;
+}
+
+.nav-link{
+    color: black;
+    padding: 0.5%;
+}
+
+#text-tittle{
+    font-size: 190%;
+    font-weight: bold;
+    margin-top: 20%;
+    text-align: center;
+    color: black;
+}
+.img-fluid{
+    border-radius: 50%;
+    border-color: black;
+}
+.text-center{
+    color: black;
+    margin: 5%;
+}
+#out-item{
+    margin-top: 75%;
 }
