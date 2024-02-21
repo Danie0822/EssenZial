@@ -1,7 +1,7 @@
 const express = require('express'); 
 const morgan = require('morgan');
 const config = require('./config'); 
-const clientes = require('./modulos/clientes/rutas');
+const categoria = require('./modulos/categorias/rutas') 
 const usuario = require('./modulos/usuarios/rutas');
 const Login = require('./modulos/Login/rutas');
 const Admin = require('./modulos/admin/rutas');
@@ -19,9 +19,9 @@ app.use('/uploads', express.static('uploads'));
 app.set('port', config.app.port);
 
 //rutas 
-app.use('/api/clientes', clientes); 
+app.use('/api/categorias', categoria); 
 app.use('/api/usuarios', usuario); 
-app.use('/Login', Login); 
+app.use('/api/login', Login); 
 app.use('/api/admin', Admin)
 app.use(error); 
 

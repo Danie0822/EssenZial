@@ -9,8 +9,8 @@ const upload = require('./upload');
 // Funciones
 async function todos(req, res, next) {
     try {
-        const clientes = await controlador.todos();
-        respuestas.success(req, res, clientes, 200);
+        const categoria = await controlador.todos();
+        respuestas.success(req, res, categoria, 200);
     } catch (error) {
         next(error);
     }
@@ -18,8 +18,8 @@ async function todos(req, res, next) {
 
 async function uno(req, res, next) {
     try {
-        const cliente = await controlador.uno(req.params.id);
-        respuestas.success(req, res, cliente, 200);
+        const categoria = await controlador.uno(req.params.id);
+        respuestas.success(req, res, categoria, 200);
     } catch (error) {
         next(error);
     }
@@ -28,7 +28,7 @@ async function uno(req, res, next) {
 async function eliminar(req, res, next) {
     try {
         await controlador.eliminar(req.params.id);
-        respuestas.success(req, res, 'Cliente eliminado correctamente', 200);
+        respuestas.success(req, res, 'Categoria eliminado correctamente', 200);
     } catch (error) {
         next(error);
     }
@@ -36,13 +36,13 @@ async function eliminar(req, res, next) {
 
 async function agregar(req, res, next) {
     try {
-        const clienteData = req.body;
+        const categoriaData = req.body;
         let filePath = null;
         if (req.file) {
             filePath = `uploads/${req.file.filename}`; // Concatena 'uploads/' con el nombre del archivo
-            clienteData.ruta_imagen = filePath;
+            categoriaData.imagen_categoria = filePath;
         }
-        await controlador.agregar(clienteData, filePath);
+        await controlador.agregar(categoriaData, filePath);
         respuestas.success(req, res, 'Cliente agregado correctamente', 200);
     } catch (error) {
         next(error);

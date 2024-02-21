@@ -13,6 +13,7 @@ async function loginAdmin(req, res, next) {
     try {
         const { correo, clave } = req.query;
         const result = await controlador.login(correo, clave);
+       ;
 
         if (result.token) {
             respuestas.success(req, res, result.token, 200);
