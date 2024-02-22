@@ -36,3 +36,26 @@
 #out-item{
     margin-top: 65%;
 }
+
+.row-grafica{
+    margin-left: 10%;
+}
+.graficas{
+    margin-top: 0%;
+    margin-left: 15%;
+
+}
+.pedidos{
+    padding: 2%;
+    font-size: small;
+    font-weight: bold;
+    border-radius: 5%;
+    margin: 2%;
+}
+.cantidad{
+    margin-left: 5%;
+}
+
+.imagen{
+    border-radius: 50%;
+}

@@ -14,20 +14,18 @@
     <div class="container-fluid">
       <div class="row">
         <nav class="col-2 bg-light">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
+          </button>
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li>
                 <a class="nav-link" href="#" id="text-tittle">
                   <img src="../../resources/img/icono.png" width="50" height="50" class="d-inline-block align-top"
-                      alt="">
-                Essenzial
-              </a>
+                    alt="">
+                  Essenzial
+                </a>
               <li>
-                <img src="../../resources/img/pp.jpeg" class="img-fluid mx-auto d-block" alt="..." width="100px" height="150px">
+                <img src="../../resources/img/pp.jpeg" class="img-fluid mx-auto d-block" alt="..." width="100px"
+                  height="150px">
               </li>
               <li>
                 <div class="text-center">
@@ -38,37 +36,37 @@
               <li class="nav-item">
                 <a class="nav-link" href="../../Views/public/homepage.html">
                   <img src="../../resources/img/home.png" width="25" height="25" class="d-inline-block align-top"
-                      alt="">
-                Inicio
+                    alt="">
+                  Inicio
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <img src="../../resources/img/gamas.png" width="30" height="30" class="d-inline-block align-top"
-                      alt="">
-                Gamas 
+                    alt="">
+                  Gamas
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <img src="../../resources/img/inventario.png" width="30" height="30" class="d-inline-block align-top"
-                      alt="">
+                    alt="">
                   Inventario
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <img src="../../resources/img/pedidos.png" width="30" height="30" class="d-inline-block align-top"
-                      alt="">
+                    alt="">
                   Pedidos
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <img src="../../resources/img/usuarios.png" width="30" height="30" class="d-inline-block align-top"
-                      alt="">
+                    alt="">
                   Usuarios
               </li>
               <li class="nav-item" id="out-item">
                 <a class="nav-link" href="#">
                   <img src="../../resources/img/salir.png" width="30" height="30" class="d-inline-block align-top"
-                      alt="">
+                    alt="">
                   Salir
               </li>
             </ul>
@@ -77,37 +75,61 @@
       </div>
     </div>
   </header>
-  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-    <div id="contenido-dinamico">
-      <!-- Aquí se cargará el contenido dinámico -->
-      <div class="row">
-        <div class="col-4">
-          <h5>Marca más vendida</h5>
-          <img src="../../resources/img/grafica.png" alt="">
-        </div>
-        <div class="col-4">
-          <h5>Perfume mans vendido</h5>
-          <img src="../../resources/img/grafica.png" alt="">
+  <main>
+    <div class="container">
+      <div class="row justify-content-start row-grafica">
+        <div class="col-lg-4 col-md-3 col-sm-2 col-graficas">
+          <div>
+            <h6>Marcas más vendidas</h6>
+            <img src="../../resources/img/grafica.png" alt="">
+          </div>
+
+          <div>
+            <h6>Perfumes más vendidos</h6>
+            <img src="../../resources/img/grafica.png" alt="">
+          </div>
         </div>
 
-      </div>
-      <div class="row">
-        <div class="col-4">
-          dd
-                  </div>
-                  <div class="col-4">
-          dd
-                  </div>
-          
+        <div class="col-lg-6 col-md-3 col-sm-2 graficas">
+          <div class="container-fluid">
+            <h5>Últimos pedidos</h5>
+            <div class="container-fluid bg-light align-items-center pedidos">
+              <div class="row align-text-center">
+                <div class="col-4">
+                  <p>30/01/24</p>
                 </div>
+                <div class="col-4">
+                  <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                </div>
+                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen" width="50px" height="50px"
+                    alt="" srcset=""></div>
+                <div class="col-1 cantidad">10</div>
+              </div>
+            </div>
+
+            <div class="container-fluid bg-light align-items-center pedidos">
+              <div class="row align-text-center">
+                <div class="col-4">
+                  <p>30/01/24</p>
+                </div>
+                <div class="col-4">
+                  <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                </div>
+                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen" width="50px" height="50px"
+                    alt="" srcset=""></div>
+                <div class="col-1 cantidad">10</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
 
       </div>
-      <div class="row">
-        <div class="col"> xxx</div>
-      </div>
+
+
     </div>
+
   </main>
-  <script src="js/dashboard.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
