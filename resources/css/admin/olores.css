@@ -8,6 +8,18 @@
     text-align: start;   
     position: fixed;
 }
+.nav {
+    height: 100vh; /* Establece la altura del menú al 100% de la altura visible */
+    flex-direction: column; /* Asegura que los elementos del menú estén en una columna */
+}
+.navbar-collapse {
+    height: auto !important; /* Asegura que el menú desplegable tenga una altura automática */
+}
+.sidebar-sticky {
+    height: 100%; /* Asegura que el menú tenga una altura del 100% */
+    overflow-y: auto; /* Agrega un desplazamiento vertical si el contenido del menú es demasiado largo */
+}
+
 .nav-item{
     margin-left: 15%;
 }
