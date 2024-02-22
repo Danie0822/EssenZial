@@ -1,7 +1,4 @@
-.lateral{
-    background-color: #F5F5F5;
-}
-.row{
+.navbar{
     margin-top:10px;
     margin-left: 10px;
 }
@@ -9,9 +6,11 @@
     border-radius: 2%;
     align-items: center;
     text-align: start;   
+    position: fixed;
 }
 .nav-item{
     margin-left: 15%;
+    margin-top: 2%;
 }
 
 .nav-link{
@@ -35,5 +34,5 @@
     margin: 5%;
 }
 #out-item{
-    margin-top: 75%;
+    margin-top: 65%;
 }
