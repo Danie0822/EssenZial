@@ -4,7 +4,7 @@ const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
 const multer = require('multer');
-const upload = require('./upload');
+const upload = require('../recursos/upload');
 
 // Funciones
 async function todos(req, res, next) {
@@ -48,17 +48,17 @@ async function agregar(req, res, next) {
         next(error);
     }
 }
-
 async function actualizar(req, res, next) {
     try {
         const clienteData = req.body;
         let filePath = null;
         if (req.file) {
-            filePath = `uploads/${req.file.filename}`;
-            clienteData.ruta_imagen = filePath;
+            filePath = `uploads/${req.file.filename}`; // Concatena 'uploads/' con el nombre del archivo
+            clienteData.imagen_categoria = filePath;
         }
-        await controlador.actualizar(clienteData.id, clienteData);
-        respuestas.success(req, res, 'Categoria actualizada correctamente', 200);
+        console.log(clienteData);
+        await controlador.actualizar(clienteData.id_categoria,clienteData);
+        respuestas.success(req, res, 'Cliente actualizado correctamente', 200);
     } catch (error) {
         next(error);
     }

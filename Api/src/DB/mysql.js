@@ -53,8 +53,8 @@ function todos(tabla) {
     return ejecutarConsulta(sql, []);
 }
 
-function uno(tabla, id) {
-    const sql = `SELECT * FROM ${tabla} WHERE id = ?`;
+function uno(tabla, id, campoIdentificacion) {
+    const sql = `SELECT * FROM ${tabla} WHERE ${campoIdentificacion} = ?`;
     return ejecutarConsulta(sql, [id]);
 }
 
@@ -63,9 +63,9 @@ function agregar(tabla, data) {
     return ejecutarConsulta(sql, data);
 }
 
-function actualizar(tabla, data, campoIdentificacion) {
+function actualizar(tabla, data, campoIdentificacion, id ) {
     const sql = `UPDATE ${tabla} SET ? WHERE ${campoIdentificacion} = ?`;
-    return ejecutarConsulta(sql, [data, data[campoIdentificacion]]);
+    return ejecutarConsulta(sql, [data, id]);
 }
 
 
