@@ -74,13 +74,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Marcas</a>
+                            <a class="nav-link" href="#" onclick="showContent('marcas')">Marcas</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Olores</a>
+                            <a class="nav-link" href="#" onclick="showContent('olores')">Olores</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Categorías</a>
+                            <a class="nav-link" href="#" onclick="showContent('categorias')">Categorías</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
@@ -90,7 +90,9 @@
                 </div>
             </nav>
 
-            <div class="container mt-4">
+            <div class="container mt-4" id="content">
+                <!-- Contenido dinámico se mostrará aquí -->
+                <h2>Marcas</h2>
                 <table class="table">
                     <thead>
                         <tr>
@@ -118,15 +120,35 @@
                         </tr>
                     </tbody>
                 </table>
-            </div>
-
-            <div class="container text-right">
-                <button type="button" class="btn btn-success">Agregar</button>
+                <div class="container text-right">
+                    <button type="button" class="btn btn-success">Agregar</button>
+                </div>
             </div>
         </main>
     </div>
 </div>
+<script>
+    function showContent(contentName) {
+        var contentDiv = document.getElementById('content');
+        var content = '';
 
+        switch(contentName) {
+            case 'marcas':
+                content = '<h2>Marcas</h2><table class="table"><thead><tr><th scope="col">Nombre</th><th scope="col">Imagen</th><th scope="col">Acciones</th></tr></thead><tbody><tr><td>Ejemplo 1</td><td><img src="imagen1.jpg" alt="Imagen 1" width="50"></td><td><button type="button" class="btn btn-primary">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td></tr><tr><td>Ejemplo 2</td><td><img src="imagen2.jpg" alt="Imagen 2" width="50"></td><td><button type="button" class="btn btn-primary">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td></tr></tbody></table><div class="container text-right"><button type="button" class="btn btn-success">Agregar</button></div>';
+                break;
+            case 'olores':
+                content = '<h2>Olores</h2><p>Aquí se mostrarán los olores.</p>';
+                break;
+            case 'categorias':
+                content = '<h2>Categorías</h2><p>Aquí se mostrarán las categorías.</p>';
+                break;
+            default:
+                content = '<h2>Contenido Inicial</h2><p>Bienvenido al contenido inicial.</p>';
+        }
+
+        contentDiv.innerHTML = content;
+    }
+</script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
