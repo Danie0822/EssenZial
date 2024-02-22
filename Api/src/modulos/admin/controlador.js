@@ -9,7 +9,7 @@ module.exports = function (dbInyectada) {
     }
 
     async function uno(id) {
-        return db.uno(Tabla, id);
+        return db.uno(Tabla, id, idTabla);
     }
 
     async function eliminar(id) {
