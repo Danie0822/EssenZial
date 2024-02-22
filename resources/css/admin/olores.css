@@ -1,0 +1,71 @@
+.navbar{
+    margin-top:10px;
+    margin-left: 10px;
+}
+.col-2{
+    border-radius: 2%;
+    align-items: center;
+    text-align: start;   
+    position: fixed;
+}
+.nav-item{
+    margin-left: 15%;
+}
+.nav-link{/* Color y movimineto de texto */
+    color: black;
+    padding: 0.5%;
+}
+#text-tittle{/* Estilo del texto */
+    font-size: 190%;
+    font-weight: bold;
+    margin-top: 1%;
+    text-align: center;
+    color: black;
+}
+.img-fluid{/* Imagend de usuario */
+    border-radius: 50%;
+    border-color: black;
+}
+.text-center{ /* Movimiento de texto */
+    color: black;
+    margin: 5%;
+}
+/* Movimiento de Item Log out */
+#out-item{ 
+    margin-top: 15%;
+}
+/* Movimiento de item y tamano de imagen*/
+.inicio img
+{
+    margin-right: 10%;
+    height: 28px;
+    width: 28px;
+}
+.inicio
+{
+    color: #555;
+}
+.gamas img
+{
+    margin-right: 10%;
+    height: 30px;
+    width: 30px;
+}
+.inventario img
+{
+    margin-right: 10%;
+    height: 30px;
+    width: 30px;
+}
+.pedidos img
+{
+    margin-right: 10%;
+    height: 30px;
+    width: 30px;
+}
+.usuarios img
+{
+    margin-right: 10%;
+    height: 30px;
+    width: 30px;
+}

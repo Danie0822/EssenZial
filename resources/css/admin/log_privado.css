@@ -14,12 +14,13 @@
   color: #555;
   /* Color de la etiqueta */
 }
-.fondo {
-  background-image: url('../../resources/img/pef-logo.png');
-  height: 739px;
+.fondo {/* Fondo y Tamaño de la img */
+  background-image: url('../../img/pef-logo.png');
   background-repeat: no-repeat;
 }
-
+.log{
+ 
+}
 .form-control {
   border-radius: 10px;
 }
@@ -27,6 +28,10 @@
 .lb-Bienvenido {/* Movimiento de Textto*/ 
   margin-left: 120px;
   margin-top: 90px;
+}
+.contenedorlog/* Tamano del fondo  */
+{
+  height: 738px;
 }
 .lb-Ingresar {/* Movimiento de Textto*/ 
   margin-left: 120px;
