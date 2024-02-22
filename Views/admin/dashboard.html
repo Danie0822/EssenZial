@@ -2,173 +2,179 @@
 <html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="../../resources/css/admin/dashboard.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../resources/css/admin/dashboard.css">
 </head>
 
 <body>
-  <header>
-    <div class="container-fluid">
-      <div class="row">
-        <nav class="col-2 bg-light">
-          </button>
-          <div class="sidebar-sticky">
-            <ul class="nav flex-column">
-              <li>
-                <a class="nav-link" href="#" id="text-tittle">
-                  <img src="../../resources/img/icono.png" width="50" height="50" class="d-inline-block align-top"
-                    alt="">
-                  Essenzial
-                </a>
-              <li>
-                <img src="../../resources/img/pp.jpeg" class="img-fluid mx-auto d-block" alt="..." width="100px"
-                  height="150px">
-              </li>
-              <li>
-                <div class="text-center">
-                  <h5>Alessandro Morales</h5>
+    <header>
+        <div class="container-fluid">
+            <div class="row">
+                <nav class="col-2 bg-light">
+                    </button>
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column">
+                            <li>
+                                <a class="nav-link" href="#" id="text-tittle">
+                                    <img src="../../resources/img/icono.png" width="50" height="50"
+                                        class="d-inline-block align-top" alt="">
+                                    Essenzial
+                                </a>
+                            <li>
+                                <img src="../../resources/img/pp.jpeg" class="img-fluid mx-auto d-block" alt="..."
+                                    width="100px" height="150px">
+                            </li>
+                            <li>
+                                <div class="text-center">
+                                    <h5>Alessandro Morales</h5>
+                                </div>
+                            </li>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="../../Views/public/homepage.html">
+                                    <img src="../../resources/img/home.png" width="25" height="25"
+                                        class="d-inline-block align-top" alt="">
+                                    Inicio
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <img src="../../resources/img/gamas.png" width="30" height="30"
+                                        class="d-inline-block align-top" alt="">
+                                    Gamas
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <img src="../../resources/img/inventario.png" width="30" height="30"
+                                        class="d-inline-block align-top" alt="">
+                                    Inventario
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <img src="../../resources/img/pedidos.png" width="30" height="30"
+                                        class="d-inline-block align-top" alt="">
+                                    Pedidos
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <img src="../../resources/img/usuarios.png" width="30" height="30"
+                                        class="d-inline-block align-top" alt="">
+                                    Usuarios
+                            </li>
+                            <li class="nav-item" id="out-item">
+                                <a class="nav-link" href="#">
+                                    <img src="../../resources/img/salir.png" width="30" height="30"
+                                        class="d-inline-block align-top" alt="">
+                                    Salir
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="row row-grafica">
+                <div class="col-lg-6 col-md-3 col-sm-2 col-graficas">
+                    <div>
+                        <h4>Marcas más vendidas</h4>
+                        <img src="../../resources/img/grafica.png" width="400px" height="250px" alt="">
+                    </div>
+
+                    <div>
+                        <h4>Perfumes más vendidos</h4>
+                        <img src="../../resources/img/grafica.png" width="400px" height="250px" alt="">
+                    </div>
+
+                    <div>
+                        <h4>Venta en los últimos meses</h4>
+                        <img src="../../resources/img/barchart.png" width="400px" height="250px" alt="">
+                    </div>
                 </div>
-              </li>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../../Views/public/homepage.html">
-                  <img src="../../resources/img/home.png" width="25" height="25" class="d-inline-block align-top"
-                    alt="">
-                  Inicio
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <img src="../../resources/img/gamas.png" width="30" height="30" class="d-inline-block align-top"
-                    alt="">
-                  Gamas
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <img src="../../resources/img/inventario.png" width="30" height="30" class="d-inline-block align-top"
-                    alt="">
-                  Inventario
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <img src="../../resources/img/pedidos.png" width="30" height="30" class="d-inline-block align-top"
-                    alt="">
-                  Pedidos
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <img src="../../resources/img/usuarios.png" width="30" height="30" class="d-inline-block align-top"
-                    alt="">
-                  Usuarios
-              </li>
-              <li class="nav-item" id="out-item">
-                <a class="nav-link" href="#">
-                  <img src="../../resources/img/salir.png" width="30" height="30" class="d-inline-block align-top"
-                    alt="">
-                  Salir
-              </li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </div>
-  </header>
 
-  <main>
-    <div class="container">
-      <div class="row justify-content-start row-grafica">
-        <div class="col-lg-4 col-md-3 col-sm-2 col-graficas">
-          <div>
-            <h4>Marcas más vendidas</h4>
-            <img src="../../resources/img/grafica.png" width="400px" height="250px" alt="">
-          </div>
+                <dllñkkkkkk l 
+                iv class="col-lg-6 col-md-3 col-sm-2 graficas">
+                    <div class="container-fluid container1 bg-light">
+                        <h5>Últimos pedidos</h5>
 
-          <div>
-            <h4>Perfumes más vendidos</h4>
-            <img src="../../resources/img/grafica.png" width="400px" height="250px" alt="">
-          </div>
+                        <div class="container-fluid align-items-center pedidos">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>30/01/24</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                                </div>
+                                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen"
+                                        width="50px" height="50px" alt="" srcset=""></div>
+                                <div class="col-1 cantidad">10</div>
+                            </div>
+                        </div>
+
+                        <div class="container-fluid align-items-center pedidos">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>30/01/24</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                                </div>
+                                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen"
+                                        width="50px" height="50px" alt="" srcset=""></div>
+                                <div class="col-1 cantidad">10</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-fluid container1 bg-light">
+                        <h5>Últimas promociones</h5>
+
+                        <div class="container align-items-center pedidos">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>30/01/24</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                                </div>
+                                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen"
+                                        width="50px" height="50px" alt="" srcset=""></div>
+                                <div class="col-1 cantidad">10</div>
+                            </div>
+                        </div>
+
+                        <div class="container align-items-center pedidos">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>30/01/24</p>
+                                </div>
+                                <div class="col-4">
+                                    <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                                </div>
+                                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen"
+                                        width="50px" height="50px" alt="" srcset=""></div>
+                                <div class="col-1 cantidad">10</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
         </div>
 
-        <div class="col-lg-6 col-md-3 col-sm-2 graficas">
-          <div class="container-fluid container1 bg-light">
-            <h5>Últimos pedidos</h5>
-
-            <div class="container-fluid align-items-center pedidos">
-              <div class="row">
-                <div class="col-4">
-                  <p>30/01/24</p>
-                </div>
-                <div class="col-4">
-                  <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
-                </div>
-                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen" width="50px" height="50px"
-                    alt="" srcset=""></div>
-                <div class="col-1 cantidad">10</div>
-              </div>
-            </div>
-
-            <div class="container-fluid align-items-center pedidos">
-              <div class="row">
-                <div class="col-4">
-                  <p>30/01/24</p>
-                </div>
-                <div class="col-4">
-                  <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
-                </div>
-                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen" width="50px" height="50px"
-                    alt="" srcset=""></div>
-                <div class="col-1 cantidad">10</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="container-fluid container1 bg-light">
-            <h5>Últimas promociones</h5>
-
-            <div class="container align-items-center pedidos">
-              <div class="row">
-                <div class="col-4">
-                  <p>30/01/24</p>
-                </div>
-                <div class="col-4">
-                  <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
-                </div>
-                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen" width="50px" height="50px"
-                    alt="" srcset=""></div>
-                <div class="col-1 cantidad">10</div>
-              </div>
-            </div>
-
-            <div class="container align-items-center pedidos">
-              <div class="row">
-                <div class="col-4">
-                  <p>30/01/24</p>
-                </div>
-                <div class="col-4">
-                  <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
-                </div>
-                <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen" width="50px" height="50px"
-                    alt="" srcset=""></div>
-                <div class="col-1 cantidad">10</div>
-              </div>
-            </div>
-          </div>
-        </div>
+    </main>
 
 
-      </div>
-
-
-    </div>
-
-  </main>
-
-  
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
