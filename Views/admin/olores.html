@@ -4,86 +4,173 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Apartados Gamas</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../resources/css/admin/olores.css">
 </head>
 
 <body>
-    <header>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="colum cont">
 
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-lg-2 col-md-3 bg-light">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <!-- Contenido del menú -->
+                        <li>
+                            <a class="nav-link" href="#" id="text-tittle">
+                                <img src="../../resources/img/icono.png" width="50" height="50"
+                                    class="d-inline-block align-top" alt="">
+                                Essenzial
+                            </a>
+                        </li>
+                        <li>
+                            <img src="../../resources/img/pp.jpeg" class="img-fluid mx-auto d-block mt-3 mb-3" alt="..."
+                                style="max-width: 100px; height: auto;">
+                        </li>
+                        <li>
+                            <div class="text-center">
+                                <h5>Alessandro Morales</h5>
+                            </div>
+                        </li>
+                        <li class="nav-item inicio">
+                            <a class="nav-link" href="../../Views/public/homepage.html">
+                                <img src="../../resources/img/home.png" width="25" height="25"
+                                    class="d-inline-block align-top" alt="">
+                                Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item gamas">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/gamas.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Gamas
+                            </a>
+                        </li>
+                        <li class="nav-item inventario">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/inventario.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Inventario
+                            </a>
+                        </li>
+                        <li class="nav-item pedidos">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/pedidos.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item usuarios">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/usuarios.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item" id="out-item">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/salir.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Salir
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <nav class="col-2 bg-light">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="sidebar-sticky">
-                        <ul class="nav flex-column">
-                            <li>
-                                <a class="nav-link" href="#" id="text-tittle">
-                                    <img src="../../resources/img/icono.png" width="50" height="50"
-                                        class="d-inline-block align-top" alt="">
-                                    Essenzial
-                                </a>
-                            <li>
-                                <img src="../../resources/img/pp.jpeg" class="img-fluid mx-auto d-block" alt="..."
-                                    width="100px" height="150px">
+            </nav>
+            <div class="col-lg-10 col-md-9">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light subnav">
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="showContent('marcas')">Marcas</a>
                             </li>
-                            <li>
-                                <div class="text-center">
-                                    <h5>Alessandro Morales</h5>
-                                </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="showContent('olores')">Olores</a>
                             </li>
-                            </li>
-                            <li class="nav-item inicio">
-                                <a class="nav-link" href="../../Views/public/homepage.html">
-                                    <img src="../../resources/img/home.png" width="25" height="25"
-                                        class="d-inline-block align-top" alt="" id="inicio">
-                                    Inicio
-                            </li>
-                            <li class="nav-item gamas">
-                                <a class="nav-link" href="#">
-                                    <img src="../../resources/img/gamas.png" width="30" height="30"
-                                        class="d-inline-block align-top" alt="">
-                                    Gamas
-                            </li>
-                            <li class="nav-item inventario">
-                                <a class="nav-link" href="#">
-                                    <img src="../../resources/img/inventario.png" width="30" height="30"
-                                        class="d-inline-block align-top" alt="">
-                                    Inventario
-                            </li>
-                            <li class="nav-item pedidos">
-                                <a class="nav-link" href="#">
-                                    <img src="../../resources/img/pedidos.png" width="30" height="30"
-                                        class="d-inline-block align-top" alt="">
-                                    Pedidos
-                            </li>
-                            <li class="nav-item usuarios">
-                                <a class="nav-link" href="#">
-                                    <img src="../../resources/img/usuarios.png" width="30" height="30"
-                                        class="d-inline-block align-top" alt="">
-                                    Usuarios
-                            </li>
-                            <li class="nav-item" id="out-item">
-                                <a class="nav-link" href="#">
-                                    <img src="../../resources/img/salir.png" width="30" height="30"
-                                        class="d-inline-block align-top" alt="">
-                                    Salir
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" onclick="showContent('categorias')">Categorías</a>
                             </li>
                         </ul>
+
                     </div>
                 </nav>
             </div>
+            <main class="col-lg-9 col-md-8 fondo-main">
+               
+
+
+                <!-- <nav class="box">
+                    <button>
+                        Marcas
+                    </button>
+                    <button>
+                        Olores
+                    </button>
+                    <button>
+                        Categorías
+                    </button>
+                </nav> -->
+
+                <div class="container mt-4" id="content">
+                    <!-- Contenido dinámico se mostrará aquí -->
+                    <h2>Marcas</h2>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Imagen</th>
+                                <th scope="col">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ejemplo 1</td>
+                                <td><img src="imagen1.jpg" alt="Imagen 1" width="50"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary">Editar</button>
+                                    <button type="button" class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ejemplo 2</td>
+                                <td><img src="imagen2.jpg" alt="Imagen 2" width="50"></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary">Editar</button>
+                                    <button type="button" class="btn btn-danger">Eliminar</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="container text-right">
+                        <button type="button" class="btn btn-success">Agregar</button>
+                    </div>
+                </div>
+            </main>
         </div>
-    </header>
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-    </main>
-    <script src="js/dashboard.js"></script>
+    </div>
+    <script>
+        function showContent(contentName) {
+            var contentDiv = document.getElementById('content');
+            var content = '';
+
+            switch (contentName) {
+                case 'marcas':
+                    content = '<h2>Marcas</h2><table class="table"><thead><tr><th scope="col">Nombre</th><th scope="col">Imagen</th><th scope="col">Acciones</th></tr></thead><tbody><tr><td>Ejemplo 1</td><td><img src="imagen1.jpg" alt="Imagen 1" width="50"></td><td><button type="button" class="btn btn-primary">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td></tr><tr><td>Ejemplo 2</td><td><img src="imagen2.jpg" alt="Imagen 2" width="50"></td><td><button type="button" class="btn btn-primary">Editar</button><button type="button" class="btn btn-danger">Eliminar</button></td></tr></tbody></table><div class="container text-right"><button type="button" class="btn btn-success">Agregar</button></div>';
+                    break;
+                case 'olores':
+                    content = '<h2>Olores</h2><p>Aquí se mostrarán los olores.</p>';
+                    break;
+                case 'categorias':
+                    content = '<h2>Categorías</h2><p>Aquí se mostrarán las categorías.</p>';
+                    break;
+                default:
+                    content = '<h2>Contenido Inicial</h2><p>Bienvenido al contenido inicial.</p>';
+            }
+
+            contentDiv.innerHTML = content;
+        }
+    </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

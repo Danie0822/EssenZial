@@ -81,3 +81,14 @@
     height: 30px;
     width: 30px;
 }
+/* .fondo-main{
+    background-color: black;
+} */
+.subnav { 
+    border-radius: 10px;
+}
+#content 
+{
+    background-color: black;
+
+}
