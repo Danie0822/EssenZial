@@ -1,9 +1,12 @@
 const ctx = document.getElementById('myChart');
 const ctx2 = document.getElementById('myChart2');
+const ctx3 = document.getElementById('myChart3');
 const marcas = ['Montblanc', 'Calvin Klein', 'Salvatore Ferragamo', 'Azzaro', 'Paco Rabanne'];
 const marcas2 = ['Montblanc', 'Calvin Klein', 'Salvatore Ferragamo', 'Azzaro', 'Paco Rabanne'];
 const porcentajes = [10, 15, 20, 25, 30];
 const porcentajes2 = [5, 25, 20, 35, 30];
+const meses =['Enero', 'Febrero', 'Marzo'];
+const ventas = [10, 50, 70];
 
 const myChart = new Chart(ctx, {
   type: 'doughnut',
@@ -33,6 +36,7 @@ const myChart = new Chart(ctx, {
   },
   options: {
     borderWidth: 2,
+    hoverBorderWidth:0,
     plugins: {
       legend: {
         display: false,
@@ -74,7 +78,6 @@ const myChart2 = new Chart(ctx2, {
     }]
   },
   options: {
-
     borderWidth: 2,
     hoverBorderWidth:0,
 
@@ -95,3 +98,44 @@ const myChart2 = new Chart(ctx2, {
   },
 });
 
+const myChart3 = new Chart(ctx3, {
+    type:'bar',
+    data: {
+      labels: meses,
+      datasets: [{
+        label: 'Ventas',
+        data: ventas,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+  
+        ],
+      }]
+    },
+    options: {
+      borderWidth: 2,
+      hoverBorderWidth:0,
+  
+      plugins: {
+        legend: {
+          display: false,
+        },
+      },
+  
+      layout: {
+        padding: {
+          left: 50, // Ajusta el espaciado izquierdo
+          right: 50, // Ajusta el espaciado derecho
+          // Ajusta el espaciado superior
+          bottom: 50, // Ajusta el espaciado inferior
+        }
+      }
+    },
+
+});
