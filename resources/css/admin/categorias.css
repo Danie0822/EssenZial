@@ -1,0 +1,42 @@
+
+.color
+{
+    background-color:rgb(245, 245, 245);
+    border-radius: 15px;
+}
+.sizebox{
+    padding-bottom: 2px;
+}
+.sizebox1{
+    padding:20px;
+}
+.txt-buscar
+{
+    border-radius: 10px;
+    width: 400px;
+    padding-left:20px;
+}
+.search-icon {
+    position: absolute;
+    right: 10px; /* Ajusta la posición de la imagen según sea necesario */
+    top: 50%;
+    transform: translateY(-50%);
+    height: 20px; /* ajusta el tamaño de la imagen según tus necesidades */
+    width: auto;
+}
+
+.input-group-text {
+    padding: 0; /* Elimina el padding para que la imagen se fusione con el input */
+    border-radius: 0; /* Opcional: quita el borde redondeado si lo deseas */
+    background-color: transparent; /* Establece el fondo transparente */
+    border: none; /* Elimina el borde */
+}
+.focus:focus{
+    border-color: #0b0b0b;
+    box-shadow: none;
+}
+.rounded-input {
+    border-radius: 20px; /* Ajusta el valor según el grado de redondez deseado */
+}
+
+

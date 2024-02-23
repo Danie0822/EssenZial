@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú y Contenido Principal</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../resources/css/admin/menu.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-lg-2 col-md-3 bg-light">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li>
+                            <a class="nav-link" href="#" id="text-tittle">
+                                <img src="../../resources/img/icono.png" width="50" height="50"
+                                    class="d-inline-block align-top" alt="">
+                                Essenzial
+                            </a>
+                        </li>
+                        <li>
+                            <img src="../../resources/img/pp.jpeg" class="img-fluid mx-auto d-block mt-3 mb-3" alt="..."
+                                style="max-width: 100px; height: auto;">
+                        </li>
+                        <li>
+                            <div class="text-center">
+                                <h5>Alessandro Morales</h5>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link"  onclick="showContent('gamas')">
+                                <img src="../../resources/img/home.png" width="25" height="25"
+                                    class="d-inline-block align-top" alt="">
+                                Inicio
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/gamas.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Gamas
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/inventario.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Inventario
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/pedidos.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Pedidos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/usuarios.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Usuarios
+                            </a>
+                        </li>
+                        <li class="nav-item" id="out-item">
+                            <a class="nav-link" href="#">
+                                <img src="../../resources/img/salir.png" width="30" height="30"
+                                    class="d-inline-block align-top" alt="">
+                                Salir
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-lg-10 col-md-9">
+                <iframe id="content" class="dynamic-iframe"></iframe>
+            </main>
+        </div>
+    </div>
+    <script src="../../resources/js/menu.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

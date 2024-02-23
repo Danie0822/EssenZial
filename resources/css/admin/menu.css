@@ -1,0 +1,96 @@
+.navbar{
+    margin-top:10px;
+    margin-left: 10px;
+}
+
+.dynamic-iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+.col-2{
+    border-radius: 2%;
+    align-items: center;
+    text-align: start;   
+    position: fixed;
+}
+.nav {
+    height: 100vh; 
+    flex-direction: column; 
+}
+.navbar-collapse {
+    height: auto !important; 
+}
+
+
+.nav-item{
+    margin-left: 15%;
+}
+.nav-link{
+    color: black;
+    padding: 0.5%;
+}
+#text-tittle{
+    font-size: 190%;
+    font-weight: bold;
+    margin-top: 1%;
+    text-align: center;
+    color: black;
+}
+.img-fluid{
+    border-radius: 50%;
+    border-color: black;
+}
+.text-center{ 
+    color: black;
+    margin: 5%;
+}
+#out-item{ 
+    margin-top: 15%;
+}
+
+.inicio img
+{
+    margin-right: 10%;
+    height: 28px;
+    width: 28px;
+}
+.inicio
+{
+    color: #555;
+}
+.gamas img
+{
+    margin-right: 10%;
+    height: 30px;
+    width: 30px;
+}
+.inventario img
+{
+    margin-right: 10%;
+    height: 30px;
+    width: 30px;
+}
+.pedidos img
+{
+    margin-right: 10%;
+    height: 30px;
+    width: 30px;
+}
+.usuarios img
+{
+    margin-right: 10%;
+    height: 30px;
+    width: 30px;
+}
+#content 
+{
+    background-color:rgb(245, 245, 245);
+    border-radius: 15px;
+}
+.sizebox{
+    padding:10px;
+}
+.sizebox1{
+    padding:20px;
+}
