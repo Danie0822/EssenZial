@@ -78,19 +78,22 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="graficos bg-light text-center">
-                            <canvas id="myChart" width="100px" height="100px">
+                            <h4>Marcas más vendidas</h4>
+                            <canvas class="donut" id="myChart">
 
                             </canvas>
                         </div>
-                        <div class="bg-light graficos text-center">
+                        <div class="graficos bg-light  text-center">
                             <h4>Perfumes más vendidos</h4>
-                            <img src="../../resources/img/grafica.png" alt="">
+                            <canvas class="donut" id="myChart2" width="400px">
+
+                            </canvas>
                         </div>
 
                     </div>
 
 
-                    <div class="col-lg-5 bg-light containerPedidos">
+                    <div class="col-lg-5 containerPedidos">
                         <div class="container1 bg-light">
                             <h5>Últimos pedidos</h5>
 
@@ -121,6 +124,68 @@
                                     <div class="col-1 cantidad">10</div>
                                 </div>
                             </div>
+
+                            
+                            <div class="align-items-center pedidos">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>30/01/24</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                                    </div>
+                                    <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen"
+                                            width="50px" height="50px" alt="" srcset=""></div>
+                                    <div class="col-1 cantidad">10</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="container1 bg-light">
+                            <h5>Últimas promociones</h5>
+
+                            <div class="align-items-center pedidos">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>30/01/24</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                                    </div>
+                                    <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen"
+                                            width="50px" height="50px" alt="" srcset=""></div>
+                                    <div class="col-1 cantidad">10</div>
+                                </div>
+                            </div>
+
+                            <div class="align-items-center pedidos">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>30/01/24</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                                    </div>
+                                    <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen"
+                                            width="50px" height="50px" alt="" srcset=""></div>
+                                    <div class="col-1 cantidad">10</div>
+                                </div>
+                            </div>
+
+                            
+                            <div class="align-items-center pedidos">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <p>30/01/24</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <p>Jean Paul Gaultier Le Beau Eau de Parfum Intense</p>
+                                    </div>
+                                    <div class="col-1"><img src="../../resources/img/perfume.png" class="imagen"
+                                            width="50px" height="50px" alt="" srcset=""></div>
+                                    <div class="col-1 cantidad">10</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -128,9 +193,8 @@
             </section>
         </div>
     </main>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js"
-        integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../../Controllers/graficos.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

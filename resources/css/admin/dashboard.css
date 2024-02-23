@@ -1,12 +1,14 @@
 main{
     color: black;
 }
-.sidebar{
-   height: 100vh;
-}
+
 .nav-item{
     margin-left: 15%;
     margin-top: 2%;
+}
+.donut{
+    width: 100px;
+    height: 100px;
 }
 
 .nav-link{
@@ -46,7 +48,7 @@ main{
 .container1{
     border-radius: 5px;
     padding: 4%;
-    margin: 5px;
+    margin: 8px;
 }
 
 .containerPedidos{
