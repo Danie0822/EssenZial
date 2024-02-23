@@ -27,6 +27,11 @@ main{
     border-radius: 50%;
     border-color: black;
 }
+
+.imagen{
+    border-radius: 50%;
+    margin-top: 2%;
+}
 .text-center{
     color: black;
     margin: 5%;
