@@ -1,102 +1,11 @@
-.navbar{
-    margin-top:10px;
-    margin-left: 10px;
-}
 
-.dynamic-iframe {
-    border: none;
-    width: 100%;
-    height: 100%;
-}
-.col-2{
-    border-radius: 2%;
-    align-items: center;
-    text-align: start;   
-    position: fixed;
-}
-.nav {
-    height: 100vh; /* Establece la altura del menú al 100% de la altura visible */
-    flex-direction: column; /* Asegura que los elementos del menú estén en una columna */
-}
-.navbar-collapse {
-    height: auto !important; /* Asegura que el menú desplegable tenga una altura automática */
-}
-
-
-.nav-item{
-    margin-left: 15%;
-}
-.nav-link{/* Color y movimineto de texto */
-    color: black;
-    padding: 0.5%;
-}
-#text-tittle{/* Estilo del texto */
-    font-size: 190%;
-    font-weight: bold;
-    margin-top: 1%;
-    text-align: center;
-    color: black;
-}
-.img-fluid{/* Imagend de usuario */
-    border-radius: 50%;
-    border-color: black;
-}
-.text-center{ /* Movimiento de texto */
-    color: black;
-    margin: 5%;
-}
-/* Movimiento de Item Log out */
-#out-item{ 
-    margin-top: 15%;
-}
-/* Movimiento de item y tamano de imagen*/
-.inicio img
-{
-    margin-right: 10%;
-    height: 28px;
-    width: 28px;
-}
-.inicio
-{
-    color: #555;
-}
-.gamas img
-{
-    margin-right: 10%;
-    height: 30px;
-    width: 30px;
-}
-.inventario img
-{
-    margin-right: 10%;
-    height: 30px;
-    width: 30px;
-}
-.pedidos img
-{
-    margin-right: 10%;
-    height: 30px;
-    width: 30px;
-}
-.usuarios img
-{
-    margin-right: 10%;
-    height: 30px;
-    width: 30px;
-}
-/* .fondo-main{
-    background-color: black;
-} */
-.subnav { 
-    border-radius: 10px;
-}
-#content 
+.color
 {
     background-color:rgb(245, 245, 245);
     border-radius: 15px;
 }
 .sizebox{
-    padding:10px;
+    padding-bottom: 10px;
 }
 .sizebox1{
     padding:20px;
@@ -104,23 +13,23 @@
 .txt-buscar
 {
     border-radius: 10px;
-    width: 400px;
+    max-width: 300px;
     padding-left:20px;
 }
 .search-icon {
     position: absolute;
-    right: 10px; /* Ajusta la posición de la imagen según sea necesario */
+    right: 10px; 
     top: 50%;
     transform: translateY(-50%);
-    height: 20px; /* ajusta el tamaño de la imagen según tus necesidades */
+    height: 20px; 
     width: auto;
 }
 
 .input-group-text {
-    padding: 0; /* Elimina el padding para que la imagen se fusione con el input */
-    border-radius: 0; /* Opcional: quita el borde redondeado si lo deseas */
-    background-color: transparent; /* Establece el fondo transparente */
-    border: none; /* Elimina el borde */
+    padding: 0;
+    border-radius: 0; 
+    background-color: transparent; 
+    border: none; 
 }
 .focus:focus{
     border-color: #0b0b0b;
@@ -129,5 +38,3 @@
 .rounded-input {
     border-radius: 20px; /* Ajusta el valor según el grado de redondez deseado */
 }
-
-
