@@ -14,3 +14,7 @@ function showContent(contentName) {
             iframe.src = 'default.html';
     }
 }
+window.onload = function() {
+    // Llamamos a la función para mostrar el contenido predeterminado
+    showContent('marcas');
+};
