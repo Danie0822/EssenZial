@@ -8,7 +8,8 @@
         <h2>Inventario</h2>
     </div>
     <div class="input-group mb-3 txt-buscar">
-        <input type="email" class="form-control focus" placeholder="Buscar" aria-label="Buscar" aria-describedby="basic-addon2">
+        <input type="email" class="form-control focus" placeholder="Buscar" aria-label="Buscar"
+            aria-describedby="basic-addon2">
         <div class="input-group-append">
             <span class="input-group-text bg-transparent border-0">
                 <img src="../../resources/img/buscar 1.png" alt="" class="search-icon">
@@ -20,7 +21,8 @@
 
 
     <div class="container text-right">
-        <button type="button" class="btn btn-secondary"data-toggle="modal" data-target="#saveModal"><i class="fas fa-plus"></i> </button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#saveModal"><i
+                class="fas fa-plus"></i> </button>
     </div>
     <div class="sizebox"></div>
 
@@ -51,78 +53,120 @@
                     <button type="button" class="btn btn-dark"><i class="fa-solid fa-star"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
-                    <button type="button" class="btn btn-dark"><i class="fa-solid fa-clipboard-list"></i></button>
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#viewPerfume"><i
+                            class="fa-solid fa-clipboard-list"></i></button>
                 </td>
             </tr>
         </tbody>
     </table>
     <!--Modal para crear el perfume-->
     <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="modalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="modalTitle">Crear perfume</h1>
+        aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="modalTitle">Crear perfume</h1>
+                </div>
+                <!-- Formulario para crear o actualizar un registro -->
+                <form id="saveForm">
+                    <div class="modal-body row g-3">
+                        <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                        <input type="hidden" id="idProducto" name="idProducto">
+                        <!--Primera columna-->
+                        <div class="col-sm-12 col-md-4">
+                            <label for="nombreProducto" class="form-label">Nombre del perfume</label>
+                            <input id="nombreProducto" type="text" name="nombreProducto" class="form-control" required>
+                        </div>
+                        <!--Segunda columna-->
+                        <div class="col-sm-12 col-md-4">
+                            <label for="categoriaProducto" class="form-label">Elige el descuento</label>
+                            <select id="categoriaProducto" name="categoriaProducto" class="form-select" required>
+                            </select>
+                        </div>
+                        <!--Tercera columna-->
+                        <div class="col-sm-12 col-md-4">
+                            <label for="imagenProducto" class="form-label">Imagen</label>
+                            <input id="imagenProducto" type="file" name="imagenProducto" class="form-control"
+                                accept=".png, .jpg">
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label for="precioProducto" class="form-label">Precio del producto(US$)</label>
+                            <input id="precioProducto" type="number" name="precioProducto" min="0.01" step="0.01"
+                                class="form-control" required>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <label for="descripcionProducto" class="form-label">Descripción del producto</label>
+                            <textarea name="descripcionProducto" id="descripcionProducto" class="form-control"
+                                rows="3"></textarea>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <img src="..." class="img-thumbnail" alt="...">
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <label for="marcaProducto" class="form-label">Marca</label>
+                            <select id="marcaProducto" name="marcaProducto" class="form-select" required>
+                            </select>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <label for="olorProducto" class="form-label">Olores</label>
+                            <select id="olorProducto" name="olorProducto" class="form-select" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                class="bi bi-x-circle-fill"></i></button>
+                        <button type="button" class="btn btn-dark"><i class="bi bi-plus-circle-fill"></i></button>
+                    </div>
+                </form>
+
             </div>
-            <!-- Formulario para crear o actualizar un registro -->
-            <form id="saveForm">
-                <div class="modal-body row g-3">
-                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
-                    <input type="hidden" id="idProducto" name="idProducto">
-                    <!--Primera columna-->
-                    <div class="col-sm-12 col-md-4">
-                        <label for="nombreProducto" class="form-label">Nombre del perfume</label>
-                        <input id="nombreProducto" type="text" name="nombreProducto" class="form-control" required>
-                    </div>
-                    <!--Segunda columna-->
-                    <div class="col-sm-12 col-md-4">
-                        <label for="categoriaProducto" class="form-label">Elige el descuento</label>
-                        <select id="categoriaProducto" name="categoriaProducto" class="form-select" required>
-                        </select>
-                    </div>
-                    <!--Tercera columna-->
-                    <div class="col-sm-12 col-md-4">
-                        <label for="imagenProducto" class="form-label">Imagen</label>
-                        <input id="imagenProducto" type="file" name="imagenProducto" class="form-control"
-                            accept=".png, .jpg">
-                    </div>
-                    <div class="col-sm-12 col-md-4">
-                        <label for="precioProducto" class="form-label">Precio del producto(US$)</label>
-                        <input id="precioProducto" type="number" name="precioProducto" min="0.01" step="0.01"
-                            class="form-control" required>
-                    </div>
-
-                    <div class="col-sm-12 col-md-4">
-                        <label for="descripcionProducto" class="form-label">Descripción del producto</label>
-                        <textarea name="descripcionProducto" id="descripcionProducto" class="form-control"
-                            rows="3"></textarea>
-                    </div>
-                    <div class="col-sm-12 col-md-4">
-                        <img src="..." class="img-thumbnail" alt="...">
-                    </div>
-
-                    <div class="col-sm-12 col-md-4">
-                        <label for="marcaProducto" class="form-label">Marca</label>
-                        <select id="marcaProducto" name="marcaProducto" class="form-select" required>
-                        </select>
-                    </div>
-                    <div class="col-sm-12 col-md-4">
-                        <label for="olorProducto" class="form-label">Olores</label>
-                        <select id="olorProducto" name="olorProducto" class="form-select" required>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="bi bi-x-circle-fill"></i></button>
-                    <button type="button" class="btn btn-dark"><i class="bi bi-plus-circle-fill"></i></button>
-                </div>
-            </form>
-
         </div>
     </div>
-</div>
-<script type="text/javascript" src="../../Controllers/inventario.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://kit.fontawesome.com/186c8fdf5b.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--Modal para ver el perfume-->
+    <div class="modal fade" id="viewPerfume" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title fs-5" id="modalTitle">Ver perfume</h3>
+                </div>
+                <div class="modal-body row g-3">
+                    <div class="col-ms-12 col-md-6">
+                        <label for="nombreProductoVer" class="form-label" style="font-weight: bold;">Nombre del
+                            perfume</label>
+                        <p>Stronger with u</p>
+                    </div>
+                    <div class="col-ms-12 col-md-6">
+                        <label for="descuentoProductoVer" class="form-label" style="font-weight: bold;">Descuento</label>
+                        <p>15%</p>
+                    </div>
+                    <div class="col-ms-12 col-md-6">
+                        <label for="precioProductoVer" class="form-label" style="font-weight: bold;">Precio</label>
+                        <p>$250.98</p>
+                    </div>
+                    <div class="col-ms-12 col-md-6">
+                        <label for="descripcionProductoVer" class="form-label" style="font-weight: bold;">Descripción</label>
+                        <p>El perfume Strong es el mas vendido a nivel mundial</p>
+                    </div>
+                    <div class="col-ms-12 col-md-12">
+                        <label for="imagenProducto" class="form-label" style="font-weight: bold;">Imagen</label>
+                        <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block" alt="...">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../../Controllers/inventario.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://kit.fontawesome.com/186c8fdf5b.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
