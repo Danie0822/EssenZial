@@ -19,10 +19,11 @@
     <div class="sizebox1"></div>
 
     <div class="container text-right">
-        <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> </button>
+        <button type="button" class="btn btn-dark"><i class="fas fa-plus" data-bs-toggle="modal" data-bs-target="#exampleModal"></i> </button>
     </div>
     <div class="sizebox"></div>
 
+    <!--Tabla de los registros-->
     <table class="table">
         <thead>
             <tr>
@@ -54,6 +55,63 @@
             </tr>
         </tbody>
     </table>
+
+    <!--Modal para crear producto-->
+    <div class="modal fade" id="saveModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalTitle"></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <!-- Formulario para crear o actualizar un registro -->
+            <form id="saveForm">
+                <div class="modal-body row g-3">
+                    <!-- Campo oculto para asignar el id del registro al momento de modificar -->
+                    <input type="hidden" id="idProducto" name="idProducto">
+                    <div class="col-sm-12 col-md-6">
+                        <label for="nombreProducto" class="form-label">Nombre</label>
+                        <input id="nombreProducto" type="text" name="nombreProducto" class="form-control"
+                            required>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="descripcionProducto" class="form-label">Descripción</label>
+                        <input id="descripcionProducto" type="text" name="descripcionProducto"
+                            class="form-control" required>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="precioProducto" class="form-label">Precio (US$)</label>
+                        <input id="precioProducto" type="number" name="precioProducto" min="0.01" step="0.01"
+                            class="form-control" required>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="existenciasProducto" class="form-label">Existencias</label>
+                        <input id="existenciasProducto" type="number" name="existenciasProducto" min="1"
+                            step="1" class="form-control" required>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="categoriaProducto" class="form-label">Categoría</label>
+                        <select id="categoriaProducto" name="categoriaProducto" class="form-select" required>
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <label for="imagenProducto" class="form-label">Imagen</label>
+                        <input id="imagenProducto" type="file" name="imagenProducto" class="form-control"
+                            accept=".png, .jpg">
+                    </div>
+                    <div class="form-check form-switch form-check-reverse">
+                        <input class="form-check-input" type="checkbox" id="estadoProducto"
+                            name="estadoProducto" checked>
+                        <label class="form-check-label" for="estadoProducto">Estado</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
