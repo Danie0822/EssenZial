@@ -1,6 +1,7 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link rel="stylesheet" href="../../resources/css/admin/marcas.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <div class="sizebox"></div>
 <div class="color">
     <div class="sizebox1"></div>
@@ -19,7 +20,7 @@
     <div class="sizebox1"></div>
 
     <div class="container text-right">
-        <button type="button" class="btn btn-success"><i class="fas fa-plus"></i> </button>
+        <button type="button" class="btn btn-success"data-toggle="modal" data-target="#staticBackdrop"><i class="fas fa-plus"></i> </button>
     </div>
     <div class="sizebox"></div>
 
@@ -50,6 +51,36 @@
             </tr>
         </tbody>
     </table>
+
+
+       <!-- Modal -->
+       <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+       aria-labelledby="staticBackdropLabel" aria-hidden="true">
+       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel" style="width: 100%;">Crear Marca</h1>
+               </div>                
+               <div class="modal-body">
+                   <div class="form-row">
+                       <div class="form-group col-md-6">
+                           <label for="campo1">Nombre Marca</label>
+                           <input type="text" class="form-control" id="campo1">
+                       </div>
+                       <div class="form-group col-md-6">
+                           <label for="campo2">Imagen</label>
+                           <input type="text" class="form-control" id="campo2">
+                           <button type="button" class="btn btn-dark" data-dismiss="modal">Agregar Imangen</button>
+                       </div>
+                   </div>
+               </div>
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-dark" data-dismiss="modal" ><i class="bi bi-x-circle-fill"></i></button>
+                   <button type="button" class="btn btn-dark"><i class="bi bi-plus-circle-fill"></i></button>
+               </div>
+           </div>
+       </div>
+   </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
