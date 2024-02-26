@@ -18,8 +18,9 @@
 
     <div class="sizebox1"></div>
 
+
     <div class="container text-right">
-        <button type="button" class="btn btn-dark"><i class="fas fa-plus" onclick="openCreate()"></i> </button>
+        <button type="button" class="btn btn-secondary"data-toggle="modal" data-target="#saveModal"><i class="fas fa-plus"></i> </button>
     </div>
     <div class="sizebox"></div>
 
@@ -62,7 +63,6 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="modalTitle">Crear perfume</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- Formulario para crear o actualizar un registro -->
             <form id="saveForm">
@@ -113,7 +113,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-secondary"><i class="fa-solid fa-plus"></i></button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="bi bi-x-circle-fill"></i></button>
+                    <button type="button" class="btn btn-dark"><i class="bi bi-plus-circle-fill"></i></button>
                 </div>
             </form>
 
