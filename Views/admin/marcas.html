@@ -39,7 +39,8 @@
                 <td>Ejemplo 1</td>
                 <td><img src="imagen1.jpg" alt="Imagen 1" width="50"></td>
                 <td>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MODALACTO"><i class="fas fa-edit"></i></button>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#MODALACTO"><i
+                            class="fas fa-edit"></i></button>
                     <button type="button" class="btn btn-danger"><i class="fas fa-trash-alt"></i> </button>
                 </td>
             </tr>
@@ -73,14 +74,14 @@
                         <div class="form-group col-md-6">
                             <h6 for="campo2">Imagen</h6>
                             <input type="text" class="form-control" id="campo2">
-                            <button type="button" class="btn btn-dark" >Agregar Imangen</button>
+                            <button type="button" class="btn btn-dark">Agregar Imangen</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark add" data-dismiss="modal"><i
                             class="bi bi-x-circle-fill"></i></button>
-                    <button type="button" class="btn btn-dark add"><i class="bi bi-plus-circle-fill"></i></button>
+                    <button type="button" class="btn btn-dark add" data-toggle="modal" data-target="#agregado"><i class="bi bi-plus-circle-fill"></i></button>
                 </div>
             </div>
         </div>
@@ -91,7 +92,8 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel" style="width: 100%;">Actualizar Marca
+                    <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel" style="width: 100%;">Actualizar
+                        Marca
                     </h1>
                 </div>
                 <div class="modal-body">
@@ -103,7 +105,7 @@
                         <div class="form-group col-md-6">
                             <h6 for="campo2">Imagen</h6>
                             <input type="text" class="form-control" id="campo2">
-                            <button type="button" class="btn btn-dark" >Agregar Imangen</button>
+                            <button type="button" class="btn btn-dark">Agregar Imangen</button>
                         </div>
                     </div>
                 </div>
@@ -111,6 +113,27 @@
                     <button type="button" class="btn btn-dark add" data-dismiss="modal"><i
                             class="bi bi-x-circle-fill"></i></button>
                     <button type="button" class="btn btn-dark add"><i class="bi bi-pen-fill"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="agregado" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                        </div>
+                        <div class="text-center mt-2">
+                            <i class="bi bi-check-circle-fill mt-2" style="font-size: 10rem; color: black;"></i>
+                            <p class="mt-2" style="font-size: 6rem;">Éxito</p>
+                            <p style="font-size: 25px;">Se ha enviado correctamente</p>
+                            <button type="button" class="btn btn-dark mt-3 Aceptar" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
