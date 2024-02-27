@@ -38,3 +38,61 @@
 .rounded-input {
     border-radius: 20px; /* Ajusta el valor según el grado de redondez deseado */
 }
+
+.rounded-input {
+    border-radius: 20px; /* Ajusta el valor según el grado de redondez deseado */
+}
+
+      /* Estilo para hacer que el campo de la derecha sea más alto */
+      .modal-body .form-group.col-md-6:nth-child(2) input {
+        height: 100px; /* Altura ajustable según tus necesidades */
+    }
+.modal-dialog {
+    max-width: 60%; /* ajusta el ancho del modal */
+    margin: 1.75rem auto; /* centra el modal en la pantalla */
+}
+
+.modal-content {
+    height: 65vh; /* ajusta la altura del modal */
+}
+
+/* Estilo para hacer que el campo de la derecha sea más alto */
+.modal-body .form-group.col-md-6:nth-child(2) input {
+    height: 140px; /* Altura ajustable según tus necesidades */
+}
+/* Estilo para separar el botón "Agregar Imagen" del input */
+.modal-body .form-group.col-md-6:nth-child(2) input {
+    margin-bottom: 20px; /* Ajusta el margen inferior del input */
+}
+
+.modal-body .form-group.col-md-6:nth-child(2) button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.modal-header {
+    text-align: center;
+}
+    /* Estilo para centrar el botón "Agregar Imagen" */
+    .modal-body .form-group.col-md-6:nth-child(2) button {
+    display: block;
+    margin: 0 auto;
+}
+.form-control 
+{
+    border-radius: 10px;
+    border-color: black;
+}
+.btn-dark
+{
+    border-radius: 8px;
+}
+.modal-content
+{
+    border-radius: 20px;
+    background-color:rgb(245, 245, 245);
+}
+.add
+{
+    height: 40px;
+}

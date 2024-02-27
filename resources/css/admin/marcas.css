@@ -49,7 +49,7 @@
 }
 
 .modal-content {
-    height: 60vh; /* ajusta la altura del modal */
+    height: 64vh; /* ajusta la altura del modal */
 }
 
 /* Estilo para hacer que el campo de la derecha sea más alto */
@@ -73,4 +73,22 @@
     .modal-body .form-group.col-md-6:nth-child(2) button {
     display: block;
     margin: 0 auto;
+}
+.form-control 
+{
+    border-radius: 10px;
+    border-color: black;
+}
+.btn-dark
+{
+    border-radius: 8px;
+}
+.modal-content
+{
+    border-radius: 20px;
+    background-color:rgb(245, 245, 245);
+}
+.add
+{
+    height: 40px;
 }
