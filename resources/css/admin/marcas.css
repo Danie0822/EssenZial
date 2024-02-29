@@ -81,8 +81,8 @@
 }
 
 .preview-image {
-    max-width: 200px; /* Ajustar el ancho máximo según tus preferencias */
-    max-height: 200px; /* Ajustar el alto máximo según tus preferencias */
+    max-width: 200px; 
+    max-height: 200px; 
     height: auto;
     margin-top: 10px;
 }

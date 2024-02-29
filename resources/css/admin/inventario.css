@@ -129,7 +129,7 @@
 
 .rating {
     display: flex;
-    justify-content: center; /* Centra horizontalmente los elementos */
+    justify-content: center;
 }
 
 .rating label {
@@ -143,3 +143,15 @@
 .tbValoraciones {
     margin-top: 2%;
 }
+
+.botn
+{
+    width: 150px;
+}
+
+.preview-image {
+    max-width: 200px; 
+    max-height: 200px; 
+    height: auto;
+    margin-top: 10px;
+  }

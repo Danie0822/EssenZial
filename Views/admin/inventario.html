@@ -38,12 +38,12 @@
         </thead>
         <tbody>
             <tr>
-                <td>Ejemplo 1</td>
+                <td>Stronger with u</td>
                 <td>$90.00</td>
                 <td>
                     <button type="button" class="btn btn-dark"><i class="fas fa-edit" data-toggle="modal"
                             data-target="#actualizarModal"></i></button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt" data-toggle="modal" data-target="#eliminarModal"></i> </button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-info-circle" data-toggle="modal"
                             data-target="#detallesModal"></i> </i></button>
                     <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
@@ -51,7 +51,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Ejemplo 2</td>
+                <td>Acqua di Giò</td>
                 <td>$180</td>
                 <td>
 
@@ -76,6 +76,140 @@
                 </div>
                 <div class="modal-body">
                     <form id="saveForm">
+                        <div class="row">
+                            <!--Primera columna-->
+                            <div class="col-md-6 col-ms-12">
+                                <input type="hidden" id="idProducto" name="idProducto">
+                                <div>
+                                    <label for="nombreProducto" class="form-label">Nombre del perfume</label>
+                                    <input id="nombreProducto" type="text" name="nombreProducto" class="form-control"
+                                        required>
+                                </div>
+                                <div>
+
+                                </div>
+                                <div>
+                                    <label for="precioProducto" class="form-label">Precio del producto(US$)</label>
+                                    <input id="precioProducto" type="number" name="precioProducto" min="0.01"
+                                        step="0.01" class="form-control" required>
+                                </div>
+                                <div>
+                                    <label for="descripcionProducto" class="form-label">Descripción del
+                                        producto</label>
+                                    <textarea name="descripcionProducto" id="descripcionProducto"
+                                        class="form-control"></textarea>
+                                </div>
+                                <div>
+                                    <label for="marcaProducto" class="form-label">Marca</label>
+                                    <select class="form-select combobox" aria-label="Default select example">
+                                        <option selected>Selecciona una marca</option>
+                                        <option value="1">Dior</option>
+                                        <option value="2">Calvin Klein</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                            <!--segunda columna-->
+                            <div class="col-md-6 col-ms-12">
+                                <div>
+                                    <label for="oloresProducto" class="form-label">Olores</label>
+                                    <select class="form-select combobox" aria-label="Default select example">
+                                        <option selected>Selecciona un olor</option>
+                                        <option value="1">Frutal</option>
+                                        <option value="2">Amaderado</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="estadoDescuento" class="form-label">Estado del descuento</label>
+                                    <select class="form-select combobox" aria-label="Default select example">
+                                        <option selected>Selecciona el estado</option>
+                                        <option value="1">Activo</option>
+                                        <option value="2">Inactivo</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="descuentoSeleccionado" class="form-label">Elige el descuento</label>
+                                    <select class="form-select combobox" aria-label="Default select example">
+                                        <option selected>Selecciona un descuento</option>
+                                        <option value="1">50%</option>
+                                        <option value="2">30%</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="imagenMarca">
+                            <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
+                        </div>
+                        <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                            style="display: none;">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
+                        Cancelar</button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> Crear</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para ver el perfume-->
+    <div class="modal fade" id="detallesModal" tabindex="-1" role="dialog" aria-labelledby="detallesModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Detalles del perfume
+                    </h5>
+                </div>
+                <!--Inicio del cuerpo del modal de ver-->
+                <div class="modal-body">
+                    <div class="col-ms-12 col-md-6">
+                        <label for="nombreProductoVer" class="form-label" style="font-weight: bold;">Nombre del
+                            perfume</label>
+                        <p>Stronger with u</p>
+                    </div>
+                    <div class="col-ms-12 col-md-6">
+                        <label for="descuentoProductoVer" class="form-label"
+                            style="font-weight: bold;">Descuento</label>
+                        <p>15%</p>
+                    </div>
+                    <div class="col-ms-12 col-md-6">
+                        <label for="precioProductoVer" class="form-label" style="font-weight: bold;">Precio</label>
+                        <p>$90.00</p>
+                    </div>
+                    <div class="col-ms-12 col-md-6">
+                        <label for="descripcionProductoVer" class="form-label"
+                            style="font-weight: bold;">Descripción</label>
+                        <p>El perfume Strong es el mas vendido a nivel mundial</p>
+                    </div>
+                    <div class="col-ms-12 col-md-12">
+                        <label for="imagenProducto" class="form-label" style="font-weight: bold;">Imagen</label>
+                        <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block" alt="...">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
+                        Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para editar-->
+    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="actualizarModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Editar perfume</h5>
+                </div>
+                <div class="modal-body">
+                    <!--Inicio del formualrio para actualizar-->
+                    <form id="guardarForm">
                         <div class="modal-body">
                             <div class="row">
                                 <!--Primera columna-->
@@ -135,144 +269,6 @@
                                         <select class="form-select combobox" aria-label="Default select example">
                                             <option selected>Selecciona un descuento</option>
                                             <option value="1">50%</option>
-                                            <option value="2">30%</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="custom-file mb-3">
-                                <input type="file" class="custom-file-input" id="imagenMarca">
-                                <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
-                            </div>
-                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                style="display: none;">
-
-
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                        Cancelar</button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> Crear</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal para ver el perfume-->
-    <div class="modal fade" id="detallesModal" tabindex="-1" role="dialog" aria-labelledby="detallesModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header custom-modal-header">
-                    <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Detalles del perfume
-                    </h5>
-                </div>
-                <!--Inicio del cuerpo del modal de ver-->
-                <div class="modal-body">
-                    <div class="col-ms-12 col-md-6">
-                        <label for="nombreProductoVer" class="form-label" style="font-weight: bold;">Nombre del
-                            perfume</label>
-                        <p>Stronger with u</p>
-                    </div>
-                    <div class="col-ms-12 col-md-6">
-                        <label for="descuentoProductoVer" class="form-label"
-                            style="font-weight: bold;">Descuento</label>
-                        <p>15%</p>
-                    </div>
-                    <div class="col-ms-12 col-md-6">
-                        <label for="precioProductoVer" class="form-label" style="font-weight: bold;">Precio</label>
-                        <p>$250.98</p>
-                    </div>
-                    <div class="col-ms-12 col-md-6">
-                        <label for="descripcionProductoVer" class="form-label"
-                            style="font-weight: bold;">Descripción</label>
-                        <p>El perfume Strong es el mas vendido a nivel mundial</p>
-                    </div>
-                    <div class="col-ms-12 col-md-12">
-                        <label for="imagenProducto" class="form-label" style="font-weight: bold;">Imagen</label>
-                        <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block" alt="...">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                        Cerrar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--Modal para editar-->
-    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="actualizarModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header custom-modal-header">
-                    <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Editar perfume</h5>
-
-                </div>
-                <div class="modal-body">
-                    <form id="saveForm">
-                        <div class="modal-body">
-                            <div class="row">
-                                <!--Primera columna-->
-                                <div class="col-md-6 col-ms-12">
-                                    <input type="hidden" id="idProducto" name="idProducto">
-                                    <div>
-                                        <label for="nombreProducto" class="form-label">Nombre del perfume</label>
-                                        <input id="nombreProducto" type="text" name="nombreProducto"
-                                            class="form-control" required>
-                                    </div>
-                                    <div>
-
-                                    </div>
-                                    <div>
-                                        <label for="precioProducto" class="form-label">Precio del producto(US$)</label>
-                                        <input id="precioProducto" type="number" name="precioProducto" min="0.01"
-                                            step="0.01" class="form-control" required>
-                                    </div>
-                                    <div>
-                                        <label for="descripcionProducto" class="form-label">Descripción del
-                                            producto</label>
-                                        <textarea name="descripcionProducto" id="descripcionProducto"
-                                            class="form-control"></textarea>
-                                    </div>
-                                    <div>
-                                        <label for="marcaProducto" class="form-label">Marca</label>
-                                        <select class="form-select combobox" aria-label="Default select example">
-                                            <option selected>Selecciona una marca</option>
-                                            <option value="1">Dior</option>
-                                            <option value="2">Calvin Klein</option>
-                                        </select>
-
-                                    </div>
-                                </div>
-                                <!--segunda columna-->
-                                <div class="col-md-6 col-ms-12">
-                                    <div>
-                                        <label for="oloresProducto" class="form-label">Olores</label>
-                                        <select class="form-select combobox" aria-label="Default select example">
-                                            <option selected>Selecciona un olor</option>
-                                            <option value="1">Frutal</option>
-                                            <option value="2">Amaderado</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <label for="estadoDescuento" class="form-label">Estado del descuento</label>
-                                        <select class="form-select combobox" aria-label="Default select example">
-                                            <option selected>Estado del descuento</option>
-                                            <option value="1">Activo</option>
-                                            <option value="2">Inactivo</option>
-                                        </select>
-                                    </div>
-
-                                    <div>
-                                        <label for="descuentoSeleccionado" class="form-label">Elige el descuento</label>
-                                        <select class="form-select combobox" aria-label="Default select example">
-                                            <option selected>Selecciona un descuento</option>
-                                            <option value="1">50%</option>
                                             <option value="2">35%</option>
                                         </select>
                                     </div>
@@ -309,15 +305,33 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
+                <!--Inicio del cuerpo del modal-->
                 <div class="modal-body">
-                    <form id="saveForm">
-                        <div class="modal-body">
-                            <div class="row text-center">
-                                <div class="col-12">
-                                    <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block"
-                                        alt="...">
-                                    <label for="nombrePerfume" class="form-label text-center">STRONGER WITH U</label>
-                                    <div class=" text-center rating">
+                    <div class="row">
+                        <div class="col-12">
+                            <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block" alt="...">
+                            <label for="nombrePerfume" class="form-label text-center">STRONGER WITH U</label>
+                            <div class=" text-center rating">
+                                <div class="rating">
+                                    <label></label>
+                                    <label></label>
+                                    <label></label>
+                                    <label></label>
+                                    <label></label>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table text-center tbValoraciones">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cliente</th>
+                                    <th scope="col">Valoración</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Daniel Alessandro</td>
+                                    <td>
                                         <div class="rating">
                                             <label></label>
                                             <label></label>
@@ -325,45 +339,23 @@
                                             <label></label>
                                             <label></label>
                                         </div>
-                                    </div>
-                                </div>
-                                <table class="table text-center tbValoraciones">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Cliente</th>
-                                            <th scope="col">Valoración</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Daniel Alessandro</td>
-                                            <td>
-                                                <div class="rating">
-                                                    <label></label>
-                                                    <label></label>
-                                                    <label></label>
-                                                    <label></label>
-                                                    <label></label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>José Sanchéz</td>
-                                            <td>
-                                                <div class="rating">
-                                                    <label></label>
-                                                    <label></label>
-                                                    <label></label>
-                                                    <label></label>
-                                                    <label></label>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>José Sanchéz</td>
+                                    <td>
+                                        <div class="rating">
+                                            <label></label>
+                                            <label></label>
+                                            <label></label>
+                                            <label></label>
+                                            <label></label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div class="modal-footer">
                 </div>
@@ -371,9 +363,37 @@
         </div>
     </div>
 
+    <!--Modal patra eliminar registro-->
+    <div class="modal fade" id="eliminarModal" tabindex="-1" role="dialog" aria-labelledby="eliminarModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form>
+                    <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                        style="display: none;">
+
+                    <div class="text-center mt-3">
+                        <i class="bi bi-exclamation-triangle-fill" style="font-size: 3.5rem; color: black;"></i>
+                        <p class="mt-3" style="font-size: 1.5rem;">Advertencia</p>
+                        <p>¿Desea eliminar el registro?</p>
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="button" class="btn btn-dark mr-2 botn"
+                                data-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-dark botn" data-dismiss="modal">Si</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    \
     <script src="../../resources/js/foto.js"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/186c8fdf5b.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
