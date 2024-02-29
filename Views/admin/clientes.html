@@ -42,8 +42,8 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Daniel</td>
-                    <td>Morales</td>
+                    <td>Cliente1</td>
+                    <td>Apellido1</td>
                     <td>Activo</td>
                     <td>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#Actualizar"><i
@@ -53,8 +53,8 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Alessandro</td>
-                    <td>Morales</td>
+                    <td>Cliente2</td>
+                    <td>Apellido2</td>
                     <td>Inactivo</td>
                     <td>
                         <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
@@ -66,66 +66,56 @@
 
 
         <!-- Detalles Modal -->
-<div class="modal fade" id="detallesModal" tabindex="-1" role="dialog" aria-labelledby="detallesModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header custom-modal-header">
-                <h5 class="modal-title" id="detallesModalLabel">Detalles del Cliente</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Nombre:</strong> Daniel<span id="nombre_cliente_detalles"></span></p>
-                <p><strong>Apellido:</strong> Morales <span id="apellido_cliente_detalles"></span></p>
-                <p><strong>Teléfono:</strong> 7963528 <span id="telefono_cliente_detalles"></span></p>
-                <p><strong>Correo:</strong> morales@gmail.com<span id="correo_cliente_detalles"></span></p>
-                <p><strong>Estado:</strong> Activo <span id="estado_cliente_detalles"></span></p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
+        <div class="modal fade" id="detallesModal" tabindex="-1" role="dialog" aria-labelledby="detallesModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header custom-modal-header">
+                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Detalles del Cliente</h5>
+                    
+                    </div>
+                    <div class="modal-body">
+                        <p><strong>Nombre:</strong> Cliente1<span id="nombre_cliente_detalles"></span></p>
+                        <p><strong>Apellido:</strong> Apellido1 <span id="apellido_cliente_detalles"></span></p>
+                        <p><strong>Teléfono:</strong> 7963528 <span id="telefono_cliente_detalles"></span></p>
+                        <p><strong>Correo:</strong> morales@gmail.com<span id="correo_cliente_detalles"></span></p>
+                        <p><strong>Estado:</strong> Activo <span id="estado_cliente_detalles"></span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i></button>
+                    </div>
+                </div>
             </div>
         </div>
+
+        <!-- Modal Actualizar-->
+        <div class="modal fade" id="Actualizar" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form>
+                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                                style="display: none;">
+
+                            <div class="text-center mt-3">
+                                <i class="bi bi-exclamation-triangle-fill" style="font-size: 3.5rem; color: black;"></i>
+                                <p class="mt-3" style="font-size: 1.5rem;">Advertencia</p>
+                                <p>¿Deseas Actualizar el estado?</p>
+                                <div class="d-flex justify-content-center mt-3">
+                                    <button type="button" class="btn btn-dark mr-2 botn" data-dismiss="modal">No</button>
+                                    <button type="button" class="btn btn-dark botn" data-dismiss="modal">Si</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-</div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>
-
-
-<!-- Modal Eliminar-->
-<div class="modal fade" id="Actualizar" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <form>
-                    <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                        style="display: none;">
-
-                    <div class="text-center mt-3">
-                        <i class="bi bi-exclamation-triangle-fill" style="font-size: 3.5rem; color: black;"></i>
-                        <p class="mt-3" style="font-size: 1.5rem;">Advertencia</p>
-                        <p>¿Desea Actualizar el estado?</p>
-                        <div class="d-flex justify-content-center mt-3">
-                            <button type="button" class="btn btn-dark mr-2 botn" data-dismiss="modal">No</button>
-                            <button type="button" class="btn btn-dark botn" data-dismiss="modal">Si</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-</div>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

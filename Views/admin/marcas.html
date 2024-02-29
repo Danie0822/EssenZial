@@ -49,16 +49,17 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Ejemplo 1</td>
+                    <td>Marca1</td>
                     <td><img src="imagen1.jpg" alt="Imagen 1" width="50"></td>
                     <td>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#actualizar"><i
                                 class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash-alt"></i> </button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#eliminar"><i
+                                class="fas fa-trash-alt"></i> </button>
                     </td>
                 </tr>
                 <tr>
-                    <td>Ejemplo 2</td>
+                    <td>Marca2</td>
                     <td><img src="imagen2.jpg" alt="Imagen 2" width="50"></td>
                     <td>
                         <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
@@ -94,7 +95,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                            </button>
+                        </button>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#agregado"><i
                                 class="fas fa-plus"></i> </button>
                     </div>
@@ -142,21 +143,23 @@
                         </div>
 
                         <div class="custom-file mb-3">
-                            <input type="file" class="custom-file-input" id="imagenMarca">
-                            <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
+                            <input type="file" class="custom-file-input" id="imagenMarcaActualizar">
+                            <!-- Modified id here -->
+                            <label class="custom-file-label" for="imagenMarcaActualizar">Seleccionar imagen</label>
                         </div>
                         <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
                             style="display: none;">
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                            </button>
+                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                class="fas fa-times"></i></button>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acto"><i
                                 class="fas fa-plus"></i> </button>
                     </div>
                 </div>
             </div>
         </div>
+
         <!-- Modal Actualizado exitosamente-->
         <div class="modal fade" id="acto" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
             aria-hidden="true">
@@ -190,13 +193,15 @@
                                 style="display: none;">
 
                             <div class="text-center mt-3">
-                                <i class="bi bi-exclamation-triangle-fill" style="font-size: 3.5rem; color: black;"></i>
+                                <i class="bi bi-exclamation-triangle-fill"
+                                    style="font-size: 3.5rem; color: black;"></i>
                                 <p class="mt-3" style="font-size: 1.5rem;">Advertencia</p>
                                 <p>¿Desea eliminar el registro?</p>
                                 <div class="d-flex justify-content-center mt-3">
                                     <button type="button" class="btn btn-dark mr-2 botn"
                                         data-dismiss="modal">No</button>
-                                    <button type="button" class="btn btn-dark botn" data-dismiss="modal">Si</button>
+                                    <button type="button" class="btn btn-dark botn"
+                                        data-dismiss="modal">Si</button>
                                 </div>
                             </div>
                         </form>
