@@ -18,7 +18,7 @@
     <div class="color">
         <div class="sizebox1"></div>
         <div class="container text-right">
-            <h2>Marcas</h2>
+            <h2>Clientes</h2>
         </div>
 
         <div class="input-group mb-3 txt-buscar">
@@ -31,186 +31,101 @@
             </div>
         </div>
 
-        <div class="sizebox1"></div>
-
-        <div class="container text-right">
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#marcaModal"><i
-                    class="fas fa-plus"></i> </button>
-        </div>
-        <div class="sizebox"></div>
-
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">Nombre</th>
-                    <th scope="col">Imagen</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Estado</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Ejemplo 1</td>
-                    <td><img src="imagen1.jpg" alt="Imagen 1" width="50"></td>
+                    <td>Daniel</td>
+                    <td>Morales</td>
+                    <td>Activo</td>
                     <td>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#actualizar"><i
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#Actualizar"><i
                                 class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#eliminar"><i class="fas fa-trash-alt"></i> </button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#detallesModal"><i
+                                class="fas fa-info-circle"></i> </button>
                     </td>
                 </tr>
                 <tr>
-                    <td>Ejemplo 2</td>
-                    <td><img src="imagen2.jpg" alt="Imagen 2" width="50"></td>
+                    <td>Alessandro</td>
+                    <td>Morales</td>
+                    <td>Inactivo</td>
                     <td>
                         <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
+                        <button type="button" class="btn btn-dark"><i class="fas fa-info-circle"></i> </button>
                     </td>
                 </tr>
             </tbody>
         </table>
 
 
-        <!-- Crear Modal -->
-        <div class="modal fade" id="marcaModal" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header custom-modal-header">
-                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Crear Marca</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text nombre"><i class="fas fa-tag"></i></span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Nombre de la marca">
-                        </div>
-
-                        <div class="custom-file mb-3">
-                            <input type="file" class="custom-file-input" id="imagenMarca">
-                            <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
-                        </div>
-                        <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                            style="display: none;">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                            Cancelar</button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#agregado"><i
-                                class="fas fa-plus"></i> Crear</button>
-                    </div>
-                </div>
+        <!-- Detalles Modal -->
+<div class="modal fade" id="detallesModal" tabindex="-1" role="dialog" aria-labelledby="detallesModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header custom-modal-header">
+                <h5 class="modal-title" id="detallesModalLabel">Detalles del Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Nombre:</strong> Daniel<span id="nombre_cliente_detalles"></span></p>
+                <p><strong>Apellido:</strong> Morales <span id="apellido_cliente_detalles"></span></p>
+                <p><strong>Teléfono:</strong> 7963528 <span id="telefono_cliente_detalles"></span></p>
+                <p><strong>Correo:</strong> morales@gmail.com<span id="correo_cliente_detalles"></span></p>
+                <p><strong>Estado:</strong> Activo <span id="estado_cliente_detalles"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
             </div>
         </div>
-
-
-        <!-- Modal Agregado exitosamente-->
-        <div class="modal fade" id="agregado" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                style="display: none;">
-
-                            <div class="text-center mt-3">
-                                <i class="bi bi-check-circle" style="font-size: 3.5rem; color: black;"></i>
-                                <p class="mt-3" style="font-size: 1.5rem;">Éxito</p>
-                                <p>Se ha enviado correctamente</p>
-                                <button type="button" class="btn btn-dark botn" data-dismiss="modal">Aceptar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal de actualizar -->
-        <div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header custom-modal-header">
-                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Actualizar Marca
-                        </h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text nombre"><i class="fas fa-tag"></i></span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Nombre de la marca">
-                        </div>
-
-                        <div class="custom-file mb-3">
-                            <input type="file" class="custom-file-input" id="imagenMarca">
-                            <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
-                        </div>
-                        <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                            style="display: none;">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                            Cancelar</button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acto"><i
-                                class="fas fa-plus"></i> Crear</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Modal Actualizado exitosamente-->
-        <div class="modal fade" id="acto" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                style="display: none;">
-
-                            <div class="text-center mt-3">
-                                <i class="bi bi-check-circle" style="font-size: 3.5rem; color: black;"></i>
-                                <p class="mt-3" style="font-size: 1.5rem;">Éxito</p>
-                                <p>Se ha Actualizado correctamente</p>
-                                <button type="button" class="btn btn-dark botn" data-dismiss="modal">Aceptar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Eliminar-->
-        <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                style="display: none;">
-
-                            <div class="text-center mt-3">
-                                <i class="bi bi-exclamation-triangle-fill" style="font-size: 3.5rem; color: black;"></i>
-                                <p class="mt-3" style="font-size: 1.5rem;">Advertencia</p>
-                                <p>¿Desea eliminar el registro?</p>
-                                <div class="d-flex justify-content-center mt-3">
-                                    <button type="button" class="btn btn-dark mr-2 botn"
-                                        data-dismiss="modal">No</button>
-                                    <button type="button" class="btn btn-dark botn" data-dismiss="modal">Si</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
+</div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="../../resources/js/foto.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+
+<!-- Modal Eliminar-->
+<div class="modal fade" id="Actualizar" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <form>
+                    <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                        style="display: none;">
+
+                    <div class="text-center mt-3">
+                        <i class="bi bi-exclamation-triangle-fill" style="font-size: 3.5rem; color: black;"></i>
+                        <p class="mt-3" style="font-size: 1.5rem;">Advertencia</p>
+                        <p>¿Desea Actualizar el estado?</p>
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="button" class="btn btn-dark mr-2 botn" data-dismiss="modal">No</button>
+                            <button type="button" class="btn btn-dark botn" data-dismiss="modal">Si</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>

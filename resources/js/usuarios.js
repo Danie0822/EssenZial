@@ -2,7 +2,7 @@ function showContent(contentName) {
     var iframe = document.getElementById('content');
     switch (contentName) {
         case 'administrador':
-            iframe.src = 'marcas.html';
+            iframe.src = 'administrador.html';
             break;
         case 'clientes':
             iframe.src = 'clientes.html';
