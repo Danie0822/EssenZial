@@ -8,7 +8,7 @@ function showContent(contentName) {
             iframe.src = 'gamas.html';
             break;
         case 'inventario':
-            iframe.src = 'pruebasfjfjf.html';
+            iframe.src = 'inventario.html';
             break;
         case 'pedidos':
             iframe.src = 'pedido.html';
