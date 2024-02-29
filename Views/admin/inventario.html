@@ -12,7 +12,7 @@
         <input type="email" class="form-control focus" placeholder="Buscar" aria-label="Buscar"
             aria-describedby="basic-addon2">
         <div class="input-group-append">
-            <span class="input-group-text bg-transparent border-0">
+            <span class="input-group-text bg-transparent border-0 buscar">
                 <img src="../../resources/img/buscar 1.png" alt="" class="search-icon">
             </span>
         </div>
@@ -33,7 +33,7 @@
             <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Precio</th>
-                <th scope="col"></th>
+                <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -124,7 +124,7 @@
                                     <div>
                                         <label for="estadoDescuento" class="form-label">Estado del descuento</label>
                                         <select class="form-select combobox" aria-label="Default select example">
-                                            <option selected>Selecciona el estado del descuento</option>
+                                            <option selected>Selecciona el estado</option>
                                             <option value="1">Activo</option>
                                             <option value="2">Inactivo</option>
                                         </select>
@@ -169,6 +169,7 @@
                     <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Detalles del perfume
                     </h5>
                 </div>
+                <!--Inicio del cuerpo del modal de ver-->
                 <div class="modal-body">
                     <div class="col-ms-12 col-md-6">
                         <label for="nombreProductoVer" class="form-label" style="font-weight: bold;">Nombre del
@@ -290,8 +291,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                    </button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> </button>
+                        Cancelar</button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> Actualizar</button>
                 </div>
             </div>
         </div>
@@ -317,16 +318,13 @@
                                         alt="...">
                                     <label for="nombrePerfume" class="form-label text-center">STRONGER WITH U</label>
                                     <div class=" text-center rating">
-                                        <input type="radio" id="star5" name="rating" value="5"><label
-                                            for="star5"></label>
-                                        <input type="radio" id="star4" name="rating" value="4"><label
-                                            for="star4"></label>
-                                        <input type="radio" id="star3" name="rating" value="3"><label
-                                            for="star3"></label>
-                                        <input type="radio" id="star2" name="rating" value="2"><label
-                                            for="star2"></label>
-                                        <input type="radio" id="star1" name="rating" value="1"><label
-                                            for="star1"></label>
+                                        <div class="rating">
+                                            <label></label>
+                                            <label></label>
+                                            <label></label>
+                                            <label></label>
+                                            <label></label>
+                                        </div>
                                     </div>
                                 </div>
                                 <table class="table text-center tbValoraciones">
@@ -340,34 +338,24 @@
                                         <tr>
                                             <td>Daniel Alessandro</td>
                                             <td>
-                                                <div class="rating text-center">
-                                                    <input type="radio" id="star5" name="rating" value="5"><label
-                                                        for="star5"></label>
-                                                    <input type="radio" id="star4" name="rating" value="4"><label
-                                                        for="star4"></label>
-                                                    <input type="radio" id="star3" name="rating" value="3"><label
-                                                        for="star3"></label>
-                                                    <input type="radio" id="star2" name="rating" value="2"><label
-                                                        for="star2"></label>
-                                                    <input type="radio" id="star1" name="rating" value="1"><label
-                                                        for="star1"></label>
+                                                <div class="rating">
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>José Sanchéz</td>
                                             <td>
-                                                <div class="rating text-center">
-                                                    <input type="radio" id="star5" name="rating" value="5"><label
-                                                        for="star5"></label>
-                                                    <input type="radio" id="star4" name="rating" value="4"><label
-                                                        for="star4"></label>
-                                                    <input type="radio" id="star3" name="rating" value="3"><label
-                                                        for="star3"></label>
-                                                    <input type="radio" id="star2" name="rating" value="2"><label
-                                                        for="star2"></label>
-                                                    <input type="radio" id="star1" name="rating" value="1"><label
-                                                        for="star1"></label>
+                                                <div class="rating">
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
                                                 </div>
                                             </td>
                                         </tr>
