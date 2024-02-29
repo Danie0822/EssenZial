@@ -14,10 +14,11 @@
   color: #555;
   /* Color de la etiqueta */
 }
-.fondo {/* Fondo y Tamaño de la img */
+/*
+.fondo {/* Fondo y Tamaño de la img 
   background-image: url('../../img/pef-logo.png');
   background-repeat: no-repeat;
-}
+}*/
 .log{
  
 }
