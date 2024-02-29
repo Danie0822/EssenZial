@@ -13,6 +13,9 @@ function showContent(contentName) {
         case 'pedidos':
             iframe.src = 'pedido.html';
             break;
+        case 'usuarios':
+            iframe.src = 'usuarios.html';
+            break;
         default:
             iframe.src = 'default.html';
     }
