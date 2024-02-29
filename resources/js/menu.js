@@ -4,11 +4,11 @@ function showContent(contentName) {
         case 'gamas':
             iframe.src = 'gamas.html';
             break;
-        case 'olores':
-            iframe.src = 'olores.html';
+        case 'inventario':
+            iframe.src = 'inventario.html';
             break;
-        case 'categorias':
-            iframe.src = 'categorias.html';
+        case 's':
+            iframe.src = 'inventario.html';
             break;
         default:
             iframe.src = 'default.html';
