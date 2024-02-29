@@ -1,18 +1,77 @@
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link rel="stylesheet" href="../../resources/css/admin/marcas.css">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marcas</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="../../resources/css/admin/marcas.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    .modal-content {
+      border-radius: 20px;
+    }
+    .nombre {
+      background-color: #f8f9fa;
+      border-radius: 10px 0 0 10px;
+    }
+    .form-control {
+      border-radius: 0 10px 10px 0;
+    }
+    .btn {
+      border-radius: 20px;
+    }
+    .custom-modal-header {
+      background-color: #000;
+      color: #fff;
+      border-radius: 20px 20px 0 0;
+    }
+    .custom-modal-header .close {
+      color: #fff;
+    }
+    .form-control:focus {
+      border-color: #0b0b0b;
+      box-shadow: none;
+    }
+    .custom-file-input {
+      color: transparent;
+    }
+    .custom-file-input::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+    .custom-file-input::before {
+      content: 'Seleccionar imagen';
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .preview-image {
+      max-width: 200px; /* Ajustar el ancho máximo según tus preferencias */
+      max-height: 200px; /* Ajustar el alto máximo según tus preferencias */
+      height: auto;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
 <div class="sizebox"></div>
 <div class="color">
     <div class="sizebox1"></div>
     <div class="container text-right">
         <h2>Marcas</h2>
     </div>
+    
     <div class="input-group mb-3 txt-buscar">
         <input type="email" class="form-control focus" placeholder="Buscar" aria-label="Buscar"
             aria-describedby="basic-addon2">
         <div class="input-group-append">
-            <span class="input-group-text bg-transparent border-0">
+            <span class="input-group-text bg-transparent border-0 buscar">
                 <img src="../../resources/img/buscar 1.png" alt="" class="search-icon">
             </span>
         </div>
@@ -21,7 +80,7 @@
     <div class="sizebox1"></div>
 
     <div class="container text-right">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop"><i
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#marcaModal"><i
                 class="fas fa-plus"></i> </button>
     </div>
     <div class="sizebox"></div>
@@ -56,84 +115,33 @@
     </table>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <!-- Crear Modal -->
+    <div class="modal fade" id="marcaModal" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel" style="width: 100%;">Crear Marca
-                    </h1>
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title" id="marcaModalLabel">Crear Marca</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <h6 for="campo1">Nombre Marca</h6>
-                            <input type="text" class="form-control" id="campo1">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text nombre"><i class="fas fa-tag"></i></span>
                         </div>
-                        <div class="form-group col-md-6">
-                            <h6 for="campo2">Imagen</h6>
-                            <input type="text" class="form-control" id="campo2">
-                            <button type="button" class="btn btn-dark">Agregar Imangen</button>
-                        </div>
+                        <input type="text" class="form-control" placeholder="Nombre de la marca">
                     </div>
+                    
+                    <div class="custom-file mb-3">
+                        <input type="file" class="custom-file-input" id="imagenMarca">
+                        <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
+                    </div>
+                    <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen" style="display: none;">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark add" data-dismiss="modal"><i
-                            class="bi bi-x-circle-fill"></i></button>
-                    <button type="button" class="btn btn-dark add" data-toggle="modal" data-target="#agregado"><i class="bi bi-plus-circle-fill"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="MODALACTO" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel" style="width: 100%;">Actualizar
-                        Marca
-                    </h1>
-                </div>
-                <div class="modal-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <h6 for="campo1">Nombre Marca</h6>
-                            <input type="text" class="form-control" id="campo1">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <h6 for="campo2">Imagen</h6>
-                            <input type="text" class="form-control" id="campo2">
-                            <button type="button" class="btn btn-dark">Agregar Imangen</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-dark add" data-dismiss="modal"><i
-                            class="bi bi-x-circle-fill"></i></button>
-                    <button type="button" class="btn btn-dark add"><i class="bi bi-pen-fill"></i></button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="agregado" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-            <div class="modal-content">
-
-                <div class="modal-body">
-                    <form>
-                        <div class="form-row">
-                        </div>
-                        <div class="text-center mt-2">
-                            <i class="bi bi-check-circle-fill mt-2" style="font-size: 10rem; color: black;"></i>
-                            <p class="mt-2" style="font-size: 6rem;">Éxito</p>
-                            <p style="font-size: 25px;">Se ha enviado correctamente</p>
-                            <button type="button" class="btn btn-dark mt-3 Aceptar" data-dismiss="modal">Aceptar</button>
-                        </div>
-                    </form>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> Crear</button>
                 </div>
             </div>
         </div>
@@ -143,3 +151,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="../../resources/js/foto.js"></script>
+</body>
+</html>

@@ -1,98 +1,106 @@
-
-.color
-{
-    background-color:rgb(245, 245, 245);
+/* Estilos generales */
+.color {
+    background-color: rgb(245, 245, 245);
     border-radius: 15px;
 }
-.sizebox{
+
+.sizebox {
     padding-bottom: 10px;
 }
-.sizebox1{
-    padding:20px;
+
+.sizebox1 {
+    padding: 20px;
 }
-.txt-buscar
-{
+
+/* Estilos de búsqueda */
+.txt-buscar {
     border-radius: 10px;
     max-width: 300px;
-    padding-left:20px;
+    padding-left: 20px;
 }
+
 .search-icon {
     position: absolute;
-    right: 10px; 
+    right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    height: 20px; 
+    height: 20px;
     width: auto;
 }
 
-.input-group-text {
+.buscar {
     padding: 0;
-    border-radius: 0; 
-    background-color: transparent; 
-    border: none; 
+    border-radius: 0;
+    background-color: transparent;
+    border: none;
 }
-.focus:focus{
+
+.focus:focus {
     border-color: #0b0b0b;
     box-shadow: none;
 }
-.rounded-input {
-    border-radius: 20px; /* Ajusta el valor según el grado de redondez deseado */
-}
 
-      /* Estilo para hacer que el campo de la derecha sea más alto */
-      .modal-body .form-group.col-md-6:nth-child(2) input {
-        height: 100px; /* Altura ajustable según tus necesidades */
-    }
-.modal-dialog {
-    max-width: 60%; /* ajusta el ancho del modal */
-    margin: 1.75rem auto; /* centra el modal en la pantalla */
-}
 
+/* Estilos de modal */
 .modal-content {
-    height: 64vh; /* ajusta la altura del modal */
+    border-radius: 20px;
 }
 
-/* Estilo para hacer que el campo de la derecha sea más alto */
-.modal-body .form-group.col-md-6:nth-child(2) input {
-    height: 140px; /* Altura ajustable según tus necesidades */
-}
-/* Estilo para separar el botón "Agregar Imagen" del input */
-.modal-body .form-group.col-md-6:nth-child(2) input {
-    margin-bottom: 20px; /* Ajusta el margen inferior del input */
+.custom-modal-header {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px 20px 0 0;
 }
 
-.modal-body .form-group.col-md-6:nth-child(2) button {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+.custom-modal-header .close {
+    color: #fff;
 }
-.modal-header {
-    text-align: center;
+
+.form-control:focus {
+    border-color: #0b0b0b;
+    box-shadow: none;
 }
-    /* Estilo para centrar el botón "Agregar Imagen" */
-    .modal-body .form-group.col-md-6:nth-child(2) button {
-    display: block;
-    margin: 0 auto;
+
+.custom-file-input {
+    color: transparent;
 }
-.form-control 
-{
-    border-radius: 10px;
-    border-color: black;
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
 }
-.btn-dark
-{
+
+.custom-file-input::before {
+    content: 'Seleccionar imagen';
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.preview-image {
+    max-width: 200px; /* Ajustar el ancho máximo según tus preferencias */
+    max-height: 200px; /* Ajustar el alto máximo según tus preferencias */
+    height: auto;
+    margin-top: 10px;
+}
+
+/* Estilos de botones */
+.btn {
+    border-radius: 20px;
+}
+
+.btn-dark {
     border-radius: 8px;
 }
-.modal-content
-{
-    border-radius: 20px;
-    background-color:rgb(245, 245, 245);
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border-radius: 10px 0 0 10px;
 }
-.add
-{
-    height: 40px;
-}
-.Aceptar
-{
-    width: 600px;
+
+.form-control {
+    border-radius: 0 10px 10px 0;
 }
