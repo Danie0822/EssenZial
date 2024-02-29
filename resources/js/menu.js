@@ -1,6 +1,9 @@
 function showContent(contentName) {
     var iframe = document.getElementById('content');
     switch (contentName) {
+        case 'dashboard':
+            iframe.src = 'dashboard.html';
+            break;
         case 'gamas':
             iframe.src = 'gamas.html';
             break;
