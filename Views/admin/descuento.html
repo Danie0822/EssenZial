@@ -54,12 +54,12 @@
                     <td>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#descuentoModalA"><i
                                 class="fas fa-edit"></i></button>
-                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#detallesDescuentoModal"><i
-                                    class="fas fa-info-circle"></i> </button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal"
+                            data-target="#detallesDescuentoModal"><i class="fas fa-info-circle"></i> </button>
                         <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#eliminar"><i
                                 class="fas fa-trash-alt"></i> </button>
 
-                                
+
                     </td>
                 </tr>
                 <tr>
@@ -67,8 +67,7 @@
                     <td>Inactivo</td>
                     <td>
                         <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-dark" ><i
-                            class="fas fa-info-circle"></i> </button>
+                        <button type="button" class="btn btn-dark"><i class="fas fa-info-circle"></i> </button>
                         <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
                     </td>
                 </tr>
@@ -77,57 +76,62 @@
 
 
         <!-- Modal de Descuento -->
-<div class="modal fade" id="descuentoModal" tabindex="-1" role="dialog" aria-labelledby="descuentoModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header custom-modal-header">
-                <h5 class="modal-title" id="descuentoModalLabel">Agregar Descuento</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="cantidad_descuento">Cantidad de Descuento</label>
-                    <input type="number" step="0.01" class="form-control" id="cantidad_descuento" placeholder="Cantidad">
-                </div>
-                <div class="form-group">
-                    <label for="descripcion_descuento">Descripción</label>
-                    <textarea class="form-control" id="descripcion_descuento" rows="3" placeholder="Descripción"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="fecha_inicio_descuento">Fecha de Inicio</label>
-                    <input type="date" class="form-control" id="fecha_inicio_descuento">
-                </div>
-                <div class="form-group">
-                    <label for="fecha_fin_descuento">Fecha de Fin</label>
-                    <input type="date" class="form-control" id="fecha_fin_descuento">
-                </div>
-                <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="estado_descuento">
-                        <label class="custom-control-label" for="estado_descuento">Estado</label>
+        <div class="modal fade" id="descuentoModal" tabindex="-1" role="dialog" aria-labelledby="descuentoModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header custom-modal-header">
+                        <h5 class="modal-title" id="descuentoModalLabel">Agregar Descuento</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="cantidad_descuento">Cantidad de Descuento</label>
+                            <input type="number" step="0.01" class="form-control" id="cantidad_descuento"
+                                placeholder="Cantidad">
+                        </div>
+                        <div class="form-group">
+                            <label for="descripcion_descuento">Descripción</label>
+                            <textarea class="form-control" id="descripcion_descuento" rows="3"
+                                placeholder="Descripción"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_inicio_descuento">Fecha de Inicio</label>
+                            <input type="date" class="form-control" id="fecha_inicio_descuento">
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha_fin_descuento">Fecha de Fin</label>
+                            <input type="date" class="form-control" id="fecha_fin_descuento">
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="estado_descuento">
+                                <label class="custom-control-label" for="estado_descuento">Estado</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                class="fas fa-times"></i></button>
+                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#agregado"><i
+                                class="fas fa-plus"></i> </button>
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i></button>
-                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#agregado"><i
-                    class="fas fa-plus"></i> </button>
-            </div>
         </div>
-    </div>
-</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
 </html>
 
-        <!-- Modal de Descuento actualizar -->
-<div class="modal fade" id="descuentoModalA" tabindex="-1" role="dialog" aria-labelledby="descuentoModalLabel" aria-hidden="true">
+<!-- Modal de Descuento actualizar -->
+<div class="modal fade" id="descuentoModalA" tabindex="-1" role="dialog" aria-labelledby="descuentoModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header custom-modal-header">
@@ -139,11 +143,13 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="cantidad_descuento">Cantidad de Descuento</label>
-                    <input type="number" step="0.01" class="form-control" id="cantidad_descuento" placeholder="Cantidad">
+                    <input type="number" step="0.01" class="form-control" id="cantidad_descuento"
+                        placeholder="Cantidad">
                 </div>
                 <div class="form-group">
                     <label for="descripcion_descuento">Descripción</label>
-                    <textarea class="form-control" id="descripcion_descuento" rows="3" placeholder="Descripción"></textarea>
+                    <textarea class="form-control" id="descripcion_descuento" rows="3"
+                        placeholder="Descripción"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="fecha_inicio_descuento">Fecha de Inicio</label>
@@ -162,7 +168,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i> </button>
-                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acto"><i class="fas fa-edit"></i> </button>
+                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acto"><i
+                        class="fas fa-edit"></i> </button>
             </div>
         </div>
     </div>
@@ -189,7 +196,8 @@
     </div>
 </div>
 <!-- Detalles Modal de Descuento -->
-<div class="modal fade" id="detallesDescuentoModal" tabindex="-1" role="dialog" aria-labelledby="detallesDescuentoModalLabel" aria-hidden="true">
+<div class="modal fade" id="detallesDescuentoModal" tabindex="-1" role="dialog"
+    aria-labelledby="detallesDescuentoModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header custom-modal-header">
@@ -200,13 +208,15 @@
             </div>
             <div class="modal-body">
                 <p><strong>Cantidad de Descuento:</strong> <span id="cantidad_descuento_detalles">10%</span></p>
-                <p><strong>Descripción:</strong> <span id="descripcion_descuento_detalles">Descuento de Temporada</span></p>
+                <p><strong>Descripción:</strong> <span id="descripcion_descuento_detalles">Descuento de Temporada</span>
+                </p>
                 <p><strong>Fecha de Inicio:</strong> <span id="fecha_inicio_descuento_detalles">2024-03-01</span></p>
                 <p><strong>Fecha de Fin:</strong> <span id="fecha_fin_descuento_detalles">2024-03-15</span></p>
                 <p><strong>Estado:</strong> <span id="estado_descuento_detalles">Activo</span></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
+                    Cerrar</button>
             </div>
         </div>
     </div>

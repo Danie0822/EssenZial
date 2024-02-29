@@ -46,22 +46,22 @@
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-info-circle" data-toggle="modal"
                             data-target="#detallesModal"></i> </i></button>
-                            <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
-                                data-target="#valoracionesModal"></i></button>
+                    <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
+                            data-target="#valoracionesModal"></i></button>
                 </td>
             </tr>
             <tr>
                 <td>Ejemplo 2</td>
                 <td>$180</td>
                 <td>
-                    
+
                     <button type="button" class="btn btn-dark"><i class="fas fa-edit" data-toggle="modal"
                             data-target="#actualizarModal"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
                     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#detallesModal"><i
                             class="fas fa-info-circle"></i> </button>
-                            <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
-                                data-target="#valoracionesModal"></i></button>
+                    <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
+                            data-target="#valoracionesModal"></i></button>
                 </td>
             </tr>
         </tbody>
@@ -72,7 +72,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header custom-modal-header">
-                    <h5 class="modal-title" id="guardarModalLabel">Crear perfume</h5>
+                    <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Crear perfume</h5>
                 </div>
                 <div class="modal-body">
                     <form id="saveForm">
@@ -166,7 +166,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header custom-modal-header">
-                    <h5 class="modal-title" id="detallesModalLabel">Detalles del perfume</h5>
+                    <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Detalles del perfume
+                    </h5>
                 </div>
                 <div class="modal-body">
                     <div class="col-ms-12 col-md-6">
@@ -207,10 +208,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header custom-modal-header">
-                    <h5 class="modal-title" id="actualizarModalLabel">Editar perfume</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Editar perfume</h5>
+
                 </div>
                 <div class="modal-body">
                     <form id="saveForm">
@@ -262,7 +261,7 @@
                                     <div>
                                         <label for="estadoDescuento" class="form-label">Estado del descuento</label>
                                         <select class="form-select combobox" aria-label="Default select example">
-                                            <option selected>Selecciona un estado del descuento</option>
+                                            <option selected>Estado del descuento</option>
                                             <option value="1">Activo</option>
                                             <option value="2">Inactivo</option>
                                         </select>
@@ -279,7 +278,7 @@
                                 </div>
                             </div>
                             <div class="custom-file mb-3">
-                                <input type="file" class="custom-file-input" id="imagenMarca">
+                                <input type="file" class="custom-file-input" id="imagenMarcaActualizar">
                                 <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
                             </div>
                             <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
@@ -291,8 +290,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                        Cancelar</button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> Crear</button>
+                    </button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> </button>
                 </div>
             </div>
         </div>
@@ -304,7 +303,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header custom-modal-header">
-                    <h5 class="modal-title" id="valoracionesModalLabel">valoraciones</h5>
+                    <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">valoraciones</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -314,14 +313,20 @@
                         <div class="modal-body">
                             <div class="row text-center">
                                 <div class="col-12">
-                                    <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block" alt="...">
+                                    <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block"
+                                        alt="...">
                                     <label for="nombrePerfume" class="form-label text-center">STRONGER WITH U</label>
                                     <div class=" text-center rating">
-                                        <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
-                                        <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
-                                        <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
-                                        <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
-                                        <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                                        <input type="radio" id="star5" name="rating" value="5"><label
+                                            for="star5"></label>
+                                        <input type="radio" id="star4" name="rating" value="4"><label
+                                            for="star4"></label>
+                                        <input type="radio" id="star3" name="rating" value="3"><label
+                                            for="star3"></label>
+                                        <input type="radio" id="star2" name="rating" value="2"><label
+                                            for="star2"></label>
+                                        <input type="radio" id="star1" name="rating" value="1"><label
+                                            for="star1"></label>
                                     </div>
                                 </div>
                                 <table class="table text-center tbValoraciones">
@@ -334,23 +339,37 @@
                                     <tbody>
                                         <tr>
                                             <td>Daniel Alessandro</td>
-                                            <td><div class="rating text-center">
-                                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
-                                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
-                                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
-                                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
-                                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
-                                            </div></td>
+                                            <td>
+                                                <div class="rating text-center">
+                                                    <input type="radio" id="star5" name="rating" value="5"><label
+                                                        for="star5"></label>
+                                                    <input type="radio" id="star4" name="rating" value="4"><label
+                                                        for="star4"></label>
+                                                    <input type="radio" id="star3" name="rating" value="3"><label
+                                                        for="star3"></label>
+                                                    <input type="radio" id="star2" name="rating" value="2"><label
+                                                        for="star2"></label>
+                                                    <input type="radio" id="star1" name="rating" value="1"><label
+                                                        for="star1"></label>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>José Sanchéz</td>
-                                            <td><div class="rating text-center">
-                                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
-                                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
-                                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
-                                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
-                                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
-                                            </div></td>
+                                            <td>
+                                                <div class="rating text-center">
+                                                    <input type="radio" id="star5" name="rating" value="5"><label
+                                                        for="star5"></label>
+                                                    <input type="radio" id="star4" name="rating" value="4"><label
+                                                        for="star4"></label>
+                                                    <input type="radio" id="star3" name="rating" value="3"><label
+                                                        for="star3"></label>
+                                                    <input type="radio" id="star2" name="rating" value="2"><label
+                                                        for="star2"></label>
+                                                    <input type="radio" id="star1" name="rating" value="1"><label
+                                                        for="star1"></label>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
