@@ -20,3 +20,7 @@ function showContent(contentName) {
             iframe.src = 'default.html';
     }
 }
+function logout() {
+    window.location.replace('index.html');
+    window.history.replaceState(null, '', 'index.html');
+}
