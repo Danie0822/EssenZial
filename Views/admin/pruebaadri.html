@@ -22,7 +22,7 @@
 
 
     <div class="container text-right">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#saveModal"><i
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#guardarModal"><i
                 class="fas fa-plus"></i> </button>
     </div>
     <div class="sizebox"></div>
@@ -42,9 +42,9 @@
                 <td>$90.00</td>
                 <td>
                     <button type="button" class="btn btn-dark"><i class="fa-solid fa-star"></i></button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-edit" data-toggle="modal" data-target="#actualizarModal"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
-                    <button type="button" class="btn btn-dark"><i class="fa-solid fa-clipboard-list"></i></button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-info-circle" data-toggle="modal" data-target="#detallesModal"></i> </i></button>
                 </td>
             </tr>
             <tr>
@@ -52,21 +52,20 @@
                 <td>$180</td>
                 <td>
                     <button type="button" class="btn btn-dark"><i class="fa-solid fa-star"></i></button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-edit" data-toggle="modal" data-target="#actualizarModal"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
-                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#viewPerfume"><i
-                            class="fa-solid fa-clipboard-list"></i></button>
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#detallesModal"><i class="fas fa-info-circle"></i> </button>
                 </td>
             </tr>
         </tbody>
     </table>
     <!--Modal para crear el perfume-->
-    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
+    <div class="modal fade" id="guardarModal" tabindex="-1" role="dialog" aria-labelledby="guardarModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header custom-modal-header">
-                    <h5 class="modal-title" id="marcaModalLabel">Crear perfume</h5>
+                    <h5 class="modal-title" id="guardarModalLabel">Crear perfume</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -110,7 +109,7 @@
                                 <!--segunda columna-->
                                 <div class="col-md-6 col-ms-12">
                                     <div>
-                                        <label for="marcaProducto" class="form-label">Olores</label>
+                                        <label for="oloresProducto" class="form-label">Olores</label>
                                         <select class="form-select combobox" aria-label="Default select example">
                                             <option selected>Selecciona una marca</option>
                                             <option value="1">Dior</option>
@@ -119,7 +118,7 @@
                                     </div>
 
                                     <div>
-                                        <label for="marcaProducto" class="form-label">Estado del descuento</label>
+                                        <label for="estadoDescuento" class="form-label">Estado del descuento</label>
                                         <select class="form-select combobox" aria-label="Default select example">
                                             <option selected>Selecciona una marca</option>
                                             <option value="1">Dior</option>
@@ -128,7 +127,7 @@
                                     </div>
 
                                     <div>
-                                        <label for="marcaProducto" class="form-label">Elige el descuento</label>
+                                        <label for="descuentoSeleccionado" class="form-label">Elige el descuento</label>
                                         <select class="form-select combobox" aria-label="Default select example">
                                             <option selected>Selecciona una marca</option>
                                             <option value="1">Dior</option>
@@ -157,14 +156,16 @@
     </div>
 
     <!--Modal para ver el perfume-->
-    <div class="modal fade" id="viewPerfume" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="modalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal fade" id="detallesModal" tabindex="-1" role="dialog" aria-labelledby="detallesModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title fs-5" id="modalTitle">Ver perfume</h3>
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title" id="detallesModalLabel">Detalles del perfume</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="modal-body row g-3">
+                <div class="modal-body">
                     <div class="col-ms-12 col-md-6">
                         <label for="nombreProductoVer" class="form-label" style="font-weight: bold;">Nombre del
                             perfume</label>
@@ -188,14 +189,110 @@
                         <label for="imagenProducto" class="form-label" style="font-weight: bold;">Imagen</label>
                         <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block" alt="...">
                     </div>
-
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!--Modal para editar-->
+    <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="actualizarModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header custom-modal-header">
+                <h5 class="modal-title" id="actualizarModalLabel">Editar perfume</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="saveForm">
+                    <div class="modal-body">
+                        <div class="row">
+                            <!--Primera columna-->
+                            <div class="col-md-6 col-ms-12">
+                                <input type="hidden" id="idProducto" name="idProducto">
+                                <div>
+                                    <label for="nombreProducto" class="form-label">Nombre del perfume</label>
+                                    <input id="nombreProducto" type="text" name="nombreProducto"
+                                        class="form-control" required>
+                                </div>
+                                <div>
+
+                                </div>
+                                <div>
+                                    <label for="precioProducto" class="form-label">Precio del producto(US$)</label>
+                                    <input id="precioProducto" type="number" name="precioProducto" min="0.01"
+                                        step="0.01" class="form-control" required>
+                                </div>
+                                <div>
+                                    <label for="descripcionProducto" class="form-label">Descripción del
+                                        producto</label>
+                                    <textarea name="descripcionProducto" id="descripcionProducto"
+                                        class="form-control"></textarea>
+                                </div>
+                                <div>
+                                    <label for="marcaProducto" class="form-label">Marca</label>
+                                    <select class="form-select combobox" aria-label="Default select example">
+                                        <option selected>Selecciona una marca</option>
+                                        <option value="1">Dior</option>
+                                        <option value="2">Calvin Klein</option>
+                                    </select>
+                            
+                                </div>
+                            </div>
+                            <!--segunda columna-->
+                            <div class="col-md-6 col-ms-12">
+                                <div>
+                                    <label for="oloresProducto" class="form-label">Olores</label>
+                                    <select class="form-select combobox" aria-label="Default select example">
+                                        <option selected>Selecciona una marca</option>
+                                        <option value="1">Dior</option>
+                                        <option value="2">Calvin Klein</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="estadoDescuento" class="form-label">Estado del descuento</label>
+                                    <select class="form-select combobox" aria-label="Default select example">
+                                        <option selected>Selecciona una marca</option>
+                                        <option value="1">Dior</option>
+                                        <option value="2">Calvin Klein</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="descuentoSeleccionado" class="form-label">Elige el descuento</label>
+                                    <select class="form-select combobox" aria-label="Default select example">
+                                        <option selected>Selecciona una marca</option>
+                                        <option value="1">Dior</option>
+                                        <option value="2">Calvin Klein</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="custom-file mb-3">
+                            <input type="file" class="custom-file-input" id="imagenMarca">
+                            <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
+                        </div>
+                        <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen" style="display: none;">
+                    
+                        
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
+                    Cancelar</button>
+                <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> Crear</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="../../resources/js/foto.js"></script>
