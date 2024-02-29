@@ -10,6 +10,9 @@ function showContent(contentName) {
         case 'categorias':
             iframe.src = 'categorias.html';
             break;
+            case 'descuentos':
+                iframe.src = 'descuento.html';
+                break;
         default:
             iframe.src = 'default.html';
     }
