@@ -20,6 +20,7 @@ function showContent(contentName) {
             iframe.src = 'default.html';
     }
 }
+// para no poder volver hacia atras 
 function logout() {
     window.location.replace('index.html');
     window.history.replaceState(null, '', 'index.html');
