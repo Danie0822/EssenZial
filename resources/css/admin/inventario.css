@@ -93,7 +93,7 @@
 }
 
 .btn-dark {
-    border-radius: 8px;
+    border-radius: 20px;
 }
 
 .input-group-text {
@@ -115,7 +115,6 @@
     background-color: #fff;
     border: 1px solid #ced4da;
     display: block;
-    /* Mostrar etiqueta como bloque para ocupar toda la anchura */
     margin-bottom: 0.5rem;
 
 }
@@ -126,14 +125,11 @@
     box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, .25);
 }
 
-/*PARTE DEL RATING BAR*/
+/*Parte de la barra de calificaciones*/
 
 .rating {
     display: flex;
-}
-
-.rating input {
-    display: none;
+    justify-content: center; /* Centra horizontalmente los elementos */
 }
 
 .rating label {
@@ -141,21 +137,9 @@
     width: 16px;
     height: 16px;
     margin: 0 2px;
-    background-color: transparent;
-    background-image: url('../../img/estrella.png');
-}
-
-.rating label:hover,
-.rating label:hover~label {
     background-image: url('../../img/estrella-rellena.png');
 }
 
-.rating input:checked~label,
-.rating:not(:checked)>label:hover,
-.rating:not(:checked)>label:hover~label {
-    background-image: url('../../img/estrella-rellena.png');
-}
-
-.tbValoraciones{
+.tbValoraciones {
     margin-top: 2%;
 }

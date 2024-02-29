@@ -12,7 +12,7 @@
         <input type="email" class="form-control focus" placeholder="Buscar" aria-label="Buscar"
             aria-describedby="basic-addon2">
         <div class="input-group-append">
-            <span class="input-group-text bg-transparent border-0">
+            <span class="input-group-text bg-transparent border-0 buscar">
                 <img src="../../resources/img/buscar 1.png" alt="" class="search-icon">
             </span>
         </div>
@@ -46,22 +46,22 @@
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-info-circle" data-toggle="modal"
                             data-target="#detallesModal"></i> </i></button>
-                            <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
-                                data-target="#valoracionesModal"></i></button>
+                    <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
+                            data-target="#valoracionesModal"></i></button>
                 </td>
             </tr>
             <tr>
                 <td>Ejemplo 2</td>
                 <td>$180</td>
                 <td>
-                    
+
                     <button type="button" class="btn btn-dark"><i class="fas fa-edit" data-toggle="modal"
                             data-target="#actualizarModal"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
                     <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#detallesModal"><i
                             class="fas fa-info-circle"></i> </button>
-                            <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
-                                data-target="#valoracionesModal"></i></button>
+                    <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
+                            data-target="#valoracionesModal"></i></button>
                 </td>
             </tr>
         </tbody>
@@ -75,6 +75,7 @@
                     <h5 class="modal-title" id="guardarModalLabel">Crear perfume</h5>
                 </div>
                 <div class="modal-body">
+                    <!--Inicio del formulario de ingresar perfume-->
                     <form id="saveForm">
                         <div class="modal-body">
                             <div class="row">
@@ -110,7 +111,7 @@
 
                                     </div>
                                 </div>
-                                <!--segunda columna-->
+                                <!--Segunda columna-->
                                 <div class="col-md-6 col-ms-12">
                                     <div>
                                         <label for="oloresProducto" class="form-label">Olores</label>
@@ -168,6 +169,7 @@
                 <div class="modal-header custom-modal-header">
                     <h5 class="modal-title" id="detallesModalLabel">Detalles del perfume</h5>
                 </div>
+                <!--Inicio del cuerpo del modal-->
                 <div class="modal-body">
                     <div class="col-ms-12 col-md-6">
                         <label for="nombreProductoVer" class="form-label" style="font-weight: bold;">Nombre del
@@ -213,6 +215,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <!--Inicio del formulario de actualizar perfume-->
                     <form id="saveForm">
                         <div class="modal-body">
                             <div class="row">
@@ -313,15 +316,16 @@
                     <form id="saveForm">
                         <div class="modal-body">
                             <div class="row text-center">
-                                <div class="col-12">
-                                    <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block" alt="...">
+                                <div class="col-12 text-center">
+                                    <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block"
+                                        alt="...">
                                     <label for="nombrePerfume" class="form-label text-center">STRONGER WITH U</label>
-                                    <div class=" text-center rating">
-                                        <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
-                                        <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
-                                        <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
-                                        <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
-                                        <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                                    <div class="rating">
+                                        <label></label>
+                                        <label></label>
+                                        <label></label>
+                                        <label></label>
+                                        <label></label>
                                     </div>
                                 </div>
                                 <table class="table text-center tbValoraciones">
@@ -334,23 +338,27 @@
                                     <tbody>
                                         <tr>
                                             <td>Daniel Alessandro</td>
-                                            <td><div class="rating text-center">
-                                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
-                                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
-                                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
-                                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
-                                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
-                                            </div></td>
+                                            <td>
+                                                <div class="rating">
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>José Sanchéz</td>
-                                            <td><div class="rating text-center">
-                                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
-                                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
-                                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
-                                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
-                                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
-                                            </div></td>
+                                            <td>
+                                                <div class="rating">
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                    <label></label>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
