@@ -81,8 +81,8 @@
 }
 
 .preview-image {
-    max-width: 200px; /* Ajustar el ancho máximo según tus preferencias */
-    max-height: 200px; /* Ajustar el alto máximo según tus preferencias */
+    max-width: 200px;
+    max-height: 200px;
     height: auto;
     margin-top: 10px;
 }
@@ -105,4 +105,22 @@
     border-radius: 0 10px 10px 0;
 }
 
+.combobox {
 
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: .5rem 2rem .5rem 1rem;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    display: block; /* Mostrar etiqueta como bloque para ocupar toda la anchura */
+    margin-bottom: 0.5rem; 
+
+}
+
+.combobox:focus {
+    outline: none;
+    border-color: #6c757d;
+    box-shadow: 0 0 0 0.25rem rgba(108,117,125,.25);
+}
