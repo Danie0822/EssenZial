@@ -41,20 +41,27 @@
                 <td>Ejemplo 1</td>
                 <td>$90.00</td>
                 <td>
-                    <button type="button" class="btn btn-dark"><i class="fa-solid fa-star"></i></button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-edit" data-toggle="modal" data-target="#actualizarModal"></i></button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-edit" data-toggle="modal"
+                            data-target="#actualizarModal"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-info-circle" data-toggle="modal" data-target="#detallesModal"></i> </i></button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-info-circle" data-toggle="modal"
+                            data-target="#detallesModal"></i> </i></button>
+                            <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
+                                data-target="#valoracionesModal"></i></button>
                 </td>
             </tr>
             <tr>
                 <td>Ejemplo 2</td>
                 <td>$180</td>
                 <td>
-                    <button type="button" class="btn btn-dark"><i class="fa-solid fa-star"></i></button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-edit" data-toggle="modal" data-target="#actualizarModal"></i></button>
+                    
+                    <button type="button" class="btn btn-dark"><i class="fas fa-edit" data-toggle="modal"
+                            data-target="#actualizarModal"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
-                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#detallesModal"><i class="fas fa-info-circle"></i> </button>
+                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#detallesModal"><i
+                            class="fas fa-info-circle"></i> </button>
+                            <button type="button" class="btn btn-dark"><i class="fa-solid fa-star" data-toggle="modal"
+                                data-target="#valoracionesModal"></i></button>
                 </td>
             </tr>
         </tbody>
@@ -103,7 +110,7 @@
                                             <option value="1">Dior</option>
                                             <option value="2">Calvin Klein</option>
                                         </select>
-                                
+
                                     </div>
                                 </div>
                                 <!--segunda columna-->
@@ -140,9 +147,10 @@
                                 <input type="file" class="custom-file-input" id="imagenMarca">
                                 <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
                             </div>
-                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen" style="display: none;">
-                        
-                            
+                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                                style="display: none;">
+
+
                         </div>
                     </form>
                 </div>
@@ -156,7 +164,8 @@
     </div>
 
     <!--Modal para ver el perfume-->
-    <div class="modal fade" id="detallesModal" tabindex="-1" role="dialog" aria-labelledby="detallesModalLabel" aria-hidden="true">
+    <div class="modal fade" id="detallesModal" tabindex="-1" role="dialog" aria-labelledby="detallesModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header custom-modal-header">
@@ -191,7 +200,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i> Cerrar</button>
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
+                        Cerrar</button>
                 </div>
             </div>
         </div>
@@ -199,99 +209,166 @@
 
     <!--Modal para editar-->
     <div class="modal fade" id="actualizarModal" tabindex="-1" role="dialog" aria-labelledby="actualizarModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header custom-modal-header">
-                <h5 class="modal-title" id="actualizarModalLabel">Editar perfume</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="saveForm">
-                    <div class="modal-body">
-                        <div class="row">
-                            <!--Primera columna-->
-                            <div class="col-md-6 col-ms-12">
-                                <input type="hidden" id="idProducto" name="idProducto">
-                                <div>
-                                    <label for="nombreProducto" class="form-label">Nombre del perfume</label>
-                                    <input id="nombreProducto" type="text" name="nombreProducto"
-                                        class="form-control" required>
-                                </div>
-                                <div>
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title" id="actualizarModalLabel">Editar perfume</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="saveForm">
+                        <div class="modal-body">
+                            <div class="row">
+                                <!--Primera columna-->
+                                <div class="col-md-6 col-ms-12">
+                                    <input type="hidden" id="idProducto" name="idProducto">
+                                    <div>
+                                        <label for="nombreProducto" class="form-label">Nombre del perfume</label>
+                                        <input id="nombreProducto" type="text" name="nombreProducto"
+                                            class="form-control" required>
+                                    </div>
+                                    <div>
 
+                                    </div>
+                                    <div>
+                                        <label for="precioProducto" class="form-label">Precio del producto(US$)</label>
+                                        <input id="precioProducto" type="number" name="precioProducto" min="0.01"
+                                            step="0.01" class="form-control" required>
+                                    </div>
+                                    <div>
+                                        <label for="descripcionProducto" class="form-label">Descripción del
+                                            producto</label>
+                                        <textarea name="descripcionProducto" id="descripcionProducto"
+                                            class="form-control"></textarea>
+                                    </div>
+                                    <div>
+                                        <label for="marcaProducto" class="form-label">Marca</label>
+                                        <select class="form-select combobox" aria-label="Default select example">
+                                            <option selected>Selecciona una marca</option>
+                                            <option value="1">Dior</option>
+                                            <option value="2">Calvin Klein</option>
+                                        </select>
+
+                                    </div>
                                 </div>
-                                <div>
-                                    <label for="precioProducto" class="form-label">Precio del producto(US$)</label>
-                                    <input id="precioProducto" type="number" name="precioProducto" min="0.01"
-                                        step="0.01" class="form-control" required>
-                                </div>
-                                <div>
-                                    <label for="descripcionProducto" class="form-label">Descripción del
-                                        producto</label>
-                                    <textarea name="descripcionProducto" id="descripcionProducto"
-                                        class="form-control"></textarea>
-                                </div>
-                                <div>
-                                    <label for="marcaProducto" class="form-label">Marca</label>
-                                    <select class="form-select combobox" aria-label="Default select example">
-                                        <option selected>Selecciona una marca</option>
-                                        <option value="1">Dior</option>
-                                        <option value="2">Calvin Klein</option>
-                                    </select>
-                            
+                                <!--segunda columna-->
+                                <div class="col-md-6 col-ms-12">
+                                    <div>
+                                        <label for="oloresProducto" class="form-label">Olores</label>
+                                        <select class="form-select combobox" aria-label="Default select example">
+                                            <option selected>Selecciona una marca</option>
+                                            <option value="1">Dior</option>
+                                            <option value="2">Calvin Klein</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="estadoDescuento" class="form-label">Estado del descuento</label>
+                                        <select class="form-select combobox" aria-label="Default select example">
+                                            <option selected>Selecciona una marca</option>
+                                            <option value="1">Dior</option>
+                                            <option value="2">Calvin Klein</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="descuentoSeleccionado" class="form-label">Elige el descuento</label>
+                                        <select class="form-select combobox" aria-label="Default select example">
+                                            <option selected>Selecciona una marca</option>
+                                            <option value="1">Dior</option>
+                                            <option value="2">Calvin Klein</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <!--segunda columna-->
-                            <div class="col-md-6 col-ms-12">
-                                <div>
-                                    <label for="oloresProducto" class="form-label">Olores</label>
-                                    <select class="form-select combobox" aria-label="Default select example">
-                                        <option selected>Selecciona una marca</option>
-                                        <option value="1">Dior</option>
-                                        <option value="2">Calvin Klein</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="estadoDescuento" class="form-label">Estado del descuento</label>
-                                    <select class="form-select combobox" aria-label="Default select example">
-                                        <option selected>Selecciona una marca</option>
-                                        <option value="1">Dior</option>
-                                        <option value="2">Calvin Klein</option>
-                                    </select>
-                                </div>
-
-                                <div>
-                                    <label for="descuentoSeleccionado" class="form-label">Elige el descuento</label>
-                                    <select class="form-select combobox" aria-label="Default select example">
-                                        <option selected>Selecciona una marca</option>
-                                        <option value="1">Dior</option>
-                                        <option value="2">Calvin Klein</option>
-                                    </select>
-                                </div>
+                            <div class="custom-file mb-3">
+                                <input type="file" class="custom-file-input" id="imagenMarca">
+                                <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
                             </div>
+                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                                style="display: none;">
+
+
                         </div>
-                        <div class="custom-file mb-3">
-                            <input type="file" class="custom-file-input" id="imagenMarca">
-                            <label class="custom-file-label" for="imagenMarca">Seleccionar imagen</label>
-                        </div>
-                        <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen" style="display: none;">
-                    
-                        
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                    Cancelar</button>
-                <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> Crear</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
+                        Cancelar</button>
+                    <button type="button" class="btn btn-dark"><i class="fas fa-plus"></i> Crear</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!--Moodal para valoraciones-->
+    <div class="modal fade" id="valoracionesModal" tabindex="-1" role="dialog" aria-labelledby="valoracionesModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header custom-modal-header">
+                    <h5 class="modal-title" id="valoracionesModalLabel">valoraciones</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="saveForm">
+                        <div class="modal-body">
+                            <div class="row text-center">
+                                <div class="col-12">
+                                    <img src="../../resources/img/perfumeString.png" class="rounded mx-auto d-block" alt="...">
+                                    <label for="nombrePerfume" class="form-label text-center">STRONGER WITH U</label>
+                                    <div class=" text-center rating">
+                                        <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                                        <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                                        <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                                        <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                                        <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                                    </div>
+                                </div>
+                                <table class="table text-center tbValoraciones">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Cliente</th>
+                                            <th scope="col">Valoración</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Daniel Alessandro</td>
+                                            <td><div class="rating text-center">
+                                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td>José Sanchéz</td>
+                                            <td><div class="rating text-center">
+                                                <input type="radio" id="star5" name="rating" value="5"><label for="star5"></label>
+                                                <input type="radio" id="star4" name="rating" value="4"><label for="star4"></label>
+                                                <input type="radio" id="star3" name="rating" value="3"><label for="star3"></label>
+                                                <input type="radio" id="star2" name="rating" value="2"><label for="star2"></label>
+                                                <input type="radio" id="star1" name="rating" value="1"><label for="star1"></label>
+                                            </div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
