@@ -104,3 +104,54 @@
 .form-control {
     border-radius: 0 10px 10px 0;
 }
+.modal-content {
+    border-radius: 20px;
+  }
+  .nombre {
+    background-color: #f8f9fa;
+    border-radius: 10px 0 0 10px;
+  }
+  .form-control {
+    border-radius: 0 10px 10px 0;
+  }
+  .btn {
+    border-radius: 20px;
+  }
+  .custom-modal-header {
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px 20px 0 0;
+  }
+  .custom-modal-header .close {
+    color: #fff;
+  }
+  .form-control:focus {
+    border-color: #0b0b0b;
+    box-shadow: none;
+  }
+  .custom-file-input {
+    color: transparent;
+  }
+  .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+  }
+  .custom-file-input::before {
+    content: 'Seleccionar imagen';
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 20px;
+    display: inline-block;
+    cursor: pointer;
+  }
+  .preview-image {
+    max-width: 200px; /* Ajustar el ancho máximo según tus preferencias */
+    max-height: 200px; /* Ajustar el alto máximo según tus preferencias */
+    height: auto;
+    margin-top: 10px;
+  }
+  .botn
+{
+    width: 150px;
+}
