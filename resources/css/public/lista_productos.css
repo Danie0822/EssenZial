@@ -1,0 +1,14 @@
+.container.estilos {
+    border: 1px solid #ccc; 
+    padding: 15px; 
+    border-radius: 5px; 
+    margin-top: 10px;
+}
+
+.textBrand{
+    color: #807D7E;
+}
+
+.card{
+    margin-left: 10px;
+}

@@ -1,0 +1,45 @@
+/*CSS para la header y el footer*/
+
+.peque {
+    width: 40px;
+    height: 40px;
+}
+
+#boton {
+    margin-left: 2.5%;
+}
+
+#image {
+    height: 20px;
+}
+
+#cont {
+    margin-top: 15%;
+}
+
+.columnas {
+   padding-left: 10%;
+   padding-top: 5%;
+   padding-bottom: 5%;
+}
+
+h3 {
+    color: white;
+    margin-bottom: 5%;
+}
+
+p{
+    color: white;
+}
+
+.foot {
+    margin-top: 5%;
+    background-color: #2A2F2F;
+}
+.copy{
+    color: white;
+    margin-bottom: 5%;
+}
+.boton{
+    margin: 2%;
+}
