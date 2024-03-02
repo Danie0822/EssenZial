@@ -14,8 +14,10 @@ const obtenerCategorias = async () => {
                     <td>${categoria.nombre_categoria}</td>
                     <td><img src="http://localhost:4000${categoria.imagen_categoria.replace('/uploads', '')}" alt="Imagen de la categoría" width="50"></td>
                     <td>
-                        <button class="btn btn-danger eliminar" data-id="${categoria.id_categoria}" data-toggle="modal" data-target="#eliminar">Eliminar</button>
-                        <button class="btn btn-danger actualizar" data-id="${categoria.id_categoria}" data-toggle="modal" data-target="#actualizar">Actualizar</button>
+                        <button class="btn btn-dark eliminar" data-id="${categoria.id_categoria}" data-toggle="modal" data-target="#eliminar"><i
+                        class="fas fa-trash-alt"></i></button>
+                        <button class="btn btn-dark actualizar" data-id="${categoria.id_categoria}" data-toggle="modal" data-target="#actualizar"><i
+                        class="fas fa-edit "></i> </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
