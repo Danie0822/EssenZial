@@ -8,7 +8,7 @@ const seguridad = require('../seguridad/seguridad');
 router.get('/',seguridad('admin'), todos);
 router.get('/:id', seguridad('admin'), id);
 router.delete('/delete/:id', seguridad('admin'), eliminar);
-router.post('', seguridad('admin'), agregar);
+router.post('/save', seguridad('admin'), agregar);
 router.put('/update', seguridad('admin'), actualizar);
 
 // Funciones
