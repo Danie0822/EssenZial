@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", loadFooter);
 
 
 function loadHeader(){
-    var headerContent = `        <nav class="navbar navbar-expand-lg navbar-light mb-3">
+    var headerContent = `        <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="../../resources/img/icono.png" width="30" height="30" class="d-inline-block align-top"
