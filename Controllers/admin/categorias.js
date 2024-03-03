@@ -118,24 +118,37 @@ const actualizar = async (idCategoria) => {
 document.addEventListener("DOMContentLoaded", function () {
     obtenerCategorias();
 
+    let idCategoriaEliminar = null;
+    let idCategoriaActualizar = null;
+
     const categoriaTableBody = document.getElementById("categoriaTableBody");
     categoriaTableBody.addEventListener("click", function (event) {
         if (event.target.classList.contains("eliminar")) {
-            const idCategoria = event.target.dataset.id;
-            const confirmarEliminarBtn = document.getElementById('confirmarEliminar');
-            confirmarEliminarBtn.addEventListener('click', async function () {
-                eliminarCategoria(idCategoria);
-            });
+            idCategoriaEliminar = event.target.dataset.id;
+            $('#eliminar').modal('show');
         }
         else if (event.target.classList.contains("actualizar")) {
-            const idCategoria = event.target.dataset.id;
+            idCategoriaActualizar = event.target.dataset.id;
             const nombreCategoria = event.target.closest('tr').querySelector('td:first-child').textContent;
             const imagenCategoria = event.target.closest('tr').querySelector('td:nth-child(2) img').src;
             mostrarCategoria(nombreCategoria, imagenCategoria);
-            const confirmarActualizarBtn = document.getElementById('confirmarActualizar');
-            confirmarActualizarBtn.addEventListener('click', async function () {
-                actualizar(idCategoria);
-            });
+            $('#actualizar').modal('show');
+        }
+    });
+
+    const confirmarEliminarBtn = document.getElementById('confirmarEliminar');
+    confirmarEliminarBtn.addEventListener('click', async function () {
+        if (idCategoriaEliminar) {
+            await eliminarCategoria(idCategoriaEliminar);
+            idCategoriaEliminar = null;
+        }
+    });
+
+    const confirmarActualizarBtn = document.getElementById('confirmarActualizar');
+    confirmarActualizarBtn.addEventListener('click', async function () {
+        if (idCategoriaActualizar) {
+            await actualizar(idCategoriaActualizar);
+            idCategoriaActualizar = null;
         }
     });
 
