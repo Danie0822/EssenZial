@@ -30,6 +30,19 @@ const obtenerCategorias = async () => {
     }
 };
 
+const limpiarFormulario = () => {
+    document.getElementById("nombreCategoria").value = "";
+    document.getElementById("imagenMarca").value = "";
+    document.querySelector('.preview-image').style.display = 'none';
+}
+
+const limpiarFormularioActualizar = () => {
+    document.getElementById("nombreCategoriaActuaizar").value = "";
+    document.getElementById("imagenMarcaActualizar").value = "";
+    document.querySelector('.imagede').style.display = 'none';
+}
+
+
 const agregarCategoria = async () => {
     try {
         const nombreCategoria = document.getElementById("nombreCategoria").value;
@@ -44,6 +57,11 @@ const agregarCategoria = async () => {
         if (data.success) {
             console.log("Categoría agregada exitosamente");
             obtenerCategorias();
+            limpiarFormulario();
+            $('#marcaModal').modal('hide'); // Cierra el modal de agregar
+            setTimeout(function() {
+                $('#agregado').modal('show'); // Abre el modal de confirmación después de un segundo
+            }, 500);
         } else {
             console.error("Error al agregar categoría:", data.message);
         }
@@ -59,6 +77,10 @@ const eliminarCategoria = async (idCategoria) => {
         if (data.success) {
             console.log("Categoría eliminada exitosamente");
             obtenerCategorias();
+            $('#eliminar').modal('hide'); // Cierra el modal de eliminar
+            setTimeout(function() {
+                $('#eliminadoExitosoModal').modal('show'); // Abre el modal de eliminación exitosa después de un segundo
+            }, 500);
         } else {
             console.error("Error al eliminar categoría:", data.message);
         }
@@ -81,6 +103,11 @@ const actualizar = async (idCategoria) => {
         if (data.success) {
             console.log("Categoría actualizada exitosamente");
             obtenerCategorias();
+            limpiarFormularioActualizar();
+            $('#actualizar').modal('hide'); // Cierra el modal de actualizar
+            setTimeout(function() {
+                $('#acto').modal('show'); // Abre el modal de confirmación después de un segundo
+            }, 500);
         } else {
             console.error("Error al actualizar categoría:", data.message);
         }
