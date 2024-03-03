@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Agregar Dirección</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../resources/css/public/modals_dirreciones.css">
+</head>
+
+<body>
+
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarDireccion">
+        Agregar dirección
+    </button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarDireccion">
+        Actualizar dirección
+    </button>
+
+    <!-- Modal Agregar Direcciones -->
+    <div class="modal fade" id="modalAgregarDireccion" tabindex="-1" role="dialog"
+        aria-labelledby="modalAgregarDireccionLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAgregarDireccionLabel">Agregar dirección</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nombreDireccion">Nombre de la dirección:</label>
+                        <input placeholder="Casa, trabajo etc" type="text" class="form-control"
+                            id="nombreDireccionModalAgregar">
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección:</label>
+                        <input placeholder="Calle, número de casa " type="text" class="form-control"
+                            id="direccionModalAgregar">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="telefono">Teléfono:</label>
+                            <input placeholder="9232-2324" type="text" class="form-control" id="telefonoModalAgregar">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="codigoPostal">Código Postal:</label>
+                            <input placeholder="02111" type="text" class="form-control" id="codigoPostalModalAgregar">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="instrucciones">Instrucciones de entrega:</label>
+                        <textarea placeholder="Cerca del supermercado “Keny market”" class="form-control"
+                            id="instruccionesModalAgregar" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-sm text-white">Guardar información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Actualizar Direcciones -->
+    <div class="modal fade" id="modalActualizarDireccion" tabindex="-1" role="dialog"
+        aria-labelledby="modalActualizarDireccionLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalActualizarDireccionLabel">Actualizar dirección</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nombreDireccion">Nombre de la dirección:</label>
+                        <input placeholder="Casa, trabajo etc" type="text" class="form-control"
+                            id="nombreDireccionModalActualizar">
+                    </div>
+                    <div class="form-group">
+                        <label for="direccion">Dirección:</label>
+                        <input placeholder="Calle, número de casa " type="text" class="form-control"
+                            id="direccionModalActualizar">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="telefono">Teléfono:</label>
+                            <input placeholder="9232-2324" type="text" class="form-control"
+                                id="telefonoModalActualizar">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="codigoPostal">Código Postal:</label>
+                            <input placeholder="02111" type="text" class="form-control"
+                                id="codigoPostalModalActualizar">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="instrucciones">Instrucciones de entrega:</label>
+                        <textarea placeholder="Cerca del supermercado “Keny market”" class="form-control"
+                            id="instruccionesModalActualizar" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-sm text-white">Actualizar información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
