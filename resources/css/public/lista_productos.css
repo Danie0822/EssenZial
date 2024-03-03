@@ -1,10 +1,19 @@
-.container.estilos {
+.estilos {
     border: 1px solid #ccc; 
     padding: 15px; 
     border-radius: 5px; 
     margin-top: 10px;
 }
-
+.labely{
+    border-bottom:1px solid #ccc;
+    margin-top: 10px;
+}
+.labely1{
+    border-bottom:1px solid #ccc;
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
 .textBrand{
     color: #807D7E;
 }
@@ -16,5 +25,22 @@
 .productos{
     margin-top: 20px;
 }
+.form-check-input:checked{
+    border-color: #FCBD01;
+    background-color: #FCBD01;
+}
 
-    
+
+.form-range::-webkit-slider-thumb{
+    background-color: #FCBD01;
+}
+
+.form-range::-moz-range-thumb {
+    background-color: #FCBD01;
+}
+
+
+
+
+
+
