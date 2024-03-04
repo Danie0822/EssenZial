@@ -32,13 +32,12 @@
                         <th scope="col">Cantidad</th>
                         <th scope="col">Subtotal</th>
                         <th scope="col">Borrar</th>
-
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td> 
-                            <div>
+                            <div class="container">
                                 <img src="https://laopinion.com/wp-content/uploads/sites/3/2019/04/shutterstock_769656256.jpg?quality=60&strip=all&w=1000" alt="Imagen 1" width="50">
                                 <h6>Aqua di Gio</h6>
                                 <p style="color: black;">Giorgio armani</p>
@@ -54,17 +53,35 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Amaderados </td>
-                        <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQieyalet5_oXsK1lzG6_qyqj--9Z4JrVWmLcAmHU2-Fw&s" alt="Imagen 2" width="50"></td>
+                        <td> 
+                            <div class="container">
+                                <img src="https://laopinion.com/wp-content/uploads/sites/3/2019/04/shutterstock_769656256.jpg?quality=60&strip=all&w=1000" alt="Imagen 1" width="50">
+                                <h6>Aqua di Gio</h6>
+                                <p style="color: black;">Giorgio armani</p>
+                            </div>
+                        </td>
+                        <td><label for="">$50.00</label></td>
+                        <td><label for="">2</label></td>
+                        <td><label for=""><label for=""> $100.00</label></label></td>
+
                         <td>
-                            <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
-                            <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
+                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#eliminar"><i
+                                    class="fas fa-trash-alt"></i> </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-
+            <div class="row pago justify-content-center">
+                    <div class="col-6">
+                         <h6>Total</h6>
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="precio"> $100.00</label>
+                    </div>
+                   
+                    <button type="button" class="btn button"><h6>Confirmar pedido</h6></button>
+            </div>
         </div>
     </main> 
     <footer>
