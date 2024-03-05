@@ -1,0 +1,55 @@
+.div1{
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.titulo{
+    color: black;
+    position: relative;
+    padding-left: 20px;
+}
+.det{
+    color: black;
+    font-size: 18px;
+}
+
+.titulo::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 100%;
+    background-color: #ffc107;
+}
+
+.container div img,
+.container div h6,
+.container div p {
+    display: inline-block;
+    vertical-align: middle; 
+}
+
+thead{
+    background-color: #3C4242;
+    color:#FFFFFF;
+}
+.pago{
+    background-color: #F3F3F3;
+    width: 300px;
+    margin-top: auto;
+    margin-left: auto; 
+    padding: 10px;
+}
+
+.precio{
+    margin-left: 20px;
+}
+.button{
+    background-color: #EDD146;
+    color: #FFFFFF;
+    border-radius: 10px;
+
+ 
+}

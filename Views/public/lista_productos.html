@@ -5,8 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de productos</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!--Link de bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--Css para iconos-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!--Css para el header y footer-->
     <link rel="stylesheet" href="../../resources/css/public/header_footer.css">
     <link rel="stylesheet" href="../../resources/css/public/lista_productos.css">
     <link rel="icon" href="../../resources/img/icono.png" type="image/x-icon">
@@ -18,79 +24,99 @@
     <main>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="col-lg-2  col-md-4 col-sm-12">
                     <div class="container estilos">
-                        <label for="">
-                            <h5>Filtros</h5>
-                        </label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Parfum
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Eau de parfum
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Eau de toilette
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Eau de fraíche
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="container estilos">
-                        <label for="">
-                            <h5>Top marcas</h5>
-                        </label>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Carolina Herrera
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Burberry
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Calvin Klein
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Giorgio Armani
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Hugo boss
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
-                            <label class="form-check-label" for="flexCheckChecked">
-                                Givenchy
-                            </label>
-                        </div>
-
-
+                            <div class="container">
+                                <div class="labely">
+                                    <label for="">
+                                        <h5>Filtros</h5>
+                                    </label>
+                                    <i class="fa-solid fa-filter"></i>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkParfum">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Parfum
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkEau" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Eau de parfum
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkToi" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Eau de toilette
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkFrai" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Eau de fraíche
+                                    </label>
+                                </div>
+                            </div>
+        
+                            <div class="container">
+                                <div class="labely1">
+                                    <label for="">
+                                        <h5>Top marcas</h5>
+                                    </label>
+        
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkCaro">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                        Carolina Herrera
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkBurberry" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Burberry
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkCalvin" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Calvin Klein
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkGiorgio" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Giorgio Armani
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkHugo" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Hugo boss
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="checkGivenchy" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                        Givenchy
+                                    </label>
+                                </div>
+        
+        
+                            </div>
+                            <div class="container">
+                                <div class="labely1">
+                                    <label for="">
+                                        <h5>Precios</h5>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label for="customRange1" class="form-label">$10</label>
+                                    <input type="range" class="form-range" id="customRange1">
+                                </div>
+                            </div>
+                        
                     </div>
                 </div>
                 <div class="col-6 productos">
@@ -102,49 +128,53 @@
                             <img src="../../resources/img/gio.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h6 class="card-text" style="color: black;">Acqua Di Gio</h6>
-                                    <p class="textBrand">Giorgio Armani</p>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
-                                            <label for="">$150.00</label>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
-                                           <button type="button" class="btn btn-outline-secondary btn-sm"> Ver producto</button>
-                                        </div>
+                                <p class="textBrand">Giorgio Armani</p>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <label for="">$150.00</label>
                                     </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm"> Ver
+                                            producto</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="card" style="width: 18rem;">
                             <img src="../../resources/img/gio.png" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h6 class="card-text" style="color: black;">Acqua Di Gio</h6>
-                                    <p class="textBrand">Giorgio Armani</p>
-                                    <div class="row">
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
-                                            <label for="">$150.00</label>
-                                        </div>
-                                        <div class="col-lg-6 col-md-12 col-sm-12">
-                                           <button type="button" class="btn btn-outline-secondary btn-sm"> Ver producto</button>
-                                        </div>
+                                <p class="textBrand">Giorgio Armani</p>
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <label for="">$150.00</label>
                                     </div>
+                                    <div class="col-lg-6 col-md-12 col-sm-12">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm"> Ver
+                                            producto</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        
+
                     </div>
-                    
+
 
                 </div>
-                
+
             </div>
         </div>
     </main>
     <footer>
     </footer>
 
+    <!--Script para plantilla del header y footer-->
     <script src="../../Controllers/public/components.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <!--Script para uso de iconos-->
     <script src="https://kit.fontawesome.com/186c8fdf5b.js" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
