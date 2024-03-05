@@ -23,12 +23,8 @@
    padding-bottom: 5%;
 }
 
-h3 {
-    color: white;
-    margin-bottom: 5%;
-}
-
-p{
+.foot h3,
+.foot p {
     color: white;
 }
 

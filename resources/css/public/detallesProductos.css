@@ -1,0 +1,125 @@
+.description {
+    margin-bottom: 30px;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    height: 100%;
+    width: 100%;
+}
+
+.carousel-item {
+    text-align: center;
+}
+
+.valoraciones {
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+.valoraciones .card {
+    background-color: #f8f9fa;
+    padding: 20px;
+    margin-right: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    max-width: 200px;
+    transition: all 0.3s ease-in-out;
+}
+
+.valoraciones .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.valoraciones .card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.valoraciones .card-text {
+    color: #555;
+    margin-bottom: 0;
+}
+
+.valoraciones .card-body {
+    text-align: center;
+}
+
+.productos-similares {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+.productos-similares .product-item {
+    display: inline-block;
+    margin-right: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.productos-similares .product-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.productos-similares .product-item img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.productos-similares .product-info {
+    text-align: center;
+}
+
+.productos-similares .product-price {
+    background-color: #adb2b8; /* Color azul */
+    color: #F6F6F6; /* Texto blanco */
+    padding: 5px 10px;
+    border-radius: 50px;
+    display: inline-flex;
+}
+
+.scrollable {
+    overflow-x: auto;
+}
+
+.sizebox {
+    padding-bottom: 10px;
+}
+
+h3.titulo {
+    position: relative;
+}
+
+h3.titulo::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 100%;
+    background-color: #ffc107;
+}
+.imagen{
+    max-width: 400px;
+    max-height: 400px;
+}
