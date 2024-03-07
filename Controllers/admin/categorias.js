@@ -1,9 +1,9 @@
-let idCategoria = 0; 
+let idCategoria = 0;
 
 const obtenerCategorias = async () => {
     try {
-        const data = await fetchData("/categorias"); 
-        
+        const data = await fetchData("/categorias");
+
         if (data.success) {
             const tbody = document.getElementById("categoriaTableBody");
             tbody.innerHTML = "";
@@ -42,35 +42,40 @@ const limpiarFormularioActualizar = () => {
     document.querySelector('.imagede').style.display = 'none';
 }
 
-const abrirModalEditar  = (idCategorias, nombreCategoria, imagen) => {
+const abrirModalEditar = (idCategorias, nombreCategoria, imagen) => {
     try {
-        if(idCategorias !== null ){
+        if (idCategorias !== null) {
             mostrarCategoria(nombreCategoria, imagen);
-        $('#actualizar').modal('show');
+            $('#actualizar').modal('show');
 
-        idCategoria = idCategorias;
-       }
-       else{
-        console.log('No se paso bien el id');
-       }
+            idCategoria = idCategorias;
+        }
+        else {
+            abirError();
+
+        }
 
     } catch (error) {
-        console.error("Error:", error);
+        abirError();
     }
 };
 
-const abrirModalEliminar  = (idCategorias) => {
+function abirError() {
+    $('#errorModal').modal('show');
+}
+
+const abrirModalEliminar = (idCategorias) => {
     try {
-        if(idCategorias !== null ){
-        $('#eliminar').modal('show');
-        idCategoria = idCategorias;
-       }
-       else{
-        console.log('No se paso bien el id');
-       }
+        if (idCategorias !== null) {
+            $('#eliminar').modal('show');
+            idCategoria = idCategorias;
+        }
+        else {
+            abirError();
+        }
 
     } catch (error) {
-        console.error("Error:", error);
+        abirError();
     }
 };
 
@@ -83,40 +88,40 @@ const agregarCategoria = async () => {
         formData.append('nombre_categoria', nombreCategoria);
         formData.append('imagen', imagenCategoria);
 
-        const data = await createData("/categorias/save", formData); 
-       
+        const data = await createData("/categorias/save", formData);
+
         if (data.success) {
 
             obtenerCategorias();
             limpiarFormulario();
             $('#marcaModal').modal('hide'); // Cierra el modal de agregar
-            setTimeout(function() {
+            setTimeout(function () {
                 $('#agregado').modal('show'); // Abre el modal de confirmación después de un segundo
             }, 500);
         } else {
-            console.error("Error al agregar categoría:", data.message);
+            abirError();
         }
     } catch (error) {
-        console.error("Error:", error);
+        abirError();
     }
 };
 
 const eliminarCategoria = async (idCategoria) => {
     try {
-        const data = await deleteData(`/categorias/delete/${idCategoria}`); 
-        
+        const data = await deleteData(`/categorias/delete/${idCategoria}`);
+
         if (data.success) {
-            console.log("Categoría eliminada exitosamente");
+            
             obtenerCategorias();
             $('#eliminar').modal('hide'); // Cierra el modal de eliminar
-            setTimeout(function() {
+            setTimeout(function () {
                 $('#eliminadoExitosoModal').modal('show'); // Abre el modal de eliminación exitosa después de un segundo
             }, 500);
         } else {
-            console.error("Error al eliminar categoría:", data.message);
+            abirError();
         }
     } catch (error) {
-        console.error("Error:", error);
+        abirError();
     }
 };
 
@@ -129,21 +134,21 @@ const actualizar = async (idCategoria) => {
         formData.append('nombre_categoria', nombreCategoria);
         formData.append('imagen', imagenCategoria);
 
-        const data = await updateData("/categorias/update", formData); 
-        
+        const data = await updateData("/categorias/update", formData);
+
         if (data.success) {
-            console.log("Categoría actualizada exitosamente");
+           
             obtenerCategorias();
             limpiarFormularioActualizar();
             $('#actualizar').modal('hide'); // Cierra el modal de actualizar
-            setTimeout(function() {
+            setTimeout(function () {
                 $('#acto').modal('show'); // Abre el modal de confirmación después de un segundo
             }, 500);
         } else {
-            console.error("Error al actualizar categoría:", data.message);
+            abirError();
         }
     } catch (error) {
-        console.error("Error:", error);
+        abirError();
     }
 };
 document.addEventListener("DOMContentLoaded", function () {
