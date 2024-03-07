@@ -18,6 +18,11 @@
         Actualizar dirección
     </button>
 
+    <!--MODAL PARA ACTUALIZAR INFROMACION DE CLIENTE DE MODAL-->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalActualizarCliente">
+        Actualizar cliente
+    </button>
+
     <!-- Modal Agregar Direcciones -->
     <div class="modal fade" id="modalAgregarDireccion" tabindex="-1" role="dialog"
         aria-labelledby="modalAgregarDireccionLabel" aria-hidden="true">
@@ -102,6 +107,50 @@
                         <label for="instrucciones">Instrucciones de entrega:</label>
                         <textarea placeholder="Cerca del supermercado “Keny market”" class="form-control"
                             id="instruccionesModalActualizar" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-sm text-white">Actualizar información</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal para actualizar cliente-->
+        <div class="modal fade" id="modalActualizarCliente" tabindex="-1" role="dialog"
+        aria-labelledby="modalActualizarClienteLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalActualizarClienteLabel">Actualiza tu información</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="nombreCliente">Nombre:</label>
+                            <input placeholder="Adriana" type="text" class="form-control"
+                                id="nombreClienteActualizar">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="apellidoCliente">Apellido:</label>
+                            <input placeholder="Orellana" type="text" class="form-control"
+                                id="apellidoClienteActualizar">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="correoCliente">Correo electrónico</label>
+                            <input placeholder="adrianaorellana68@gmail.com" type="text" class="form-control"
+                                id="correoClienteActualizar">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="telefono">Teléfono:</label>
+                            <input placeholder="9232-2324" type="text" class="form-control"
+                                id="telefonoModalActualizar">
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
