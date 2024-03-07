@@ -1,4 +1,4 @@
-
+let idCategoria = 0; 
 
 const obtenerCategorias = async () => {
     try {
@@ -14,10 +14,10 @@ const obtenerCategorias = async () => {
                     <td>${categoria.nombre_categoria}</td>
                     <td><img src="http://localhost:4000${categoria.imagen_categoria.replace('/uploads', '')}" alt="Imagen de la categoría" width="50"></td>
                     <td>
-                        <button class="btn btn-dark eliminar" data-id="${categoria.id_categoria}" data-toggle="modal" data-target="#eliminar"><i
+                        <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${categoria.id_categoria})"><i
                         class="fas fa-trash-alt"></i></button>
-                        <button class="btn btn-dark actualizar" data-id="${categoria.id_categoria}" data-toggle="modal" data-target="#actualizar"><i
-                        class="fas fa-edit "></i> </button>
+                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${categoria.id_categoria}, '${categoria.nombre_categoria}', 'http://localhost:4000${categoria.imagen_categoria.replace('/uploads', '')}')"><i
+                        class="fas fa-edit "></i> </button>                        
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -42,6 +42,37 @@ const limpiarFormularioActualizar = () => {
     document.querySelector('.imagede').style.display = 'none';
 }
 
+const abrirModalEditar  = (idCategorias, nombreCategoria, imagen) => {
+    try {
+        if(idCategorias !== null ){
+            mostrarCategoria(nombreCategoria, imagen);
+        $('#actualizar').modal('show');
+
+        idCategoria = idCategorias;
+       }
+       else{
+        console.log('No se paso bien el id');
+       }
+
+    } catch (error) {
+        console.error("Error:", error);
+    }
+};
+
+const abrirModalEliminar  = (idCategorias) => {
+    try {
+        if(idCategorias !== null ){
+        $('#eliminar').modal('show');
+        idCategoria = idCategorias;
+       }
+       else{
+        console.log('No se paso bien el id');
+       }
+
+    } catch (error) {
+        console.error("Error:", error);
+    }
+};
 
 const agregarCategoria = async () => {
     try {
@@ -55,7 +86,7 @@ const agregarCategoria = async () => {
         const data = await createData("/categorias/save", formData); 
        
         if (data.success) {
-            console.log("Categoría agregada exitosamente");
+
             obtenerCategorias();
             limpiarFormulario();
             $('#marcaModal').modal('hide'); // Cierra el modal de agregar
@@ -118,37 +149,19 @@ const actualizar = async (idCategoria) => {
 document.addEventListener("DOMContentLoaded", function () {
     obtenerCategorias();
 
-    let idCategoriaEliminar = null;
-    let idCategoriaActualizar = null;
-
-    const categoriaTableBody = document.getElementById("categoriaTableBody");
-    categoriaTableBody.addEventListener("click", function (event) {
-        if (event.target.classList.contains("eliminar")) {
-            idCategoriaEliminar = event.target.dataset.id;
-            $('#eliminar').modal('show');
-        }
-        else if (event.target.classList.contains("actualizar")) {
-            idCategoriaActualizar = event.target.dataset.id;
-            const nombreCategoria = event.target.closest('tr').querySelector('td:first-child').textContent;
-            const imagenCategoria = event.target.closest('tr').querySelector('td:nth-child(2) img').src;
-            mostrarCategoria(nombreCategoria, imagenCategoria);
-            $('#actualizar').modal('show');
-        }
-    });
-
     const confirmarEliminarBtn = document.getElementById('confirmarEliminar');
     confirmarEliminarBtn.addEventListener('click', async function () {
-        if (idCategoriaEliminar) {
-            await eliminarCategoria(idCategoriaEliminar);
-            idCategoriaEliminar = null;
+        if (!idCategoria == 0) {
+            await eliminarCategoria(idCategoria);
+            idCategoria = null;
         }
     });
 
     const confirmarActualizarBtn = document.getElementById('confirmarActualizar');
     confirmarActualizarBtn.addEventListener('click', async function () {
-        if (idCategoriaActualizar) {
-            await actualizar(idCategoriaActualizar);
-            idCategoriaActualizar = null;
+        if (!idCategoria == 0) {
+            await actualizar(idCategoria);
+            idCategoria = null;
         }
     });
 
