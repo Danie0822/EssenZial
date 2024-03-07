@@ -12,6 +12,7 @@
     color: black;
     font-size: 18px;
 }
+/*Css para la palabra de saludo*/
 
 .titulo::before {
     content: '';
@@ -29,6 +30,61 @@ a{
 }
 
 .nav-link i {
-    margin-right: 5px; /* Añade un margen a la derecha del icono */
+    margin-right: 5px; 
 }
+
+/*Inicio de css para la animacion de la barra lateral*/
+
+.nav-lateral {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 20px;
+}
+
+.nav-lateral .nav-item {
+    position: relative;
+}
+
+.nav-lateral .nav-link {
+    position: relative;
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s, box-shadow 0.3s;
+}
+
+
+.nav-lateral .nav-link::before {
+    content: "";
+    position: absolute;
+    background-color: #ffc107; 
+    height: 100%;
+    width: 5px;
+    left: 0;
+    top: 0;
+    transform: scaleY(0); 
+    transition: transform 0.3s;
+}
+
+.nav-lateral .nav-item:hover .nav-link::before {
+    transform: scaleY(1);
+}
+
+.nav-lateral .nav-link::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 5px;
+    left: -10px; 
+    top: 0;
+    z-index: -1; 
+    transition: transform 0.3s;
+}
+
+.nav-lateral .nav-link:hover::after {
+    transform: translateX(5px); 
+}
+
+
 
