@@ -41,3 +41,79 @@ p{
 .boton{
     margin: 2%;
 }
+.clasesDes{
+    padding-top: 30px;
+}
+.slick-arrow
+{
+ width: 30px;
+ height: 30px;
+ font-size: 0px;
+ color: transparent;
+ border: none;
+ position: absolute;
+ top: 1px;
+ right: 0;
+ padding-right: 5px;
+}
+.slick-prev{
+    right: 40px;
+    background: url(../../img/flecha-izquierda.png);
+    background-size: 100% ;
+}
+.slick-next{
+
+    background: url(../../img/flecha-correcta.png);
+    background-size: 100% ;
+}
+.card img 
+{
+    height: 450px;
+}
+.card{
+    border-radius: 10px;
+}
+.cart1
+{
+    background-color: #dfbbb0; 
+}
+.cart1 img
+{
+    height: 340.85px;
+    width: 285.26px;
+}
+.cart2
+{
+    background-color: #f1b9a8 ; 
+}
+.cart2 img 
+{
+    height: 340.85px;
+    width: 285.26px;
+    margin: 0;
+    padding: 0;
+}
+.cart1 h6 
+{
+    padding: 10px;
+}
+.cart1 p 
+{
+    padding: 10px;
+}
+.cart1 h5 
+{
+    padding: 10px;
+}
+.cart2 h6 
+{
+    padding: 10px;
+}
+.cart2 p 
+{
+    padding: 10px;
+}
+.cart2 h5 
+{
+    padding: 10px;
+}
