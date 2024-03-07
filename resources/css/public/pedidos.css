@@ -29,6 +29,10 @@ a{
     color: #807D7E;
 }
 
+.nav{
+    margin-bottom: 20px;
+}
+
 .nav-link i {
     margin-right: 5px; 
 }
@@ -84,6 +88,28 @@ a{
 
 .nav-lateral .nav-link:hover::after {
     transform: translateX(5px); 
+}
+
+/*Css para paneles de pedidos*/
+
+.paneles{
+    background-color: #F6F6F6;
+    width: auto;
+    border-radius: 15px;
+    padding: 10px;
+    
+}
+p{
+    font-size: 15px;
+}
+h6{
+    font-size: 20px;
+}
+
+.detalles{
+    color: #FFFFFF;
+    background-color: #EDD146;
+    
 }
 
 
