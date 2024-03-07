@@ -139,6 +139,8 @@ a{
 .nav-lateral .nav-link:hover::after {
     transform: translateX(5px); 
 }
-
+.bold-text {
+    font-weight: bold; /* Fuente en negrita */
+}
 
 
