@@ -1,3 +1,7 @@
+*{
+    margin: 0;
+    padding: 0;
+}
 .peque {
     width: 40px;
     height: 40px;
@@ -186,3 +190,55 @@ p {
     padding-left: 20px;
     padding-top: 30px;
 }
+.cartaderecha{
+    margin: 1.5px;
+}
+.cartaIzquierdaBajo{
+    background-image: url(../../img/carta3.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px;
+}
+.cartaIzquierdaBajo img {
+    height: 40px;
+    width: 40px;
+}
+.cartaIzquierdaBajo h1 {
+    padding-left: 20px;
+    padding-top: 50px;
+}
+.cartaIzquierdaBajo h4 {
+    padding-left: 20px;
+    padding-top: 30px;
+}
+.cartaIzquierdaBajo{
+    margin: 1.5px;
+}
+.cartaderecha{
+    margin: 1.5px;
+}
+.cartaDerechaBajo{
+    background-image: url(../../img/cart4.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px;
+}
+.cartaDerechaBajo img {
+    height: 40px;
+    width: 40px;
+}
+.cartaDerechaBajo h1 {
+    padding-left: 20px;
+    padding-top: 50px;
+}
+.cartaDerechaBajo h4 {
+    padding-left: 20px;
+    padding-top: 30px;
+}
+.cartaDerechaBajo{
+    margin: 1.5px;
+}
+/* 
+.container-fluid{
+    padding: 0px;
+} */
