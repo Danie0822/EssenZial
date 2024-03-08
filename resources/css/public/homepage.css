@@ -16,9 +16,9 @@
 }
 
 .columnas {
-   padding-left: 10%;
-   padding-top: 5%;
-   padding-bottom: 5%;
+    padding-left: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 h3 {
@@ -26,7 +26,7 @@ h3 {
     margin-bottom: 5%;
 }
 
-p{
+p {
     color: white;
 }
 
@@ -34,86 +34,155 @@ p{
     margin-top: 5%;
     background-color: #2A2F2F;
 }
-.copy{
+
+.copy {
     color: white;
     margin-bottom: 5%;
 }
-.boton{
+
+.boton {
     margin: 2%;
 }
-.clasesDes{
+
+.clasesDes {
     padding-top: 30px;
 }
-.slick-arrow
-{
- width: 30px;
- height: 30px;
- font-size: 0px;
- color: transparent;
- border: none;
- position: absolute;
- top: 1px;
- right: 0;
- padding-right: 5px;
+
+.slick-arrow {
+    width: 30px;
+    height: 30px;
+    font-size: 0px;
+    color: transparent;
+    border: none;
+    position: absolute;
+    top: 1px;
+    right: 0;
+    padding-right: 5px;
 }
-.slick-prev{
+
+.slick-prev {
     right: 40px;
     background: url(../../img/flecha-izquierda.png);
-    background-size: 100% ;
+    background-size: 100%;
 }
-.slick-next{
+
+.slick-next {
 
     background: url(../../img/flecha-correcta.png);
-    background-size: 100% ;
+    background-size: 100%;
 }
-.card img 
-{
-    height: 450px;
+
+.cartm {
+    height: 240px;
+    width: 240px;
 }
-.card{
+
+.card {
     border-radius: 10px;
 }
-.cart1
-{
-    background-color: #dfbbb0; 
+
+.cart1 {
+    margin: 1px;
+    background-color: #dfbbb0;
 }
-.cart1 img
-{
+
+.cart1 img {
     height: 340.85px;
     width: 285.26px;
 }
-.cart2
-{
-    background-color: #f1b9a8 ; 
+
+.cart2 {
+    margin: 1px;
+    background-color: #f1b9a8;
 }
-.cart2 img 
-{
+
+.cart2 img {
     height: 340.85px;
     width: 285.26px;
     margin: 0;
     padding: 0;
 }
-.cart1 h6 
-{
+
+.cart1 h6 {
     padding: 10px;
 }
-.cart1 p 
-{
+
+.cart1 p {
     padding: 10px;
 }
-.cart1 h5 
-{
+
+.cart1 h5 {
     padding: 10px;
 }
-.cart2 h6 
-{
+
+.cart2 h6 {
     padding: 10px;
 }
-.cart2 p 
-{
+
+.cart2 p {
     padding: 10px;
 }
-.cart2 h5 
-{
+
+.cart2 h5 {
     padding: 10px;
+}
+
+.cartprueba {
+    background-image: url(../../img/carta1.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px;
+}
+
+.cartprueba img {
+    height: 40px;
+    width: 40px;
+}
+
+.imagencart {
+    padding-left: 20px;
+    padding-top: 50px;
+}
+
+.cartprueba{
+    margin: 1.5px;
+}
+.cartprueba h1 {
+    padding-left: 20px;
+    padding-top: 50px;
+}
+
+.cartprueba h4 {
+    padding-left: 20px;
+    padding-top: 25px;
+}
+/* aca */
+.bot {
+    padding-left: 30px;
+    padding-top: 30px;
+    padding-bottom: 20px;
+}
+
+.btn-transparent {
+    border-radius: 8px;
+    width: 150px;
+    height: 50px;
+}
+.cartaderecha{
+    background-image: url(../../img/carta2.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px;
+}
+.cartaderecha img {
+    height: 40px;
+    width: 40px;
+}
+.cartaderecha h1 {
+    padding-left: 20px;
+    padding-top: 50px;
+}
+.cartaderecha h4 {
+    padding-left: 20px;
+    padding-top: 30px;
 }
