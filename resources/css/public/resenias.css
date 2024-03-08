@@ -5,3 +5,56 @@
 .card{
     margin: 5px;
 }
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: none; 
+    padding-bottom: 0; 
+  }
+  .modal-title {
+    color: black;
+    position: relative; 
+    padding-left: 20px; 
+  }
+  .modal-title::before {
+    content: ''; 
+    position: absolute;
+    left: 0; 
+    top: 50%; 
+    transform: translateY(-50%);
+    width: 5px; 
+    height: 100%; 
+    background-color: #ffc107; 
+  }
+  .star-rating {
+    font-size: 2em;
+    color: #ddd; 
+    text-align: center; 
+    margin-bottom: 20px; 
+  }
+  .star-rating input {
+    display: none;
+  }
+  .star-rating label {
+    cursor: pointer;
+    color: #ccc; 
+  }
+  .star-rating input:checked ~ label,
+  .star-rating input:checked ~ label ~ label {
+    color: #ffc107; 
+  }
+  .modal-footer {
+    border-top: none; 
+    justify-content: flex-start; 
+  }
+  .btn-warning {
+    background-color: #ffc107; 
+    border-color: #ffc107; 
+  }
+  .btn-warning:hover {
+    background-color: #ffca2c; 
+    border-color: #ffca2c; 
+  }
+  .form-control {
+    background-color: #f2f2f2; 
+  }

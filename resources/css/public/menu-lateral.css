@@ -1,0 +1,86 @@
+.nav-lateral {
+    list-style: none;
+    padding-left: 0;
+    margin-left: 20px;
+}
+
+.nav-lateral .nav-item {
+    position: relative;
+}
+
+.nav-lateral .nav-link {
+    position: relative;
+    display: block;
+    padding: 10px;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s, box-shadow 0.3s;
+}
+
+
+.nav-lateral .nav-link::before {
+    content: "";
+    position: absolute;
+    background-color: #ffc107; 
+    height: 100%;
+    width: 5px;
+    left: 0;
+    top: 0;
+    transform: scaleY(0); 
+    transition: transform 0.3s;
+}
+
+.nav-lateral .nav-item:hover .nav-link::before {
+    transform: scaleY(1);
+}
+
+.nav-lateral .nav-link::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 5px;
+    left: -10px; 
+    top: 0;
+    z-index: -1; 
+    transition: transform 0.3s;
+}
+
+.nav-lateral .nav-link:hover::after {
+    transform: translateX(5px); 
+}
+
+/*Css para paneles de pedidos*/
+
+.paneles{
+    background-color: #F6F6F6;
+    width: auto;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 5px;
+}
+p{
+    font-size: 15px;
+}
+h6{
+    font-size: 20px;
+}
+
+.detalles{
+    color: #FFFFFF;
+    background-color: #EDD146;
+}
+.lb{
+    color: #BEBCBD;
+    font-weight: bold;
+    
+}
+
+.title{
+    margin-top: 15px;
+    font-weight: bold;
+
+}
+
+.titleTwo{
+    font-weight: bold;
+}
