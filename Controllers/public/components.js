@@ -115,7 +115,9 @@ function loadNav(){
         </li>
     </ul>
 </div>`
-document.body.innerHTML += navContent;
+var nav = document.querySelector(".row");
+nav.innerHTML = navContent + nav.innerHTML
+
 };
 document.addEventListener("DOMContentLoaded", loadNav);
 
