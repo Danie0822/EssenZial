@@ -40,7 +40,7 @@
         <div class="sizebox1"></div>
 
         <div class="container text-right">
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#marcaModal"><i
+            <button type="button" class="btn btn-dark" onclick="AbrirAgregar()"><i
                     class="fas fa-plus"></i> </button>
         </div>
         <div class="sizebox"></div>
@@ -86,8 +86,8 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
                         </button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#agregado"
-                            id="agregarCategoriaBtn"><i class="fas fa-plus"></i> </button>
+                        <button type="button" class="btn btn-dark" id="agregarCategoriaBtn"><i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -232,12 +232,14 @@
     </div>
     <script src="../../Controllers/admin/buscador.js"></script>
     <script src="../../Controllers/admin/metodos.js"></script>
-    <script src="../../Controllers/admin/categorias.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
     <script src="../../resources/js/foto.js"></script>
-
+    <script src="../../Controllers/admin/categorias.js"></script>
 
 </body>
 

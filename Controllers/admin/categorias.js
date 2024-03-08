@@ -1,5 +1,7 @@
 let idCategoria = 0;
-
+const myModal1 = new bootstrap.Modal(document.getElementById('actualizar'));
+const myModal2 = new bootstrap.Modal(document.getElementById('marcaModal'));
+const myModal3 = new bootstrap.Modal(document.getElementById('eliminar'));
 const obtenerCategorias = async () => {
     try {
         const data = await fetchData("/categorias");
@@ -23,10 +25,10 @@ const obtenerCategorias = async () => {
                 tbody.appendChild(tr);
             });
         } else {
-            console.error("Error al obtener categorías:", data.message);
+            AbrirError();
         }
     } catch (error) {
-        console.error("Error:", error);
+        AbrirError();
     }
 };
 
@@ -46,36 +48,42 @@ const abrirModalEditar = (idCategorias, nombreCategoria, imagen) => {
     try {
         if (idCategorias !== null) {
             mostrarCategoria(nombreCategoria, imagen);
-            $('#actualizar').modal('show');
+            myModal1.show();
 
             idCategoria = idCategorias;
         }
         else {
-            abirError();
+            AbrirError();
 
         }
 
     } catch (error) {
-        abirError();
+        AbrirError();
+        console.log(error);
     }
 };
 
-function abirError() {
-    $('#errorModal').modal('show');
+function AbrirError() {
+    const myModal = new bootstrap.Modal(document.getElementById('errorModal'));
+    myModal.show();
+}
+
+function AbrirAgregar() {
+    myModal2.show();
 }
 
 const abrirModalEliminar = (idCategorias) => {
     try {
         if (idCategorias !== null) {
-            $('#eliminar').modal('show');
+            myModal3.show();
             idCategoria = idCategorias;
         }
         else {
-            abirError();
+            AbrirError();
         }
 
     } catch (error) {
-        abirError();
+        AbrirError();
     }
 };
 
@@ -94,15 +102,16 @@ const agregarCategoria = async () => {
 
             obtenerCategorias();
             limpiarFormulario();
-            $('#marcaModal').modal('hide'); // Cierra el modal de agregar
+            myModal2.hide();
             setTimeout(function () {
-                $('#agregado').modal('show'); // Abre el modal de confirmación después de un segundo
+                const myModal = new bootstrap.Modal(document.getElementById('agregado'));
+                myModal.show();
             }, 500);
         } else {
-            abirError();
+            AbrirError();
         }
     } catch (error) {
-        abirError();
+        AbrirError();
     }
 };
 
@@ -111,19 +120,24 @@ const eliminarCategoria = async (idCategoria) => {
         const data = await deleteData(`/categorias/delete/${idCategoria}`);
 
         if (data.success) {
-            
+
             obtenerCategorias();
-            $('#eliminar').modal('hide'); // Cierra el modal de eliminar
+
+            myModal3.hide();
             setTimeout(function () {
-                $('#eliminadoExitosoModal').modal('show'); // Abre el modal de eliminación exitosa después de un segundo
+                const myModal = new bootstrap.Modal(document.getElementById('eliminadoExitosoModal'));
+                myModal.show();
+
             }, 500);
         } else {
-            abirError();
+            AbrirError();
         }
     } catch (error) {
-        abirError();
+        AbrirError();
     }
 };
+
+
 
 const actualizar = async (idCategoria) => {
     try {
@@ -137,18 +151,20 @@ const actualizar = async (idCategoria) => {
         const data = await updateData("/categorias/update", formData);
 
         if (data.success) {
-           
+
             obtenerCategorias();
             limpiarFormularioActualizar();
-            $('#actualizar').modal('hide'); // Cierra el modal de actualizar
+
+            myModal1.hide();
             setTimeout(function () {
-                $('#acto').modal('show'); // Abre el modal de confirmación después de un segundo
+                const myModal = new bootstrap.Modal(document.getElementById('acto'));
+                myModal.show();
             }, 500);
         } else {
-            abirError();
+            AbrirError();
         }
     } catch (error) {
-        abirError();
+        AbrirError();
     }
 };
 document.addEventListener("DOMContentLoaded", function () {
@@ -183,9 +199,9 @@ async function mostrarCategoria(nombreCategoria, imagenCategoria) {
             imagenPreview.src = urlImagen;
             imagenPreview.style.display = 'block';
         } else {
-            console.error("Elemento .imagenPreview1 no encontrado.");
+            AbrirError();
         }
     } catch (error) {
-        console.error("Error:", error);
+        AbrirError();
     }
 }
