@@ -1,17 +1,19 @@
-.div1{
+.div1 {
     margin-left: 20px;
     margin-top: 20px;
 }
 
-.titulo{
+.titulo {
     color: black;
     position: relative;
     padding-left: 20px;
 }
-.det{
+
+.det {
     color: black;
     font-size: 18px;
 }
+
 /*Css para la palabra de saludo*/
 
 .titulo::before {
@@ -25,105 +27,53 @@
     background-color: #ffc107;
 }
 
-a{
+a {
     color: #807D7E;
 }
 
-.nav{
+.nav {
     margin-bottom: 20px;
 }
 
 .nav-link i {
-    margin-right: 5px; 
-}
-
-/*Inicio de css para la animacion de la barra lateral*/
-
-.nav-lateral {
-    list-style: none;
-    padding-left: 0;
-    margin-left: 20px;
-}
-
-.nav-lateral .nav-item {
-    position: relative;
-}
-
-.nav-lateral .nav-link {
-    position: relative;
-    display: block;
-    padding: 10px;
-    color: #333;
-    text-decoration: none;
-    transition: color 0.3s, box-shadow 0.3s;
-}
-
-
-.nav-lateral .nav-link::before {
-    content: "";
-    position: absolute;
-    background-color: #ffc107; 
-    height: 100%;
-    width: 5px;
-    left: 0;
-    top: 0;
-    transform: scaleY(0); 
-    transition: transform 0.3s;
-}
-
-.nav-lateral .nav-item:hover .nav-link::before {
-    transform: scaleY(1);
-}
-
-.nav-lateral .nav-link::after {
-    content: "";
-    position: absolute;
-    height: 100%;
-    width: 5px;
-    left: -10px; 
-    top: 0;
-    z-index: -1; 
-    transition: transform 0.3s;
-}
-
-.nav-lateral .nav-link:hover::after {
-    transform: translateX(5px); 
+    margin-right: 5px;
 }
 
 /*Css para paneles de pedidos*/
 
-.paneles{
+.paneles {
     background-color: #F6F6F6;
     width: auto;
     border-radius: 15px;
     padding: 15px;
     margin: 5px;
 }
-p{
+
+p {
     font-size: 15px;
 }
-h6{
+
+h6 {
     font-size: 20px;
 }
 
-.detalles{
+.detalles {
     color: #FFFFFF;
     background-color: #EDD146;
 }
-.lb{
+
+.lb {
     color: #BEBCBD;
     font-weight: bold;
-    
+
 }
 
-.title{
+.title {
     margin-top: 15px;
     font-weight: bold;
 
 }
 
-.titleTwo{
+.titleTwo {
     font-weight: bold;
 }
-
-
