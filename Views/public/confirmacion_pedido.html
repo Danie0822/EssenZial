@@ -10,6 +10,42 @@
     <link rel="stylesheet" href="../../resources/css/public/header_footer.css">
     <link rel="stylesheet" href="../../resources/css/public/confirmacion_pedido.css">
     <link rel="icon" href="../../resources/img/icono.png" type="image/x-icon">
+    <style>
+        .resumen-orden {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .inputTex {
+            margin-bottom: 10px;
+            /* Agregar espacio entre los textos */
+        }
+
+        .radio-container input[type="radio"] {
+            margin-right: 10px;
+            /* Espaciado entre radio y texto */
+        }
+
+        .radius1 {
+            padding-top: 15px;
+
+        }
+
+        .radius2 {
+            padding-top: 10px;
+            padding-left: 10px;
+            padding-bottom: 10px;
+        }
+
+        .radio-separator {
+            width: 100%;
+            border-bottom: 1px solid #ddd;
+            /* Agregar línea separadora */
+            margin: 5px 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,28 +53,79 @@
     </header>
     <main>
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-8">
-                    <div class="container">
-                        <div>
-                            <h4 class="titulo">
-                                Verificar pedido
-                            </h4>
-                            <p class="det">Detalles del pedido</p>
-                        </div>
-                        
-                        
-                    </div>
-
+            <div class="col-md-8">
+                <span>Página Principal > Añadir al carrito > <strong class="bold-text">Confirmar pedido</strong></span>
+            </div>
+            <div class="col-lg-2 col-md-8 col-cm-8">
+                <div class="div1">
+                    <h4 class="titulo">
+                        Hola Adriana
+                    </h4>
+                    <p class="det">Bienvenido a tu cuenta</p>
                 </div>
-                <div class="col-4">
-
+            </div>
+            <!-- Inputs y Resumen de la orden -->
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong class="bold-text inputTex">Nombre*</strong>
+                            <input type="text" class="form-control inputInfo" placeholder="Nombre">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong class="bold-text inputTex">Apellido*</strong>
+                            <input type="text" class="form-control inputInfo" placeholder="Apellido">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong class="bold-text inputTex">Teléfono*</strong>
+                            <input type="tel" class="form-control inputInfo" placeholder="Teléfono">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong class="bold-text inputTex">Correo Electrónico*</strong>
+                            <input type="email" class="form-control inputInfo" placeholder="Correo Electrónico">
+                        </div>
+                    </div>
+                    <!-- Contenedor con radius -->
+                    <div class="contenedor row">
+                        <div class="col-md-12">
+                            <h4 class="inputTex">Dirección</h4>
+                            <p class="inputTex">Selecciona la dirección a la que quieres que enviemos tu paquete</p>
+                            <div class="radio-container">
+                                <div class="radius1">
+                                    <input type="radio" id="direccion1" name="direccion" value="direccion1"
+                                        class="radius1">
+                                    <label for="direccion1" class="">Casa</label>
+                                </div>
+                                <div class="radio-separator"></div> <!-- Línea separadora -->
+                                <div class="radius2">
+                                    <input type="radio" id="direccion2" name="direccion" value="direccion2">
+                                    <label for="direccion2">Trabajo</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h4 >Método de envío</h4>
+                    <!-- Contenedor para Método de envío -->
+                    <div class="contenedor col-md-12 contEnvio">
+                        <div class="d-flex justify-content-between">
+                            <h5 >Por encomendista</h5>
+                            <h5 >$0.00</h5>
+                        </div>
+                        <p class="inputTex">El costo por el envío se aplica en la compra del producto</p>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-3">
+                    <div class="resumen-orden">
+                        <h4 class="titulo">Resumen de la orden</h4>
+                        <!-- Contenido del resumen de la orden -->
+                    </div>
                 </div>
             </div>
         </div>
-
-
-    </main> 
+    </main>
     <footer>
     </footer>
 

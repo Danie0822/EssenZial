@@ -19,3 +19,30 @@
     height: 100%;
     background-color: #ffc107;
 }
+.apartadoPeque{
+    padding-left: 35px;
+}
+.texto{
+    padding-left: 35px;
+}
+.inputInfo{
+    height: 40px;
+    border-radius: 10px;
+    background-color: #F6F6F6;
+}
+.radio-container{
+    border-radius: 10px;
+    background-color: #F6F6F6; 
+}
+.radius{
+    padding-left: 10px;
+}
+.radius1{
+    padding-left: 10px;
+}
+.contEnvio{
+    padding-top: 15px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color: #F6F6F6; 
+}

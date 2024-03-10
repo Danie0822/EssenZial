@@ -242,3 +242,20 @@ p {
 .container-fluid{
     padding: 0px;
 } */
+h3.titulo {
+    position: relative;
+}
+h3.titulo::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 100%;
+    background-color: #ffc107;
+    padding-top: 20px;
+}
+.contaf{
+    padding-bottom: 30px;
+}
