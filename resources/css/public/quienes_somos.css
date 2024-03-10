@@ -19,10 +19,6 @@
     position: relative;
     padding-left: 20px;
 }
-.det{
-    color: black;
-    font-size: 18px;
-}
 
 .titulo::before {
     content: '';
@@ -49,5 +45,12 @@
     color: white;
 }
 .images{
+    margin: 10px;
+    background-color: white;
+}
+
+.rowSocios{
+    padding: 5px;
+    font-size: 20px;
     margin: 10px;
 }
