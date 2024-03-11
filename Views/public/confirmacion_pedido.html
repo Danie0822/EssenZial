@@ -53,21 +53,23 @@
     </header>
     <main>
         <div class="container-fluid">
-            <div class="col-md-8">
+            <div class="col-md-8 arib">
                 <span>Página Principal > Añadir al carrito > <strong class="bold-text">Confirmar pedido</strong></span>
-            </div>
-            <div class="col-lg-2 col-md-8 col-cm-8">
+            </div>  
+            <div class="col-lg-2 col-md-8 col-cm-8 Tit">
                 <div class="div1">
                     <h4 class="titulo">
-                        Hola Adriana
+                        Verificar pedido
                     </h4>
-                    <p class="det">Bienvenido a tu cuenta</p>
+                    <p class="det">Detalles del pedido</p>
                 </div>
             </div>
+
             <!-- Inputs y Resumen de la orden -->
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-8">
+                    
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <strong class="bold-text inputTex">Nombre*</strong>
@@ -106,22 +108,84 @@
                         </div>
                     </div>
                     <hr>
-                    <h4 >Método de envío</h4>
+                    <h4>Método de envío</h4>
                     <!-- Contenedor para Método de envío -->
                     <div class="contenedor col-md-12 contEnvio">
                         <div class="d-flex justify-content-between">
-                            <h5 >Por encomendista</h5>
-                            <h5 >$0.00</h5>
+                            <h5>Por encomendista</h5>
+                            <h5>$0.00</h5>
                         </div>
                         <p class="inputTex">El costo por el envío se aplica en la compra del producto</p>
                     </div>
                     <hr>
+                    <!-- Contenedor para Método de pago -->
+                    <h4>Método de pago</h4>
+                    <p>Todas las transacciones son seguras y encriptadas</p>
+                    <div class="contenedor col-md-12 contenedorPago">
+                        <div class="col-md-12">
+                            <input type="radio" id="contraEntrega" name="pago" value="contraEntrega" class="radius1">
+                            <label for="contraEntrega">Contra entrega</label>
+                            <p>Paga en efectivo cuando recibas tu paquete</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="contBoton">
+                        <button type="button" class="btn btn-warning" style="background-color: #EDD146; color: white;">Finalizar Pedido</button>
+                    </div>
+                    <div class=" contenedorGuardarInfo">
+                        <input type="checkbox" id="guardarInfo" name="guardarInfo">
+                        <label for="guardarInfo">Guardar mi información para agilizar la verificación del pedido</label>
+                    </div>
+
                 </div>
                 <div class="col-md-3">
                     <div class="resumen-orden">
                         <h4 class="titulo">Resumen de la orden</h4>
                         <!-- Contenido del resumen de la orden -->
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <img src="../../resources/img/boss.jpg" alt="Perfume" style="max-width: 100%;">
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="margin-bottom: 0;">MYSLF  <p style="float: right;">$74.34</p></h5>
+                                <p>Yves Saint Laurent</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <img src="../../resources/img/boss.jpg" alt="Perfume" style="max-width: 100%;">
+                            </div>
+                            <div class="col-md-6">
+                                <h5 style="margin-bottom: 0;">MYSLF  <p style="float: right;">$74.34</p></h5>
+                                <p>Yves Saint Laurent</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Agregar el texto del subtotal -->
+                        <div class="d-flex justify-content-between">
+                            <h5 class="align-self-start">Subtotal (2 productos)</h5>
+                            <h5 class="align-self-end">$273.47</h5>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="align-self-start">Ahorros</h5>
+                            <h5 class="align-self-end">-$0.00</h5>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="align-self-start">Envío</h5>
+                            <h5 class="align-self-end">$0.00</h5>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="align-self-start">Total</h5>
+                            <h5 class="align-self-end">$273.47</h5>
+                        </div>
                     </div>
+                    
+                    
+                    
                 </div>
             </div>
         </div>

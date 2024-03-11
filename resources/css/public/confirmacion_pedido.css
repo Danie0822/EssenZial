@@ -46,3 +46,17 @@
     border-radius: 10px;
     background-color: #F6F6F6; 
 }
+.contenedorPago{
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    background-color: #F6F6F6; 
+}
+.btn-warning{
+    border-radius: 8px;
+}
+.contBoton{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
