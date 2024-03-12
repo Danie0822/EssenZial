@@ -39,50 +39,37 @@ document.addEventListener("DOMContentLoaded", loadFooter);
 
 
 function loadHeader(){
-    var headerContent = `
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-                <img src="../../resources/img/icono.png" width="30" height="30" class="d-inline-block align-top"
-                    alt="">
-                EssenZial
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+    var headerContent = `    <nav class="navbar navbar-expand-lg navbar-light text-end">
+    <a class="navbar-brand" href="#">
+        <img src="../../resources/img/icono.png" width="30" height="30" class="d-inline-block align-top" alt="">
+        EssenZial
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-link active" href="#">Hombre <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="#">Mujer</a>
+            <a class="nav-link" href="#">Niños</a>
+            <a class="nav-link" href="#">Unisex</a>
+            <button class="btn btn-sm bg-light peque" type="button">
+                <a class="navbar-brand" href="../public/index.html">
+                    <img src="../../resources/img/icons8-usuario-32.png" alt=""
+                        class="d-inline-block align-text-top" id="image">
+                </a>
             </button>
-            <div class="d-flex">
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Hombres</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Mujer</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Niños</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Unisex</a>
-                        </li>
-                    </ul>
-                    <button class="btn btn-sm bg-light peque" type="button">
-                        <a class="navbar-brand" href="../public/index.html">
-                            <img src="../../resources/img/icons8-usuario-32.png" alt=""
-                                class="d-inline-block align-text-top" id="image">
-                        </a>
-                    </button>
-                    <button class="btn btn-sm bg-light peque" type="button" id="boton">
-                        <a class="navbar-brand" href="../public/index.html">
-                            <img src="../../resources/img/carrito.png" alt="" class="d-inline-block align-text-top"
-                                id="image">
-                        </a>
-                    </button>
-                </div>
-            </div>
+            <button class="btn btn-sm bg-light peque" type="button" id="boton">
+                <a class="navbar-brand" href="../public/index.html">
+                    <img src="../../resources/img/carrito.png" alt="" class="d-inline-block align-text-top"
+                        id="image">
+                </a>
+            </button>
+
         </div>
-    </nav>`
+    </div>
+</nav>`
 
 var header = document.querySelector("header");
 header.innerHTML = headerContent + header.innerHTML;
