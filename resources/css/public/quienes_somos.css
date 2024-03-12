@@ -1,4 +1,4 @@
-.centrado{
+.centrado {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -9,12 +9,12 @@
 }
 
 /*Css para el titulo de rectangulo amarillo*/
-.div1{
+.div1 {
     margin-left: 20px;
     margin-top: 20px;
 }
 
-.titulo{
+.titulo {
     color: black;
     position: relative;
     padding-left: 20px;
@@ -31,25 +31,29 @@
     background-color: #ffc107;
 }
 
-.card{
+.card {
     margin: 20px;
 }
-.card1{
+
+.card1 {
     background-color: #807D7E;
 }
-.card2{
+
+.card2 {
     background-color: #EDD146;
 }
-.card3{
+
+.card3 {
     background-color: #333333;
     color: white;
 }
-.images{
+
+.images {
     margin: 10px;
     background-color: white;
 }
 
-.rowSocios{
+.rowSocios {
     padding: 5px;
     font-size: 20px;
     margin: 10px;
@@ -75,7 +79,8 @@
     transform: translate(-50%, -50%);
     color: white;
     text-align: center;
-    font-size: 2vw; /* Utilizando un porcentaje del ancho de la ventana */
+    font-size: 2vw;
+    /* Utilizando un porcentaje del ancho de la ventana */
     font-weight: bold;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
@@ -84,6 +89,10 @@
 
 @media (max-width: 768px) {
     .img-text {
-        font-size: 4vw; /* Ajuste de tamaño para pantallas más pequeñas */
+        font-size: 2vw;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 }
