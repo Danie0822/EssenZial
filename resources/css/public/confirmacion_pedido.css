@@ -60,3 +60,37 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.resumen-orden {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.inputTex {
+    margin-bottom: 10px;
+    /* Agregar espacio entre los textos */
+}
+
+.radio-container input[type="radio"] {
+    margin-right: 10px;
+    /* Espaciado entre radio y texto */
+}
+
+.radius1 {
+    padding-top: 15px;
+
+}
+
+.radius2 {
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.radio-separator {
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+    /* Agregar línea separadora */
+    margin: 5px 0;
+}
