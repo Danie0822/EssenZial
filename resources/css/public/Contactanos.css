@@ -14,7 +14,9 @@
 #image {
     height: 20px;
 }
-
+.inicio{
+    background-color: #807D7E;
+}
 #cont {
     margin-top: 15%;
 }
@@ -259,11 +261,27 @@ h3.titulo::before {
 .contaf{
     padding-bottom: 30px;
 }
-.btn-transparent {
-    color: #3C4242;
-    /* Color del texto */
-    border-color: #3C4242;
-    /* Color del borde */
+.btn-transparente {
     background-color: transparent;
-    /* Fondo transparente */
+    color: white;
+    border-color: white;
+    width: 135px;
+}
+
+.btn-transparente:hover {
+    background-color: white;
+    color: black;
+}
+.contacto{
+    background-color: #F6F6F6;
+    border: none;
+    border-radius: 10px; /* Opcional: para asegurarse de que no haya bordes redondeados */
+    box-shadow: none;
+}
+.but{
+    width: 90px;
+    height: 50px;
+}
+.cart3{
+    background-image: url(../../img/fondoperfume.png);
 }
