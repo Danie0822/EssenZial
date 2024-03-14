@@ -1,207 +1,175 @@
-let idCategoria = 0;
-const myModal1 = new bootstrap.Modal(document.getElementById('actualizar'));
-const myModal2 = new bootstrap.Modal(document.getElementById('marcaModal'));
-const myModal3 = new bootstrap.Modal(document.getElementById('eliminar'));
+const obtenerElemento = (id) => document.getElementById(id);
+const abrirModal = (modal) => modal.show();
+const cerrarModal = (modal) => modal.hide();
+const manejarError = () => abrirModal(myError);
+
+const myActualizar = new bootstrap.Modal(obtenerElemento('actualizar'));
+const myAgregar = new bootstrap.Modal(obtenerElemento('marcaModal'));
+const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
+const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
+
+let idCategoria = null;
+
 const obtenerCategorias = async () => {
     try {
-        const data = await fetchData("/categorias");
+        const { success, data } = await fetchData("/categorias");
+        const tbody = obtenerElemento("tablaBody");
+        tbody.innerHTML = "";
 
-        if (data.success) {
-            const tbody = document.getElementById("categoriaTableBody");
-            tbody.innerHTML = "";
-
-            data.data.forEach(categoria => {
+        if (success) {
+            data.forEach(({ id_categoria, nombre_categoria, imagen_categoria }) => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td>${categoria.nombre_categoria}</td>
-                    <td><img src="http://localhost:4000${categoria.imagen_categoria.replace('/uploads', '')}" alt="Imagen de la categoría" width="50"></td>
+                    <td>${nombre_categoria}</td>
+                    <td><img src="http://localhost:4000${imagen_categoria.replace('/uploads', '')}" alt="Imagen de la categoría" width="50"></td>
                     <td>
-                        <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${categoria.id_categoria})"><i
-                        class="fas fa-trash-alt"></i></button>
-                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${categoria.id_categoria}, '${categoria.nombre_categoria}', 'http://localhost:4000${categoria.imagen_categoria.replace('/uploads', '')}')"><i
-                        class="fas fa-edit "></i> </button>                        
+                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_categoria}, '${nombre_categoria}', 'http://localhost:4000${imagen_categoria.replace('/uploads', '')}')"><i class="fas fa-edit"></i></button>  
+                        <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${id_categoria})"><i class="fas fa-trash-alt"></i></button>                      
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
         } else {
-            AbrirError();
+            manejarError();
         }
     } catch (error) {
-        AbrirError();
+        manejarError();
     }
 };
 
 const limpiarFormulario = () => {
-    document.getElementById("nombreCategoria").value = "";
-    document.getElementById("imagenMarca").value = "";
-    document.querySelector('.preview-image').style.display = 'none';
+    document.querySelectorAll('.form-control').forEach(input => input.value = "");
+    document.querySelectorAll('.preview-image').forEach(image => image.style.display = 'none');
 }
 
 const limpiarFormularioActualizar = () => {
-    document.getElementById("nombreCategoriaActuaizar").value = "";
-    document.getElementById("imagenMarcaActualizar").value = "";
-    document.querySelector('.imagede').style.display = 'none';
+    document.querySelectorAll('.form-control-actualizar').forEach(input => input.value = "");
+    document.querySelectorAll('.imagede').forEach(image => image.style.display = 'none');
 }
 
 const abrirModalEditar = (idCategorias, nombreCategoria, imagen) => {
-    try {
-        if (idCategorias !== null) {
-            mostrarCategoria(nombreCategoria, imagen);
-            myModal1.show();
-
-            idCategoria = idCategorias;
-        }
-        else {
-            AbrirError();
-
-        }
-
-    } catch (error) {
-        AbrirError();
-        console.log(error);
+    if (idCategorias) {
+        mostrarCategoria(nombreCategoria, imagen);
+        idCategoria = idCategorias;
+        abrirModal(myActualizar);
+    } else {
+        manejarError();
     }
 };
 
-function AbrirError() {
-    const myModal = new bootstrap.Modal(document.getElementById('errorModal'));
-    myModal.show();
-}
-
 function AbrirAgregar() {
-    myModal2.show();
+    abrirModal(myAgregar);
 }
 
 const abrirModalEliminar = (idCategorias) => {
-    try {
-        if (idCategorias !== null) {
-            myModal3.show();
-            idCategoria = idCategorias;
-        }
-        else {
-            AbrirError();
-        }
-
-    } catch (error) {
-        AbrirError();
+    if (idCategorias) {
+        idCategoria = idCategorias;
+        abrirModal(myEliminar);
+    } else {
+        manejarError();
     }
 };
 
 const agregarCategoria = async () => {
     try {
-        const nombreCategoria = document.getElementById("nombreCategoria").value;
-        const imagenCategoria = document.getElementById("imagenMarca").files[0];
+        const nombreCategoria = obtenerElemento("nombreCategoria").value;
+        const imagenCategoria = obtenerElemento("imagenMarca").files[0];
 
         const formData = new FormData();
         formData.append('nombre_categoria', nombreCategoria);
         formData.append('imagen', imagenCategoria);
 
-        const data = await createData("/categorias/save", formData);
+        const { success } = await createData("/categorias/save", formData);
 
-        if (data.success) {
-
+        if (success) {
             obtenerCategorias();
             limpiarFormulario();
-            myModal2.hide();
-            setTimeout(function () {
-                const myModal = new bootstrap.Modal(document.getElementById('agregado'));
-                myModal.show();
-            }, 500);
+            cerrarModal(myAgregar);
+            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
         } else {
-            AbrirError();
+            manejarError();
         }
     } catch (error) {
-        AbrirError();
+        manejarError();
     }
 };
 
 const eliminarCategoria = async (idCategoria) => {
     try {
-        const data = await deleteData(`/categorias/delete/${idCategoria}`);
+        const { success } = await deleteData(`/categorias/delete/${idCategoria}`);
 
-        if (data.success) {
-
+        if (success) {
             obtenerCategorias();
-
-            myModal3.hide();
-            setTimeout(function () {
-                const myModal = new bootstrap.Modal(document.getElementById('eliminadoExitosoModal'));
-                myModal.show();
-
-            }, 500);
+            cerrarModal(myEliminar);
+            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('eliminadoExitosoModal'))), 500);
         } else {
-            AbrirError();
+            manejarError();
         }
     } catch (error) {
-        AbrirError();
+        manejarError();
     }
 };
 
-
-
 const actualizar = async (idCategoria) => {
     try {
-        const nombreCategoria = document.getElementById("nombreCategoriaActuaizar").value;
-        const imagenCategoria = document.getElementById("imagenMarcaActualizar").files[0];
+        const nombreCategoria = obtenerElemento("nombreCategoriaActuaizar").value;
+        const imagenCategoria = obtenerElemento("imagenMarcaActualizar").files[0];
         const formData = new FormData();
         formData.append('id_categoria', idCategoria);
         formData.append('nombre_categoria', nombreCategoria);
         formData.append('imagen', imagenCategoria);
 
-        const data = await updateData("/categorias/update", formData);
+        const { success } = await updateData("/categorias/update", formData);
 
-        if (data.success) {
-
+        if (success) {
             obtenerCategorias();
             limpiarFormularioActualizar();
-
-            myModal1.hide();
-            setTimeout(function () {
-                const myModal = new bootstrap.Modal(document.getElementById('acto'));
-                myModal.show();
-            }, 500);
+            cerrarModal(myActualizar);
+            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('acto'))), 500);
         } else {
-            AbrirError();
+            manejarError();
         }
     } catch (error) {
-        AbrirError();
+        manejarError();
     }
 };
+
 document.addEventListener("DOMContentLoaded", function () {
+
     obtenerCategorias();
 
-    const confirmarEliminarBtn = document.getElementById('confirmarEliminar');
-    confirmarEliminarBtn.addEventListener('click', async function () {
-        if (!idCategoria == 0) {
+    const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
+    confirmarEliminarBtn.addEventListener('click', async () => {
+        if (idCategoria) {
             await eliminarCategoria(idCategoria);
             idCategoria = null;
         }
     });
 
-    const confirmarActualizarBtn = document.getElementById('confirmarActualizar');
-    confirmarActualizarBtn.addEventListener('click', async function () {
-        if (!idCategoria == 0) {
+    const confirmarActualizarBtn = obtenerElemento('confirmarActualizar');
+    confirmarActualizarBtn.addEventListener('click', async () => {
+        if (idCategoria) {
             await actualizar(idCategoria);
             idCategoria = null;
         }
     });
 
-    const agregarCategoriaBtn = document.getElementById("agregarCategoriaBtn");
+    const agregarCategoriaBtn = obtenerElemento("agregarCategoriaBtn");
     agregarCategoriaBtn.addEventListener("click", agregarCategoria);
 });
 
-async function mostrarCategoria(nombreCategoria, imagenCategoria) {
+const mostrarCategoria = (nombreCategoria, imagenCategoria) => {
     try {
-        document.getElementById("nombreCategoriaActuaizar").value = nombreCategoria;
+        obtenerElemento("nombreCategoriaActuaizar").value = nombreCategoria;
         const imagenPreview = document.querySelector('.imagede');
         if (imagenPreview) {
             const urlImagen = imagenCategoria;
             imagenPreview.src = urlImagen;
             imagenPreview.style.display = 'block';
         } else {
-            AbrirError();
+            manejarError();
         }
     } catch (error) {
-        AbrirError();
+        manejarError();
     }
 }
