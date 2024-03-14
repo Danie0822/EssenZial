@@ -39,8 +39,21 @@
     background-color: #807D7E;
 }
 
+.card1:hover {
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+
 .card2 {
     background-color: #EDD146;
+}
+
+.card2:hover{
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
 }
 
 .card3 {
@@ -48,9 +61,8 @@
     color: white;
 }
 
-.images {
-    margin: 10px;
-    background-color: white;
+.imagenesCol {
+    margin: 15px;
 }
 
 .rowSocios {
