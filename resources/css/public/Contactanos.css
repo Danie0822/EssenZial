@@ -87,16 +87,6 @@ p {
     border-radius: 10px;
 }
 
-.cart1 {
-    margin: 1px;
-    background-color: #dfbbb0;
-}
-
-.cart1 img {
-    height: 340.85px;
-    width: 285.26px;
-}
-
 .cart2 {
     margin: 1px;
     background-color: #f1b9a8;
@@ -284,4 +274,37 @@ h3.titulo::before {
 }
 .cart3{
     background-image: url(../../img/fondoperfume.png);
+}
+.texto-encima {
+    position: absolute;
+    top: 50%; /* Posiciona el contenedor en el centro vertical del contenedor padre */
+    left: 0;
+    transform: translateY(-50%); /* Centra verticalmente el contenido */
+    width: 100%;
+    padding: 20px; /* Fondo semi-transparente para hacer el texto legible */
+}
+.img-fluid{ 
+    width: 100%;
+}
+.cartHombres{
+    background-color: #3C4242;
+}
+.cartMujeres{
+    background-color: #BC5090;
+}
+.imagencartH{
+    background-image: url(../../img/givenchyH.png);
+    background-repeat: no-repeat;
+}
+.imagencartM{
+    background-image: url(../../img/givenchyM.png);
+    background-repeat: no-repeat;
+}
+
+.cart1{
+    padding-right: 40px;
+}
+.btnVermas{
+    width: 165px;
+    height: 60px;
 }
