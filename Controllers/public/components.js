@@ -11,9 +11,9 @@ function loadFooter(){
         </div>
         <div class="col-lg-4 col-sm-12 columnas">
             <h3>Acerca de nosotros</h3>
-            <a href="#"> <p>Acerca de EssenZial</p></a>
+            <a href="../../Views/public/quienes_somos.html#info"> <p>Acerca de EssenZial</p></a>
             <a href="#"> <p>Blog</p></a>
-            <a href="#"> <p>Quiénes somos</p></a>
+            <a href="../../Views/public/quienes_somos.html#descripcion"> <p>Quiénes somos</p></a>
 
         </div>
         <div class="col-lg-4 col-sm-12 columnas text-center">
@@ -50,10 +50,10 @@ function loadHeader(){
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-link active" href="#">Hombre <span class="sr-only">(current)</span></a>
-            <a class="nav-link" href="#">Mujer</a>
-            <a class="nav-link" href="#">Niños</a>
-            <a class="nav-link" href="#">Unisex</a>
+            <a class="nav-link active" href="../../Views/public/lista_productos.html">Hombre <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="../../Views/public/lista_mujeres.html">Mujer</a>
+            <a class="nav-link" href="../../Views/public/lista_ninos.html">Niños</a>
+            <a class="nav-link" href="../../Views/public/lista_unisex.html">Unisex</a>
             <button class="btn btn-sm bg-light peque" type="button">
                 <a class="navbar-brand" href="../public/index.html">
                     <img src="../../resources/img/icons8-usuario-32.png" alt=""
@@ -61,7 +61,7 @@ function loadHeader(){
                 </a>
             </button>
             <button class="btn btn-sm bg-light peque" type="button" id="boton">
-                <a class="navbar-brand" href="../public/index.html">
+                <a class="navbar-brand" href="../public/carrito.html">
                     <img src="../../resources/img/carrito.png" alt="" class="d-inline-block align-text-top"
                         id="image">
                 </a>
