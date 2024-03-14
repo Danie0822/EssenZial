@@ -7,7 +7,7 @@ const obtenerCategorias = async () => {
         const data = await fetchData("/categorias");
 
         if (data.success) {
-            const tbody = document.getElementById("categoriaTableBody");
+            const tbody = document.getElementById("tablaBody");
             tbody.innerHTML = "";
 
             data.data.forEach(categoria => {

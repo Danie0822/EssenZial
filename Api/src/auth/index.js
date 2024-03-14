@@ -14,7 +14,7 @@ function asignarToken(data, tipoUsuario) {
     }
 
     const tokenData = { ...data, userType: tipoUsuario };
-    return jwt.sign(tokenData, secret, { expiresIn: '60m' });
+    return jwt.sign(tokenData, secret, { expiresIn: '120m' });
 }
 
 function verificarToken(token, tipoUsuario) {
