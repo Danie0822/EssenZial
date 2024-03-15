@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS tb_descuentos (
     id_descuento INT AUTO_INCREMENT PRIMARY KEY,
     cantidad_descuento DECIMAL(10, 2) NOT NULL DEFAULT '0.15',
     descripcion_descuento TEXT,
-    fecha_inicio_descuento DATE DEFAULT CURRENT_DATE,
+    fecha_inicio_descuento DATE DEFAULT (CURRENT_DATE),
     estado_descuento BOOLEAN DEFAULT TRUE,
     fecha_fin_descuento DATE
 ) ENGINE=InnoDB;
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS tb_pedidos (
     id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     total_pago DECIMAL(10,2) NOT NULL DEFAULT '0.00',
     numero_pedido VARCHAR(10) NOT NULL UNIQUE,
-    fecha_pedido DATE DEFAULT CURRENT_DATE,
+    fecha_pedido DATE DEFAULT (CURRENT_DATE),
     estado_pedido VARCHAR(250),
     tipo_pago BOOLEAN DEFAULT TRUE,
     id_direccion INT NOT NULL,
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS tb_valoraciones (
     id_valoracion INT AUTO_INCREMENT PRIMARY KEY,
     calificacion_producto INT NOT NULL CHECK(calificacion_producto >= 0 AND calificacion_producto <= 5),
     comentario_producto VARCHAR(250) NOT NULL,
-    fecha_valoracion DATE DEFAULT CURRENT_DATE,
+    fecha_valoracion DATE DEFAULT (CURRENT_DATE),
     estado_comentario BOOLEAN DEFAULT TRUE,
     id_detalle_pedido INT NOT NULL,
     CONSTRAINT FK_valoracion_Detalle_pedido FOREIGN KEY (id_detalle_pedido) REFERENCES tb_detalle_pedido(id_detalle_pedido)
