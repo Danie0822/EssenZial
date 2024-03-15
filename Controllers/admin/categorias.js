@@ -73,11 +73,15 @@ const abrirModalEliminar = (idCategorias) => {
 const agregarCategoria = async () => {
     try {
         const nombreCategoria = obtenerElemento("nombreCategoria").value;
-        const imagenCategoria = obtenerElemento("imagenMarca").files[0];
-
+        const imagenMarca = obtenerElemento("imagenMarca").files[0];
+        if(!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100)|| !validaciones.validarImagen(imagenMarca)){
+            alert("Por favor, ingrese un nombre válido para la categoría (solo letras y números).");
+            
+        }
+        else{
         const formData = new FormData();
         formData.append('nombre_categoria', nombreCategoria);
-        formData.append('imagen', imagenCategoria);
+        formData.append('imagen', imagenMarca);
 
         const { success } = await createData("/categorias/save", formData);
 
@@ -89,8 +93,10 @@ const agregarCategoria = async () => {
         } else {
             manejarError();
         }
+    }
     } catch (error) {
         manejarError();
+        console.log(error);
     }
 };
 
