@@ -54,16 +54,14 @@ function loadHeader(){
             <a class="nav-link" href="../../Views/public/lista_mujeres.html">Mujer</a>
             <a class="nav-link" href="../../Views/public/lista_ninos.html">Niños</a>
             <a class="nav-link" href="../../Views/public/lista_unisex.html">Unisex</a>
-            <button class="btn btn-sm bg-light peque" type="button">
-                <a class="navbar-brand" href="../public/index.html">
-                    <img src="../../resources/img/icons8-usuario-32.png" alt=""
-                        class="d-inline-block align-text-top" id="image">
+            <button class="btn btn-sm bg-light peque " type="button">
+                <a class="navbar-brand align-items-center justify-content-center" href="../public/index.html">
+                <i class="fa-regular fa-user fa-xs"></i>
                 </a>
             </button>
-            <button class="btn btn-sm bg-light peque" type="button" id="boton">
+            <button class="btn btn-sm bg-light peque text-center" type="button" id="boton">
                 <a class="navbar-brand" href="../public/carrito.html">
-                    <img src="../../resources/img/carrito.png" alt="" class="d-inline-block align-text-top"
-                        id="image">
+                <i class="fa-solid fa-cart-shopping fa-xs"></i>
                 </a>
             </button>
 
