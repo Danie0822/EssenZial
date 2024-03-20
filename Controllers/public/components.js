@@ -4,9 +4,9 @@ function loadFooter(){
     <div class="row">
         <div class="col-lg-4 col-sm-12 columnas">
             <h3>Ayuda</h3>
-            <a href="#" class=""><p>Contáctanos</p></a>
-            <a href="#"><p>Devoluciones y reembolsos</p></a> 
-            <a href="#"><p>Términos y condiciones</p></a>
+            <a href="../../Views/public/contactanos.html#form" class=""><p>Contáctanos</p></a>
+            <a href="../../Views/public/terminos_codiciones.html#devoluciones"><p>Devoluciones y reembolsos</p></a> 
+            <a href="../../Views/public/terminos_codiciones.html"><p>Términos y condiciones</p></a>
 
         </div>
         <div class="col-lg-4 col-sm-12 columnas">
@@ -17,9 +17,9 @@ function loadFooter(){
 
         </div>
         <div class="col-lg-4 col-sm-12 columnas text-center">
-            <button type="button" class="btn btn-outline-secondary boton"><i class="fa-brands fa-facebook"></i></button>
-            <button type="button" class="btn btn-outline-secondary boton"><i class="fa-brands fa-instagram"></i></button>
-            <button type="button" class="btn btn-outline-secondary boton"><i class="fa-solid fa-envelope"></i></button>
+            <button type="button" class="btn btn-outline-secondary boton"><a href="https://www.facebook.com"><i class="fa-brands fa-facebook"></i></a></button>
+            <button type="button" class="btn btn-outline-secondary boton"><a href="https://www.instagram.com"><i class="fa-brands fa-instagram"></i></a></button>
+            <button type="button" class="btn btn-outline-secondary boton"><a href="https://www.google.com/intl/es/gmail/about/"><i class="fa-solid fa-envelope"></i></a></button>
         </div>
     </div>
     <div class="row">
@@ -55,7 +55,7 @@ function loadHeader(){
             <a class="nav-link" href="../../Views/public/lista_ninos.html">Niños</a>
             <a class="nav-link" href="../../Views/public/lista_unisex.html">Unisex</a>
             <button class="btn btn-sm bg-light peque " type="button">
-                <a class="navbar-brand align-items-center justify-content-center" href="../public/index.html">
+                <a class="navbar-brand align-items-center justify-content-center" href="../../Views/public/pedidos.html">
                 <i class="fa-regular fa-user fa-xs"></i>
                 </a>
             </button>
@@ -64,7 +64,6 @@ function loadHeader(){
                 <i class="fa-solid fa-cart-shopping fa-xs"></i>
                 </a>
             </button>
-
         </div>
     </div>
 </nav>`
