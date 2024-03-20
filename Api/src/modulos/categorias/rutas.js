@@ -6,6 +6,14 @@ const seguridad = require('../seguridad/seguridad');
 const multer = require('multer');
 const upload = require('../recursos/upload');
 
+function validarImagen(imagen, req, res, next) {
+    if (!imagen || imagen.trim().length === 0) {
+        respuestas.error(req, res, 'La URL de la imagen es obligatoria', 400);
+        return next('route');
+    }
+
+    return imagen.trim();
+}
 // Funciones
 async function todos(req, res, next) {
     try {
@@ -42,6 +50,9 @@ async function agregar(req, res, next) {
             filePath = `uploads/${req.file.filename}`;
             categoriaData.imagen_categoria = filePath;
         }
+        const imagen_categoria = validarImagen(filePath, req, res, next);
+        if (!imagen_categoria) return; // Detener la ejecución si la validación falla
+
         await controlador.agregar(categoriaData, filePath);
         respuestas.success(req, res, 'Categoria agregada correctamente', 200);
     } catch (error) {
@@ -57,7 +68,7 @@ async function actualizar(req, res, next) {
             clienteData.imagen_categoria = filePath;
         }
         console.log(clienteData);
-        await controlador.actualizar(clienteData.id_categoria,clienteData);
+        await controlador.actualizar(clienteData.id_categoria, clienteData);
         respuestas.success(req, res, 'Cliente actualizado correctamente', 200);
     } catch (error) {
         next(error);

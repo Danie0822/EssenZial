@@ -1,7 +1,6 @@
 const Tabla = 'tb_categorias';
 const idTabla = 'id_categoria'; 
 const fs = require('fs');
-
 module.exports = function (dbInyectada) {
     const db = dbInyectada || require('../../DB/mysql');
 
@@ -10,7 +9,7 @@ module.exports = function (dbInyectada) {
         return categorias.map(categoria => {
             return {
                 ...categoria,
-                imagen_categoria: categoria.imagen_categoria ? '/uploads/' + categoria.imagen_categoria : null
+                imagen_categoria: categoria.imagen_categoria ?  categoria.imagen_categoria : null
             };
         });
     }
@@ -20,7 +19,7 @@ module.exports = function (dbInyectada) {
         if (categorias) {
             return {
                 ...categorias,
-                imagen_categoria: categorias.imagen_categoria ? '/uploads/' + categorias.imagen_categoria : null
+                imagen_categoria: categorias.imagen_categoria ?   categorias.imagen_categoria : null
             };
         }
         return null; 
