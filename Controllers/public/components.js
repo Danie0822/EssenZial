@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", loadFooter);
 
 function loadHeader(){
     var headerContent = `    <nav class="navbar navbar-expand-lg navbar-light text-end">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="../../Views/public/homepage.html">
         <img src="../../resources/img/icono.png" width="30" height="30" class="d-inline-block align-top" alt="">
         EssenZial
     </a>
