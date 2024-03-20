@@ -39,9 +39,10 @@
     border-bottom: 1px solid #e0e0e0;
     margin-bottom: 10px; 
 }
+.nav-link {
+    color: black; 
+}
 
-.navbar-nav .nav-link.active {
-    color: red; /* Cambia el color del texto del enlace activo */
-    font-weight: bold; /* Cambia el estilo del texto del enlace activo */
-    /* Otros estilos según tus preferencias */
+.nav-link:hover {
+    color: white; 
 }
