@@ -21,9 +21,6 @@
     </header>
     <main>
         <div class="container-fluid">
-            <div class="   col-md-8 ">
-                <span>Página Principal > Mi Cuenta > <strong class="bold-text">Información Personal</strong></span>
-            </div>
             <div class="row">
                 <!-- Informacion -->
                 <div class="col-lg-8 col-md-12 col-cm-12">
@@ -52,7 +49,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-warning btn-sm text-white">Editar información</button>
+                        <button type="button" class="btn btn-warning btn-sm text-white" data-toggle="modal"
+                            data-target="#modalActualizarCliente">Editar información</button>
                     </div>
                     <!-- Cards -->
 
@@ -79,8 +77,7 @@
                                         <button class="btn botons btn-outline-primary" data-toggle="modal"
                                             data-target="#modalActualizarDireccion"><i class="fas fa-edit"></i></button>
                                         <button class="btn botons btn-outline-danger ml-2" data-toggle="modal"
-                                        data-target="#eliminar"><i
-                                                class="fas fa-trash-alt"></i></button>
+                                            data-target="#eliminar"><i class="fas fa-trash-alt"></i></button>
                                     </div>
                                 </div>
                             </div>
@@ -231,13 +228,80 @@
                     </div>
                 </div>
             </div>
+
+            <!--Modal para agregar información del cliente-->
+            <div class="modal fade" id="modalActualizarCliente" tabindex="-1" role="dialog"
+                aria-labelledby="modalActualizarClienteLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalActualizarClienteLabel">Actualiza tu información</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nombreCliente">Nombre:</label>
+                                    <input placeholder="Adriana" type="text" class="form-control"
+                                        id="nombreClienteActualizar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="apellidoCliente">Apellido:</label>
+                                    <input placeholder="Orellana" type="text" class="form-control"
+                                        id="apellidoClienteActualizar">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="correoCliente">Correo electrónico</label>
+                                    <input placeholder="adrianaorellana68@gmail.com" type="text" class="form-control"
+                                        id="correoClienteActualizar">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="telefono">Teléfono:</label>
+                                    <input placeholder="9232-2324" type="text" class="form-control"
+                                        id="telefonoModalActualizar">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning btn-sm text-white"  data-toggle="modal" data-target="#modalConfirmacion">Actualizar
+                                información</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalConfirmacion" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <form>
+                                <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                                    style="display: none;">
+                                <div class="text-center mt-3">
+                                    <i class="fa-solid fa-circle-check" style="font-size: 3.5rem; color: black;"></i>
+                                    <p class="mt-3" style="font-size: 1.5rem;">Confirmación</p>
+                                    <p>¡Registro eliminado exitosamente!</p>
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <button type="submit" class="btn btn-primary">OK</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </main>
     <footer>
     </footer>
 
     <!--Script para plantilla del header y footer-->
-    <script src="../../Controllers/public/components.js"></script>
-    <script src="../../Controllers/public/components2.js"></script>
+    <script src="../../Controllers/utils/components.js"></script>
+    <script src="../../Controllers/utils/components2.js"></script>
     <!--Script para uso de iconos-->
     <script src="https://kit.fontawesome.com/186c8fdf5b.js" crossorigin="anonymous"></script>
 
