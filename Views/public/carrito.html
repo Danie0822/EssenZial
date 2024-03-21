@@ -13,19 +13,23 @@
 </head>
 
 <body>
+    <!-- Encabezado de la página -->
     <header>
     </header>
     <main>
         <!--Inicio de la pagina-->
         <div class="container-fluid">
             <div class="div1">
+                <!--Titulo de la pagina-->
                 <h4 class="titulo">
                     Carrito
                 </h4>
                 <p class="det">Detalles del carrito</p>
             </div>
+            <!--Tabla-->
             <div class="table-responsive">
                 <table class="table">
+                    <!--Encabezado de la tabla-->
                     <thead>
                         <tr>
                             <th scope="col">Detalle del producto</th>
@@ -36,16 +40,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!--Cuerpo de la tabla-->
                         <tr>
-                            <td> 
+                            <td>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-12 col-sm-12">
-                                            <img src="https://laopinion.com/wp-content/uploads/sites/3/2019/04/shutterstock_769656256.jpg?quality=60&strip=all&w=1000" alt="Imagen 1" width="50">
+                                            <img src="https://laopinion.com/wp-content/uploads/sites/3/2019/04/shutterstock_769656256.jpg?quality=60&strip=all&w=1000"
+                                                alt="Imagen 1" width="50">
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12">
                                             <h6>Aqua di Gio</h6>
-                                    <p style="color: black;">Giorgio armani</p>
+                                            <p style="color: black;">Giorgio armani</p>
                                         </div>
                                     </div>
                                 </div>
@@ -53,22 +59,24 @@
                             <td><label for="">$50.00</label></td>
                             <td><label for="">2</label></td>
                             <td><label for=""><label for=""> $100.00</label></label></td>
-    
+
                             <td>
-                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#eliminar"><i
-                                        class="fas fa-trash-alt"></i> </button>
+                                <button type="button" class="btn btn-light" data-toggle="modal"
+                                    data-target="#eliminar"><i class="fas fa-trash-alt"></i> </button>
                             </td>
                         </tr>
+                        <!--Cuerpo de la tabla-->
                         <tr>
-                            <td> 
+                            <td>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-lg-1 col-md-12 col-sm-12">
-                                            <img src="https://laopinion.com/wp-content/uploads/sites/3/2019/04/shutterstock_769656256.jpg?quality=60&strip=all&w=1000" alt="Imagen 1" width="50">
+                                            <img src="https://laopinion.com/wp-content/uploads/sites/3/2019/04/shutterstock_769656256.jpg?quality=60&strip=all&w=1000"
+                                                alt="Imagen 1" width="50">
                                         </div>
                                         <div class="col-lg-3 col-md-12 col-sm-12">
                                             <h6>Aqua di Gio</h6>
-                                    <p style="color: black;">Giorgio armani</p>
+                                            <p style="color: black;">Giorgio armani</p>
                                         </div>
                                     </div>
                                 </div>
@@ -76,29 +84,31 @@
                             <td><label for="">$50.00</label></td>
                             <td><label for="">2</label></td>
                             <td><label for=""><label for=""> $100.00</label></label></td>
-    
+
                             <td>
-                                <button type="button" class="btn btn-light" data-toggle="modal" data-target="#eliminar"><i
-                                        class="fas fa-trash-alt"></i> </button>
+                                <button type="button" class="btn btn-light" data-toggle="modal"
+                                    data-target="#eliminar"><i class="fas fa-trash-alt"></i> </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
 
-
+            <!--Contenedor con confirmación de pago-->
             <div class="row pago justify-content-center">
-                    <div class="col-6">
-                         <h6>Total</h6>
-                    </div>
-                    <div class="col-6">
-                        <label for="" class="precio"> $100.00</label>
-                    </div>
-                   
-                    <a  href="../../Views/public/confirmacion_pedido.html" type="button" class="btn button"><h6>Confirmar pedido</h6></a>
+                <div class="col-6">
+                    <h6>Total</h6>
+                </div>
+                <div class="col-6">
+                    <label for="" class="precio"> $100.00</label>
+                </div>
+                <a href="../../Views/public/confirmacion_pedido.html" type="button" class="btn button">
+                    <h6>Confirmar pedido</h6>
+                </a>
             </div>
         </div>
-    </main> 
+    </main>
+    <!-- Pie de página -->
     <footer>
     </footer>
 
@@ -106,7 +116,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    
+
     <!--Script para plantilla del header y footer-->
     <script src="../../Controllers/utils/components.js"></script>
     <!--Script para uso de iconos-->
