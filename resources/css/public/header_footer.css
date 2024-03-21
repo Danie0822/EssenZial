@@ -1,5 +1,5 @@
-/*CSS para la header y el footer*/
-
+/* CSS para el header y el footer */
+ 
 .peque {
     padding-left: 15px;
     margin-left: 2px;
@@ -8,15 +8,14 @@
     padding-bottom: 0px;
 }
 
-
 #cont {
     margin-top: 15%;
 }
 
 .columnas {
-   padding-left: 10%;
-   padding-top: 5%;
-   padding-bottom: 5%;
+    padding-left: 10%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 .foot h3,
@@ -28,21 +27,42 @@
     margin-top: 5%;
     background-color: #2A2F2F;
 }
-.copy{
+
+.copy {
     color: white;
     margin-bottom: 5%;
 }
-.boton{
+
+.boton {
     margin: 2%;
 }
-.navbar{
+
+.navbar {
     border-bottom: 1px solid #e0e0e0;
-    margin-bottom: 10px; 
+    margin-bottom: 10px;
 }
+
 .nav-link {
-    color: black; 
+    color: black;
 }
 
 .nav-link:hover {
+    color: white;
+}
+
+
+.btn.btn-outline-secondary.boton a i {
+    color: #888; 
+}
+
+.btn.btn-outline-secondary.boton a:hover i {
+    color: rgb(8, 88, 179);
+}
+.link-no-underline {
+    text-decoration: none;
+    color: black; 
+}
+
+.link-no-underline:hover {
     color: white; 
 }

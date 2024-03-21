@@ -4,16 +4,17 @@ function loadFooter(){
     <div class="row">
         <div class="col-lg-4 col-sm-12 columnas">
             <h3>Ayuda</h3>
-            <a href="../../Views/public/contactanos.html#form" class=""><p>Contáctanos</p></a>
-            <a href="../../Views/public/terminos_codiciones.html#devoluciones"><p>Devoluciones y reembolsos</p></a> 
-            <a href="../../Views/public/terminos_codiciones.html"><p>Términos y condiciones</p></a>
+            <a href="../../Views/public/contactanos.html#form" class="link-no-underline"><p>Contáctanos</p></a>
+            <a href="../../Views/public/terminos_codiciones.html#devoluciones" class="link-no-underline"><p>Devoluciones y reembolsos</p></a> 
+            <a href="../../Views/public/terminos_codiciones.html" class="link-no-underline"><p>Términos y condiciones</p></a>
 
         </div>
         <div class="col-lg-4 col-sm-12 columnas">
             <h3>Acerca de nosotros</h3>
-            <a href="../../Views/public/quienes_somos.html#info"> <p>Acerca de EssenZial</p></a>
-            <a href="#"> <p>Blog</p></a>
-            <a href="../../Views/public/quienes_somos.html#descripcion"> <p>Quiénes somos</p></a>
+            <a href="../../Views/public/quienes_somos.html#info" class="link-no-underline"> <p>Acerca de EssenZial</p></a>
+            <a href="#" class="link-no-underline"> <p>Blog</p></a>
+            <a href="../../Views/public/quienes_somos.html#descripcion" class="link-no-underline"> <p>Quiénes somos</p></a>
+            
 
         </div>
         <div class="col-lg-4 col-sm-12 columnas text-center">
@@ -39,7 +40,7 @@ document.addEventListener("DOMContentLoaded", loadFooter);
 
 
 function loadHeader(){
-    var headerContent = `    <nav class="navbar navbar-expand-lg navbar-light text-end">
+    var headerContent = `    <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="../../Views/public/homepage.html">
         <img src="../../resources/img/icono.png" width="30" height="30" class="d-inline-block align-top" alt="">
         EssenZial
