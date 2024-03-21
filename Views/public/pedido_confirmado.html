@@ -4,11 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de productos</title>
+    <title>Pedido finalizado</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../resources/css/public/header_footer.css">
-    <link rel="stylesheet" href="../../resources/css/public/lista_productos.css">
+    
     <link rel="icon" href="../../resources/img/icono.png" type="image/x-icon">
 </head>
 
@@ -21,7 +21,7 @@
                 <div class="col-md-4">
                     <h2 class="mb-4">Tu pedido ha sido finalizado y confirmado con éxito</h2>
                     <img src="../../resources/img/pedido_realizado.png" class="img-fluid mb-4" alt="Confirmation Image">
-                    <a href="#" class="btn btn-warning btn-sm text-white">Seguir comprando</a>
+                    <a href="#" class="btn btn-warning btn-sm text-white"  onclick="window.open('../../Views/public/homepage.html', '_blank')">Seguir comprando</a>
                 </div>
             </div>
         </div>
@@ -29,11 +29,14 @@
     <footer>
     </footer>
 
-    <script src="../../Controllers/utils/components.js"></script>
+    
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="../../Controllers/utils/components.js"></script>
 </body>
 
 </html>
