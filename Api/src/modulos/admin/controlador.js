@@ -21,7 +21,14 @@ module.exports = function (dbInyectada) {
     }
 
     async function actualizar(data) {
-        return db.actualizar(Tabla, data, idTabla);
+        const { nombre_admin, apellido_admin, correo_admin, clave_admin } = data;
+        const Newdata = {
+            nombre_admin,
+            apellido_admin,
+            correo_admin,
+            clave_admin
+        };
+        return db.actualizar(Tabla, Newdata, idTabla, data.id_categoria);
     }
 
     return {

@@ -8,7 +8,6 @@ const storage = multer.diskStorage({
     filename: function (req, file, cb) {
         const filename = Date.now() + '-' + file.originalname;
         const filePath = filename;
-        console.log('Nombre del archivo:', filePath); // Imprimir el nombre del archivo
         cb(null, filename);
     }
 });

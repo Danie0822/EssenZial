@@ -33,8 +33,8 @@ module.exports = function (dbInyectada) {
         return db.eliminar(Tabla, id, idTabla);
     }
 
-    async function agregar(data, filePath) {
-        const { nombre_categoria} = data;
+    async function agregar(nombre, filePath) {
+        const  nombre_categoria = nombre;
         const newData = { nombre_categoria, imagen_categoria: filePath }; 
         return db.agregar(Tabla, newData);
     }
