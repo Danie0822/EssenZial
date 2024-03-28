@@ -22,6 +22,22 @@ function validarformato(imagen, nombre, req, res, next) {
 
     };
 }
+function validarformatoActualizar(imagen, nombre, req, res, next) {
+    if (!nombre || nombre.trim().length === 0) {
+        respuestas.error(req, res, 'El nombre es obligatorio', 400);
+        return next('route');
+    }
+    if (nombre.trim().length > 255) {
+        respuestas.error(req, res, 'El nombre no puede tener más de 255 caracteres', 400);
+        return next('route');
+    }
+    const imagen_categoria = imagen !== null ? imagen.trim() : imagen;
+    return {
+        nombre_categoria: nombre.trim(),
+        imagen_categoria: imagen_categoria
+
+    };
+}
 
 function validarID(id, req, res, next) {
     if (!id || isNaN(id) || parseInt(id) <= 0) {
@@ -91,7 +107,7 @@ async function actualizar(req, res, next) {
         if (req.file) {
             filePath = `uploads/${req.file.filename}`;
         }
-        const datosValidados = validarformato(filePath, req.body.nombre_categoria, req, res, next);
+        const datosValidados = validarformatoActualizar(filePath, req.body.nombre_categoria, req, res, next);
         const id = validarID(req.body.id_categoria, req, res, next)
         await controlador.actualizar(id, datosValidados);
         respuestas.success(req, res, 'Cliente actualizado correctamente', 200);

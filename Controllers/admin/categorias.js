@@ -23,7 +23,7 @@ const obtenerCategorias = async () => {
                     <td>${nombre_categoria}</td>
                     <td><img src="http://localhost:4000/${imagen_categoria}" alt="Imagen de la categoría" width="50"></td>
                     <td>
-                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_categoria}, '${nombre_categoria}', 'http://localhost:4000${imagen_categoria.replace('/uploads', '')}')"><i class="fas fa-edit"></i></button>  
+                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_categoria}, '${nombre_categoria}', 'http://localhost:4000/${imagen_categoria}')"><i class="fas fa-edit"></i></button>  
                         <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${id_categoria})"><i class="fas fa-trash-alt"></i></button>                      
                     </td>
                 `;
@@ -74,26 +74,26 @@ const agregarCategoria = async () => {
     try {
         const nombreCategoria = obtenerElemento("nombreCategoria").value;
         const imagenMarca = obtenerElemento("imagenMarca").files[0];
-        if(!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100)|| !validaciones.validarImagen(imagenMarca)){
+        if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100) || !validaciones.validarImagen(imagenMarca)) {
             alert("Por favor, ingrese un nombre válido para la categoría (solo letras y números).");
-            
-        }
-        else{
-        const formData = new FormData();
-        formData.append('nombre_categoria', nombreCategoria);
-        formData.append('imagen', imagenMarca);
 
-        const { success } = await createData("/categorias/save", formData);
-
-        if (success) {
-            obtenerCategorias();
-            limpiarFormulario();
-            cerrarModal(myAgregar);
-            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
-        } else {
-            manejarError();
         }
-    }
+        else {
+            const formData = new FormData();
+            formData.append('nombre_categoria', nombreCategoria);
+            formData.append('imagen', imagenMarca);
+
+            const { success } = await createData("/categorias/save", formData);
+
+            if (success) {
+                obtenerCategorias();
+                limpiarFormulario();
+                cerrarModal(myAgregar);
+                setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
+            } else {
+                manejarError();
+            }
+        }
     } catch (error) {
         manejarError();
         console.log(error);
@@ -119,21 +119,27 @@ const eliminarCategoria = async (idCategoria) => {
 const actualizar = async (idCategoria) => {
     try {
         const nombreCategoria = obtenerElemento("nombreCategoriaActuaizar").value;
-        const imagenCategoria = obtenerElemento("imagenMarcaActualizar").files[0];
-        const formData = new FormData();
-        formData.append('id_categoria', idCategoria);
-        formData.append('nombre_categoria', nombreCategoria);
-        formData.append('imagen', imagenCategoria);
+        if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100)) {
+            alert("Por favor, ingrese un nombre válido para la categoría (solo letras y números).");
 
-        const { success } = await updateData("/categorias/update", formData);
+        }
+        else {
+            const imagenCategoria = obtenerElemento("imagenMarcaActualizar").files[0];
+            const formData = new FormData();
+            formData.append('id_categoria', idCategoria);
+            formData.append('nombre_categoria', nombreCategoria);
+            formData.append('imagen', imagenCategoria);
 
-        if (success) {
-            obtenerCategorias();
-            limpiarFormularioActualizar();
-            cerrarModal(myActualizar);
-            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('acto'))), 500);
-        } else {
-            manejarError();
+            const { success } = await updateData("/categorias/update", formData);
+
+            if (success) {
+                obtenerCategorias();
+                limpiarFormularioActualizar();
+                cerrarModal(myActualizar);
+                setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('acto'))), 500);
+            } else {
+                manejarError();
+            }
         }
     } catch (error) {
         manejarError();
