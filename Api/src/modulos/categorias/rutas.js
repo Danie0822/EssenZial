@@ -64,7 +64,8 @@ async function uno(req, res, next) {
 
 async function eliminar(req, res, next) {
     try {
-        await controlador.eliminar(req.params.id);
+        const id = validarID(req.params.id, req, res, next)
+        await controlador.eliminar(id);
         respuestas.success(req, res, 'Categoria eliminada correctamente', 200);
     } catch (error) {
         next(error);
