@@ -1,4 +1,5 @@
 const multer = require('multer');
+const { v4: uuidv4 } = require('uuid'); // Importar la función uuidv4 de la biblioteca uuid
 
 // Configuración de multer para guardar archivos de imagen
 const storage = multer.diskStorage({
@@ -6,14 +7,14 @@ const storage = multer.diskStorage({
         cb(null, 'uploads/');
     },
     filename: function (req, file, cb) {
-        const filename = Date.now() + '-' + file.originalname;
-        const filePath = filename;
+        const uniqueIdentifier = uuidv4();
+        const fileExtension = file.originalname.split('.').pop();
+        const filename = Date.now() + '-' + uniqueIdentifier + '.' + fileExtension;
         cb(null, filename);
     }
 });
 
 const fileFilter = (req, file, cb) => {
-    // Aceptar solo archivos de imagen
     if (file.mimetype.startsWith('image/')) {
         cb(null, true);
     } else {
