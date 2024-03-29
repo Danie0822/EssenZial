@@ -121,7 +121,6 @@ const actualizar = async (idCategoria) => {
         const nombreCategoria = obtenerElemento("nombreCategoriaActuaizar").value;
         if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100)) {
             alert("Por favor, ingrese un nombre válido para la categoría (solo letras y números).");
-
         }
         else {
             const imagenCategoria = obtenerElemento("imagenMarcaActualizar").files[0];
@@ -142,6 +141,7 @@ const actualizar = async (idCategoria) => {
             }
         }
     } catch (error) {
+        console.log(error);
         manejarError();
     }
 };

@@ -7,7 +7,7 @@ var validaciones = {
         return /^\d+(\.\d+)?$/.test(valor);
     },
 
-    contieneSoloLetrasYNumeros: function(valor) {z
+    contieneSoloLetrasYNumeros: function(valor) {
         if (valor.trim() === "") {
             return false;
         }
