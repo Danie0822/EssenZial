@@ -91,7 +91,6 @@ async function actualizar(req, res, next) {
         if (req.file) {
             filePath = `uploads/${req.file.filename}`;
         }
-        console.log(filePath);
         const datosValidados = validarformatoActualizar(filePath, req.body.nombre_categoria, req, res, next);
         const id = validarID(req.body.id_categoria, req, res, next)
         await controlador.actualizar(id, datosValidados);

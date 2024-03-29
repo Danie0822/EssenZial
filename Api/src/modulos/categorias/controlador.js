@@ -50,7 +50,7 @@ module.exports = function (dbInyectada) {
             fs.unlinkSync(categoria[0].imagen_categoria);
         }
     
-        // Actualizar la información del cliente en la base de datos
+        // Actualizar la información del cliente en la base de datos y pone en un nuevo array la info nueva 
         const newData = { nombre_categoria };
         if (imagen_categoria) {
             newData.imagen_categoria = imagen_categoria;

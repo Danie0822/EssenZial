@@ -2,12 +2,13 @@ const obtenerElemento = (id) => document.getElementById(id);
 const abrirModal = (modal) => modal.show();
 const cerrarModal = (modal) => modal.hide();
 const manejarError = () => abrirModal(myError);
+const manejarValidaciones = () => abrirModal(validationsModal);
 
 const myActualizar = new bootstrap.Modal(obtenerElemento('actualizar'));
 const myAgregar = new bootstrap.Modal(obtenerElemento('marcaModal'));
 const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
-
+const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
 let idCategoria = null;
 
 const obtenerCategorias = async () => {
@@ -75,8 +76,7 @@ const agregarCategoria = async () => {
         const nombreCategoria = obtenerElemento("nombreCategoria").value;
         const imagenMarca = obtenerElemento("imagenMarca").files[0];
         if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100) || !validaciones.validarImagen(imagenMarca)) {
-            alert("Por favor, ingrese un nombre válido para la categoría (solo letras y números).");
-
+            manejarValidaciones();
         }
         else {
             const formData = new FormData();
@@ -120,7 +120,7 @@ const actualizar = async (idCategoria) => {
     try {
         const nombreCategoria = obtenerElemento("nombreCategoriaActuaizar").value;
         if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100)) {
-            alert("Por favor, ingrese un nombre válido para la categoría (solo letras y números).");
+            manejarValidaciones();
         }
         else {
             const imagenCategoria = obtenerElemento("imagenMarcaActualizar").files[0];
