@@ -4,38 +4,26 @@ const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
 const multer = require('multer');
+const Validador = require('../recursos/validator');
 const upload = require('../recursos/upload');
 
 // Validación de nombre y URL de imagen
 function validarformato(imagen, nombre, req, res, next) {
-    if (!imagen || imagen.trim().length === 0 || !nombre || nombre.trim().length === 0) {
-        respuestas.error(req, res, 'Tanto el nombre como la imagen son obligatorios', 400);
-        return next('route');
-    }
-    if (nombre.trim().length > 255) {
-        respuestas.error(req, res, 'El nombre no puede tener más de 255 caracteres', 400);
-        return next('route');
-    }
+    const nombreValidado = Validador.validarCampo(nombre, 'El nombre es obligatorio', req, res, next);
+    Validador.validarLongitud(nombreValidado, 255, 'El nombre no puede tener más de 255 caracteres', req, res, next);
     return {
-        nombre_categoria: nombre.trim(),
-        imagen_categoria: imagen.trim()
-
+        nombre_categoria: nombreValidado,
+        imagen_categoria: Validador.validarCampo(imagen, 'La imagen es obligatorio', req, res, next)
     };
 }
+
 function validarformatoActualizar(imagen, nombre, req, res, next) {
-    if (!nombre || nombre.trim().length === 0) {
-        respuestas.error(req, res, 'El nombre es obligatorio', 400);
-        return next('route');
-    }
-    if (nombre.trim().length > 255) {
-        respuestas.error(req, res, 'El nombre no puede tener más de 255 caracteres', 400);
-        return next('route');
-    }
+    const nombreValidado = Validador.validarCampo(nombre, 'El nombre es obligatorio', req, res, next);
+    Validador.validarLongitud(nombreValidado, 255, 'El nombre no puede tener más de 255 caracteres', req, res, next);
     const imagen_categoria = imagen !== null ? imagen.trim() : imagen;
     return {
-        nombre_categoria: nombre.trim(),
+        nombre_categoria: nombreValidado,
         imagen_categoria: imagen_categoria
-
     };
 }
 
@@ -44,11 +32,8 @@ function validarID(id, req, res, next) {
         respuestas.error(req, res, 'El Id debe ser un número entero mayor que cero', 400);
         return next('route');
     }
-
     return id;
 }
-
-
 
 // Rutas
 router.get('/', seguridad('admin'), todos);
@@ -56,8 +41,6 @@ router.get('/:id', seguridad('admin'), uno);
 router.delete('/delete/:id', seguridad('admin'), eliminar);
 router.post('/save', seguridad('admin'), upload.single('imagen'), agregar);
 router.put('/update', seguridad('admin'), upload.single('imagen'), actualizar);
-
-
 
 // Funciones
 async function todos(req, res, next) {
@@ -101,6 +84,7 @@ async function agregar(req, res, next) {
         next(error);
     }
 }
+
 async function actualizar(req, res, next) {
     try {
         let filePath = null;
@@ -115,7 +99,5 @@ async function actualizar(req, res, next) {
         next(error);
     }
 }
-
-
 
 module.exports = router;
