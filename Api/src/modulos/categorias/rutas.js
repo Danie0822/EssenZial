@@ -3,7 +3,6 @@ const router = express.Router();
 const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
-const multer = require('multer');
 const Validador = require('../recursos/validator');
 const upload = require('../recursos/upload');
 

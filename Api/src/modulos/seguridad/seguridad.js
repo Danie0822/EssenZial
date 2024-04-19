@@ -1,7 +1,7 @@
 const auth = require('../../auth/index');
 
 module.exports = function chequearAuth(tipoUsuario) {
-    function middleware(req, res, next) {
+    return function middleware(req, res, next) {
         try {
             // Verificar y decodificar el token
             const token = req.headers.authorization && req.headers.authorization.split(' ')[1];
@@ -10,11 +10,8 @@ module.exports = function chequearAuth(tipoUsuario) {
             // Adjuntar la información del usuario decodificado al objeto de solicitud
             req.user = decodedToken;
 
-            // Obtener el tipo de usuario del token decodificado
-            const userType = decodedToken.userType;
-
             // Verificar si el tipo de usuario coincide con el permitido para acceder a la ruta
-            if (userType !== tipoUsuario) {
+            if (decodedToken.userType !== tipoUsuario) {
                 return res.status(403).json({ error: 'Acceso no autorizado' });
             }
 
@@ -25,7 +22,5 @@ module.exports = function chequearAuth(tipoUsuario) {
             console.error('Error al verificar el token:', error.message);
             return res.status(401).json({ error: 'Token inválido' });
         }
-    }
-
-    return middleware;
+    };
 };

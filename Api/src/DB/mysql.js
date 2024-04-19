@@ -2,43 +2,16 @@ const mysql = require('mysql');
 const config = require('../config');
 const { error } = require('../red/respuestas');
 
-const dbconfig = {
-    host: config.mysql.host,
-    user: config.mysql.user,
-    password: config.mysql.password,
-    database: config.mysql.database
-};
+// Crear un pool de conexiones
+const pool = mysql.createPool({
+    connectionLimit: 10, // Ajustar según tus necesidades
+    ...config.mysql
+});
 
-let conexion;
-
-function conectar() {
-    conexion = mysql.createConnection(dbconfig);
-
-    conexion.connect((err) => {
-        if (err) {
-            console.log('[db err]', err);
-            setTimeout(conectar, 200);
-        } else {
-            console.log('DB conectada uwu');
-        }
-    });
-
-    conexion.on('error', err => {
-        console.log('[db err]', err);
-        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            conectar();
-        } else {
-            // Manejar el error de manera adecuada
-            error(res, 500, 'Error Interno');
-        }
-    });
-}
-
-conectar();
-
+// Función para ejecutar consultas
 function ejecutarConsulta(sql, params) {
     return new Promise((resolve, reject) => {
-        conexion.query(sql, params, (error, result) => {
+        pool.query(sql, params, (error, result) => {
             if (error) {
                 reject(error);
             } else {
@@ -48,37 +21,43 @@ function ejecutarConsulta(sql, params) {
     });
 }
 
+// Función para obtener todos los registros de una tabla
 function todos(tabla) {
-    const sql = `SELECT * FROM ${tabla}`;
-    return ejecutarConsulta(sql, []);
+    const sql = `SELECT * FROM ??`;
+    return ejecutarConsulta(sql, [tabla]);
 }
 
+// Función para obtener un solo registro de una tabla por su ID
 function uno(tabla, id, campoIdentificacion) {
-    const sql = `SELECT * FROM ${tabla} WHERE ${campoIdentificacion} = ?`;
-    return ejecutarConsulta(sql, [id]);
+    const sql = `SELECT * FROM ?? WHERE ?? = ?`;
+    return ejecutarConsulta(sql, [tabla, campoIdentificacion, id]);
 }
 
+// Función para agregar un nuevo registro a una tabla
 function agregar(tabla, data) {
-    const sql = `INSERT INTO ${tabla} SET ?`;
-    return ejecutarConsulta(sql, data);
+    const sql = `INSERT INTO ?? SET ?`;
+    return ejecutarConsulta(sql, [tabla, data]);
 }
 
-function actualizar(tabla, data, campoIdentificacion, id ) {
-    const sql = `UPDATE ${tabla} SET ? WHERE ${campoIdentificacion} = ?`;
-    return ejecutarConsulta(sql, [data, id]);
+// Función para actualizar un registro en una tabla
+function actualizar(tabla, data, campoIdentificacion, id) {
+    const sql = `UPDATE ?? SET ? WHERE ?? = ?`;
+    return ejecutarConsulta(sql, [tabla, data, campoIdentificacion, id]);
 }
 
-
-
+// Función para eliminar un registro de una tabla
 function eliminar(tabla, id, nombreid) {
-    const sql = `DELETE FROM ${tabla} WHERE ${nombreid} = ?`;
-    return ejecutarConsulta(sql, [id]);
+    const sql = `DELETE FROM ?? WHERE ?? = ?`;
+    return ejecutarConsulta(sql, [tabla, nombreid, id]);
 }
 
+// Función para ejecutar una consulta personalizada en una tabla
 function query(tabla, consulta) {
-    const sql = `SELECT * FROM ${tabla} WHERE ?`;
-    return ejecutarConsulta(sql, consulta);
+    const sql = `SELECT * FROM ?? WHERE ?`;
+    return ejecutarConsulta(sql, [tabla, consulta]);
 }
+
+// Función para ejecutar un procedimiento almacenado
 function ejecutarProcedimiento(nombreProcedimiento, parametros) {
     return new Promise((resolve, reject) => {
         let placeholders = '';
@@ -88,7 +67,7 @@ function ejecutarProcedimiento(nombreProcedimiento, parametros) {
 
         const callStatement = `CALL ${nombreProcedimiento}(${placeholders})`;
 
-        conexion.query(callStatement, parametros, (error, result) => {
+        pool.query(callStatement, parametros, (error, result) => {
             if (error) {
                 reject(error);
             } else {
@@ -98,12 +77,13 @@ function ejecutarProcedimiento(nombreProcedimiento, parametros) {
     });
 }
 
+// Exportar las funciones para su uso fuera del módulo
 module.exports = {
     todos,
     uno,
     agregar,
     eliminar,
     actualizar,
-    query, 
+    query,
     ejecutarProcedimiento
 };
