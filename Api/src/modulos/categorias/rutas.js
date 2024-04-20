@@ -4,7 +4,8 @@ const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
 const Validador = require('../recursos/validator');
-const upload = require('../recursos/upload');
+const multerConfig = require('../recursos/upload');
+const upload = multerConfig('categorias');
 
 // Validación de nombre y URL de imagen
 function validarformato(imagen, nombre, req, res, next) {
@@ -74,7 +75,7 @@ async function agregar(req, res, next) {
     try {
         let filePath = null;
         if (req.file) {
-            filePath = `uploads/${req.file.filename}`;
+            filePath = `uploads/categorias/${req.file.filename}`;
         }
         const datosValidados = validarformato(filePath, req.body.nombre_categoria, req, res, next);
         await controlador.agregar(datosValidados.nombre_categoria, datosValidados.imagen_categoria);
@@ -88,7 +89,7 @@ async function actualizar(req, res, next) {
     try {
         let filePath = null;
         if (req.file) {
-            filePath = `uploads/${req.file.filename}`;
+            filePath = `uploads/categorias/${req.file.filename}`;
         }
         const datosValidados = validarformatoActualizar(filePath, req.body.nombre_categoria, req, res, next);
         const id = validarID(req.body.id_categoria, req, res, next)
