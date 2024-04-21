@@ -1,4 +1,5 @@
 const baseURL = "http://localhost:4000/api";
+const imagen = "http://localhost:4000/";
 const token = sessionStorage.getItem("token");
 
 let isFetchingData = false;

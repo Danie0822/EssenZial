@@ -1,25 +1,22 @@
-const express = require('express'); 
+const express = require('express');
 const respuestas = require('../../red/respuestas');
-const router = express.Router(); 
-const controlador = require('./index'); 
+const router = express.Router();
+const controlador = require('./index');
 
-// rutas
+// Rutas
 router.get('/admin', loginAdmin);
 router.get('/cliente', loginCliente);
 
-
 // Funciones
-
 async function loginAdmin(req, res, next) {
     try {
         const { correo, clave } = req.query;
-        const result = await controlador.login(correo, clave);
-       ;
+        const { token, error } = await controlador.loginAdmin(correo, clave);
 
-        if (result.token) {
-            respuestas.success(req, res, result.token, 200);
+        if (token) {
+            respuestas.success(req, res, token, 200);
         } else {
-            respuestas.error(req, res, result.error, 401);
+            respuestas.error(req, res, error, 401);
         }
     } catch (error) {
         next(error);
@@ -29,17 +26,16 @@ async function loginAdmin(req, res, next) {
 async function loginCliente(req, res, next) {
     try {
         const { correo, clave } = req.query;
-        const result = await controlador.Cliente(correo, clave);
-       ;
+        const { token, error } = await controlador.loginCliente(correo, clave);
 
-        if (result.token) {
-            respuestas.success(req, res, result.token, 200);
+        if (token) {
+            respuestas.success(req, res, token, 200);
         } else {
-            respuestas.error(req, res, result.error, 401);
+            respuestas.error(req, res, error, 401);
         }
     } catch (error) {
         next(error);
     }
 }
 
-module.exports = router; 
+module.exports = router;

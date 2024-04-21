@@ -76,6 +76,25 @@ function ejecutarProcedimiento(nombreProcedimiento, parametros) {
         });
     });
 }
+async function login(tabla, correo, clave) {
+    try {
+        const tipoUsuario = tabla === 'tb_clientes' ? 'cliente' : 'admin';
+        const columnaCorreo = `correo_${tipoUsuario}`;
+        const columnaClave = `clave_${tipoUsuario}`;
+
+        const sql = `SELECT * FROM ?? WHERE ?? = ? AND ?? = ? LIMIT 1`;
+        const result = await ejecutarConsulta(sql, [tabla, columnaCorreo, correo, columnaClave, clave]);
+
+        if (result.length > 0) {
+            return { usuario: result[0] };
+        } else {
+            return { error: 'Credenciales inválidas' };
+        }
+    } catch (error) {
+        return { error: 'Error interno' };
+    }
+}
+
 
 // Exportar las funciones para su uso fuera del módulo
 module.exports = {
@@ -85,5 +104,6 @@ module.exports = {
     eliminar,
     actualizar,
     query,
-    ejecutarProcedimiento
+    ejecutarProcedimiento,
+    login
 };

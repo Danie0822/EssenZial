@@ -22,7 +22,7 @@ const obtenerCategorias = async () => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                     <td>${nombre_categoria}</td>
-                    <td><img src="http://localhost:4000/${imagen_categoria}" alt="Imagen de la categoría" width="50"></td>
+                    <td><img src="${imagen}${imagen_categoria}" alt="Imagen de la categoría" width="50"></td>
                     <td>
                         <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_categoria}, '${nombre_categoria}', 'http://localhost:4000/${imagen_categoria}')"><i class="fas fa-edit"></i></button>  
                         <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${id_categoria})"><i class="fas fa-trash-alt"></i></button>                      
