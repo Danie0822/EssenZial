@@ -19,14 +19,8 @@ module.exports = function (db) {
     }
 
     async function actualizar(data) {
-        const { nombre_admin, apellido_admin, correo_admin, clave_admin, id_admin } = data;
-        const newData = {
-            nombre_admin,
-            apellido_admin,
-            correo_admin,
-            clave_admin
-        };
-        return db.actualizar(TABLE_NAME, newData, ID_FIELD, id_admin);
+        const { id_admin, ...restoDatos } = data;
+        return db.actualizar(TABLE_NAME, restoDatos, ID_FIELD, id_admin);
     }
 
     return {

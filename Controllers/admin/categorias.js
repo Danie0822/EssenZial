@@ -44,12 +44,24 @@ const limpiarFormulario = () => {
 }
 
 const limpiarFormularioActualizar = () => {
+    // Limpiar el valor de todos los campos de formulario con la clase 'form-control-actualizar'
     document.querySelectorAll('.form-control-actualizar').forEach(input => input.value = "");
+
+    // Limpiar el campo de selección de imagen y restablecer el nombre del archivo
+    var fileInputs = document.querySelectorAll('.custom-file-input');
+    fileInputs.forEach(fileInput => {
+        fileInput.value = '';
+        var label = fileInput.nextElementSibling;
+        label.innerHTML = 'Seleccionar imagen';
+    });
+
+    // Ocultar todas las imágenes con la clase 'imagede'
     document.querySelectorAll('.imagede').forEach(image => image.style.display = 'none');
 }
 
 const abrirModalEditar = (idCategorias, nombreCategoria, imagen) => {
     if (idCategorias) {
+       
         mostrarCategoria(nombreCategoria, imagen);
         idCategoria = idCategorias;
         abrirModal(myActualizar);
@@ -172,6 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const mostrarCategoria = (nombreCategoria, imagenCategoria) => {
     try {
+        limpiarFormularioActualizar();
         obtenerElemento("nombreCategoriaActuaizar").value = nombreCategoria;
         const imagenPreview = document.querySelector('.imagede');
         if (imagenPreview) {

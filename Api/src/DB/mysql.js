@@ -8,7 +8,8 @@ const pool = mysql.createPool({
     ...config.mysql
 });
 
-// Función para ejecutar consultas
+
+// Función para ejecutar consultas preparadas
 function ejecutarConsulta(sql, params) {
     return new Promise((resolve, reject) => {
         pool.query(sql, params, (error, result) => {
@@ -20,7 +21,6 @@ function ejecutarConsulta(sql, params) {
         });
     });
 }
-
 // Función para obtener todos los registros de una tabla
 function todos(tabla) {
     const sql = `SELECT * FROM ??`;

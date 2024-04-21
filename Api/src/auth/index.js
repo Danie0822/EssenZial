@@ -6,10 +6,14 @@ const secrets = {
     cliente: config.jwt.secretCliente
 };
 
-function asignarToken(data, tipoUsuario) {
+function validarTipoUsuario(tipoUsuario) {
     if (!secrets[tipoUsuario]) {
         throw new Error('Tipo de usuario inválido');
     }
+}
+
+function asignarToken(data, tipoUsuario) {
+    validarTipoUsuario(tipoUsuario);
 
     const tokenData = { ...data, userType: tipoUsuario };
     const expiresIn = config.jwt.expiresIn || '120m';
@@ -17,13 +21,9 @@ function asignarToken(data, tipoUsuario) {
 }
 
 function verificarToken(token, tipoUsuario) {
-    if (!secrets[tipoUsuario]) {
-        throw new Error('Tipo de usuario inválido');
-    }
-
+    validarTipoUsuario(tipoUsuario);
     try {
-        const decoded = jwt.verify(token, secrets[tipoUsuario]);
-        return decoded;
+        return jwt.verify(token, secrets[tipoUsuario]);
     } catch (error) {
         throw new Error('Token inválido o expirado');
     }

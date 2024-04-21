@@ -1,6 +1,7 @@
+const fs = require('fs').promises;
+
 const TABLE_NAME = 'tb_categorias';
 const ID_FIELD = 'id_categoria';
-const fs = require('fs');
 
 module.exports = function (db) {
     async function todos() {
@@ -20,9 +21,13 @@ module.exports = function (db) {
     }
 
     async function eliminar(id) {
-        const categorias = await db.uno(TABLE_NAME, id, ID_FIELD);
-        if (categorias && categorias[0].imagen_categoria) {
-            fs.unlinkSync(categorias[0].imagen_categoria);
+        const categoria = await db.uno(TABLE_NAME, id, ID_FIELD);
+        if (categoria && categoria[0].imagen_categoria) {
+            try {
+                await fs.unlink(categoria[0].imagen_categoria);
+            } catch (error) {
+                console.error('Error al eliminar la imagen:', error);
+            }
         }
         return db.eliminar(TABLE_NAME, id, ID_FIELD);
     }
@@ -35,19 +40,20 @@ module.exports = function (db) {
     async function actualizar(id, data) {
         const { nombre_categoria, imagen_categoria } = data;
         const categoria = await db.uno(TABLE_NAME, id, ID_FIELD);
-    
+
         if (categoria && categoria[0] && categoria[0].imagen_categoria && imagen_categoria && imagen_categoria !== categoria[0].imagen_categoria) {
-            // Eliminar la foto anterior del servidor
-            fs.unlinkSync(categoria[0].imagen_categoria);
+            try {
+                await fs.unlink(categoria[0].imagen_categoria);
+            } catch (error) {
+                console.error('Error al eliminar la imagen anterior:', error);
+            }
         }
-    
-        // Actualizar la información del cliente en la base de datos y pone en un nuevo array la info nueva 
         const newData = { nombre_categoria };
         if (imagen_categoria) {
             newData.imagen_categoria = imagen_categoria;
         }
         const resultado = await db.actualizar(TABLE_NAME, newData, ID_FIELD, id);
-    
+
         return resultado;
     }
 
