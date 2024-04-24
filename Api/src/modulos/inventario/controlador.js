@@ -21,10 +21,17 @@ module.exports = function(db){
             imagen_producto: inventario.imagen_producto || null
         }
     }
+    async function agregar(nombre, cantidad, descripcion, precio, imagen){
+        const newData = { nombre_invanterio: nombre, cantidad_inventario: cantidad, descripcion_inventario: descripcion, 
+        precio_inventario: precio, imagen_producto: imagen};
+    
+        return db.agregar(TABLE_NAME, newData);
+    }
 
     return{
         todos,
-        uno
+        uno,
+        agregar
     };
 };
 

@@ -39,7 +39,7 @@ function validar(req, res, next) {
 //Rutas
 router.get('/', seguridad('admin'), todos);
 router.get('/:id', seguridad('admin'), validarId, unoPorId);
-//router.get('/save', seguridad('admin'), validarInventario,validar, agregarInventario());
+router.get('/save', seguridad('admin'), validarInventario, validar, agregar());
 //router.get('/update',seguridad('admin'), validarInventario, validarIdUpdate, validar, actualizarInventario());
 //router.get('delete/:id', seguridad('admin'), validarId, eliminarInventario());
 
@@ -61,6 +61,17 @@ async function unoPorId(req, res, next){
         next(error);
     }
 
+}
+
+async function agregar(req, res, next){
+    try{
+        const datosValidados = validarInventario(req.body.nombre_inventario, req.body.cantidad_inventario, req.body.descripcion_inventario, req.body.precio_inventario, req, res, next);
+        await controlador.agregar(datosValidados.nombre_inventario, datosValidados.cantidad_inventario, datosValidados.descripcion_inventario, datosValidados.precio_inventario);
+        respuestas.success(req, res, 'Inventario agregado', 200);
+
+    }catch(error){
+        next(error);
+    }
 }
 
 module.exports = router;
