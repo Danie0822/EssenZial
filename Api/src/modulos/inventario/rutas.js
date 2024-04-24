@@ -17,9 +17,7 @@ const validarId = [
 const validarInventario=[
     body('nombre_inventario').notEmpty().trim().isLength({ max: 255}).withMessage('El nombre del producto es requerido y debe tener como máximo 255 caracteres'),
     body('cantidad_inventario').notEmpty().isInt({ min: 1 }).withMessage('La cantidad de producto es requerida y debe ser mayor o igual a 1'),
-    body('descripcion_inventario').notEmpty().trim().isLength({ max: 400}).withMessage('La descripción del producto es requerida y deber tener máximo 400 caracteres'),
-    body('precio_inventario').notEmpty().trim().isNumeric().isInt({ min: 1}).withMessage('El precio del proucto es requerido y debe ser mayor a $1'),
-    body('imagen_producto').notEmpty().trim().isLength({ max: 255 }).withMessage('El nombre de la imagen es requerido y debe tener como máximo 255 caracteres')
+    body('descripcion_inventario').notEmpty().trim().isLength({ max: 400}).withMessage('La descripción del producto es requerida y deber tener máximo 400 caracteres')
 ]
 
 // Middleware de validación específica para el ID en rutas de actualización y eliminación
@@ -39,7 +37,7 @@ function validar(req, res, next) {
 //Rutas
 router.get('/', seguridad('admin'), todos);
 router.get('/:id', seguridad('admin'), validarId, unoPorId);
-router.get('/save', seguridad('admin'), validarInventario, validar, agregar());
+router.post('/save', seguridad('admin'), validarInventario, validar, agregar);
 //router.get('/update',seguridad('admin'), validarInventario, validarIdUpdate, validar, actualizarInventario());
 //router.get('delete/:id', seguridad('admin'), validarId, eliminarInventario());
 
@@ -65,8 +63,7 @@ async function unoPorId(req, res, next){
 
 async function agregar(req, res, next){
     try{
-        const datosValidados = validarInventario(req.body.nombre_inventario, req.body.cantidad_inventario, req.body.descripcion_inventario, req.body.precio_inventario, req, res, next);
-        await controlador.agregar(datosValidados.nombre_inventario, datosValidados.cantidad_inventario, datosValidados.descripcion_inventario, datosValidados.precio_inventario);
+        await controlador.agregar(req.body);
         respuestas.success(req, res, 'Inventario agregado', 200);
 
     }catch(error){
