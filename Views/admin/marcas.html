@@ -46,7 +46,7 @@
                         </div>
                         <div class="sizebox"></div>
 
-                        <table class="table">
+                        <table class="table ">
                             <thead>
                                 <tr>
                                     <th scope="col">Nombre</th>
@@ -54,26 +54,8 @@
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Salvatore Ferragamo </td>
-                                    <td><img src="../../resources/img/ferragamo.jpg" alt="Imagen 1" width="50"></td>
-                                    <td>
-                                        <button type="button" class="btn btn-dark" data-toggle="modal"
-                                            data-target="#actualizar"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-dark" data-toggle="modal"
-                                            data-target="#eliminar"><i class="fas fa-trash-alt"></i> </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Calvin Klein</td>
-                                    <td><img src="../../resources/img/Calvin.jpg" alt="Imagen 2" width="50"></td>
-                                    <td>
-                                        <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
-                                        <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                            <tbody id="tablaBody">
+                               
                             </tbody>
                         </table>
 
@@ -92,7 +74,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text nombre"><i class="fas fa-tag"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Nombre de la marca">
+                                            <input type="text" class="form-control" placeholder="Nombre de la marca " id="nombre_marca">
                                         </div>
 
                                         <div class="custom-file mb-3">
@@ -107,8 +89,7 @@
                                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i
                                                 class="fas fa-times"></i>
                                         </button>
-                                        <button type="button" class="btn btn-dark" data-toggle="modal"
-                                            data-target="#agregado"><i class="fas fa-plus"></i> </button>
+                                        <button type="button" class="btn btn-dark" id="agregarMarcasBtn" ><i class="fas fa-plus"></i> </button>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +134,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text nombre"><i class="fas fa-tag"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Nombre de la marca">
+                                            <input type="text" class="form-control" placeholder="Nombre de la marca" id="nombreMarcasActuaizar">
                                         </div>
 
                                         <div class="custom-file mb-3">
@@ -161,14 +142,13 @@
                                             <label class="custom-file-label" for="imagenMarcaActualizar">Seleccionar
                                                 imagen</label>
                                         </div>
-                                        <img src="" class="preview-image" id="imagenPreview"
+                                        <img src="" class="preview-image imagede" id="imagenPreview"
                                             alt="Vista previa de la imagen" style="display: none;">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i
                                                 class="fas fa-times"></i></button>
-                                        <button type="button" class="btn btn-dark" data-toggle="modal"
-                                            data-target="#acto"><i class="fas fa-edit"></i> </button>
+                                        <button type="button" class="btn btn-dark"  id="confirmarActualizar" ><i class="fas fa-edit"></i> </button>
                                     </div>
                                 </div>
                             </div>
@@ -217,10 +197,40 @@
                                                     <button type="button" class="btn btn-dark mr-2 botn"
                                                         data-dismiss="modal">No</button>
                                                     <button type="button" class="btn btn-dark botn"
-                                                        data-dismiss="modal">Si</button>
+                                                       id="confirmarEliminar">Si</button>
                                                 </div>
                                             </div>
                                         </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
+                            aria-labelledby="errorModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <i class="bi bi-exclamation-triangle-fill text-danger"
+                                            style="font-size: 5rem;"></i>
+                                        <h5 class="mt-3">¡Ups, ocurrió un error!</h5>
+                                        <p class="mt-3">Lo sentimos, parece que hubo un error interno. Por favor,
+                                            inténtalo de nuevo más
+                                            tarde.</p>
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal para Validaciones -->
+                        <div class="modal fade" id="validationsModal" tabindex="-1" role="dialog"
+                            aria-labelledby="errorModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <i class="fas fa-exclamation-circle text-warning" style="font-size: 5rem;"></i>
+                                        <h5 class="mt-3">¡Validaciones!</h5>
+                                        <p class="mt-3">Por favor, revise las validaciones en los campos.</p>
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +246,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../../Controllers/admin/metodos.js"></script>
     <script src="../../Controllers/utils/Validaciones.js"></script>
-    <script src="../../Controllers/admin/categorias.js"></script>
+    <script src="../../Controllers/admin/marcas.js"></script>
     <script src="../../resources/js/foto.js"></script>
     <script src="../../Controllers/admin/buscador.js"></script>
 </body>

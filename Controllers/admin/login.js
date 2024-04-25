@@ -9,7 +9,7 @@ async function handleLoginFormSubmit(event) {
 
     try {
         const token = await authenticateUser(email, password);
-        saveTokenToSessionStorage(token); // Guardar el token en sessionStorage
+        saveTokenToSessionStorage(token); 
         window.location.href = "menu.html";
     } catch (error) {
         alert(error.message);

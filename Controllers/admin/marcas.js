@@ -13,19 +13,19 @@ let idCategoria = null;
 
 const obtenerCategorias = async () => {
     try {
-        const { success, data } = await fetchData("/categorias");
+        const { success, data } = await fetchData("/marcas");
         const tbody = obtenerElemento("tablaBody");
         tbody.innerHTML = "";
 
         if (success) {
-            data.forEach(({ id_categoria, nombre_categoria, imagen_categoria }) => {
+            data.forEach(({ id_marca, nombre_marca, imagen_marca }) => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td>${nombre_categoria}</td> 
-                    <td><img src="${imagen}${imagen_categoria}" alt="Imagen de la categoría" width="50"></td>
+                    <td>${nombre_marca}</td> 
+                    <td><img src="${imagen}${imagen_marca}" alt="Imagen de la categoría" width="50"></td>
                     <td>
-                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_categoria}, '${nombre_categoria}', 'http://localhost:4000/${imagen_categoria}')"><i class="fas fa-edit"></i></button>  
-                        <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${id_categoria})"><i class="fas fa-trash-alt"></i></button>                      
+                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_marca}, '${nombre_marca}', 'http://localhost:4000/${imagen_marca}')"><i class="fas fa-edit"></i></button>  
+                        <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${id_marca})"><i class="fas fa-trash-alt"></i></button>                      
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -34,6 +34,7 @@ const obtenerCategorias = async () => {
             manejarError();
         }
     } catch (error) {
+        console.log(error);
         manejarError();
     }
 };
@@ -60,7 +61,6 @@ const limpiarFormularioActualizar = () => {
 }
 
 const abrirModalEditar = (idCategorias, nombreCategoria, imagen) => {
-    console.log(idCategorias);
     if (idCategorias) {
         mostrarCategoria(nombreCategoria, imagen);
         idCategoria = idCategorias;
@@ -85,16 +85,16 @@ const abrirModalEliminar = (idCategorias) => {
 
 const agregarCategoria = async () => {
     try {
-        const nombreCategoria = obtenerElemento("nombreCategoria").value;
+        const nombreCategoria = obtenerElemento("nombre_marca").value;
         const imagenMarca = obtenerElemento("imagenMarca").files[0];
         if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100) || !validaciones.validarImagen(imagenMarca)) {
             manejarValidaciones();
         }
         else {
             const formData = new FormData();
-            formData.append('nombre_categoria', nombreCategoria);
+            formData.append('nombre_marca', nombreCategoria);
             formData.append('imagen', imagenMarca);
-            const { success } = await createData("/categorias/save", formData);
+            const { success } = await createData("/marcas/save", formData);
             if (success) {
                 obtenerCategorias();
             } else {
@@ -109,7 +109,7 @@ const agregarCategoria = async () => {
 
 const eliminarCategoria = async (idCategoria) => {
     try {
-        const { success } = await deleteData(`/categorias/delete/${idCategoria}`);
+        const { success } = await deleteData(`/marcas/delete/${idCategoria}`);
         if (success) {
             obtenerCategorias();
             cerrarModal(myEliminar);
@@ -124,18 +124,18 @@ const eliminarCategoria = async (idCategoria) => {
 
 const actualizar = async (idCategoria) => {
     try {
-        const nombreCategoria = obtenerElemento("nombreCategoriaActuaizar").value;
+        const nombreCategoria = obtenerElemento("nombreMarcasActuaizar").value;
         if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100)) {
             manejarValidaciones();
         }
         else {
             const imagenCategoria = obtenerElemento("imagenMarcaActualizar").files[0];
             const formData = new FormData();
-            formData.append('id_categoria', idCategoria);
-            formData.append('nombre_categoria', nombreCategoria);
+            formData.append('id_marca', idCategoria);
+            formData.append('nombre_marca', nombreCategoria);
             formData.append('imagen', imagenCategoria);
 
-            const { success } = await updateData("/categorias/update", formData);
+            const { success } = await updateData("/marcas/update", formData);
 
             if (success) {
                 obtenerCategorias();
@@ -156,14 +156,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     obtenerCategorias();
 
-    const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
-    confirmarEliminarBtn.addEventListener('click', async () => {
-        if (idCategoria) {
-            await eliminarCategoria(idCategoria);
-            idCategoria = null;
-        }
-    });
-
     const confirmarActualizarBtn = obtenerElemento('confirmarActualizar');
     confirmarActualizarBtn.addEventListener('click', async () => {
         if (idCategoria) {
@@ -172,14 +164,21 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    const agregarCategoriaBtn = obtenerElemento("agregarCategoriaBtn");
+    const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
+    confirmarEliminarBtn.addEventListener('click', async () => {
+        if (idCategoria) {
+            await eliminarCategoria(idCategoria);
+            idCategoria = null;
+        }
+    });
+    const agregarCategoriaBtn = obtenerElemento("agregarMarcasBtn");
     agregarCategoriaBtn.addEventListener("click", agregarCategoria);
 });
 
 const mostrarCategoria = (nombreCategoria, imagenCategoria) => {
     try {
         limpiarFormularioActualizar();
-        obtenerElemento("nombreCategoriaActuaizar").value = nombreCategoria;
+        obtenerElemento("nombreMarcasActuaizar").value = nombreCategoria;
         const imagenPreview = document.querySelector('.imagede');
         if (imagenPreview) {
             const urlImagen = imagenCategoria;
