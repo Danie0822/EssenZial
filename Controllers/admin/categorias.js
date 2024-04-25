@@ -97,6 +97,8 @@ const agregarCategoria = async () => {
             const { success } = await createData("/categorias/save", formData);
             if (success) {
                 obtenerCategorias();
+                cerrarModal(myAgregar);
+                setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
             } else {
                 manejarError();
             }

@@ -1,3 +1,4 @@
+
 const obtenerElemento = (id) => document.getElementById(id);
 const abrirModal = (modal) => modal.show();
 const cerrarModal = (modal) => modal.hide();
@@ -9,7 +10,7 @@ const myAgregar = new bootstrap.Modal(obtenerElemento('marcaModal'));
 const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
-let idCategoria = null;
+let id = null;
 
 const obtenerCategorias = async () => {
     try {
@@ -45,25 +46,20 @@ const limpiarFormulario = () => {
 }
 
 const limpiarFormularioActualizar = () => {
-    // Limpiar el valor de todos los campos de formulario con la clase 'form-control-actualizar'
     document.querySelectorAll('.form-control-actualizar').forEach(input => input.value = "");
-
-    // Limpiar el campo de selección de imagen y restablecer el nombre del archivo
     var fileInputs = document.querySelectorAll('.custom-file-input');
     fileInputs.forEach(fileInput => {
         fileInput.value = '';
         var label = fileInput.nextElementSibling;
         label.innerHTML = 'Seleccionar imagen';
     });
-
-    // Ocultar todas las imágenes con la clase 'imagede'
     document.querySelectorAll('.imagede').forEach(image => image.style.display = 'none');
 }
 
-const abrirModalEditar = (idCategorias, nombreCategoria, imagen) => {
-    if (idCategorias) {
-        mostrarCategoria(nombreCategoria, imagen);
-        idCategoria = idCategorias;
+const abrirModalEditar = (id_unico, nombre, imagen) => {
+    if (id_unico) {
+        mostrarMarcas(nombre, imagen);
+        id = id_unico;
         abrirModal(myActualizar);
     } else {
         manejarError();
@@ -74,9 +70,9 @@ function AbrirAgregar() {
     abrirModal(myAgregar);
 }
 
-const abrirModalEliminar = (idCategorias) => {
-    if (idCategorias) {
-        idCategoria = idCategorias;
+const abrirModalEliminar = (id_unico) => {
+    if (id_unico) {
+        id = id_unico;
         abrirModal(myEliminar);
     } else {
         manejarError();
@@ -85,18 +81,20 @@ const abrirModalEliminar = (idCategorias) => {
 
 const agregarCategoria = async () => {
     try {
-        const nombreCategoria = obtenerElemento("nombre_marca").value;
-        const imagenMarca = obtenerElemento("imagenMarca").files[0];
-        if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100) || !validaciones.validarImagen(imagenMarca)) {
+        const nombre = obtenerElemento("nombre_marca").value;
+        const imagen = obtenerElemento("imagenMarca").files[0];
+        if (!validaciones.contieneSoloLetrasYNumeros(nombre) || !validaciones.longitudMaxima(nombre, 100) || !validaciones.validarImagen(imagen)) {
             manejarValidaciones();
         }
         else {
             const formData = new FormData();
-            formData.append('nombre_marca', nombreCategoria);
-            formData.append('imagen', imagenMarca);
+            formData.append('nombre_marca', nombre);
+            formData.append('imagen', imagen);
             const { success } = await createData("/marcas/save", formData);
             if (success) {
                 obtenerCategorias();
+                cerrarModal(myAgregar);
+                setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
             } else {
                 manejarError();
             }
@@ -107,9 +105,9 @@ const agregarCategoria = async () => {
     }
 };
 
-const eliminarCategoria = async (idCategoria) => {
+const eliminarCategoria = async (id) => {
     try {
-        const { success } = await deleteData(`/marcas/delete/${idCategoria}`);
+        const { success } = await deleteData(`/marcas/delete/${id}`);
         if (success) {
             obtenerCategorias();
             cerrarModal(myEliminar);
@@ -122,18 +120,18 @@ const eliminarCategoria = async (idCategoria) => {
     }
 };
 
-const actualizar = async (idCategoria) => {
+const actualizar = async (id) => {
     try {
-        const nombreCategoria = obtenerElemento("nombreMarcasActuaizar").value;
-        if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100)) {
+        const nombre = obtenerElemento("nombreMarcasActuaizar").value;
+        if (!validaciones.contieneSoloLetrasYNumeros(nombre) || !validaciones.longitudMaxima(nombre, 100)) {
             manejarValidaciones();
         }
         else {
-            const imagenCategoria = obtenerElemento("imagenMarcaActualizar").files[0];
+            const imagen = obtenerElemento("imagenMarcaActualizar").files[0];
             const formData = new FormData();
-            formData.append('id_marca', idCategoria);
-            formData.append('nombre_marca', nombreCategoria);
-            formData.append('imagen', imagenCategoria);
+            formData.append('id_marca', id);
+            formData.append('nombre_marca', nombre);
+            formData.append('imagen', imagen);
 
             const { success } = await updateData("/marcas/update", formData);
 
@@ -158,24 +156,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const confirmarActualizarBtn = obtenerElemento('confirmarActualizar');
     confirmarActualizarBtn.addEventListener('click', async () => {
-        if (idCategoria) {
-            await actualizar(idCategoria);
-            idCategoria = null;
+        if (id) {
+            await actualizar(id);
+            id = null;
         }
     });
 
-    const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
+        const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
     confirmarEliminarBtn.addEventListener('click', async () => {
-        if (idCategoria) {
-            await eliminarCategoria(idCategoria);
-            idCategoria = null;
+        if (id) {
+            await eliminarCategoria(id);
+            id = null;
         }
     });
     const agregarCategoriaBtn = obtenerElemento("agregarMarcasBtn");
     agregarCategoriaBtn.addEventListener("click", agregarCategoria);
 });
 
-const mostrarCategoria = (nombreCategoria, imagenCategoria) => {
+const mostrarMarcas = (nombreCategoria, imagenCategoria) => {
     try {
         limpiarFormularioActualizar();
         obtenerElemento("nombreMarcasActuaizar").value = nombreCategoria;
