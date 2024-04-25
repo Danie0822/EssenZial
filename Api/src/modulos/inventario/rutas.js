@@ -39,7 +39,7 @@ router.get('/', seguridad('admin'), todos);
 router.get('/:id', seguridad('admin'), validarId, unoPorId);
 router.post('/save', seguridad('admin'), validarInventario, validar, agregar);
 router.put('/update',seguridad('admin'), validarInventario, validar, actualizar);
-router.delete('delete/:id', seguridad('admin'), validarId, eliminar);
+router.delete('/delete/:id', seguridad('admin'), validarId, eliminar);
 
 
 async function todos(req, res, next) {
