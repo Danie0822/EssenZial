@@ -18,7 +18,7 @@ app.use('/uploads', express.static('uploads'));
 
 //configuracion
 app.set('port', config.app.port);
-
+//prueba
 //rutas 
 app.use('/api/categorias', categoria); 
 app.use('/api/inventarios', inventarios);
