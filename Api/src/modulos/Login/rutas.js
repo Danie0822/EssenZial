@@ -11,10 +11,10 @@ router.get('/cliente', loginCliente);
 async function loginAdmin(req, res, next) {
     try {
         const { correo, clave } = req.query;
-        const { token, error } = await controlador.loginAdmin(correo, clave);
-
+        const { usuario, token, error } = await controlador.loginAdmin(correo, clave);
         if (token) {
-            respuestas.success(req, res, token, 200);
+            const { id_admin, nombre_admin } = usuario;
+            respuestas.success(req, res, { id_admin, nombre_admin, token }, 200);
         } else {
             respuestas.error(req, res, error, 401);
         }
@@ -26,10 +26,11 @@ async function loginAdmin(req, res, next) {
 async function loginCliente(req, res, next) {
     try {
         const { correo, clave } = req.query;
-        const { token, error } = await controlador.loginCliente(correo, clave);
+        const { usuario, token, error } = await controlador.loginCliente(correo, clave);
 
         if (token) {
-            respuestas.success(req, res, token, 200);
+            const { id_cliente, nombre_cliente } = usuario;
+            respuestas.success(req, res, { id_cliente, nombre_cliente, token }, 200);
         } else {
             respuestas.error(req, res, error, 401);
         }

@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:4000/api/login/admin/";
+const BASE_URL = "http://localhost:4000/api/login/admin";
 
 document.getElementById("loginForm").addEventListener("submit", handleLoginFormSubmit);
 
@@ -25,7 +25,7 @@ async function authenticateUser(email, password) {
         const data = await response.json();
 
         if (response.ok && data.success) {
-            const token = data.data;
+            const token = data.data.token;
             if (typeof token === "string") {
                 return token;
             } else {
@@ -37,7 +37,7 @@ async function authenticateUser(email, password) {
             throw new Error(data.message || "Error de autenticación");
         }
     } catch (error) {
-        console.error("Error:", error);
+        console.log( error);
         throw new Error("Error de conexión");
     }
 }

@@ -76,6 +76,7 @@ function ejecutarProcedimiento(nombreProcedimiento, parametros) {
         });
     });
 }
+// Función para el login 
 async function login(tabla, correo, clave) {
     try {
         const tipoUsuario = tabla === 'tb_clientes' ? 'cliente' : 'admin';

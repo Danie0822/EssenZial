@@ -1,25 +1,27 @@
-/* Estilos generales */
-.color {
+#categorias-page .color {
   background-color: rgb(245, 245, 245);
   border-radius: 15px;
 }
+#categorias-page {
+  height: 92vh;
+}
 
-.sizebox {
+#categorias-page .sizebox {
   padding-bottom: 10px;
 }
 
-.sizebox1 {
+#categorias-page .sizebox1 {
   padding: 20px;
 }
 
 /* Estilos de búsqueda */
-.txt-buscar {
+#categorias-page .txt-buscar {
   border-radius: 10px;
   max-width: 300px;
   padding-left: 20px;
 }
 
-.search-icon {
+#categorias-page .search-icon {
   position: absolute;
   right: 10px;
   top: 50%;
@@ -28,47 +30,47 @@
   width: auto;
 }
 
-.buscar {
+#categorias-page .buscar {
   padding: 0;
   border-radius: 0;
   background-color: transparent;
   border: none;
 }
 
-.focus:focus {
+#categorias-page .focus:focus {
   border-color: #0b0b0b;
   box-shadow: none;
 }
 
 /* Estilos de modal */
-.modal-content {
+#categorias-page .modal-content {
   border-radius: 20px;
 }
 
-.custom-modal-header {
+#categorias-page .custom-modal-header {
   background-color: #000;
   color: #fff;
   border-radius: 20px 20px 0 0;
 }
 
-.custom-modal-header .close {
+#categorias-page .custom-modal-header .close {
   color: #fff;
 }
 
-.form-control:focus {
+#categorias-page .form-control:focus {
   border-color: #0b0b0b;
   box-shadow: none;
 }
 
-.custom-file-input {
+#categorias-page .custom-file-input {
   color: transparent;
 }
 
-.custom-file-input::-webkit-file-upload-button {
+#categorias-page .custom-file-input::-webkit-file-upload-button {
   visibility: hidden;
 }
 
-.custom-file-input::before {
+#categorias-page .custom-file-input::before {
   content: 'Seleccionar imagen';
   color: #fff;
   background-color: #007bff;
@@ -79,7 +81,7 @@
   cursor: pointer;
 }
 
-.preview-image {
+#categorias-page .preview-image {
   max-width: 200px;
   max-height: 200px;
   height: auto;
@@ -87,48 +89,51 @@
 }
 
 /* Estilos de botones */
-.btn {
+#categorias-page .btn {
   border-radius: 20px;
 }
 
-.btn-dark {
+#categorias-page .btn-dark {
   border-radius: 8px;
 }
 
-.input-group-text {
+#categorias-page .input-group-text {
   background-color: #f8f9fa;
   border-radius: 10px 0 0 10px;
 }
 
-.form-control {
+#categorias-page .form-control {
   border-radius: 0 10px 10px 0;
 }
 
 /* Estilos personalizados */
-.nombre {
+#categorias-page .nombre {
   background-color: #f8f9fa;
   border-radius: 10px 0 0 10px;
 }
 
-.botn {
+#categorias-page .botn {
   width: 150px;
 }
 
-img {
+#categorias-page img {
   border-radius: 100px;
   width: 50px;
   height: 50px;
 }
 
 /* Reducir la opacidad del fondo del modal */
-.modal-backdrop {
+#categorias-page .modal-backdrop {
   opacity: 0.8;
 }
 
 /* Cambiar el color de fondo del modal */
-.modal-backdrop {
+#categorias-page .modal-backdrop {
   background-color: rgba(54, 51, 51, 0.5);
 }
-.preview-image {
+#categorias-page .preview-image {
   display: none;
+}
+.modal-title{
+  color: #fff;
 }

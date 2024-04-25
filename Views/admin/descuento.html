@@ -1,265 +1,281 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Descuentos</title>
+    <title>Menú</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="../../resources/css/admin/descuento.css">
+    <link rel="stylesheet" href="../../resources/css/admin/menu.css">
+    <link rel="stylesheet" href="../../resources/css/admin/categorias.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    <link rel="icon" href="../../resources/img/icono.png" type="image/x-icon">
 </head>
 
 <body>
-
-    <div class="sizebox"></div>
-    <div class="color">
-        <div class="sizebox1"></div>
-        <div class="container text-right">
-            <h2>Descuentos</h2>
-        </div>
-
-        <div class="input-group mb-3 txt-buscar">
-            <input type="email" class="form-control focus" placeholder="Buscar" aria-label="Buscar"
-                aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <span class="input-group-text bg-transparent border-0 buscar">
-                    <img src="../../resources/img/buscar 1.png" alt="" class="search-icon">
-                </span>
-            </div>
-        </div>
-
-        <div class="sizebox1"></div>
-
-        <div class="container text-right">
-            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#descuentoModal"><i
-                    class="fas fa-plus"></i> </button>
-        </div>
-        <div class="sizebox"></div>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>10 %</td>
-                    <td>Activo</td>
-                    <td>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#descuentoModalA"><i
-                                class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal"
-                            data-target="#detallesDescuentoModal"><i class="fas fa-info-circle"></i> </button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#eliminar"><i
-                                class="fas fa-trash-alt"></i> </button>
-
-
-                    </td>
-                </tr>
-                <tr>
-                    <td>20 %</td>
-                    <td>Inactivo</td>
-                    <td>
-                        <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-dark"><i class="fas fa-info-circle"></i> </button>
-                        <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-
-        <!-- Modal de Descuento -->
-        <div class="modal fade" id="descuentoModal" tabindex="-1" role="dialog" aria-labelledby="descuentoModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header custom-modal-header">
-                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Agregar Descuento</h5>
-                        
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="cantidad_descuento">Cantidad de Descuento</label>
-                            <input type="number" step="0.01" class="form-control" id="cantidad_descuento"
-                                placeholder="Cantidad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="menu"></div>
+            <main class="col-lg-10 col-md-9">
+                <div class="sizebox222"></div>
+                
+                    <div class="navbarGamas"></div>
+                    <div class="sizebox"></div>
+                    <div id="categorias-page">
+                    <div class="color" >
+                        <div class="sizebox1"></div>
+                        <div class="container text-right">
+                            <h2>Descuentos</h2>
                         </div>
-                        <div class="form-group">
-                            <label for="descripcion_descuento">Descripción</label>
-                            <textarea class="form-control" id="descripcion_descuento" rows="3"
-                                placeholder="Descripción"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha_inicio_descuento">Fecha de Inicio</label>
-                            <input type="date" class="form-control" id="fecha_inicio_descuento">
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha_fin_descuento">Fecha de Fin</label>
-                            <input type="date" class="form-control" id="fecha_fin_descuento">
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="estado_descuento">
-                                <label class="custom-control-label" for="estado_descuento">Estado</label>
+                
+                        <div class="input-group mb-3 txt-buscar">
+                            <input type="email" class="form-control focus" placeholder="Buscar" aria-label="Buscar"
+                                aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <span class="input-group-text bg-transparent border-0 buscar">
+                                    <img src="../../resources/img/buscar 1.png" alt="" class="search-icon">
+                                </span>
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
-                                class="fas fa-times"></i></button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#agregado"><i
-                                class="fas fa-plus"></i> </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- Modal de Descuento actualizar -->
-        <div class="modal fade" id="descuentoModalA" tabindex="-1" role="dialog" aria-labelledby="descuentoModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header custom-modal-header">
-                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Actualizar Descuento</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="cantidad_descuento">Cantidad de Descuento</label>
-                            <input type="number" step="0.01" class="form-control" id="cantidad_descuento"
-                                placeholder="Cantidad">
+                
+                        <div class="sizebox1"></div>
+                
+                        <div class="container text-right">
+                            <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#descuentoModal"><i
+                                    class="fas fa-plus"></i> </button>
                         </div>
-                        <div class="form-group">
-                            <label for="descripcion_descuento">Descripción</label>
-                            <textarea class="form-control" id="descripcion_descuento" rows="3"
-                                placeholder="Descripción"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha_inicio_descuento">Fecha de Inicio</label>
-                            <input type="date" class="form-control" id="fecha_inicio_descuento">
-                        </div>
-                        <div class="form-group">
-                            <label for="fecha_fin_descuento">Fecha de Fin</label>
-                            <input type="date" class="form-control" id="fecha_fin_descuento">
-                        </div>
-                        <div class="form-group">
-                            <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="estado_descuento_actualizar">
-                                <label class="custom-control-label" for="estado_descuento_actualizar">Estado</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i> </button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acto"><i
-                                class="fas fa-edit"></i> </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Agregado exitosamente-->
-        <div class="modal fade" id="agregado" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                style="display: none;">
-    
-                            <div class="text-center mt-3">
-                                <i class="bi bi-check-circle" style="font-size: 3.5rem; color: black;"></i>
-                                <p class="mt-3" style="font-size: 1.5rem;">Éxito</p>
-                                <p>Se ha enviado correctamente</p>
-                                <button type="button" class="btn btn-dark botn" data-dismiss="modal">Aceptar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Detalles Modal de Descuento -->
-        <div class="modal fade" id="detallesDescuentoModal" tabindex="-1" role="dialog"
-            aria-labelledby="detallesDescuentoModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header custom-modal-header">
-                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Detalles del Descuento</h5>
-                        
-                    </div>
-                    <div class="modal-body">
-                        <p><strong>Cantidad de Descuento:</strong> <span id="cantidad_descuento_detalles">10%</span></p>
-                        <p><strong>Descripción:</strong> <span id="descripcion_descuento_detalles">Descuento de Temporada</span>
-                        </p>
-                        <p><strong>Fecha de Inicio:</strong> <span id="fecha_inicio_descuento_detalles">2024-03-01</span></p>
-                        <p><strong>Fecha de Fin:</strong> <span id="fecha_fin_descuento_detalles">2024-03-15</span></p>
-                        <p><strong>Estado:</strong> <span id="estado_descuento_detalles">Activo</span></p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
-                            </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Actualizado exitosamente-->
-        <div class="modal fade" id="acto" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                style="display: none;">
-    
-                            <div class="text-center mt-3">
-                                <i class="bi bi-check-circle" style="font-size: 3.5rem; color: black;"></i>
-                                <p class="mt-3" style="font-size: 1.5rem;">Éxito</p>
-                                <p>Se ha Actualizado correctamente</p>
-                                <button type="button" class="btn btn-dark botn" data-dismiss="modal">Aceptar</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal Eliminar-->
-        <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form>
-                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                style="display: none;">
-    
-                            <div class="text-center mt-3">
-                                <i class="bi bi-exclamation-triangle-fill" style="font-size: 3.5rem; color: black;"></i>
-                                <p class="mt-3" style="font-size: 1.5rem;">Advertencia</p>
-                                <p>¿Desea eliminar el registro?</p>
-                                <div class="d-flex justify-content-center mt-3">
-                                    <button type="button" class="btn btn-dark mr-2 botn" data-dismiss="modal">No</button>
-                                    <button type="button" class="btn btn-dark botn" data-dismiss="modal">Si</button>
+                        <div class="sizebox"></div>
+                
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cantidad</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>10 %</td>
+                                    <td>Activo</td>
+                                    <td>
+                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#descuentoModalA"><i
+                                                class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-dark" data-toggle="modal"
+                                            data-target="#detallesDescuentoModal"><i class="fas fa-info-circle"></i> </button>
+                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#eliminar"><i
+                                                class="fas fa-trash-alt"></i> </button>
+                
+                
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>20 %</td>
+                                    <td>Inactivo</td>
+                                    <td>
+                                        <button type="button" class="btn btn-dark"><i class="fas fa-edit"></i></button>
+                                        <button type="button" class="btn btn-dark"><i class="fas fa-info-circle"></i> </button>
+                                        <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                
+                
+                        <!-- Modal de Descuento -->
+                        <div class="modal fade" id="descuentoModal" tabindex="-1" role="dialog" aria-labelledby="descuentoModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header custom-modal-header">
+                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Agregar Descuento</h5>
+                                        
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="cantidad_descuento">Cantidad de Descuento</label>
+                                            <input type="number" step="0.01" class="form-control" id="cantidad_descuento"
+                                                placeholder="Cantidad">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descripcion_descuento">Descripción</label>
+                                            <textarea class="form-control" id="descripcion_descuento" rows="3"
+                                                placeholder="Descripción"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fecha_inicio_descuento">Fecha de Inicio</label>
+                                            <input type="date" class="form-control" id="fecha_inicio_descuento">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fecha_fin_descuento">Fecha de Fin</label>
+                                            <input type="date" class="form-control" id="fecha_fin_descuento">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="estado_descuento">
+                                                <label class="custom-control-label" for="estado_descuento">Estado</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                                class="fas fa-times"></i></button>
+                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#agregado"><i
+                                                class="fas fa-plus"></i> </button>
+                                    </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
+                
+                
+                        <!-- Modal de Descuento actualizar -->
+                        <div class="modal fade" id="descuentoModalA" tabindex="-1" role="dialog" aria-labelledby="descuentoModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header custom-modal-header">
+                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Actualizar Descuento</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="cantidad_descuento">Cantidad de Descuento</label>
+                                            <input type="number" step="0.01" class="form-control" id="cantidad_descuento"
+                                                placeholder="Cantidad">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descripcion_descuento">Descripción</label>
+                                            <textarea class="form-control" id="descripcion_descuento" rows="3"
+                                                placeholder="Descripción"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fecha_inicio_descuento">Fecha de Inicio</label>
+                                            <input type="date" class="form-control" id="fecha_inicio_descuento">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="fecha_fin_descuento">Fecha de Fin</label>
+                                            <input type="date" class="form-control" id="fecha_fin_descuento">
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input type="checkbox" class="custom-control-input" id="estado_descuento_actualizar">
+                                                <label class="custom-control-label" for="estado_descuento_actualizar">Estado</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i> </button>
+                                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#acto"><i
+                                                class="fas fa-edit"></i> </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Modal Agregado exitosamente-->
+                        <div class="modal fade" id="agregado" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <form>
+                                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                                                style="display: none;">
+                    
+                                            <div class="text-center mt-3">
+                                                <i class="bi bi-check-circle" style="font-size: 3.5rem; color: black;"></i>
+                                                <p class="mt-3" style="font-size: 1.5rem;">Éxito</p>
+                                                <p>Se ha enviado correctamente</p>
+                                                <button type="button" class="btn btn-dark botn" data-dismiss="modal">Aceptar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Detalles Modal de Descuento -->
+                        <div class="modal fade" id="detallesDescuentoModal" tabindex="-1" role="dialog"
+                            aria-labelledby="detallesDescuentoModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header custom-modal-header">
+                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Detalles del Descuento</h5>
+                                        
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><strong>Cantidad de Descuento:</strong> <span id="cantidad_descuento_detalles">10%</span></p>
+                                        <p><strong>Descripción:</strong> <span id="descripcion_descuento_detalles">Descuento de Temporada</span>
+                                        </p>
+                                        <p><strong>Fecha de Inicio:</strong> <span id="fecha_inicio_descuento_detalles">2024-03-01</span></p>
+                                        <p><strong>Fecha de Fin:</strong> <span id="fecha_fin_descuento_detalles">2024-03-15</span></p>
+                                        <p><strong>Estado:</strong> <span id="estado_descuento_detalles">Activo</span></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
+                                            </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Modal Actualizado exitosamente-->
+                        <div class="modal fade" id="acto" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <form>
+                                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                                                style="display: none;">
+                    
+                                            <div class="text-center mt-3">
+                                                <i class="bi bi-check-circle" style="font-size: 3.5rem; color: black;"></i>
+                                                <p class="mt-3" style="font-size: 1.5rem;">Éxito</p>
+                                                <p>Se ha Actualizado correctamente</p>
+                                                <button type="button" class="btn btn-dark botn" data-dismiss="modal">Aceptar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <!-- Modal Eliminar-->
+                        <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <form>
+                                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
+                                                style="display: none;">
+                    
+                                            <div class="text-center mt-3">
+                                                <i class="bi bi-exclamation-triangle-fill" style="font-size: 3.5rem; color: black;"></i>
+                                                <p class="mt-3" style="font-size: 1.5rem;">Advertencia</p>
+                                                <p>¿Desea eliminar el registro?</p>
+                                                <div class="d-flex justify-content-center mt-3">
+                                                    <button type="button" class="btn btn-dark mr-2 botn" data-dismiss="modal">No</button>
+                                                    <button type="button" class="btn btn-dark botn" data-dismiss="modal">Si</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
-
     </div>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../Controllers/utils/menu.js"></script>
+    <script src="../../Controllers/utils/gamamenu.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../../Controllers/admin/metodos.js"></script>
+    <script src="../../Controllers/utils/Validaciones.js"></script>
+    <script src="../../Controllers/admin/categorias.js"></script>
+    <script src="../../resources/js/foto.js"></script>
+    <script src="../../Controllers/admin/buscador.js"></script>
 </body>
 
 </html>

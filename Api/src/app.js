@@ -3,7 +3,6 @@ const morgan = require('morgan');
 const config = require('./config'); 
 const categoria = require('./modulos/categorias/rutas');
 const inventarios = require('./modulos/inventario/rutas');
-//const usuario = require('./modulos/usuarios/rutas');
 const Login = require('./modulos/Login/rutas');
 const Admin = require('./modulos/admin/rutas');
 const app = express(); 
@@ -22,7 +21,6 @@ app.set('port', config.app.port);
 //rutas 
 app.use('/api/categorias', categoria); 
 app.use('/api/inventarios', inventarios);
-//app.use('/api/usuarios', usuario); 
 app.use('/api/login', Login); 
 app.use('/api/admin', Admin)
 app.use(error); 

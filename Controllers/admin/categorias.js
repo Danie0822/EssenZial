@@ -21,7 +21,7 @@ const obtenerCategorias = async () => {
             data.forEach(({ id_categoria, nombre_categoria, imagen_categoria }) => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td>${nombre_categoria}</td>
+                    <td>${nombre_categoria}</td> 
                     <td><img src="${imagen}${imagen_categoria}" alt="Imagen de la categoría" width="50"></td>
                     <td>
                         <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_categoria}, '${nombre_categoria}', 'http://localhost:4000/${imagen_categoria}')"><i class="fas fa-edit"></i></button>  
@@ -71,6 +71,7 @@ const abrirModalEditar = (idCategorias, nombreCategoria, imagen) => {
 };
 
 function AbrirAgregar() {
+    
     abrirModal(myAgregar);
 }
 
@@ -99,9 +100,6 @@ const agregarCategoria = async () => {
 
             if (success) {
                 obtenerCategorias();
-                limpiarFormulario();
-                cerrarModal(myAgregar);
-                setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
             } else {
                 manejarError();
             }
@@ -119,7 +117,7 @@ const eliminarCategoria = async (idCategoria) => {
         if (success) {
             obtenerCategorias();
             cerrarModal(myEliminar);
-            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('eliminadoExitosoModal'))), 500);
+            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('acto'))), 500);
         } else {
             manejarError();
         }
