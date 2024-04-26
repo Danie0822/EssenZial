@@ -9,9 +9,15 @@ module.exports = function (db) {
         return db.uno(TABLE_NAME, id, ID_FIELD);
     }
 
+    async function eliminar(id) {
+        return db.eliminar(TABLE_NAME, id, ID_FIELD);
+    }
+
+
     return {
         todos,
-        uno
+        uno,
+        eliminar
     };
     
 }
