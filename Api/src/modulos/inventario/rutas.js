@@ -22,8 +22,8 @@ const validarInventario=[
 
 // Middleware de validación específica para el ID en rutas de actualización y eliminación
 const validarIdUpdate = [
-    body('id_admin').notEmpty().isInt({ min: 1 }).withMessage('El ID debe ser un número entero mayor que cero')
-];
+    body('id_inventario').notEmpty().isInt({ min: 1 }).withMessage('El ID debe ser un número entero mayor que cero')
+]
 
 // Middleware de validación y manejo de errores centralizado
 function validar(req, res, next) {
@@ -34,12 +34,12 @@ function validar(req, res, next) {
     next();
 }
 
-//Rutas
+//Rutas de los endpoints
 router.get('/', seguridad('admin'), todos);
 router.get('/:id', seguridad('admin'), validarId, unoPorId);
 router.post('/save', seguridad('admin'), validarInventario, validar, agregar);
-//router.get('/update',seguridad('admin'), validarInventario, validarIdUpdate, validar, actualizarInventario());
-//router.get('delete/:id', seguridad('admin'), validarId, eliminarInventario());
+router.put('/update',seguridad('admin'), validarInventario, validar, actualizar);
+router.delete('/delete/:id', seguridad('admin'), validarId, eliminar);
 
 
 async function todos(req, res, next) {
@@ -71,17 +71,23 @@ async function agregar(req, res, next){
     }
 }
 
+async function actualizar(req, res, next){
+    try{
+        await controlador.actualizar(req.body);
+        respuestas.success(req, res, 'Inventario actualizado correctamente', 200);
+    }catch(error){
+        next(error);
+    }
+}
+
+async function eliminar(req, res, next){
+    try{
+        await controlador.eliminar(req.params.id);
+        respuestas.success(req, res, 'Inventario eliminado', 200);
+
+    }catch(error){
+        next(error);
+    }
+}
+
 module.exports = router;
-
-/*
-function agregarInventario(){
-
-}
-
-function actualizarInventario(){
-
-}
-
-function eliminarInventario(){
-
-}*/

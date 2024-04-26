@@ -80,7 +80,6 @@ CREATE TABLE IF NOT EXISTS tb_inventarios (
     cantidad_inventario INT NOT NULL CHECK(cantidad_inventario > 0),
     descripcion_inventario TEXT NOT NULL,
     precio_inventario DECIMAL(10, 2) NOT NULL CHECK(precio_inventario > 0),
-    imagen_producto VARCHAR(100) NOT NULL,
     id_olor INT NOT NULL,
     id_categoria INT NOT NULL,
     id_marca INT NOT NULL,
