@@ -18,6 +18,24 @@ var validaciones = {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
     },
 
+    validacionNombres: function (valor) {
+        // Verificar si el valor está vacío
+        if (!valor || valor.trim() === '') {
+            return false; // Valor vacío, devuelve false
+        }
+    
+        // Expresión regular para verificar que solo contenga letras (mayúsculas o minúsculas)
+        const letrasRegex = /^[A-Za-z]+$/;
+    
+        // Verificar si el valor solo contiene letras
+        if (!letrasRegex.test(valor)) {
+            return false; // No solo contiene letras, devuelve false
+        }
+    
+        // Si pasa ambas validaciones, el valor es válido
+        return true;
+    },    
+
     longitudMaxima: function (valor, maximo) {
         return valor.length <= maximo;
     },
