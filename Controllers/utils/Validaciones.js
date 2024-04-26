@@ -19,6 +19,7 @@ var validaciones = {
     validarCorreoElectronico: function (correo) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
     },
+
     longitudMaxima: function (valor, maximo) {
         return valor.length <= maximo;
     },
