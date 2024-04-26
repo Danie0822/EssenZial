@@ -1,42 +1,41 @@
 const express = require('express');
-const { body, param, validationResult } = require('express-validator');
 const router = express.Router();
 const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
+const Validador = require('../recursos/validator');
 
-// Middleware de validación común para los campos de administradores
-const validarAdmin = [
-    body('nombre_admin').notEmpty().trim().isLength({ max: 255 }).withMessage('El nombre es requerido y debe tener como máximo 255 caracteres'),
-    body('apellido_admin').notEmpty().trim().isLength({ max: 255 }).withMessage('El apellido es requerido y debe tener como máximo 255 caracteres'),
-    body('correo_admin').notEmpty().trim().isEmail().withMessage('El correo electrónico debe ser válido y no puede estar vacío').isLength({ max: 255 }).withMessage('El correo electrónico debe tener como máximo 255 caracteres'),
-    body('clave_admin').notEmpty().trim().isLength({ min: 6, max: 255 }).withMessage('La clave es requerida y debe tener al menos 6 caracteres y como máximo 255 caracteres')
-];
+// Middleware para validar el formato de los datos
+function validarDatos(nombre_admin, apellido_admin, correo_admin, clave_admin, req, res, next) {
+    const nombreValidado = Validador.validarLongitud(nombre_admin, 255, 'El nombre debe ser obligatorio', req, res, next);
+    const apellidoValidado = Validador.validarLongitud(apellido_admin, 255, 'El apellido debe ser obligatorio', req, res, next);
+    const correo = Validador.validarCorreo(correo_admin, 'El correo debe ser un formato correo', req, res, next);
+    const contra = Validador.validarLongitud(clave_admin, 300, 'El clave debe ser obligatorio', req, res, next);
+    return { nombre_admin: nombreValidado, apellido_admin: apellidoValidado, correo_admin: correo, clave_admin: contra };
+}
 
-// Middleware de validación específica para el ID en rutas de actualización y eliminación
-const validarIdUpdate = [
-    body('id_admin').notEmpty().isInt({ min: 1 }).withMessage('El ID debe ser un número entero mayor que cero')
-];
+function validarFormatoActualizar(nombre_admin, apellido_admin, correo_admin, id, req, res, next) {
+    const nombreValidado = Validador.validarLongitud(nombre_admin, 255, 'El nombre debe ser obligatorio', req, res, next);
+    const apellidoValidado = Validador.validarLongitud(apellido_admin, 255, 'El apellido debe ser obligatorio', req, res, next);
+    const correo = Validador.validarCorreo(correo_admin, 'El correo debe ser un formato correo', req, res, next);
+    const id_unico = Validador.validarNumeroEntero(id, 'El id debe ser un numero ', req, res, next)
+    return { nombre_admin: nombreValidado, apellido_admin: apellidoValidado, correo_admin: correo, id_admin: id_unico };
+}
 
-const validarId = [
-    param('id').notEmpty().isInt({ min: 1 }).withMessage('El ID debe ser un número entero mayor que cero')
-];
-
-// Middleware de validación y manejo de errores centralizado
-function validar(req, res, next) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return respuestas.error(req, res, 'Error en la validación', 400, errors.array());
+// Middleware para validar el ID
+function validarID(id, req, res, next) {
+    if (!id || isNaN(id) || parseInt(id) <= 0) {
+        return next('route');
     }
-    next();
+    return id;
 }
 
 // Rutas
 router.get('/', seguridad('admin'), obtenerTodos);
-router.get('/:id', seguridad('admin'), validarId, obtenerPorId);
-router.delete('/delete/:id', seguridad('admin'), validarId, eliminarPorId);
-router.post('/save', validarAdmin, validar, agregar);
-router.put('/update', validarIdUpdate, validarAdmin, validar, actualizar);
+router.get('/:id', seguridad('admin'), obtenerPorId);
+router.delete('/delete/:id', seguridad('admin'), eliminarPorId);
+router.post('/save', seguridad('admin'), agregar);
+router.put('/update', seguridad('admin'), actualizar);
 
 // Funciones
 
@@ -60,8 +59,10 @@ async function obtenerPorId(req, res, next) {
 
 async function eliminarPorId(req, res, next) {
     try {
-        await controlador.eliminar(req.params.id);
+        const id = validarID(req.params.id, req, res, next);
+        await controlador.eliminar(id);
         respuestas.success(req, res, 'Elemento eliminado', 200);
+        const i2 = id
     } catch (error) {
         next(error);
     }
@@ -69,16 +70,20 @@ async function eliminarPorId(req, res, next) {
 
 async function agregar(req, res, next) {
     try {
-        await controlador.agregar(req.body);
+        console.log('Body:', req.body.nombre_admin);
+        const validaciones = validarDatos(req.body.nombre_admin, req.body.apellido_admin, req.body.correo_admin, req.body.clave_admin, req, res, next);
+        await controlador.agregar(validaciones);
         respuestas.success(req, res, 'Elemento insertado', 200);
     } catch (error) {
+        console.log(error)
         next(error);
     }
 }
 
 async function actualizar(req, res, next) {
     try {
-        await controlador.actualizar(req.body);
+        const validaciones = validarFormatoActualizar(req.body.nombre_admin, req.body.apellido_admin, req.body.correo_admin, req.body.id_admin, req, res, next);
+        await controlador.actualizar(validaciones);
         respuestas.success(req, res, 'Elemento actualizado', 200);
     } catch (error) {
         next(error);

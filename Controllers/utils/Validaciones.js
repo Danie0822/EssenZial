@@ -13,11 +13,12 @@ var validaciones = {
         }
         return /^[a-zA-Z0-9\s]*$/.test(valor);
     },
-
+    validarContra: function(contrasena) {
+        return contrasena.length >= 8;
+    },
     validarCorreoElectronico: function (correo) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
     },
-
     longitudMaxima: function (valor, maximo) {
         return valor.length <= maximo;
     },

@@ -9,15 +9,13 @@ const upload = multerConfig('categorias');
 
 // Middleware para validar el formato de los datos
 function validarDatos(nombre, imagen, req, res, next) {
-    const nombreValidado = Validador.validarCampo(nombre, 'El nombre es obligatorio', req, res, next);
-    Validador.validarLongitud(nombreValidado, 255, 'El nombre no puede tener más de 255 caracteres', req, res, next);
+    const nombreValidado = Validador.validarLongitud(nombre, 255, 'El nombre debe ser obligatorio', req, res, next);
     const imagenValidada = Validador.validarCampo(imagen, 'La imagen es obligatoria', req, res, next);
     return { nombre_categoria: nombreValidado, imagen_categoria: imagenValidada };
 }
 
 function validarFormatoActualizar(imagen, nombre, req, res, next) {
-    const nombreValidado = Validador.validarCampo(nombre, 'El nombre es obligatorio', req, res, next);
-    Validador.validarLongitud(nombreValidado, 255, 'El nombre no puede tener más de 255 caracteres', req, res, next);
+    const nombreValidado = Validador.validarLongitud(nombre, 255, 'El nombre debe ser obligatorio', req, res, next);
     const imagenCategoria = (imagen && imagen.trim()) || null;
     return {
         nombre_categoria: nombreValidado,
