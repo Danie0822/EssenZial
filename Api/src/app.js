@@ -6,9 +6,11 @@ const inventarios = require('./modulos/inventario/rutas');
 const Login = require('./modulos/Login/rutas');
 const Admin = require('./modulos/admin/rutas');
 const marcas = require('./modulos/marcas/rutas');
+const olores = require('./modulos/olores/rutas');
 const app = express(); 
 const error = require('./red/errors'); 
 const cors = require('cors');
+
 //Middleware
 app.use(morgan('dev')); 
 app.use(express.json());
@@ -25,6 +27,7 @@ app.use('/api/inventarios', inventarios);
 app.use('/api/login', Login); 
 app.use('/api/admin', Admin)
 app.use('/api/marcas', marcas)
+app.use('/api/olores', olores)
 app.use(error); 
 
 module.exports = app; 

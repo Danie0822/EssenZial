@@ -82,7 +82,7 @@ const abrirModalEliminar = (id_unico) => {
 const agregarCategoria = async () => {
     try {
         const nombre = obtenerElemento("nombre_marca").value;
-        const imagen = obtenerElemento("imagenMarca").files[0];
+        const imagen = obtenerElemento("imagen_agregar").files[0];
         if (!validaciones.contieneSoloLetrasYNumeros(nombre) || !validaciones.longitudMaxima(nombre, 100) || !validaciones.validarImagen(imagen)) {
             manejarValidaciones();
         }
@@ -127,7 +127,7 @@ const actualizar = async (id) => {
             manejarValidaciones();
         }
         else {
-            const imagen = obtenerElemento("imagenMarcaActualizar").files[0];
+            const imagen = obtenerElemento("imagen_actualizar").files[0];
             const formData = new FormData();
             formData.append('id_marca', id);
             formData.append('nombre_marca', nombre);

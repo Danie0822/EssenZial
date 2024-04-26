@@ -1,3 +1,4 @@
+
 const obtenerElemento = (id) => document.getElementById(id);
 const abrirModal = (modal) => modal.show();
 const cerrarModal = (modal) => modal.hide();
@@ -9,23 +10,23 @@ const myAgregar = new bootstrap.Modal(obtenerElemento('marcaModal'));
 const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
-let idCategoria = null;
+let id = null;
 
 const obtenerCategorias = async () => {
     try {
-        const { success, data } = await fetchData("/categorias");
+        const { success, data } = await fetchData("/olores");
         const tbody = obtenerElemento("tablaBody");
         tbody.innerHTML = "";
 
         if (success) {
-            data.forEach(({ id_categoria, nombre_categoria, imagen_categoria }) => {
+            data.forEach(({ id_olor, nombre_olor, imagen_olor }) => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td>${nombre_categoria}</td> 
-                    <td><img src="${imagen}${imagen_categoria}" alt="Imagen de la categoría" width="50"></td>
+                    <td>${nombre_olor}</td> 
+                    <td><img src="${imagen}${imagen_olor}" alt="Imagen de la categoría" width="50"></td>
                     <td>
-                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_categoria}, '${nombre_categoria}', 'http://localhost:4000/${imagen_categoria}')"><i class="fas fa-edit"></i></button>  
-                        <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${id_categoria})"><i class="fas fa-trash-alt"></i></button>                      
+                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_olor}, '${nombre_olor}', 'http://localhost:4000/${imagen_olor}')"><i class="fas fa-edit"></i></button>  
+                        <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${id_olor})"><i class="fas fa-trash-alt"></i></button>                      
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -34,6 +35,7 @@ const obtenerCategorias = async () => {
             manejarError();
         }
     } catch (error) {
+        console.log(error);
         manejarError();
     }
 };
@@ -44,26 +46,20 @@ const limpiarFormulario = () => {
 }
 
 const limpiarFormularioActualizar = () => {
-    // Limpiar el valor de todos los campos de formulario con la clase 'form-control-actualizar'
     document.querySelectorAll('.form-control-actualizar').forEach(input => input.value = "");
-
-    // Limpiar el campo de selección de imagen y restablecer el nombre del archivo
     var fileInputs = document.querySelectorAll('.custom-file-input');
     fileInputs.forEach(fileInput => {
         fileInput.value = '';
         var label = fileInput.nextElementSibling;
         label.innerHTML = 'Seleccionar imagen';
     });
-
-    // Ocultar todas las imágenes con la clase 'imagede'
     document.querySelectorAll('.imagede').forEach(image => image.style.display = 'none');
 }
 
-const abrirModalEditar = (idCategorias, nombreCategoria, imagen) => {
-    console.log(idCategorias);
-    if (idCategorias) {
-        mostrarCategoria(nombreCategoria, imagen);
-        idCategoria = idCategorias;
+const abrirModalEditar = (id_unico, nombre, imagen) => {
+    if (id_unico) {
+        mostrarMarcas(nombre, imagen);
+        id = id_unico;
         abrirModal(myActualizar);
     } else {
         manejarError();
@@ -74,9 +70,9 @@ function AbrirAgregar() {
     abrirModal(myAgregar);
 }
 
-const abrirModalEliminar = (idCategorias) => {
-    if (idCategorias) {
-        idCategoria = idCategorias;
+const abrirModalEliminar = (id_unico) => {
+    if (id_unico) {
+        id = id_unico;
         abrirModal(myEliminar);
     } else {
         manejarError();
@@ -85,16 +81,16 @@ const abrirModalEliminar = (idCategorias) => {
 
 const agregarCategoria = async () => {
     try {
-        const nombreCategoria = obtenerElemento("nombreCategoria").value;
-        const imagenMarca = obtenerElemento("imagen_agregar").files[0];
-        if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100) || !validaciones.validarImagen(imagenMarca)) {
+        const nombre = obtenerElemento("nombre_olor").value;
+        const imagen = obtenerElemento("imagen_agregar").files[0];
+        if (!validaciones.contieneSoloLetrasYNumeros(nombre) || !validaciones.longitudMaxima(nombre, 100) || !validaciones.validarImagen(imagen)) {
             manejarValidaciones();
         }
         else {
             const formData = new FormData();
-            formData.append('nombre_categoria', nombreCategoria);
-            formData.append('imagen', imagenMarca);
-            const { success } = await createData("/categorias/save", formData);
+            formData.append('nombre_olor', nombre);
+            formData.append('imagen', imagen);
+            const { success } = await createData("/olores/save", formData);
             if (success) {
                 obtenerCategorias();
                 cerrarModal(myAgregar);
@@ -109,9 +105,9 @@ const agregarCategoria = async () => {
     }
 };
 
-const eliminarCategoria = async (idCategoria) => {
+const eliminarCategoria = async (id) => {
     try {
-        const { success } = await deleteData(`/categorias/delete/${idCategoria}`);
+        const { success } = await deleteData(`/olores/delete/${id}`);
         if (success) {
             obtenerCategorias();
             cerrarModal(myEliminar);
@@ -124,20 +120,20 @@ const eliminarCategoria = async (idCategoria) => {
     }
 };
 
-const actualizar = async (idCategoria) => {
+const actualizar = async (id) => {
     try {
-        const nombreCategoria = obtenerElemento("nombreCategoriaActuaizar").value;
-        if (!validaciones.contieneSoloLetrasYNumeros(nombreCategoria) || !validaciones.longitudMaxima(nombreCategoria, 100)) {
+        const nombre = obtenerElemento("nombreOlorActuaizar").value;
+        if (!validaciones.contieneSoloLetrasYNumeros(nombre) || !validaciones.longitudMaxima(nombre, 100)) {
             manejarValidaciones();
         }
         else {
-            const imagenCategoria = obtenerElemento("imagen_actualizar").files[0];
+            const imagen = obtenerElemento("imagen_actualizar").files[0];
             const formData = new FormData();
-            formData.append('id_categoria', idCategoria);
-            formData.append('nombre_categoria', nombreCategoria);
-            formData.append('imagen', imagenCategoria);
+            formData.append('id_olor', id);
+            formData.append('nombre_olor', nombre);
+            formData.append('imagen', imagen);
 
-            const { success } = await updateData("/categorias/update", formData);
+            const { success } = await updateData("/olores/update", formData);
 
             if (success) {
                 obtenerCategorias();
@@ -158,30 +154,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
     obtenerCategorias();
 
-    const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
-    confirmarEliminarBtn.addEventListener('click', async () => {
-        if (idCategoria) {
-            await eliminarCategoria(idCategoria);
-            idCategoria = null;
-        }
-    });
-
     const confirmarActualizarBtn = obtenerElemento('confirmarActualizar');
     confirmarActualizarBtn.addEventListener('click', async () => {
-        if (idCategoria) {
-            await actualizar(idCategoria);
-            idCategoria = null;
+        if (id) {
+            await actualizar(id);
+            id = null;
         }
     });
 
-    const agregarCategoriaBtn = obtenerElemento("agregarCategoriaBtn");
+        const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
+    confirmarEliminarBtn.addEventListener('click', async () => {
+        if (id) {
+            await eliminarCategoria(id);
+            id = null;
+        }
+    });
+    const agregarCategoriaBtn = obtenerElemento("agregarOloresBtn");
     agregarCategoriaBtn.addEventListener("click", agregarCategoria);
 });
 
-const mostrarCategoria = (nombreCategoria, imagenCategoria) => {
+const mostrarMarcas = (nombreCategoria, imagenCategoria) => {
     try {
         limpiarFormularioActualizar();
-        obtenerElemento("nombreCategoriaActuaizar").value = nombreCategoria;
+        obtenerElemento("nombreOlorActuaizar").value = nombreCategoria;
         const imagenPreview = document.querySelector('.imagede');
         if (imagenPreview) {
             const urlImagen = imagenCategoria;

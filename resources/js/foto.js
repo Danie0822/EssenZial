@@ -1,5 +1,5 @@
 // Obtener el input de la imagen para crear
-var imagenMarca = document.getElementById('imagenMarca');
+var imagenMarca = document.getElementById('imagen_agregar');
 if (imagenMarca) {
     imagenMarca.addEventListener('change', function() {
         readURL(this);
@@ -7,7 +7,7 @@ if (imagenMarca) {
 }
 
 // Obtener el input de la imagen para actualizar
-var imagenMarcaActualizar = document.getElementById('imagenMarcaActualizar');
+var imagenMarcaActualizar = document.getElementById('imagen_actualizar');
 if (imagenMarcaActualizar) {
     imagenMarcaActualizar.addEventListener('change', function() {
         readURL(this);
