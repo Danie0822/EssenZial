@@ -41,7 +41,6 @@ const obtener = async () => {
 
 const limpiarFormulario = () => {
     document.querySelectorAll('.form-control').forEach(input => input.value = "");
-    document.querySelectorAll('.preview-image').forEach(image => image.style.display = 'none');
 }
 
 const limpiarFormularioActualizar = () => {
@@ -59,6 +58,7 @@ const abrirModalEditar = (id_unico, nombre, apellido, correo) => {
 };
 
 function AbrirAgregar() {
+    limpiarFormulario();
     abrirModal(myAgregar);
 }
 
@@ -79,15 +79,15 @@ const agregarCategoria = async () => {
         const correo = obtenerElemento("txtCorreo").value;
         const clave = obtenerElemento("txtClave").value;
 
-        const formData1 = new FormData();
-        formData1.append('nombre_admin', nombre);
-        formData1.append('apellido_admin', apellido);
-        formData1.append('correo_admin', correo);
-        formData1.append('clave_admin', clave);
-        const { success } = await createData("/admin/save", formData1);
-        if (success) {
-            obtenerCategorias();
-        
+        var adminData = {
+            nombre_admin: nombre,
+            apellido_admin: apellido,
+            correo_admin: correo,
+            clave_admin: clave
+        };
+        const response = await createAdmin("/admin/save", adminData);
+        if (response.status == 200) {
+            obtener();
         } else {
             manejarError();
         }
@@ -100,7 +100,7 @@ const agregarCategoria = async () => {
 
 const eliminarCategoria = async (id) => {
     try {
-        const { success } = await deleteData(`/olores/delete/${id}`);
+        const { success } = await deleteData(`/admin/delete/${id}`);
         if (success) {
             obtener();
             cerrarModal(myEliminar);

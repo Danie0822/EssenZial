@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS tb_admins (
     nombre_admin VARCHAR(255) NOT NULL,
     apellido_admin VARCHAR(255) NOT NULL,
     correo_admin VARCHAR(255) UNIQUE NOT NULL,
-    clave_admin VARCHAR(255) NOT NULL,
+    clave_admin TEXT NOT NULL,
     INDEX(correo_admin)
 ) ENGINE=InnoDB;
 
