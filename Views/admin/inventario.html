@@ -331,113 +331,111 @@
                                 <div class="modal-content">
                                     <div class="modal-header custom-modal-header">
                                         <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">
-                                            Editar perfume
+                                            Actualizar producto
                                         </h5>
                                     </div>
                                     <div class="modal-body">
-                                        <!--Inicio del formualrio para actualizar-->
-                                        <form id="guardarForm">
-                                            <div class="modal-body">
-                                                <div class="row">
-                                                    <!--Primera columna-->
-                                                    <div class="col-md-6 col-ms-12">
-                                                        <input type="hidden" id="idProducto" name="idProducto">
-                                                        <div>
-                                                            <label for="nombreProducto" class="form-label">Nombre del
-                                                                perfume</label>
-                                                            <input id="nombreProducto" type="text" name="nombreProducto"
-                                                                class="form-control" required>
-                                                        </div>
-                                                        <div>
-
-                                                        </div>
-                                                        <div>
-                                                            <label for="precioProducto" class="form-label">Precio del
-                                                                producto(US$)</label>
-                                                            <input id="precioProducto" type="number"
-                                                                name="precioProducto" min="0.01" step="0.01"
-                                                                class="form-control" required>
-                                                        </div>
-                                                        <div>
-                                                            <label for="descripcionProducto"
-                                                                class="form-label">Descripción del
-                                                                producto</label>
-                                                            <textarea name="descripcionProducto"
-                                                                id="descripcionProducto"
-                                                                class="form-control"></textarea>
-                                                        </div>
-                                                        <div>
-                                                            <label for="marcaProducto" class="form-label">Marca</label>
-                                                            <select class="form-select combobox"
-                                                                aria-label="Default select example">
-                                                                <option selected>Selecciona una marca</option>
-                                                                <option value="1">Dior</option>
-                                                                <option value="2">Calvin Klein</option>
-                                                            </select>
-
-                                                        </div>
+                                        <form id="saveForm" action="/add" method="post">
+                                            <div class="row">
+                                                <!--Primera columna-->
+                                                <div class="col-md-6 col-ms-12">
+                                                    <input type="hidden" id="idProducto" name="idProducto">
+                                                    <div>
+                                                        <label for="nombreProducto" class="form-label">Nombre del
+                                                            perfume</label>
+                                                        <input id="nombreProducto" type="text" name="nombreProducto"
+                                                            class="form-control" id="nombreProductoAc" required>
                                                     </div>
-                                                    <!--segunda columna-->
-                                                    <div class="col-md-6 col-ms-12">
-                                                        <div>
-                                                            <label for="oloresProducto"
-                                                                class="form-label">Olores</label>
-                                                            <select class="form-select combobox"
-                                                                aria-label="Default select example">
-                                                                <option selected>Selecciona un olor</option>
-                                                                <option value="1">Frutal</option>
-                                                                <option value="2">Amaderado</option>
-                                                            </select>
-                                                        </div>
-                                                        <div>
-                                                            <label for="oloresProducto"
-                                                                class="form-label">Categorías</label>
-                                                            <select class="form-select combobox"
-                                                                aria-label="Default select example">
-                                                                <option selected>Selecciona una categoría</option>
-                                                                <option value="1">Niños</option>
-                                                                <option value="2">Hombres</option>
-                                                                <option value="2">Mujeres</option>
-                                                            </select>
-                                                        </div>
+                                                    <div>
+                                                        <label for="cantidadProducto" class="form-label">Cantidad del
+                                                            producto</label>
+                                                        <input id="cantidadProductoAc" type="number"
+                                                            name="cantidadProducto" min="1" step="1"
+                                                            class="form-control" required>
+                                                    </div>
+                                                    <div>
+                                                        <label for="descripcionProducto" class="form-label">Descripción
+                                                            del
+                                                            producto</label>
+                                                        <textarea name="descripcionProducto" id="descripcionProductoAc"
+                                                            class="form-control"></textarea>
+                                                    </div>
+                                                    <div>
+                                                        <label for="precioProducto" class="form-label">Precio del
+                                                            producto(US$)</label>
+                                                        <input id="precioProductoAc" type="number" name="precioProducto"
+                                                            min="1" step="1" class="form-control" required>
+                                                    </div>
 
-                                                        <div>
-                                                            <label for="estadoDescuento" class="form-label">Estado del
-                                                                descuento</label>
-                                                            <select class="form-select combobox"
-                                                                aria-label="Default select example">
-                                                                <option selected>Selecciona el estado</option>
-                                                                <option value="1">Activo</option>
-                                                                <option value="2">Inactivo</option>
-                                                            </select>
-                                                        </div>
+                                                </div>
+                                                <!--segunda columna-->
+                                                <div class="col-md-6 col-ms-12">
+                                                    <div>
+                                                        <label for="oloresProductoAc" class="form-label">Olores</label>
+                                                        <select class="form-select combobox"
+                                                            aria-label="Default select example">
+                                                            <option selected>Selecciona un olor</option>
+                                                            <option value="1">Frutal</option>
+                                                            <option value="2">Amaderado</option>
+                                                        </select>
+                                                    </div>
 
-                                                        <div>
-                                                            <label for="descuentoSeleccionado" class="form-label">Elige
-                                                                el
-                                                                descuento</label>
-                                                            <select class="form-select combobox"
-                                                                aria-label="Default select example">
-                                                                <option selected>Selecciona un descuento</option>
-                                                                <option value="1">50%</option>
-                                                                <option value="2">35%</option>
-                                                            </select>
-                                                        </div>
+                                                    <div>
+                                                        <label for="categoriaProductoAc"
+                                                            class="form-label">Categorías</label>
+                                                        <select class="form-select combobox"
+                                                            aria-label="Default select example">
+                                                            <option selected>Selecciona una categoría</option>
+                                                            <option value="1">Niños</option>
+                                                            <option value="2">Hombres</option>
+                                                            <option value="2">Mujeres</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div>
+                                                        <label for="marcaProductoAc" class="form-label">Marca</label>
+                                                        <select class="form-select combobox"
+                                                            aria-label="Default select example">
+                                                            <option selected>Selecciona una marca</option>
+                                                            <option value="1">Dior</option>
+                                                            <option value="2">Calvin Klein</option>
+                                                        </select>
+
+                                                    </div>
+
+                                                    <!--<div>
+                                                        <label for="estadoDescuento" class="form-label">Estado del
+                                                            descuento</label>
+                                                        <select class="form-select combobox"
+                                                            aria-label="Default select example">
+                                                            <option selected>Selecciona el estado</option>
+                                                            <option value="1">Activo</option>
+                                                            <option value="2">Inactivo</option>
+                                                        </select>
+                                                    </div>-->
+
+                                                    <div>
+                                                        <label for="descuentoSeleccionadoAc" class="form-label">Elige el
+                                                            descuento</label>
+                                                        <select class="form-select combobox"
+                                                            aria-label="Default select example">
+                                                            <option selected>Selecciona un descuento</option>
+                                                            <option value="1">50%</option>
+                                                            <option value="2">30%</option>
+                                                        </select>
                                                     </div>
                                                 </div>
-                                                <div class="custom-file mb-3">
-                                                    <input type="file" class="custom-file-input"
-                                                        id="imagenMarcaActualizar">
-                                                    <label class="custom-file-label" for="imagenMarca">Seleccionar
-                                                        imagen</label>
-                                                </div>
-                                                <img src="" class="preview-image" id="imagenPreview"
-                                                    alt="Vista previa de la imagen" style="display: none;">
-
-
                                             </div>
+                                            <!--<div class="custom-file mb-3">
+                                                <input type="file" class="custom-file-input" id="imagenMarca">
+                                                <label class="custom-file-label" for="imagenMarca">Seleccionar
+                                                    imagen</label>
+                                            </div>-->
+                                            <img src="" class="preview-image" id="imagenPreview"
+                                                alt="Vista previa de la imagen" style="display: none;">
                                         </form>
                                     </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i
                                                 class="fas fa-times"></i>
@@ -533,7 +531,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../../Controllers/admin/metodos.js"></script>
     <script src="../../Controllers/utils/Validaciones.js"></script>
-    <script src="../../Controllers/admin/categorias.js"></script>
+    <script src="../../Controllers/admin/inventario.js"></script>
     <script src="../../resources/js/foto.js"></script>
     <script src="../../Controllers/admin/buscador.js"></script>
 </body>
