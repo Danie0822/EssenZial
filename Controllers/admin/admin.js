@@ -24,7 +24,7 @@ const obtener = async () => {
                 tr.innerHTML = `
                     <td>${correo_admin}</td>
                     <td>
-                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_admin}, '${nombre_admin}', '${correo_admin}', '${apellido_admin}')"><i class="fas fa-edit"></i></button>  
+                        <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_admin}, '${nombre_admin}', '${apellido_admin}', '${correo_admin}')"><i class="fas fa-edit"></i></button>  
                         <button class="btn btn-dark eliminar" onclick="abrirModalEliminar(${id_admin})"><i class="fas fa-trash-alt"></i></button>                      
                     </td>
                 `;
@@ -50,8 +50,8 @@ const limpiarFormularioActualizar = () => {
 const abrirModalEditar = (id_unico, nombre, apellido, correo) => {
     if (id_unico) {
         mostrar(nombre, apellido, correo);
-        id = id_unico;
         abrirModal(myActualizar);
+        id = id_unico;
     } else {
         manejarError();
     }
@@ -78,23 +78,31 @@ const agregarCategoria = async () => {
         const apellido = obtenerElemento("txtApellido").value;
         const correo = obtenerElemento("txtCorreo").value;
         const clave = obtenerElemento("txtClave").value;
-
+        
+        if (!validaciones.contieneSoloLetrasYNumeros(nombre) || !validaciones.longitudMaxima(nombre, 100) || 
+            !validaciones.contieneSoloLetrasYNumeros(apellido) || !validaciones.longitudMaxima(apellido, 100) || 
+            !validaciones.validarContra(clave) || !validaciones.validarCorreoElectronico(correo)) {
+            manejarValidaciones();
+        }
+        else{
+        const contra = await sha256(clave);
         var adminData = {
             nombre_admin: nombre,
             apellido_admin: apellido,
             correo_admin: correo,
-            clave_admin: clave
+            clave_admin: contra
         };
-        const response = await createAdmin("/admin/save", adminData);
+        const response = await DataAdmin("/admin/save", adminData, 'POST');
         if (response.status == 200) {
             obtener();
+            cerrarModal(myAgregar);
+            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
         } else {
             manejarError();
         }
-
+    }
     } catch (error) {
         manejarError();
-        console.log(error);
     }
 };
 
@@ -115,20 +123,25 @@ const eliminarCategoria = async (id) => {
 
 const actualizar = async (id) => {
     try {
-        const nombre = obtenerElemento("nombreOlorActuaizar").value;
-        if (!validaciones.contieneSoloLetrasYNumeros(nombre) || !validaciones.longitudMaxima(nombre, 100)) {
+        const nombre = obtenerElemento("txtNombreAct").value;
+        const apellido = obtenerElemento("txtApellidoAct").value;
+        const correo = obtenerElemento("txtCorreoAct").value;
+        
+        if (!validaciones.contieneSoloLetrasYNumeros(nombre) || !validaciones.longitudMaxima(nombre, 100) || 
+            !validaciones.contieneSoloLetrasYNumeros(apellido) || !validaciones.longitudMaxima(apellido, 100) ||
+            !validaciones.validarCorreoElectronico(correo)) {
             manejarValidaciones();
         }
         else {
-            const imagen = obtenerElemento("imagen_actualizar").files[0];
-            const formData = new FormData();
-            formData.append('id_olor', id);
-            formData.append('nombre_olor', nombre);
-            formData.append('imagen', imagen);
+            var adminData = {
+                id_admin: id,
+                nombre_admin: nombre,
+                apellido_admin: apellido,
+                correo_admin: correo
+            };
+            const success = await DataAdmin("/admin/update", adminData, 'PUT');
 
-            const { success } = await updateData("/olores/update", formData);
-
-            if (success) {
+            if (success.status == 200) {
                 obtener();
                 limpiarFormularioActualizar();
                 cerrarModal(myActualizar);

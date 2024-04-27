@@ -28,7 +28,7 @@ async function fetchData(endpoint) {
     }
 }
 
-async function createData(endpoint, formData) {
+async function DataAdmin(endpoint, formData, method) {
     if (isFetchingData) {
         console.log("Otra operación está en curso. Por favor, espere.");
         return { success: false, message: "Otra operación está en curso. Por favor, espere." };
@@ -38,7 +38,7 @@ async function createData(endpoint, formData) {
 
     try {
         const response = await fetch(`${baseURL}${endpoint}`, {
-            method: 'POST',
+            method: method,
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

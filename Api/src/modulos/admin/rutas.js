@@ -62,7 +62,6 @@ async function eliminarPorId(req, res, next) {
         const id = validarID(req.params.id, req, res, next);
         await controlador.eliminar(id);
         respuestas.success(req, res, 'Elemento eliminado', 200);
-        const i2 = id
     } catch (error) {
         next(error);
     }
@@ -70,12 +69,10 @@ async function eliminarPorId(req, res, next) {
 
 async function agregar(req, res, next) {
     try {
-        console.log('Body:', req.body.nombre_admin);
         const validaciones = validarDatos(req.body.nombre_admin, req.body.apellido_admin, req.body.correo_admin, req.body.clave_admin, req, res, next);
         await controlador.agregar(validaciones);
         respuestas.success(req, res, 'Elemento insertado', 200);
     } catch (error) {
-        console.log(error)
         next(error);
     }
 }

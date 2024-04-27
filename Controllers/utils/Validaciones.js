@@ -21,8 +21,8 @@ var validaciones = {
     },
 
     longitudMaxima: function (valor, maximo) {
-        return valor.length <= maximo;
-    },
+        return valor.length >= 4 && valor.length <= maximo;
+    },    
     validarImagen: function (imagen) {
         if (imagen.length === 0) {
             return false;

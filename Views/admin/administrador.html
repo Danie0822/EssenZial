@@ -19,7 +19,6 @@
             <div class="menu"></div>
             <main class="col-lg-10 col-md-9">
                 <div class="sizebox222"></div>
-
                 <div class="navbarGamas"></div>
                 <div class="sizebox"></div>
                 <div id="categorias-page">
@@ -42,8 +41,7 @@
                         <div class="sizebox1"></div>
                         <!-- Bonton de Agregar -->
                         <div class="container text-right">
-                            <button type="button" class="btn btn-dark" id="btnAgregar" data-toggle="modal"
-                                data-target="#adminModal"><i class="fas fa-plus"></i> </button>
+                            <button type="button" class="btn btn-dark" id="btnAgregar" onclick="AbrirAgregar()"><i class="fas fa-plus"></i> </button>
                         </div>
                         <div class="sizebox"></div>
                         <!-- Tabla -->
@@ -321,8 +319,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../../Controllers/admin/metodos.js"></script>
-    <script src="../../Controllers/utils/Validaciones.js"></script>
     <script src="../../Controllers/admin/sha256.js"></script>
+    <script src="../../Controllers/utils/Validaciones.js"></script>
     <script src="../../Controllers/admin/admin.js"></script>
     <script src="../../Controllers/admin/buscador.js"></script>
 </body>
