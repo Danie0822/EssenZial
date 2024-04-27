@@ -25,11 +25,11 @@ const obtenerInventario = async () => {
             data.forEach(({ id, nombre_inventario, precio_inventario }) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <td>${nombre_inventario}/td>
+                    <td>${nombre_inventario}</td>
                     <td>$${precio_inventario}</td>
                     <td>
 
-                    <button type="button" class="btn btn-dark"></i></button>
+                    <button class="btn btn-dark actualizar"><i class="fas fa-edit"></i></button>  
                     <button type="button" class="btn btn-dark"><i class="fas fa-info-circle"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-star"></i></button>
                     <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
@@ -156,13 +156,17 @@ document.addEventListener("DOMContentLoaded", function(){
     agregarInventarioBtn.addEventListener("click", agregarInventario);
 });
 
-/*
 const mostrarInventario = () =>{
     try{
         limpiarFormularioActualizar();
-        obtenerElemento("")
+        obtenerElemento("nombreProductoAc").value = nombre_inventario;
+        obtenerElemento("cantidadProductoAc").value = cantidad_inventario;
+        obtenerElemento("descripcionProductoAc").value = descripcion_inventario;
+        obtenerElemento("precioProductoAc").value = precio_inventario; 
+    }catch(error){
+        manejarError();
     }
-};*/
+}
 
 
 
