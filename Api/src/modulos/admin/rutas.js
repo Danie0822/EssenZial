@@ -18,8 +18,8 @@ function validarFormatoActualizar(nombre_admin, apellido_admin, correo_admin, id
     const nombreValidado = Validador.validarLongitud(nombre_admin, 255, 'El nombre debe ser obligatorio', req, res, next);
     const apellidoValidado = Validador.validarLongitud(apellido_admin, 255, 'El apellido debe ser obligatorio', req, res, next);
     const correo = Validador.validarCorreo(correo_admin, 'El correo debe ser un formato correo', req, res, next);
-    const id_unico = Validador.validarNumeroEntero(id, 'El id debe ser un numero ', req, res, next)
-    return { nombre_admin: nombreValidado, apellido_admin: apellidoValidado, correo_admin: correo, id_admin: id_unico };
+    const idUnico = Validador.validarNumeroEntero(id, 'El id debe ser un numero ', req, res, next)
+    return { nombre_admin: nombreValidado, apellido_admin: apellidoValidado, correo_admin: correo, id_admin: idUnico };
 }
 
 // Middleware para validar el ID

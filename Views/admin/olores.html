@@ -19,16 +19,16 @@
             <div class="menu"></div>
             <main class="col-lg-10 col-md-9">
                 <div class="sizebox222"></div>
-                
-                    <div class="navbarGamas"></div>
-                    <div class="sizebox"></div>
-                    <div id="categorias-page">
-                    <div class="color" >
+
+                <div class="navbarGamas"></div>
+                <div class="sizebox"></div>
+                <div id="categorias-page">
+                    <div class="color">
                         <div class="sizebox1"></div>
                         <div class="container text-right">
                             <h2>Olores</h2>
                         </div>
-                
+
                         <div class="input-group mb-3 txt-buscar">
                             <input type="email" class="form-control focus" placeholder="Buscar" aria-label="Buscar"
                                 aria-describedby="basic-addon2">
@@ -38,15 +38,15 @@
                                 </span>
                             </div>
                         </div>
-                
+
                         <div class="sizebox1"></div>
-                
+
                         <div class="container text-right">
                             <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#marcaModal"><i
                                     class="fas fa-plus"></i> </button>
                         </div>
                         <div class="sizebox"></div>
-                
+
                         <table class="table">
                             <thead>
                                 <tr>
@@ -59,33 +59,37 @@
 
                             </tbody>
                         </table>
-                
-                
+
+
                         <!-- Crear Modal -->
-                        <div class="modal fade" id="marcaModal" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="marcaModal" tabindex="-1" role="dialog"
+                            aria-labelledby="marcaModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header custom-modal-header">
-                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Crear Olor</h5>
+                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">
+                                            Crear Olor</h5>
                                     </div>
                                     <div class="modal-body">
                                         <div class="input-group mb-3">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text nombre"><i class="fas fa-tag"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Nombre del olor" id="nombre_olor" >
+                                            <input type="text" class="form-control" placeholder="Nombre del olor"
+                                                id="nombre_olor">
                                         </div>
-                
+
                                         <div class="custom-file mb-3">
-                                            <input type="file" class="custom-file-input" id="imagen_agregar"  >
-                                            <label class="custom-file-label" for="imagen_agregar">Seleccionar imagen</label>
+                                            <input type="file" class="custom-file-input" id="imagen_agregar">
+                                            <label class="custom-file-label" for="imagen_agregar">Seleccionar
+                                                imagen</label>
                                         </div>
-                                        <img src="" class="preview-image"  id="imagenPreview" alt="Vista previa de la imagen"
-                                            style="display: none;">
+                                        <img src="" class="preview-image" id="imagenPreview"
+                                            alt="Vista previa de la imagen" style="display: none;">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                                class="fas fa-times"></i>
                                         </button>
                                         <button type="button" class="btn btn-dark" id="agregarOloresBtn"><i
                                                 class="fas fa-plus"></i> </button>
@@ -93,23 +97,24 @@
                                 </div>
                             </div>
                         </div>
-                
-                
+
+
                         <!-- Modal Agregado exitosamente-->
-                        <div class="modal fade" id="agregado" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="agregado" tabindex="-1" role="dialog"
+                            aria-labelledby="marcaModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body">
                                         <form>
-                                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                                style="display: none;">
-                
+                                            <img src="" class="preview-image" id="imagenPreview"
+                                                alt="Vista previa de la imagen" style="display: none;">
                                             <div class="text-center mt-3">
-                                                <i class="bi bi-check-circle" style="font-size: 3.5rem; color: black;"></i>
+                                                <i class="bi bi-check-circle"
+                                                    style="font-size: 3.5rem; color: black;"></i>
                                                 <p class="mt-3" style="font-size: 1.5rem;">Éxito</p>
-                                                <p>Se ha enviado correctamente</p>
-                                                <button type="button" class="btn btn-dark botn" data-dismiss="modal">Aceptar</button>
+                                                <p>Se ha enviando correctamente</p>
+                                                <button type="button" class="btn btn-dark botn"
+                                                    data-dismiss="modal">Aceptar</button>
                                             </div>
                                         </form>
                                     </div>
@@ -117,12 +122,13 @@
                             </div>
                         </div>
                         <!-- Modal de actualizar -->
-                        <div class="modal fade" id="actualizar" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="actualizar" tabindex="-1" role="dialog"
+                            aria-labelledby="marcaModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header custom-modal-header">
-                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">Actualizar Olor
+                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">
+                                            Actualizar Olor
                                         </h5>
                                     </div>
                                     <div class="modal-body">
@@ -130,18 +136,21 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text nombre"><i class="fas fa-tag"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Nombre del olor" id="nombreOlorActuaizar" >
+                                            <input type="text" class="form-control" placeholder="Nombre del olor"
+                                                id="nombreOlorActuaizar">
                                         </div>
-                
+
                                         <div class="custom-file mb-3">
-                                            <input type="file" class="custom-file-input " id="imagen_actualizar"  >
-                                            <label class="custom-file-label" for="imagen_actualizar">Seleccionar imagen</label>
+                                            <input type="file" class="custom-file-input " id="imagen_actualizar">
+                                            <label class="custom-file-label" for="imagen_actualizar">Seleccionar
+                                                imagen</label>
                                         </div>
-                                        <img src="" class="preview-image imagede"  id="imagenPreview" alt="Vista previa de la imagen"
-                                            style="display: none;">
+                                        <img src="" class="preview-image imagede" id="imagenPreview"
+                                            alt="Vista previa de la imagen" style="display: none;">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i class="fas fa-times"></i>
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                                class="fas fa-times"></i>
                                         </button>
                                         <button type="button" class="btn btn-dark" id="confirmarActualizar"><i
                                                 class="fas fa-edit"></i> </button>
@@ -156,39 +165,43 @@
                                 <div class="modal-content">
                                     <div class="modal-body">
                                         <form>
-                                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                                style="display: none;">
-                
+                                            <img src="" class="preview-image" id="imagenPreview"
+                                                alt="Vista previa de la imagen" style="display: none;">
+
                                             <div class="text-center mt-3">
-                                                <i class="bi bi-check-circle" style="font-size: 3.5rem; color: black;"></i>
+                                                <i class="bi bi-check-circle"
+                                                    style="font-size: 3.5rem; color: black;"></i>
                                                 <p class="mt-3" style="font-size: 1.5rem;">Éxito</p>
                                                 <p>Se ha Actualizado correctamente</p>
-                                                <button type="button" class="btn btn-dark botn" data-dismiss="modal">Aceptar</button>
+                                                <button type="button" class="btn btn-dark botn"
+                                                    data-dismiss="modal">Aceptar</button>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                
+
                         <!-- Modal Eliminar-->
-                        <div class="modal fade" id="eliminar" tabindex="-1" role="dialog" aria-labelledby="marcaModalLabel"
-                            aria-hidden="true">
+                        <div class="modal fade" id="eliminar" tabindex="-1" role="dialog"
+                            aria-labelledby="marcaModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-body">
                                         <form>
-                                            <img src="" class="preview-image" id="imagenPreview" alt="Vista previa de la imagen"
-                                                style="display: none;">
-                
+                                            <img src="" class="preview-image" id="imagenPreview"
+                                                alt="Vista previa de la imagen" style="display: none;">
+
                                             <div class="text-center mt-3">
-                                                <i class="bi bi-exclamation-triangle-fill" style="font-size: 3.5rem; color: black;"></i>
+                                                <i class="bi bi-exclamation-triangle-fill"
+                                                    style="font-size: 3.5rem; color: black;"></i>
                                                 <p class="mt-3" style="font-size: 1.5rem;">Advertencia</p>
                                                 <p>¿Desea eliminar el registro?</p>
                                                 <div class="d-flex justify-content-center mt-3">
                                                     <button type="button" class="btn btn-dark mr-2 botn"
                                                         data-dismiss="modal">No</button>
-                                                    <button type="button" class="btn btn-dark botn" id="confirmarEliminar" >Si</button>
+                                                    <button type="button" class="btn btn-dark botn"
+                                                        id="confirmarEliminar">Si</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -198,35 +211,35 @@
                         </div>
                     </div>
                     <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
-                            aria-labelledby="errorModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body text-center">
-                                        <i class="bi bi-exclamation-triangle-fill text-danger"
-                                            style="font-size: 5rem;"></i>
-                                        <h5 class="mt-3">¡Ups, ocurrió un error!</h5>
-                                        <p class="mt-3">Lo sentimos, parece que hubo un error interno. Por favor,
-                                            inténtalo de nuevo más
-                                            tarde.</p>
-                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
-                                    </div>
+                        aria-labelledby="errorModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 5rem;"></i>
+                                    <h5 class="mt-3">¡Ups, ocurrió un error!</h5>
+                                    <p class="mt-3">Lo sentimos, parece que hubo un error interno. Por favor,
+                                        inténtalo de nuevo más
+                                        tarde.</p>
+                                    <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
                                 </div>
                             </div>
                         </div>
-                        <!-- Modal para Validaciones -->
-                        <div class="modal fade" id="validationsModal" tabindex="-1" role="dialog"
-                            aria-labelledby="errorModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-body text-center">
-                                        <i class="fas fa-exclamation-circle text-warning" style="font-size: 5rem;"></i>
-                                        <h5 class="mt-3">¡Validaciones!</h5>
-                                        <p class="mt-3">Por favor, revise las validaciones en los campos.</p>
-                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
-                                    </div>
+                    </div>
+                    <!-- Modal para Validaciones -->
+                    <div class="modal fade" id="validationsModal" tabindex="-1" role="dialog"
+                        aria-labelledby="errorModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    <i class="fas fa-exclamation-circle text-warning" style="font-size: 5rem;"></i>
+                                    <h5 class="mt-3">¡Validaciones!</h5>
+                                    <p class="mt-3">Por favor, revise las validaciones en los campos.</p>
+                                    <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
                 </div>
             </main>
         </div>

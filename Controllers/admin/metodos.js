@@ -53,7 +53,7 @@ async function DataAdmin(endpoint, formData, method) {
         isFetchingData = false;
     }
 }
-async function createAdmin(endpoint, formData) {
+async function createData(endpoint, formData) {
     if (isFetchingData) {
         console.log("Otra operación está en curso. Por favor, espere.");
         return { success: false, message: "Otra operación está en curso. Por favor, espere." };
@@ -65,12 +65,12 @@ async function createAdmin(endpoint, formData) {
         const response = await fetch(`${baseURL}${endpoint}`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
                 Authorization: `Bearer ${token}`
             },
-            body: JSON.stringify(formData)
+            body: formData
         });
-        return response;
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error("Error:", error);
         return { success: false, message: error.message };

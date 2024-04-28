@@ -6,9 +6,9 @@ async function handleLoginFormSubmit(event) {
     event.preventDefault();
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-
     try {
-        const token = await authenticateUser(email, password);
+        const contra = await sha256(password); 
+        const token = await authenticateUser(email, contra);
         saveTokenToSessionStorage(token); 
         window.location.href = "menu.html";
     } catch (error) {
