@@ -8,6 +8,7 @@ const admin = require('./modulos/admin/rutas');
 const marcas = require('./modulos/marcas/rutas');
 const pedidos = require('./modulos/pedidos/rutas');
 const olores = require('./modulos/olores/rutas');
+const descuentos = require('./modulos/descuentos/rutas');
 const app = express(); 
 const error = require('./red/errors'); 
 const cors = require('cors');
@@ -25,10 +26,11 @@ app.set('port', config.app.port);
 app.use('/api/categorias', categoria); 
 app.use('/api/inventarios', inventarios);
 app.use('/api/login', Login); 
-app.use('/api/admin', admin)
-app.use('/api/marcas', marcas)
-app.use('/api/olores', olores)
+app.use('/api/admin', admin);
+app.use('/api/marcas', marcas);
+app.use('/api/olores', olores);
 app.use('/api/pedidos', pedidos);
+app.use('/api/descuentos', descuentos);
 app.use(error); 
 
 module.exports = app; 

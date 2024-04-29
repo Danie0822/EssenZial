@@ -21,6 +21,8 @@ function ejecutarConsulta(sql, params) {
         });
     });
 }
+
+
 // Función para obtener todos los registros de una tabla
 function todos(tabla) {
     const sql = `SELECT * FROM ??`;
@@ -56,6 +58,13 @@ function query(tabla, consulta) {
     const sql = `SELECT * FROM ?? WHERE ?`;
     return ejecutarConsulta(sql, [tabla, consulta]);
 }
+
+//Query personalizada para seleccionar olor y todas gamas sin imagen
+function querySelect(fields, tableName) {
+    const sql = `SELECT ${fields.join(', ')} FROM ${tableName}`;
+    return ejecutarConsulta(sql);
+}
+
 
 // Función para ejecutar un procedimiento almacenado
 function ejecutarProcedimiento(nombreProcedimiento, parametros) {
@@ -105,6 +114,7 @@ module.exports = {
     eliminar,
     actualizar,
     query,
+    querySelect,
     ejecutarProcedimiento,
     login
 };

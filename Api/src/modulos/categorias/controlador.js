@@ -1,7 +1,9 @@
 const fs = require('fs').promises;
 
+const DATA = ['id_categoria', 'nombre_categoria'];
 const TABLE_NAME = 'tb_categorias';
 const ID_FIELD = 'id_categoria';
+const NOMBRE = 'nombre_categoria';
 
 module.exports = function (db) {
     async function todos() {
