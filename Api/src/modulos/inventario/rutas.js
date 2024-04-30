@@ -29,7 +29,7 @@ const validarIdUpdate = [
 function validar(req, res, next) {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        return respuestas.error(req, res, 'Error en la validación', 400, errors.array());
+        return respuestas.error(req, res, 'Error en la validación', 410, errors.array());
     }
     next();
 }
@@ -63,6 +63,7 @@ async function unoPorId(req, res, next){
 
 async function agregar(req, res, next){
     try{
+        console.log(req.body);
         await controlador.agregar(req.body);
         respuestas.success(req, res, 'Inventario agregado', 200);
 

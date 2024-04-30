@@ -9,8 +9,8 @@ const manejarValidaciones = () => abrirModal(validationsModal);
 const myActualizar = new bootstrap.Modal(obtenerElemento('actualizar'));
 const myGuardar = new bootstrap.Modal(obtenerElemento('guardar'));
 const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
-const myActualizado = new bootstrap.Modal(obtenerElemento('actualizado'));
-const myAgregado = new bootstrap.Modal(obtenerElemento('agregado'));
+const myVer = new bootstrap.Modal(obtenerElemento('detalles'));
+const myPuntaje = new bootstrap.Modal(obtenerElemento('valoracionesModal'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
 
@@ -106,12 +106,21 @@ const obtenerMarcas = async () => {
     }
 };
 
-
+async function obtenerCmb(){
+    try {
+        await obtenerOlores();
+        await obtenerCategorias();
+        await obtenerDescuentos();
+        await obtenerMarcas();
+    } catch (error) {
+        console.error('Error al cargar los datos:', error);
+    }
+}
 
 //Funcion de obtener todos los productos del inventario
 const obtenerInventario = async () => {
     try {
-        const { success, data } = await fetchData('/inventarios');
+        const { success, data } = await fetchData('/inventario');
         const tbody = obtenerElemento('tableBody');
         tbody.innerHTML = '';
 
@@ -123,10 +132,10 @@ const obtenerInventario = async () => {
                     <td>$${precio_inventario}</td>
                     <td>
 
-                    <button class="btn btn-dark actualizar"><i class="fas fa-edit"></i></button>  
-                    <button type="button" class="btn btn-dark"><i class="fas fa-info-circle"></i></button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-star"></i></button>
-                    <button type="button" class="btn btn-dark"><i class="fas fa-trash-alt"></i> </button>
+                    <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_inventario})"><i class="fas fa-edit"></i></button>  
+                    <button type="button" class="btn btn-dark" onclick="abrirModalVer(${id_inventario})"><i class="fas fa-info-circle"></i></button>
+                    <button type="button" class="btn btn-dark" onclick="abrirModalPuntaje${id_inventario}"><i class="fas fa-star"></i></button>
+                    <button type="button" class="btn btn-dark" onclick="abrirModalEliminar(${id_inventario})"><i class="fas fa-trash-alt"></i> </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -139,41 +148,87 @@ const obtenerInventario = async () => {
         manejarError();
     }
 };
-
-
+//Abrir modal para agregar inventario
+async function abrirAgregar() {
+    abrirModal(myGuardar);
+    obtenerCmb();
+}
 
 const limpiarFormulario = () => {
     document.querySelectorAll('.form-control').forEach(input => input.value = "");
 }
+
+//Funcion para abrir modal de editar 
+const abrirModalEditar = (idInventarios) =>{
+    if(idInventarios){
+        mostrarInventariosId(idInventarios);
+        idIventario = idInventarios;
+        abrirModal(myActualizar);
+    }
+}
+
+//Funcion para abrir modal de eliminar
+const abrirModalEliminar = (idIventarios) =>{
+    if(idIventarios){
+        idIventario = idIventarios;
+        abrirModal(myEliminar);
+    }else{
+        manejarError();
+    }
+
+}
+//Funcion para abrir modal de ver
+const abrirModalVer = (idIventarios) =>{
+    if(idInventarios){
+        idIventario = idIventarios;
+        abrirModal(myVer);
+    }else{
+        manejarError();
+    }
+
+}
+//Funcion para abrir modal de puntuacion
+const abrirModalPuntaje = (idInventarios) =>{
+    if(idInventarios){
+        idIventario = idInventarios;
+        abrirModal(myPuntaje);
+    }else{
+        manejarError();
+    }
+
+
+}
+
 //Creando funcion para agregar inventario
 const agregarInventario = async () => {
     try {
-        const nombre_inventario = obtenerElemento("nombreProducto").value;
-        const cantidad_inventario = obtenerElemento("cantidadProducto").value;
-        const descripcion_inventario = obtenerElemento("descripcionProducto").value;
-        const precio_inventario = obtenerElemento("precioProducto").value;
-        const id_olor = obtenerElemento("olorProducto").value;
-        const id_categoria = obtenerElemento("categoriaProducto").value;
-        const id_marca = obtenerElemento("marcaProducto").value;
-        const id_descuento = obtenerElemento("descuentoSeleccionado").value;
+        const nombreInventario = obtenerElemento("nombreProducto").value;
+        const cantidadInventario = obtenerElemento("cantidadProducto").value;
+        const descripcionInventario = obtenerElemento("descripcionProducto").value;
+        const precioInventario = obtenerElemento("precioProducto").value;
+        const idOlor = obtenerElemento("olorProducto").value;
+        const idCategoria = obtenerElemento("categoriaProducto").value;
+        const idMarca = obtenerElemento("marcaProducto").value;
+        const idDescuento = obtenerElemento("descuentoSeleccionado").value;
 
-        if (!validaciones.contieneSoloLetrasYNumeros(nombre_inventario)) {
+        if (!validaciones.contieneSoloLetrasYNumeros(nombre_inventario) || !validaciones.longitudMaxima(nombre_inventario, 250)) {
             manejarValidaciones();
         } else {
-            const formData = new FormData();
-            formData.append('nombre_inventario', nombre_inventario);
-            formData.append('cantidad_inventario', cantidad_inventario);
-            formData.append('descripcion_inventario', descripcion_inventario);
-            formData.append('precio_inventario', precio_inventario);
-            formData.append('id_olor', id_olor);
-            formData.append('id_categoria', id_categoria);
-            formData.append('id_marca', id_marca);
-            formData.append('id_descuento', id_descuento);
+            var inventarioData = {
+                nombre_inventario: nombreInventario,
+                cantidad_inventario: cantidadInventario,
+                descripcion_inventario: descripcionInventario,
+                precio_inventario: precioInventario,
+                id_olor: idOlor,
+                id_categoria: idCategoria,
+                id_marca: idMarca,
+                id_descuento: idDescuento
+            };
 
-            const { success } = await createData("/inventarios/save", formData);
-            if (success) {
+            const  success = await DataAdmin("/inventario/save", inventarioData,'POST');
+            if (success.status == 200) {
                 obtenerInventario();
-                cerrarModal(myAgregar);
+                cerrarModal(myGuardar);
                 setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
 
             }
@@ -185,19 +240,6 @@ const agregarInventario = async () => {
        manejarError();
     }
 };
-
-//Abrir modal para agregar
-async function abrirAgregar() {
-    abrirModal(myGuardar);
-    try {
-        await obtenerOlores();
-        await obtenerCategorias();
-        await obtenerDescuentos();
-        await obtenerMarcas();
-    } catch (error) {
-        console.error('Error al cargar los datos:', error);
-    }
-}
 
 const actualizarInventario = async (id_inventario) => {
     try {
@@ -234,7 +276,7 @@ const actualizarInventario = async (id_inventario) => {
 
 const eliminarInventario = async (id_inventario) => {
     try {
-        const { success } = await deleteData(`/inventarios/delete/${id_inventario}`);
+        const { success } = await deleteData(`/inventario/delete/${id_inventario}`);
         if (success) {
             obtenerInventario();
             cerrarModal(myEliminar);
@@ -271,21 +313,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
-    const agregarInventarioBtn = obtenerElemento('agregarBtn');
+    const agregarInventarioBtn = obtenerElemento("agregarBtnInventario");
     agregarInventarioBtn.addEventListener('click', async () => {
         await agregarInventario();
     });
 
 });
 
-const mostrarInventario = () => {
+//Funcion para traer los datos de la base
+const obtenerInventarioDetalles = async (idIventario) =>{
     try {
-        limpiarFormularioActualizar();
-        obtenerElemento("nombreProductoAc").value = nombre_inventario;
-        obtenerElemento("cantidadProductoAc").value = cantidad_inventario;
-        obtenerElemento("descripcionProductoAc").value = descripcion_inventario;
-        obtenerElemento("precioProductoAc").value = precio_inventario;
+        // Realizar una solicitud al servidor para obtener los detalles de la categoría por su ID
+        const response = await fetchData(`/inventario/${idIventario}`); // Suponiendo que '/categorias/:id' es la ruta para obtener detalles de una categoría por su ID
+        if (response.success) {
+            // Si la solicitud fue exitosa, devolver los datos de la categoría
+            return response.data;
+        } else {
+            // Si la solicitud falla, lanzar un error
+            throw new Error('No se pudieron obtener los detalles de la categoría.');
+        }
     } catch (error) {
+        // Manejar cualquier error que ocurra durante la solicitud
+        console.error('Error al obtener los detalles de la categoría:', error);
         manejarError();
     }
 }
+
+//Funcion para asignar valores de la peticion select/id
+const mostrarInventariosId = async (idInventario) => {
+    try {
+        // Obtener los detalles de la categoría por su ID
+        const detallesInventario = await obtenerInventarioDetalles(idInventario);
+
+        // Llenar los inputs del formulario con los detalles obtenidos
+        obtenerElemento("nombreProductoAc").value = detallesInventario.nombre_inventario;
+        obtenerElemento("cantidadProductoAc").value = detallesInventario.cantidad_inventario;
+        obtenerElemento("descripcionProductoAc").value = detallesInventario.descripcion_inventario;
+        obtenerElemento("precioProductoAc").value = detallesInventario.precio_inventario;
+        obtenerElemento("oloresProductoAc").text = detallesInventario.id_olor.nombre_olor;
+
+    } catch (error) {
+        manejarError();
+    }
+};

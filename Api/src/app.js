@@ -24,7 +24,7 @@ app.use('/uploads', express.static('uploads'));
 app.set('port', config.app.port);
 //rutas 
 app.use('/api/categorias', categoria); 
-app.use('/api/inventarios', inventarios);
+app.use('/api/inventario', inventarios);
 app.use('/api/login', Login); 
 app.use('/api/admin', admin);
 app.use('/api/marcas', marcas);
