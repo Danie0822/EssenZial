@@ -25,12 +25,7 @@ async function authenticateUser(email, password) {
         const data = await response.json();
 
         if (response.ok && data.success) {
-            const token = data.data.token;
-            if (typeof token === "string") {
-                return token;
-            } else {
-                throw new Error("El token recibido no es válido");
-            }
+            return data;
         } else if (response.status === 401) {
             throw new Error("Credenciales inválidas");
         } else {
@@ -42,6 +37,10 @@ async function authenticateUser(email, password) {
     }
 }
 
-function saveTokenToSessionStorage(token) {
-    sessionStorage.setItem("token", token); // Guardar el token en sessionStorage
+function saveTokenToSessionStorage(data) {
+    console.log(data);
+    const tokenG = data.data.token; 
+    const id = data.data.id_admin;
+    sessionStorage.setItem("token", tokenG); // Guardar el token en sessionStorage
+    sessionStorage.setItem("", id); // Guardar el Id en sessionStorage
 }

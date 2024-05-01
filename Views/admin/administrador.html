@@ -41,21 +41,25 @@
                         <div class="sizebox1"></div>
                         <!-- Bonton de Agregar -->
                         <div class="container text-right">
-                            <button type="button" class="btn btn-dark" id="btnAgregar" onclick="AbrirAgregar()"><i class="fas fa-plus"></i> </button>
+                            <button type="button" class="btn btn-dark" id="btnAgregar" onclick="AbrirAgregar()"><i
+                                    class="fas fa-plus"></i> </button>
                         </div>
                         <div class="sizebox"></div>
                         <!-- Tabla -->
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Correo</th>
-                                    <th scope="col">Acciones</th>
-                                </tr>
-                            </thead>
-                            <!-- Contenido de la tabla -->
-                            <tbody id="tablaBody">
-                            </tbody>
-                        </table>
+                        
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <!-- Contenido de la tabla -->
+                                <tbody id="tablaBody">
+                                </tbody>
+                            </table>
+                        </div>
 
 
                         <!-- Modal para crear administrador -->
@@ -109,16 +113,17 @@
                                                                 class="fas fa-lock"></i></span>
                                                     </div>
                                                     <input type="password" class="form-control" id="txtClave"
-                                                        placeholder="Clave" >
+                                                        placeholder="Clave">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Footer del modal -->
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-dark"
-                                            data-dismiss="modal"><i class="fas fa-times"></i> </button>
-                                        <button type="button" class="btn btn-dark" id="btnAgregarAdmi"><i class="fas fa-plus"></i> </button>
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                                class="fas fa-times"></i> </button>
+                                        <button type="button" class="btn btn-dark" id="btnAgregarAdmi"><i
+                                                class="fas fa-plus"></i> </button>
                                     </div>
                                 </div>
                             </div>
@@ -176,8 +181,8 @@
                                         <button type="button" class="btn btn-dark" id="btnConfirmacionAct"
                                             data-dismiss="modal"><i class="fas fa-times"></i>
                                         </button>
-                                        <button type="button" class="btn btn-dark" id="confirmarActualizar"
-                                            ><i class="fas fa-edit"></i>
+                                        <button type="button" class="btn btn-dark" id="confirmarActualizar"><i
+                                                class="fas fa-edit"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -248,8 +253,8 @@
                                                 <div class="d-flex justify-content-center mt-3">
                                                     <button type="button" class="btn btn-dark mr-2 botn" id="btnDenegar"
                                                         data-dismiss="modal">No</button>
-                                                    <button type="button" class="btn btn-dark botn" id="confirmarEliminar"
-                                                        data-dismiss="modal">Si</button>
+                                                    <button type="button" class="btn btn-dark botn"
+                                                        id="confirmarEliminar" data-dismiss="modal">Si</button>
                                                 </div>
                                             </div>
                                         </form>

@@ -6,20 +6,20 @@ const seguridad = require('../seguridad/seguridad');
 const Validador = require('../recursos/validator');
 
 // Middleware para validar el formato de los datos
-function validarDatos(nombreAdmin, apellidoAdmin, correoAdmin, claveAdmin, req, res, next) {
-    const nombreValidado = Validador.validarLongitud(nombreAdmin, 255, 'El nombre debe ser obligatorio', req, res, next);
-    const apellidoValidado = Validador.validarLongitud(apellidoAdmin, 255, 'El apellido debe ser obligatorio', req, res, next);
-    const correo = Validador.validarCorreo(correoAdmin, 'El correo debe ser un formato correo', req, res, next);
-    const contra = Validador.validarLongitud(claveAdmin, 300, 'El clave debe ser obligatorio', req, res, next);
-    return { nombre_admin: nombreValidado, apellido_admin: apellidoValidado, correo_admin: correo, clave_admin: contra };
+function validarDatos(nombreCliente, apellidoCLiente, correoCliente, claveCliente, telefonoCliente, estado, req, res, next) {
+    const nombreValidado = Validador.validarLongitud(nombreCliente, 255, 'El nombre debe ser obligatorio', req, res, next);
+    const apellidoValidado = Validador.validarLongitud(apellidoCLiente, 255, 'El apellido debe ser obligatorio', req, res, next);
+    const telefono = Validador.validarLongitud(telefonoCliente, 255, 'El Telefono debe ser obligatorio', req, res, next);
+    const correo = Validador.validarCorreo(correoCliente, 'El correo debe ser un formato correo', req, res, next);
+    const contra = Validador.validarLongitud(claveCliente, 300, 'El clave debe ser obligatorio', req, res, next);
+    const estadoCliente = Validador.validarBooleano(estado, 'El estado debe ser un formato valido', req, res, next)
+    return { nombre_cliente: nombreValidado, apellido_cliente: apellidoValidado, correo_cliente: correo, clave_cliente: contra, telefono_cliente: telefono, estado_cliente: estadoCliente};
 }
 
-function validarFormatoActualizar(nombreAdmin, apellidoAdmin, correoAdmin, id, req, res, next) {
-    const nombreValidado = Validador.validarLongitud(nombreAdmin, 255, 'El nombre debe ser obligatorio', req, res, next);
-    const apellidoValidado = Validador.validarLongitud(apellidoAdmin, 255, 'El apellido debe ser obligatorio', req, res, next);
-    const correo = Validador.validarCorreo(correoAdmin, 'El correo debe ser un formato correo', req, res, next);
+function validarFormatoActualizar(id, estado, req, res, next) {
     const idUnico = Validador.validarNumeroEntero(id, 'El id debe ser un numero ', req, res, next)
-    return { nombre_admin: nombreValidado, apellido_admin: apellidoValidado, correo_admin: correo, id_admin: idUnico };
+    const estado_cliente = Validador.validarBooleano(estado, 'El estado debe ser un formato valido', req, res, next)
+    return {id_cliente: idUnico, estado_cliente: estado_cliente };
 }
 
 // Middleware para validar el ID
@@ -34,7 +34,7 @@ function validarID(id, req, res, next) {
 router.get('/', seguridad('admin'), obtenerTodos);
 router.get('/:id', seguridad('admin'), obtenerPorId);
 router.delete('/delete/:id', seguridad('admin'), eliminarPorId);
-router.post('/save', seguridad('admin'), agregar);
+router.post('/save', seguridad('cliente'), agregar);
 router.put('/update', seguridad('admin'), actualizar);
 
 // Funciones
@@ -69,7 +69,7 @@ async function eliminarPorId(req, res, next) {
 
 async function agregar(req, res, next) {
     try {
-        const validaciones = validarDatos(req.body.nombre_admin, req.body.apellido_admin, req.body.correo_admin, req.body.clave_admin, req, res, next);
+        const validaciones = validarDatos(req.body.nombre_cliente, req.body.apellido_cliente, req.body.correo_cliente, req.body.clave_cliente,req.body.telefono_cliente,req.body.estado_cliente, req, res, next);
         await controlador.agregar(validaciones);
         respuestas.success(req, res, 'Elemento insertado', 200);
     } catch (error) {
@@ -79,7 +79,7 @@ async function agregar(req, res, next) {
 
 async function actualizar(req, res, next) {
     try {
-        const validaciones = validarFormatoActualizar(req.body.nombre_admin, req.body.apellido_admin, req.body.correo_admin, req.body.id_admin, req, res, next);
+        const validaciones = validarFormatoActualizar(req.body.id_cliente, req.body.estado_cliente, req, res, next);
         await controlador.actualizar(validaciones);
         respuestas.success(req, res, 'Elemento actualizado', 200);
     } catch (error) {

@@ -23,7 +23,13 @@ class Validador {
         }
         return correo.trim();
     }
-
+    static validarBooleano(valor, mensajeError, req, res, next) {
+        if (typeof valor !== 'boolean') {
+            respuestas.error(req, res, mensajeError, 401);
+            return next('route');
+        }
+        return valor;
+    }
     static validarNumeroEntero(numero, mensajeError, req, res, next) {
         if (!Number.isInteger(numero = parseInt(numero)) || numero <= 0) {
             respuestas.error(req, res, mensajeError, 401);

@@ -45,19 +45,21 @@
                                     class="fas fa-plus"></i> </button>
                         </div>
                         <div class="sizebox"></div>
+                        <div class="table-responsive">
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Imagen</th>
+                                        <th scope="col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaBody">
 
-                        <table class="table ">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nombre</th>
-                                    <th scope="col">Imagen</th>
-                                    <th scope="col">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaBody">
-                               
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+
 
 
                         <!-- Crear Modal -->
@@ -74,7 +76,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text nombre"><i class="fas fa-tag"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Nombre de la marca " id="nombre_marca">
+                                            <input type="text" class="form-control" placeholder="Nombre de la marca "
+                                                id="nombre_marca">
                                         </div>
 
                                         <div class="custom-file mb-3">
@@ -89,7 +92,8 @@
                                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i
                                                 class="fas fa-times"></i>
                                         </button>
-                                        <button type="button" class="btn btn-dark" id="agregarMarcasBtn" ><i class="fas fa-plus"></i> </button>
+                                        <button type="button" class="btn btn-dark" id="agregarMarcasBtn"><i
+                                                class="fas fa-plus"></i> </button>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +138,8 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text nombre"><i class="fas fa-tag"></i></span>
                                             </div>
-                                            <input type="text" class="form-control" placeholder="Nombre de la marca" id="nombreMarcasActuaizar">
+                                            <input type="text" class="form-control" placeholder="Nombre de la marca"
+                                                id="nombreMarcasActuaizar">
                                         </div>
 
                                         <div class="custom-file mb-3">
@@ -148,7 +153,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i
                                                 class="fas fa-times"></i></button>
-                                        <button type="button" class="btn btn-dark"  id="confirmarActualizar" ><i class="fas fa-edit"></i> </button>
+                                        <button type="button" class="btn btn-dark" id="confirmarActualizar"><i
+                                                class="fas fa-edit"></i> </button>
                                     </div>
                                 </div>
                             </div>
@@ -197,7 +203,7 @@
                                                     <button type="button" class="btn btn-dark mr-2 botn"
                                                         data-dismiss="modal">No</button>
                                                     <button type="button" class="btn btn-dark botn"
-                                                       id="confirmarEliminar">Si</button>
+                                                        id="confirmarEliminar">Si</button>
                                                 </div>
                                             </div>
                                         </form>

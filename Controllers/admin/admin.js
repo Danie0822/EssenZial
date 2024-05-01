@@ -65,8 +65,13 @@ function AbrirAgregar() {
 // Const para pasar cosas que se necesita para eleminar en el modal 
 const abrirModalEliminar = (idUnico) => {
     if (idUnico) {
-        id = idUnico;
-        abrirModal(myEliminar);
+        const idAdminG = sessionStorage.getItem("id_admin");
+        if (idUnico == idAdminG) {
+            manejarValidaciones();
+        } else {
+            id = idUnico;
+            abrirModal(myEliminar);
+        }
     } else {
         manejarError();
     }
