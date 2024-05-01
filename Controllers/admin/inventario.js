@@ -15,13 +15,12 @@ const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
 
 
-let idIventario = null;
+let idInventario = null;
 
-//Obtenemos todas lo datos necesarios para cargar los 4 comboboxes
-const obtenerOlores = async () => {
+const obtenerOlores = async (idCombobox) => {
     try {
         const { success, data } = await fetchData('/olores/'); // Suponiendo que '/olores' es la ruta para obtener los olores
-        const selectOlores = document.getElementById('olorProducto'); // Obtener el elemento select
+        const selectOlores = document.getElementById(idCombobox); // Obtener el elemento select usando el ID proporcionado
 
         if (success) {
             selectOlores.innerHTML = ''; // Limpiar opciones anteriores
@@ -40,10 +39,10 @@ const obtenerOlores = async () => {
     }
 };
 
-const obtenerCategorias = async () => {
+const obtenerCategorias = async (idCmb) => {
     try {
         const { success, data } = await fetchData('/categorias/');
-        const selectOlores = document.getElementById('categoriaProducto');
+        const selectOlores = document.getElementById(idCmb);
 
         if (success) {
             selectOlores.innerHTML = '';
@@ -62,10 +61,10 @@ const obtenerCategorias = async () => {
     }
 };
 
-const obtenerDescuentos = async () => {
+const obtenerDescuentos = async (idCmb) => {
     try {
         const { success, data } = await fetchData('/descuentos/especifico');
-        const selectOlores = document.getElementById('descuentoSeleccionado');
+        const selectOlores = document.getElementById(idCmb);
 
         if (success) {
             selectOlores.innerHTML = '';
@@ -84,10 +83,10 @@ const obtenerDescuentos = async () => {
     }
 };
 
-const obtenerMarcas = async () => {
+const obtenerMarcas = async (idCmb) => {
     try {
         const { success, data } = await fetchData('/marcas/');
-        const selectOlores = document.getElementById('marcaProducto');
+        const selectOlores = document.getElementById(idCmb);
 
         if (success) {
             selectOlores.innerHTML = '';
@@ -105,13 +104,24 @@ const obtenerMarcas = async () => {
         console.error('Error al obtener las marcas:', error);
     }
 };
-
-async function obtenerCmb(){
+//Cargando comboBoxes para modal de agregar
+async function obtenerCmb() {
     try {
-        await obtenerOlores();
-        await obtenerCategorias();
-        await obtenerDescuentos();
-        await obtenerMarcas();
+        await obtenerOlores("olorProducto");
+        await obtenerCategorias("categoriaProducto");
+        await obtenerDescuentos("descuentoSeleccionado");
+        await obtenerMarcas("marcaProducto");
+    } catch (error) {
+        console.error('Error al cargar los datos:', error);
+    }
+}
+//Cargando comboBoxes para modal de actualizar
+async function obtenerCmbAc() {
+    try {
+        await obtenerOlores("oloresProductoAc");
+        await obtenerCategorias("categoriaProductoAc");
+        await obtenerDescuentos("descuentoSeleccionadoAc");
+        await obtenerMarcas("marcaProductoAc");
     } catch (error) {
         console.error('Error al cargar los datos:', error);
     }
@@ -148,6 +158,7 @@ const obtenerInventario = async () => {
         manejarError();
     }
 };
+
 //Abrir modal para agregar inventario
 async function abrirAgregar() {
     abrirModal(myGuardar);
@@ -159,40 +170,43 @@ const limpiarFormulario = () => {
 }
 
 //Funcion para abrir modal de editar 
-const abrirModalEditar = (idInventarios) =>{
-    if(idInventarios){
+const abrirModalEditar = (idInventarios) => {
+    if (idInventarios) {
         mostrarInventariosId(idInventarios);
-        idIventario = idInventarios;
+        idInventario = idInventarios;
         abrirModal(myActualizar);
     }
 }
 
 //Funcion para abrir modal de eliminar
-const abrirModalEliminar = (idIventarios) =>{
-    if(idIventarios){
-        idIventario = idIventarios;
+const abrirModalEliminar = (idInventarios) => {
+    if (idInventarios) {
+        idInventario = idInventarios;
         abrirModal(myEliminar);
-    }else{
+    } else {
         manejarError();
     }
 
 }
+
 //Funcion para abrir modal de ver
-const abrirModalVer = (idIventarios) =>{
-    if(idInventarios){
-        idIventario = idIventarios;
+const abrirModalVer = (idInventarios) => {
+    if (idInventarios) {
+        verInventario(idInventarios);
+        idIventario = idInventarios;
         abrirModal(myVer);
-    }else{
+    } else {
         manejarError();
     }
 
 }
+
 //Funcion para abrir modal de puntuacion
-const abrirModalPuntaje = (idInventarios) =>{
-    if(idInventarios){
+const abrirModalPuntaje = (idInventarios) => {
+    if (idInventarios) {
         idIventario = idInventarios;
         abrirModal(myPuntaje);
-    }else{
+    } else {
         manejarError();
     }
 
@@ -211,7 +225,7 @@ const agregarInventario = async () => {
         const idMarca = obtenerElemento("marcaProducto").value;
         const idDescuento = obtenerElemento("descuentoSeleccionado").value;
 
-        if (!validaciones.contieneSoloLetrasYNumeros(nombre_inventario) || !validaciones.longitudMaxima(nombre_inventario, 250)) {
+        if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250)) {
             manejarValidaciones();
         } else {
             var inventarioData = {
@@ -225,7 +239,7 @@ const agregarInventario = async () => {
                 id_descuento: idDescuento
             };
 
-            const  success = await DataAdmin("/inventario/save", inventarioData,'POST');
+            const success = await DataAdmin("/inventario/save", inventarioData, 'POST');
             if (success.status == 200) {
                 obtenerInventario();
                 cerrarModal(myGuardar);
@@ -235,37 +249,46 @@ const agregarInventario = async () => {
         }
 
     } catch (error) {
-       
+
         console.log(error);
-       manejarError();
+        manejarError();
     }
 };
 
-const actualizarInventario = async (id_inventario) => {
+//Funcion para actualizar los datos 
+const actualizarInventario = async (idInventario) => {
     try {
-        const nombre_inventario = obtenerElemento("nombreInventario").value;
-        const cantidad_inventario = obtenerElemento("cantidadInventario").value;
-        const descripcion_inventario = obtenerElemento("descripcionInventario").value;
-        const precio_inventario = obtenerElemento("precioInventario").value;
+        const idInvent = idInventario;
+        const nombreInventario = obtenerElemento("nombreProductoAc").value;
+        const cantidadInventario = obtenerElemento("cantidadProductoAc").value;
+        const descripcionInventario = obtenerElemento("descripcionProductoAc").value;
+        const precioInventario = obtenerElemento("precioProductoAc").value;
+        const idOlor = obtenerElemento("oloresProductoAc").value;
+        const idCategoria = obtenerElemento("categoriaProductoAc").value;
+        const idMarca = obtenerElemento("marcaProductoAc").value;
+        const idDescuento = obtenerElemento("descuentoSeleccionadoAc").value;
 
-        if (!validaciones.validacionNombres(nombre_inventario) || !validaciones.longitudMaxima(nombre_inventario, 255) || !validaciones.esNumeroEntero(cantidad_inventario) || !validaciones.validacionNombres(descripcion_inventario) || !validaciones.longitudMaxima(descripcion_inventario, 450) || !validaciones.esNumeroDecimal(precio_inventario) || !validaciones.esNumeroEntero(precio_inventario)) {
+        if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250)) {
             manejarValidaciones();
         } else {
-            const formData = new FormData();
-            formData.append('id_inventario', id_inventario);
-            formData.append('nombre_inventario', nombre_inventario);
-            formData.append('cantidad_inventario', cantidad_inventario);
-            formData.append('descripcion_inventario', descripcion_inventario);
-            formData.append('precio_inventario', precio_inventario);
-            const { success } = await createData("/inventarios/update", formData);
-            if (success) {
+            var inventarioData = {
+                id_inventario: idInvent,
+                nombre_inventario: nombreInventario,
+                cantidad_inventario: cantidadInventario,
+                descripcion_inventario: descripcionInventario,
+                precio_inventario: precioInventario,
+                id_olor: idOlor,
+                id_categoria: idCategoria,
+                id_marca: idMarca,
+                id_descuento: idDescuento
+            };
+
+            const success = await DataAdmin("/inventario/update", inventarioData, 'PUT');
+            if (success.status == 200) {
                 obtenerInventario();
-                limpiarFormularioActualizar();
                 cerrarModal(myActualizar);
                 setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('actualizado'))), 500);
 
-            } else {
-                manejarError();
             }
         }
     } catch (error) {
@@ -273,10 +296,10 @@ const actualizarInventario = async (id_inventario) => {
         manejarError();
     }
 }
-
-const eliminarInventario = async (id_inventario) => {
+//Funcion para eiminar un inventario
+const eliminarInventario = async (idInventario) => {
     try {
-        const { success } = await deleteData(`/inventario/delete/${id_inventario}`);
+        const { success } = await deleteData(`/inventario/delete/${idInventario}`);
         if (success) {
             obtenerInventario();
             cerrarModal(myEliminar);
@@ -291,6 +314,7 @@ const eliminarInventario = async (id_inventario) => {
 
 };
 
+//Funcion DOM para cargar acciones
 document.addEventListener("DOMContentLoaded", function () {
 
     obtenerInventario();
@@ -298,16 +322,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const confirmar_eliminar_button = obtenerElemento('confirmarEliminar');
     confirmar_eliminar_button.addEventListener('click', async () => {
         if (idInventario) {
-            await eliminarInventario(id_inventario);
-            id_inventario = null;
+            await eliminarInventario(idInventario);
+            idInventario = null;
         }
     });
 
-    const confirmar_actualizar_btn = obtenerElemento('actualizadoBtn');
+    const confirmar_actualizar_btn = obtenerElemento("actualizarBtn");
     confirmar_actualizar_btn.addEventListener('click', async () => {
-        if (id_inventario) {
-            await actualizarInventario(id_inventario);
-            id_inventario = null;
+        if (idInventario) {
+            await actualizarInventario(idInventario);
+            idInventario = null;
 
         }
 
@@ -320,8 +344,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-//Funcion para traer los datos de la base
-const obtenerInventarioDetalles = async (idIventario) =>{
+//Funcion para traer los datos de la base acerca de los inventarios segun el ID
+const obtenerInventarioDetalles = async (idIventario) => {
     try {
         // Realizar una solicitud al servidor para obtener los detalles de la categoría por su ID
         const response = await fetchData(`/inventario/${idIventario}`); // Suponiendo que '/categorias/:id' es la ruta para obtener detalles de una categoría por su ID
@@ -345,14 +369,60 @@ const mostrarInventariosId = async (idInventario) => {
         // Obtener los detalles de la categoría por su ID
         const detallesInventario = await obtenerInventarioDetalles(idInventario);
 
-        // Llenar los inputs del formulario con los detalles obtenidos
-        obtenerElemento("nombreProductoAc").value = detallesInventario.nombre_inventario;
-        obtenerElemento("cantidadProductoAc").value = detallesInventario.cantidad_inventario;
-        obtenerElemento("descripcionProductoAc").value = detallesInventario.descripcion_inventario;
-        obtenerElemento("precioProductoAc").value = detallesInventario.precio_inventario;
-        obtenerElemento("oloresProductoAc").text = detallesInventario.id_olor.nombre_olor;
+        // Verificar si hay algún elemento en el array y si es así, obtener el primer elemento
+        if (detallesInventario.length > 0) {
+            const inventario = detallesInventario[0];
+
+            // Llenar los inputs del formulario con los detalles obtenidos
+            obtenerElemento("nombreProductoAc").value = inventario.nombre_inventario;
+            obtenerElemento("cantidadProductoAc").value = inventario.cantidad_inventario;
+            obtenerElemento("descripcionProductoAc").value = inventario.descripcion_inventario;
+            obtenerElemento("precioProductoAc").value = inventario.precio_inventario;
+            obtenerCmbAc();
+
+        } else {
+            console.error('No se encontraron detalles de inventario para el ID proporcionado.');
+            manejarError();
+        }
 
     } catch (error) {
         manejarError();
     }
+};
+
+const verInventario = async (idInventario) => {
+    try {
+        const detalles = await obtenerInventarioDetalles(idInventario);
+        if (detalles.length > 0) {
+            const inventario = detalles[0];
+
+            obtenerElemento("nombreP").innerText = inventario.nombre_inventario;
+            obtenerElemento("cantidadP").innerText = inventario.cantidad_inventario;
+            obtenerElemento("descriP").innerText = inventario.descripcion_inventario;
+            obtenerElemento("precioP").innerText = "$" + inventario.precio_inventario;
+            const idCategoria = inventario.id_categoria;
+            const response = await fetchData(`/categorias/${idCategoria}`); // Suponiendo que '/categorias/:id' es la ruta para obtener detalles de una categoría por su ID
+            if (response.success) {
+                const datos = response.data;
+                console.log(datos.nombre_categoria);
+                
+                if(datos.length > 0){
+                    const cate = datos[0];
+                    const nombre = cate.nombre_categoria;
+                    obtenerElemento("categoriaP").innerText = nombre || 'No disponible';
+                }  
+            } else {
+                // Si la solicitud falla, lanzar un error
+                throw new Error('No se pudieron obtener los detalles de la categoría.');
+            }
+
+
+           
+        }
+    } catch (error) {
+        // Manejar cualquier error que ocurra durante la solicitud
+        console.error('Error al obtener los detalles de la categoría:', error);
+        manejarError();
+    }
+
 };

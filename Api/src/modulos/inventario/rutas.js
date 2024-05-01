@@ -55,6 +55,7 @@ async function unoPorId(req, res, next){
     try{
         const item = await controlador.uno(req.params.id);
         respuestas.success(req, res, item, 200);
+        
     }catch(error){
         next(error);
     }
