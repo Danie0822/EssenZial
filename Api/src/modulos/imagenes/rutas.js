@@ -36,7 +36,7 @@ function validarID(id, req, res, next) {
 //RUTAS
 router.get('/', seguridad('admin'), todos);
 router.get('/:id', seguridad('admin'), uno);
-router.post('/save', seguridad('admin'), upload.array('imagen', 4), agregar);
+router.post('/save', seguridad('admin'), upload.single('imagen'), agregar);
 router.put('/update', seguridad('admin'), upload.array('imagen'), actualizar);
 router.delete('/delete/:id', seguridad('admin'), eliminar);
 
