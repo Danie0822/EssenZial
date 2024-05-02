@@ -12,6 +12,7 @@ const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
 const myVer = new bootstrap.Modal(obtenerElemento('detalles'));
 const myPuntaje = new bootstrap.Modal(obtenerElemento('valoracionesModal'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
+const myImagenes = new bootstrap.Modal(obtenerElemento('imagenes'));
 const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
 
 
@@ -146,6 +147,7 @@ const obtenerInventario = async () => {
                     <button type="button" class="btn btn-dark" onclick="abrirModalVer(${id_inventario})"><i class="fas fa-info-circle"></i></button>
                     <button type="button" class="btn btn-dark" onclick="abrirModalPuntaje${id_inventario}"><i class="fas fa-star"></i></button>
                     <button type="button" class="btn btn-dark" onclick="abrirModalEliminar(${id_inventario})"><i class="fas fa-trash-alt"></i> </button>
+                    <button type="button" class="btn btn-dark" onclick="abrirImagenes(${id_inventario})"><i class="fas fa-image"></i></button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -159,9 +161,14 @@ const obtenerInventario = async () => {
     }
 };
 
+function abrirImagenes(idInventario) {
+    // Redirigir a la página de imágenes.html con el ID como parámetro en la URL
+    window.location.href = `imagenes.html?id=${idInventario}`;
+}
+
 //Abrir modal para agregar inventario
 async function abrirAgregar() {
-    abrirModal(myGuardar);
+    abrirModal(myImagenes);
     obtenerCmb();
 }
 
@@ -405,19 +412,15 @@ const verInventario = async (idInventario) => {
             if (response.success) {
                 const datos = response.data;
                 console.log(datos.nombre_categoria);
-                
-                if(datos.length > 0){
-                    const cate = datos[0];
-                    const nombre = cate.nombre_categoria;
-                    obtenerElemento("categoriaP").innerText = nombre || 'No disponible';
-                }  
+                const nombre = datos.nombre_categoria;
+                obtenerElemento("categoriaP").innerText = nombre || 'No disponible';
             } else {
                 // Si la solicitud falla, lanzar un error
                 throw new Error('No se pudieron obtener los detalles de la categoría.');
             }
 
 
-           
+
         }
     } catch (error) {
         // Manejar cualquier error que ocurra durante la solicitud

@@ -295,8 +295,8 @@
                                                 style="font-weight: bold;">Categoría del producto</label>
                                             <p id="categoriaP"></p>
                                         </div>
-                                        
-                                       
+
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i
@@ -337,17 +337,19 @@
                                                             class="form-control" required>
                                                     </div>
                                                     <div>
-                                                        <label for="descripcionProductoAc" class="form-label">Descripción
+                                                        <label for="descripcionProductoAc"
+                                                            class="form-label">Descripción
                                                             del
                                                             producto</label>
-                                                        <textarea name="descripcionProductoAc" id="descripcionProductoAc"
-                                                            class="form-control"></textarea>
+                                                        <textarea name="descripcionProductoAc"
+                                                            id="descripcionProductoAc" class="form-control"></textarea>
                                                     </div>
                                                     <div>
                                                         <label for="precioProductoAc" class="form-label">Precio del
                                                             producto(US$)</label>
-                                                        <input id="precioProductoAc" type="number" name="precioProductoAc"
-                                                            min="1" step="1" class="form-control" required>
+                                                        <input id="precioProductoAc" type="number"
+                                                            name="precioProductoAc" min="1" step="1"
+                                                            class="form-control" required>
                                                     </div>
 
                                                 </div>
@@ -390,7 +392,8 @@
                                                     <div>
                                                         <label for="descuentoSeleccionadoAc" class="form-label">Elige el
                                                             descuento</label>
-                                                        <select class="form-select combobox" id="descuentoSeleccionadoAc"
+                                                        <select class="form-select combobox"
+                                                            id="descuentoSeleccionadoAc"
                                                             aria-label="Default select example">
                                                         </select>
                                                     </div>
@@ -403,7 +406,8 @@
                                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i
                                                 class="fas fa-times"></i>
                                         </button>
-                                        <button type="button" class="btn btn-dark" id="actualizarBtn"><i class="fas fa-plus"></i> </button>
+                                        <button type="button" class="btn btn-dark" id="actualizarBtn"><i
+                                                class="fas fa-plus"></i> </button>
                                     </div>
                                 </div>
                             </div>
@@ -509,6 +513,42 @@
                                         <h5 class="mt-3">¡Validaciones!</h5>
                                         <p class="mt-3">Por favor, revise las validaciones en los campos.</p>
                                         <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Modal para agregar las imagenes-->
+                        <div class="modal fade" id="imagenes" tabindex="-1" role="dialog"
+                            aria-labelledby="detallesModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header custom-modal-header">
+                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">
+                                            Agrega las imágenes para tus productos
+                                        </h5>
+                                    </div>
+                                    <!--Inicio del cuerpo del modal de imagenes-->
+                                    <div class="modal-body">
+                                        <h6 class="modal-title text-center" id="marcaModalLabel" style="width: 100%; color: black;">
+                                           Solo puedes adjuntar 4 imágenes
+                                        </h6>
+                                        <div class="custom-file mb-3">
+                                            <input type="file" class="custom-file-input txti" id="imagen_agregar">
+                                            <label class="custom-file-label txti" for="imagen_agregar">Seleccionar
+                                                imagen</label>
+                                        </div>
+                                        <img src="" class="preview-image" id="imagenPreview"
+                                            alt="Vista previa de la imagen">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                                class="fas fa-times"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-dark" id="agregarImagenBtn"><i
+                                            class="fas fa-plus"></i>
+                                    </button>
                                     </div>
                                 </div>
                             </div>
