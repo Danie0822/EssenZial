@@ -36,14 +36,23 @@ function validarID(id, req, res, next) {
 //RUTAS
 router.get('/', seguridad('admin'), todos);
 router.get('/:id', seguridad('admin'), uno);
-router.post('/save', seguridad('admin'), upload.single('imagen'), agregar);
-router.put('/update', seguridad('admin'), upload.single('imagen'), actualizar);
+router.post('/save', seguridad('admin'), upload.array('imagen', 4), agregar);
+router.put('/update', seguridad('admin'), upload.array('imagen'), actualizar);
 router.delete('/delete/:id', seguridad('admin'), eliminar);
 
 // Funciones
 async function todos(req, res, next) {
     try {
         const categoria = await controlador.todos();
+        respuestas.success(req, res, categoria, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function uno(req, res, next) {
+    try {
+        const imagen = await controlador.uno(req.params.id);
         respuestas.success(req, res, categoria, 200);
     } catch (error) {
         next(error);
@@ -62,13 +71,24 @@ async function eliminar(req, res, next) {
 
 async function agregar(req, res, next) {
     try {
-        const datosValidados = validarDatos(req.body.id_inventario, req.file ? `uploads/productos/${req.file.filename}` : null, req, res, next);
-        await controlador.agregar(datosValidados.id_inventario, datosValidados.ruta_imagen);
-        respuestas.success(req, res, 'Imagenes agregadas correctamente', 200);
+        // Verificar si se ha subido un archivo
+        if (!req.file) {
+            throw new Error('No se ha subido ninguna imagen.');
+        }
+
+        const filePath = `uploads/productos/${req.file.filename}`;
+        const id_inventario = req.body.id_inventario;
+
+        // Agregar la imagen a la base de datos
+        await controlador.agregar(filePath, id_inventario);
+
+        // Enviar respuesta al cliente
+        respuestas.success(req, res, 'Imagen agregada correctamente', 200);
     } catch (error) {
         next(error);
     }
 }
+
 
 
 async function actualizar(req, res, next) {

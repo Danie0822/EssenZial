@@ -48,6 +48,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th scope="col">Imagen</th>
                                     <th scope="col">Ruta de la imagen</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
@@ -77,19 +78,73 @@
                                             Solo puedes adjuntar 4 imágenes
                                         </h6>
                                         <div class="custom-file mb-3">
-                                            <input type="file" class="custom-file-input txti" id="imagen_agregar">
-                                            <label class="custom-file-label txti" for="imagen_agregar">Seleccionar
-                                                imagen</label>
+                                            <input type="file" class="custom-file-input txti" id="imagenes_agregar"
+                                                accept="image/*" multiple>
+                                            <label class="custom-file-label txti" for="imagenes_agregar">Seleccionar
+                                                imágenes</label>
                                         </div>
-                                        <img src="" class="preview-image" id="imagenPreview"
-                                            alt="Vista previa de la imagen">
 
+                                        <div class="preview-images">
+                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 1"
+                                                style="display: none;">
+                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 2"
+                                                style="display: none;">
+                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 3"
+                                                style="display: none;">
+                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 4"
+                                                style="display: none;">
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i
                                                 class="fas fa-times"></i>
                                         </button>
                                         <button type="button" class="btn btn-dark" id="agregarImagenBtn"><i
+                                                class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Modal para actualizar las imagenes-->
+                        <div class="modal fade" id="imagenesAc" tabindex="-1" role="dialog"
+                            aria-labelledby="detallesModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header custom-modal-header">
+                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">
+                                            Agrega las imágenes para tus productos
+                                        </h5>
+                                    </div>
+                                    <!--Inicio del cuerpo del modal de imagenes-->
+                                    <div class="modal-body">
+                                        <h6 class="modal-title text-center" id="marcaModalLabel"
+                                            style="width: 100%; color: black;">
+                                            Solo puedes adjuntar 4 imágenes
+                                        </h6>
+                                        <div class="custom-file mb-3">
+                                            <input type="file" class="custom-file-input txti" id="imagenes_agregar"
+                                                accept="image/*" multiple>
+                                            <label class="custom-file-label txti" for="imagenes_agregar">Seleccionar
+                                                imágenes</label>
+                                        </div>
+
+                                        <div class="preview-images">
+                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 1"
+                                                style="display: none;">
+                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 2"
+                                                style="display: none;">
+                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 3"
+                                                style="display: none;">
+                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 4"
+                                                style="display: none;">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                                class="fas fa-times"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-dark" id="actualizarImagenesBtn"><i
                                                 class="fas fa-plus"></i>
                                         </button>
                                     </div>
@@ -139,7 +194,7 @@
                                                     <button type="button" class="btn btn-dark mr-2 botn"
                                                         data-dismiss="modal">No</button>
                                                     <button type="button" class="btn btn-dark botn" data-dismiss="modal"
-                                                        id="confirmarEliminar">Si</button>
+                                                        id="confirmarEliminarBtn">Si</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -198,8 +253,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="../../Controllers/admin/metodos.js"></script>
     <script src="../../Controllers/utils/Validaciones.js"></script>
-    <script src="../../Controllers/admin/inventario.js"></script>
-    <script src="../../resources/js/foto.js"></script>
+    <script src="../../Controllers/admin/imagenes.js"></script>
+    <script src="../../resources/js/foto2.js"></script>
     <script src="../../Controllers/admin/buscador.js"></script>
 </body>
 
