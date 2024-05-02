@@ -42,5 +42,5 @@ function saveTokenToSessionStorage(data) {
     const tokenG = data.data.token; 
     const id = data.data.id_admin;
     sessionStorage.setItem("token", tokenG); // Guardar el token en sessionStorage
-    sessionStorage.setItem("", id); // Guardar el Id en sessionStorage
+    sessionStorage.setItem("id_admin", id); // Guardar el Id en sessionStorage
 }
