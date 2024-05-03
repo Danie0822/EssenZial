@@ -1,4 +1,4 @@
-// variables 
+// variables de dependecias 
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 //secretos para el token 
