@@ -24,7 +24,7 @@
                     <div class="color">
                         <div class="sizebox1"></div>
                         <div class="container text-right">
-                            <h2>Imagenes</h2>
+                            <h2>Imágenes</h2>
                         </div>
 
                         <div class="input-group mb-3 txt-buscar">
@@ -49,7 +49,6 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Imagen</th>
-                                    <th scope="col">Ruta de la imagen</th>
                                     <th scope="col">Acciones</th>
                                 </tr>
                             </thead>
@@ -106,51 +105,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!--Modal para actualizar las imagenes-->
-                        <div class="modal fade" id="imagenesAc" tabindex="-1" role="dialog"
-                            aria-labelledby="detallesModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header custom-modal-header">
-                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">
-                                            Agrega las imágenes para tus productos
-                                        </h5>
-                                    </div>
-                                    <!--Inicio del cuerpo del modal de imagenes-->
-                                    <div class="modal-body">
-                                        <h6 class="modal-title text-center" id="marcaModalLabel"
-                                            style="width: 100%; color: black;">
-                                            Solo puedes adjuntar 4 imágenes
-                                        </h6>
-                                        <div class="custom-file mb-3">
-                                            <input type="file" class="custom-file-input txti" id="imagenes_agregar"
-                                                accept="image/*" multiple>
-                                            <label class="custom-file-label txti" for="imagenes_agregar">Seleccionar
-                                                imágenes</label>
-                                        </div>
-
-                                        <div class="preview-images">
-                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 1"
-                                                style="display: none;">
-                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 2"
-                                                style="display: none;">
-                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 3"
-                                                style="display: none;">
-                                            <img class="preview-image-agregar" src="" alt="Vista previa de imagen 4"
-                                                style="display: none;">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
-                                                class="fas fa-times"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-dark" id="actualizarImagenesBtn"><i
-                                                class="fas fa-plus"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <!-- Modal agregado exitosamente-->
                         <div class="modal fade" id="agregado" tabindex="-1" role="dialog"
                             aria-labelledby="agregadoModalLabel" aria-hidden="true">
@@ -174,7 +128,64 @@
                                 </div>
                             </div>
                         </div>
+                        <!--Modal para actualizar las imagenes-->
+                        <div class="modal fade" id="imagenesAc" tabindex="-1" role="dialog"
+                            aria-labelledby="detallesModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header custom-modal-header">
+                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">
+                                            Actualiza las imágenes para tus productos
+                                        </h5>
+                                    </div>
+                                    <!--Inicio del cuerpo del modal de imagenes-->
+                                    <div class="modal-body">
+                                        <div class="custom-file mb-3">
+                                            <input type="file" class="custom-file-input txti" id="imagen_actualizar"
+                                                accept="image/*" multiple>
+                                            <label class="custom-file-label txti" for="imagen_actualizar">Seleccionar
+                                                imágenes</label>
+                                        </div>
 
+                                        <div class="preview-images">
+                                            <img class="preview-image-actualizar imageAc" src=""
+                                                alt="Vista previa de imagen 1" style="display: none;">
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
+                                                class="fas fa-times"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-dark" id="actualizarImagenesBtn"><i
+                                                class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal para confirmar actualización exitosa -->
+                        <div class="modal fade" id="actualizado" tabindex="-1" role="dialog"
+                            aria-labelledby="marcaModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        <form>
+                                            <img src="" class="preview-image" id="imagenPreview"
+                                                alt="Vista previa de la imagen" style="display: none;">
+
+                                            <div class="text-center mt-3">
+                                                <i class="bi bi-check-circle"
+                                                    style="font-size: 3.5rem; color: black;"></i>
+                                                <p class="mt-3" style="font-size: 1.5rem;">Éxito</p>
+                                                <p>Se ha Actualizado correctamente</p>
+                                                <button type="button" class="btn btn-dark botn"
+                                                    data-dismiss="modal">Aceptar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Modal eliminar-->
                         <div class="modal fade" id="eliminar" tabindex="-1" role="dialog"
                             aria-labelledby="marcaModalLabel" aria-hidden="true">
@@ -194,7 +205,7 @@
                                                     <button type="button" class="btn btn-dark mr-2 botn"
                                                         data-dismiss="modal">No</button>
                                                     <button type="button" class="btn btn-dark botn" data-dismiss="modal"
-                                                        id="confirmarEliminarBtn">Si</button>
+                                                        id="eliminarBtn">Si</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -203,7 +214,7 @@
                             </div>
                         </div>
                         <!-- Modal eliminado exitosamente-->
-                        <div class="modal fade" id="eliminado" tabindex="-1" role="dialog"
+                        <div class="modal fade" id="eliminadoModal" tabindex="-1" role="dialog"
                             aria-labelledby="eliminadoModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -242,6 +253,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </main>

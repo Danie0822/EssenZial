@@ -1,3 +1,4 @@
+// Evento de cambio para el input de imágenes para agregar
 var imagenesAgregar = document.getElementById('imagenes_agregar');
 if (imagenesAgregar) {
     imagenesAgregar.addEventListener('change', function () {
@@ -5,7 +6,15 @@ if (imagenesAgregar) {
     });
 }
 
-//Funcion que nos ayuda a adjuntar 4 imagenes de un solo y mostrar su vista previa
+// Evento de cambio para el input de imagen para actualizar
+var imagenActualizar = document.getElementById('imagen_actualizar');
+if (imagenActualizar) {
+    imagenActualizar.addEventListener('change', function() {
+        readURL2(this, 'preview-image-actualizar'); // Usamos la función readURL2 para la actualización
+    });
+}
+
+// Función para mostrar la vista previa de las imágenes
 function readURLs(input, previewClass) {
     if (input.files && input.files.length === 4) {
         for (var i = 0; i < input.files.length; i++) {
@@ -24,6 +33,21 @@ function readURLs(input, previewClass) {
     } else {
         alert("Por favor selecciona exactamente 4 imágenes.");
         input.value = ''; // Limpiar el input de archivo
+    }
+}
+
+// Función para mostrar la vista previa de la imagen para actualizar
+function readURL2(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            // Ajustamos para mostrar la vista previa relativa al input
+            input.closest('.modal-content').querySelector('.preview-image-actualizar').setAttribute('src', e.target.result);
+            input.closest('.modal-content').querySelector('.preview-image-actualizar').style.display = 'block';
+        }
+
+        reader.readAsDataURL(input.files[0]); // Convertir a base64 string
     }
 }
 
