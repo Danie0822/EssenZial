@@ -6,6 +6,7 @@ const manejarValidaciones = () => abrirModal(validationsModal);
 // Const de modals
 const myActualizar = new bootstrap.Modal(obtenerElemento('Actualizar'));
 const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
+const myInfo = new bootstrap.Modal(obtenerElemento('detallesModal'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 let id = null;
 let estadoPedidosCambio = null;
@@ -17,7 +18,7 @@ const obtenerPedidos = async () => {
         tbody.innerHTML = "";
 
         if (success) {
-            data.forEach(({ id_pedido, fecha_pedido, estado_pedido, tipo_pago }) => {
+            data.forEach(({ id_pedido, fecha_pedido, estado_pedido, tipo_pago}) => {
                 // Formatear la fecha
                 const fechaFormateada = new Date(fecha_pedido).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
                 const formaPago = tipo_pago === 1 ? 'Efectivo' : 'Tarjeta';
@@ -27,9 +28,9 @@ const obtenerPedidos = async () => {
                     <td>${estado_pedido}</td> 
                     <td>${formaPago}</td> 
                     <td class="text-center">
-                        <button type="button" class="btn btn-dark"  onclick="abrirModalEditar(${id_pedido},'${estado_pedido}')"><i class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-dark" onclick="abrirModalEditar(${id_pedido},'${estado_pedido}')"><i class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-dark" onclick="abrirModalEliminar(${id_pedido})"><i class="fas fa-trash-alt"></i></button>
-                        <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#detallesModal"><i class="fas fa-info-circle"></i></button>
+                        <button type="button" class="btn btn-dark" onclick="obtenerPedidosString(${id_pedido},'${fechaFormateada}','${formaPago}')"><i class="fas fa-info-circle"></i></button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -42,9 +43,27 @@ const obtenerPedidos = async () => {
     }
 };
 
+const obtenerPedidosString = async (id, fecha_pedido, tipo_pago) => {
+    try {
+        const { success, data } = await fetchData(`/pedidos/detalle/${id}`);
+       
+        if (success) {
+            data.forEach(({id_correlativo, nombre_cliente, perfume, total_precio }) => {
+                abrirModalDetalles(nombre_cliente,fecha_pedido,tipo_pago,perfume,total_precio)
+            });
+        } else {
+            manejarError();
+        }
+    } catch (error) {
+        manejarError();
+    }
+};
+
+
+
 // Const para pasar cosas que se necesita para actualizar en el modal 
 const abrirModalEditar = (id_pedido, estado_pedido) => {
-    if (id_pedido) {
+    if (id_pedido) {    
         abrirModal(myActualizar);
         id = id_pedido;
         if (estado_pedido == 'Finalizado') {
@@ -95,6 +114,20 @@ const actualizar = async (id, estado) => {
         manejarError();
     }
 };
+// Const para limpiar formulario 
+const limpiarFormulario = () => {
+    obtenerElemento("nombreCliente").textContent = "";
+    obtenerElemento("fechaPedido").textContent = "";
+    obtenerElemento("tipoPago").textContent = "";
+    obtenerElemento("perfume").textContent = "";
+    obtenerElemento("totalPago").textContent = "";
+}
+
+const abrirModalDetalles = (nombre_cliente, fecha_pedido,tipo_pago, perfume, total_precio) => {
+    mostrar(nombre_cliente, fecha_pedido,tipo_pago, perfume, total_precio);
+    abrirModal(myInfo);
+};
+
 // Función para eliminar 
 const eliminarPedido = async (id) => {
     try {
@@ -138,3 +171,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 });
+// Const de llenar el modal de actualizar con los valores 
+const mostrar = (nombre_cliente, fecha_pedido,tipo_pago ,perfume, total_precio) => {
+    try {
+        limpiarFormulario(); // Limpia los campos antes de llenarlos
+        obtenerElemento("nombreCliente").textContent = nombre_cliente;
+        obtenerElemento("fechaPedido").textContent = fecha_pedido;
+        obtenerElemento("tipoPago").textContent = tipo_pago;
+        obtenerElemento("perfume").textContent = perfume;
+        obtenerElemento("totalPago").textContent = total_precio;
+    } catch (error) {
+        manejarError();
+    }
+}

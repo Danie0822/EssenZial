@@ -7,6 +7,7 @@ const controlador = require('./index');
 //endpoint
 router.get('/',seguridad('admin'), todos);
 router.get('/:id',seguridad('admin'), uno);
+router.get('/detalle/:id',seguridad('admin'), detallePedido);
 router.delete('/delete/:id',seguridad('admin'), eliminarPorId);
 router.put('/update',seguridad('admin'), actualizar);
 
@@ -31,6 +32,15 @@ async function todos(req, res, next) {
 async function uno(req, res, next) {
     try {
         const pedidos = await controlador.uno(req.params.id);
+        respuestas.success(req, res, pedidos, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function detallePedido(req, res, next) {
+    try {
+        const pedidos = await controlador.detallePedido(req.params.id);
         respuestas.success(req, res, pedidos, 200);
     } catch (error) {
         next(error);
