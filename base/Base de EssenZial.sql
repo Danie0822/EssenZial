@@ -12,8 +12,7 @@ CREATE TABLE IF NOT EXISTS tb_clientes (
     correo_cliente VARCHAR(255) UNIQUE NOT NULL,
     telefono_cliente VARCHAR(20) UNIQUE,
     clave_cliente VARCHAR(255) NOT NULL,
-    estado_cliente BOOLEAN DEFAULT TRUE,
-    INDEX(correo_cliente, telefono_cliente)
+    estado_cliente BOOLEAN DEFAULT TRUE
 ) ENGINE=INNODB;
 
 -- Tabla Direcciones
@@ -26,8 +25,7 @@ CREATE TABLE IF NOT EXISTS tb_direcciones (
     instrucciones_entrega VARCHAR(100) NOT NULL,
     id_cliente INT NOT NULL,
     CONSTRAINT FK_tb_direcciones_clientes
-    FOREIGN KEY (id_cliente) REFERENCES tb_clientes(id_cliente),
-    INDEX(direccion_cliente, nombre_direccion)
+    FOREIGN KEY (id_cliente) REFERENCES tb_clientes(id_cliente)
 ) ENGINE=INNODB;
 
 -- Tabla Administradores
@@ -36,16 +34,14 @@ CREATE TABLE IF NOT EXISTS tb_admins (
     nombre_admin VARCHAR(255) NOT NULL,
     apellido_admin VARCHAR(255) NOT NULL,
     correo_admin VARCHAR(255) UNIQUE NOT NULL,
-    clave_admin TEXT NOT NULL,
-    INDEX(correo_admin)
+    clave_admin TEXT NOT NULL
 ) ENGINE=InnoDB;
 
 -- Tabla Categorías
 CREATE TABLE IF NOT EXISTS tb_categorias (
     id_categoria INT AUTO_INCREMENT PRIMARY KEY,
     nombre_categoria VARCHAR(255) NOT NULL,
-    imagen_categoria VARCHAR(100) NOT NULL,
-    INDEX(nombre_categoria)
+    imagen_categoria VARCHAR(100) NOT NULL
 ) ENGINE=InnoDB;
 
 -- Tabla Marcas
@@ -59,8 +55,7 @@ CREATE TABLE IF NOT EXISTS tb_marcas (
 CREATE TABLE IF NOT EXISTS tb_olores (
     id_olor INT AUTO_INCREMENT PRIMARY KEY,
     nombre_olor VARCHAR(255) UNIQUE,
-    imagen_olor VARCHAR(100) NOT NULL,
-    INDEX(nombre_olor)
+    imagen_olor VARCHAR(100) NOT NULL
 ) ENGINE=INNODB;
 
 -- Tabla Descuentos
@@ -97,8 +92,7 @@ CREATE TABLE IF NOT EXISTS tb_imagenes (
     id_imagen INT AUTO_INCREMENT PRIMARY KEY,
     ruta_imagen VARCHAR(100) NOT NULL,
     id_inventario INT NOT NULL,
-    CONSTRAINT FK_imagen_inventario FOREIGN KEY (id_inventario) REFERENCES tb_inventarios(id_inventario),
-    INDEX(ruta_imagen, id_inventario)
+    CONSTRAINT FK_imagen_inventario FOREIGN KEY (id_inventario) REFERENCES tb_inventarios(id_inventario)
 ) ENGINE=InnoDB;
 
 -- Tabla Pedidos
@@ -107,11 +101,10 @@ CREATE TABLE IF NOT EXISTS tb_pedidos (
     total_pago DECIMAL(10,2) NOT NULL DEFAULT '0.00',
     numero_pedido VARCHAR(10) NOT NULL UNIQUE,
     fecha_pedido DATE DEFAULT (CURRENT_DATE),
-    estado_pedido VARCHAR(250),
+    estado_pedido ENUM('En proceso', 'Finalizado') DEFAULT ('En proceso'),
     tipo_pago BOOLEAN DEFAULT TRUE,
     id_direccion INT NOT NULL,
-    CONSTRAINT FK_pedido_direccion FOREIGN KEY (id_direccion) REFERENCES tb_direcciones(id_direccion),
-    INDEX(numero_pedido, estado_pedido)
+    CONSTRAINT FK_pedido_direccion FOREIGN KEY (id_direccion) REFERENCES tb_direcciones(id_direccion)
 ) ENGINE=InnoDB;
 
 -- Tabla Detalle Pedido
@@ -135,3 +128,15 @@ CREATE TABLE IF NOT EXISTS tb_valoraciones (
     id_detalle_pedido INT NOT NULL,
     CONSTRAINT FK_valoracion_Detalle_pedido FOREIGN KEY (id_detalle_pedido) REFERENCES tb_detalle_pedido(id_detalle_pedido)
 ) ENGINE=InNODB;
+
+
+DROP USER IF EXISTS 'EssenZial_desarrollador'@'localhost';
+
+-- Crear usuario para la base de datos
+CREATE USER 'EssenZial_desarrollador'@'localhost' IDENTIFIED BY 'GrupoPerfume';
+
+-- Otorgar permisos DML
+GRANT SELECT, INSERT, UPDATE, DELETE ON EssenZial.* TO 'EssenZial_desarrollador'@'localhost';
+
+-- Otorgar permisos para ejecutar y crear funciones, procedimientos, triggers y vistas
+GRANT EXECUTE, CREATE ROUTINE, ALTER ROUTINE, CREATE VIEW, TRIGGER ON EssenZial.* TO 'EssenZial_desarrollador'@'localhost';
