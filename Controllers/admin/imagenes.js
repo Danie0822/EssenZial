@@ -51,12 +51,12 @@ const obtenerImagenes = async (idInventario) => {
         manejarError();
     }
 };
+
 window.onload = () => {
     // Obtener el ID del inventario de la URL
     const urlParams = new URLSearchParams(window.location.search);
+    console.log(urlParams)
     const idInventario = urlParams.get('id');
-    console.log("ID de inventario:", idInventario);
-
     // Verificar si idInventario es válido antes de llamar a obtenerImagenes
     if (idInventario) {
         obtenerImagenes(idInventario);

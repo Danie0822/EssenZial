@@ -54,15 +54,15 @@ async function todos(req, res, next) {
 async function uno(req, res, next) {
     try {
         const imagen = await controlador.uno(req.params.id);
-        respuestas.success(req, res, categoria, 200);
+        respuestas.success(req, res, imagen, 200);
     } catch (error) {
         next(error);
     }
 }
 async function unoId(req, res, next){
     try {
-        const idInventario = req.params.id_inventario; // Cambiar a req.params.id_inventario
-        const imagen = await controlador.unoId(idInventario);
+        //const idInventario = req.params.id_inventario; // Cambiar a req.params.id_inventario
+        const imagen = await controlador.unoId(req.params.id_inventario);
         respuestas.success(req, res, imagen, 200);
     } catch(error) {
         next(error);

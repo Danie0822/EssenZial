@@ -22,11 +22,11 @@ module.exports = function(db){
     }
 
     async function unoId(id_inventario){
-        const imageness = await db.uno(TABLE_NAME, id_inventario, ID_INVENTARIO);
-        return imageness && {
-            ...imageness,
-            ruta_imagen: imageness.ruta_imagen || null
-        }
+        const imagenes = await db.uno(TABLE_NAME, id_inventario, ID_INVENTARIO);
+        return imagenes.map(imagenes => ({
+            ...imagenes,
+            ruta_imagen: imagenes.ruta_imagen || null
+        }));
     }
 
     async function agregar(filePath, id_inventario){
