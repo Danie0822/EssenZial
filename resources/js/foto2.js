@@ -5,6 +5,15 @@ if (imagenesAgregar) {
     });
 }
 
+// Obtener el input de la imagen para actualizar
+var imagenActualizar = document.getElementById('imagenes_actualizar');
+if (imagenActualizar) {
+    imagenActualizar.addEventListener('change', function() {
+        readURL(this);
+    });
+}
+
+
 //Funcion que nos ayuda a adjuntar 4 imagenes de un solo y mostrar su vista previa
 function readURLs(input, previewClass) {
     if (input.files && input.files.length === 4) {

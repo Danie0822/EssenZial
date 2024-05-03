@@ -13,9 +13,6 @@ const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 const urlParams = new URLSearchParams(window.location.search);
 const idInventario = urlParams.get('id');
 
-// Ahora puedes usar idInventario como desees en esta página
-//console.log("ID del inventario:", idInventario);
-
 //Funcion para obtener imagenes
 const obtenerImagenes = async () => {
     try {
@@ -31,7 +28,6 @@ const obtenerImagenes = async () => {
                     <td><img src="${imagen}${ruta_imagen}" alt="Imagen de la categoría" width="50"></td>
                     <td>
                     <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_imagen})"><i class="fas fa-edit"></i></button>  
-                    <button type="button" class="btn btn-dark" onclick="abrirModalVer(${id_imagen})"><i class="fas fa-info-circle"></i></button>
                     <button type="button" class="btn btn-dark" onclick="abrirModalEliminar(${id_imagen})"><i class="fas fa-trash-alt"></i> </button>
                  
                     </td>
@@ -47,6 +43,18 @@ const obtenerImagenes = async () => {
     }
 }
 
+const limpiarFormularioActualizar = () => {
+    document.querySelectorAll('.form-control-actualizar').forEach(input => input.value = "");
+    var fileInputs = document.querySelectorAll('.custom-file-input');
+    fileInputs.forEach(fileInput => {
+        fileInput.value = '';
+        var label = fileInput.nextElementSibling;
+        label.innerHTML = 'Seleccionar imagen';
+    });
+    document.querySelectorAll('.imagede').forEach(image => image.style.display = 'none');
+}
+
+//Funcion para abrir modal de agregar
 function abrirAgregar() {
     abrirModal(myAgregar);
 }
@@ -55,8 +63,6 @@ function abrirAgregar() {
 const limpiarFormulario = () => {
     document.querySelectorAll('.preview-image-agregar').forEach(image => image.style.display = 'none');
 }
-
-
 
 const agregarImagenes = async () => {
     try {
@@ -90,8 +96,15 @@ const agregarImagenes = async () => {
     }
 };
 
+const actualizarImagenes = async() =>{
+    try{
 
 
+    }catch(error){
+
+    }
+
+};
 
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener cuando recarga pagina 
@@ -121,3 +134,21 @@ document.addEventListener("DOMContentLoaded", function () {
         await agregarImagenes();
     });
 });
+
+const mostrarImagen = (ruta_imagen) =>{
+    try{
+        limpiarFormularioActualizar();
+        const imagenPreview = document.querySelector('imagede');
+        if(imagenPreview){
+            const url = ruta_imagen;
+            imagenPreview.src = url;
+            imagenPreview.style.display = 'block';
+        }else{
+            manejarError();
+        }
+    }catch(error){
+        manejarError();
+    }
+
+}
+
