@@ -12,12 +12,16 @@ module.exports = function (db) {
     async function eliminar(id) {
         return db.eliminar(TABLE_NAME, id, ID_FIELD);
     }
-
+    async function actualizar(data) {
+        const { id_pedido, ...restoDatos } = data;
+        return db.actualizar(TABLE_NAME, restoDatos, ID_FIELD,id_pedido);
+    }
 
     return {
         todos,
         uno,
-        eliminar
+        eliminar,
+        actualizar
     };
     
 }

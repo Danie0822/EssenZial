@@ -1,4 +1,4 @@
-const db = require('../../DB/mysql');
+const db = require('../../db/mysql'); 
 const ctrl = require('./controlador');
 
 //Inyectamos base de datos al controlador

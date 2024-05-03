@@ -2,7 +2,7 @@
 const auth = require('../../auth');
 
 module.exports = function(dbInyectada) {
-    const db = dbInyectada || require('../../DB/mysql');
+    const db = dbInyectada || require('../../db/mysql');
     // Funcion de login 
     async function login(tabla, correo, password, tipo) {
         try {
