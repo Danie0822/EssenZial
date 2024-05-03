@@ -36,6 +36,7 @@ function validarID(id, req, res, next) {
 //RUTAS
 router.get('/', seguridad('admin'), todos);
 router.get('/:id', seguridad('admin'), uno);
+router.get('/view/:id', seguridad('admin'), unoId);
 router.post('/save', seguridad('admin'), upload.single('imagen'), agregar);
 router.put('/update', seguridad('admin'), upload.single('imagen'), actualizar);
 router.delete('/delete/:id', seguridad('admin'), eliminar);
@@ -58,6 +59,16 @@ async function uno(req, res, next) {
         next(error);
     }
 }
+async function unoId(req, res, next){
+    try {
+        const idInventario = req.params.id_inventario; // Cambiar a req.params.id_inventario
+        const imagen = await controlador.unoId(idInventario);
+        respuestas.success(req, res, imagen, 200);
+    } catch(error) {
+        next(error);
+    }
+}
+
 
 async function eliminar(req, res, next) {
     try {

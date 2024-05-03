@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const ID_FIELD = 'id_imagen';
 const TABLE_NAME = 'tb_imagenes';
+const ID_INVENTARIO = 'id_inventario';
 
 module.exports = function(db){
     async function todos() {
@@ -18,6 +19,14 @@ module.exports = function(db){
             ...imagenes,
             ruta_imagen: imagenes.ruta_imagen || null
         };
+    }
+
+    async function unoId(id_inventario){
+        const imageness = await db.uno(TABLE_NAME, id_inventario, ID_INVENTARIO);
+        return imageness && {
+            ...imageness,
+            ruta_imagen: imageness.ruta_imagen || null
+        }
     }
 
     async function agregar(filePath, id_inventario){
@@ -60,6 +69,7 @@ module.exports = function(db){
     return{
         todos, 
         uno,
+        unoId,
         agregar, 
         actualizar,
         eliminar

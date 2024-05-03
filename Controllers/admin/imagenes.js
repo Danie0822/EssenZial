@@ -8,43 +8,63 @@ const manejarValidaciones = () => abrirModal(validationsModal);
 //Modales a usar
 const myAgregar = new bootstrap.Modal(obtenerElemento('imagenes'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
-const myActualizar = new bootstrap.Modal(obtenerElemento('imagenesAc'));
-const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
 
 // Obtener el parámetro 'id' de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const idInventario = urlParams.get('id');
-let idImagen = null;
 
 //Funcion para obtener imagenes
-const obtenerImagenes = async () => {
+const obtenerImagenes = async (idInventario) => {
     try {
-        const { success, data } = await fetchData('/imagenes');
-        const tbody = obtenerElemento('tableBody');
-        tbody.innerHTML = '';
+        // Verificar si el ID del inventario es válido
+        if (!idInventario) {
+            console.error("El ID del inventario es inválido.");
+            return;
+        }
+
+        const { success, data } = await fetchData(`/imagenes/view/${idInventario}`);
 
         if (success) {
-            data.forEach(({ id_imagen, ruta_imagen }) => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    
+            const tbody = obtenerElemento('tableBody');
+            tbody.innerHTML = ''; // Limpiar el contenido actual de la tabla
+            // Verificar si hay datos para mostrar
+            if (data && data.length > 0) {
+                data.forEach(({ id_imagen, ruta_imagen }) => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
                     <td><img src="${imagen}${ruta_imagen}" alt="Imagen de la categoría" width="50"></td>
-                    <td>
-                    <button class="btn btn-dark actualizar" onclick="abrirModalAc(${id_imagen},'http://localhost:4000/${ruta_imagen}')"><i class="fas fa-edit"></i></button>  
-                    <button type="button" class="btn btn-dark" onclick="abrirModalEliminar(${id_imagen})"><i class="fas fa-trash-alt"></i> </button>
-                 
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
+                        <td>
+                            <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_imagen})"><i class="fas fa-edit"></i></button>  
+                            <button type="button" class="btn btn-dark" onclick="abrirModalEliminar(${id_imagen})"><i class="fas fa-trash-alt"></i></button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } else {
+                console.error("No se encontraron imágenes para mostrar.");
+            }
         } else {
             manejarError();
         }
-    }
-    catch (error) {
+    } catch (error) {
+        console.error("Error al obtener imágenes:", error);
         manejarError();
     }
-}
+};
+window.onload = () => {
+    // Obtener el ID del inventario de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const idInventario = urlParams.get('id');
+    console.log("ID de inventario:", idInventario);
+
+    // Verificar si idInventario es válido antes de llamar a obtenerImagenes
+    if (idInventario) {
+        obtenerImagenes(idInventario);
+    } else {
+        console.error("El ID del inventario es inválido.");
+    }
+};
+
 
 const limpiarFormularioActualizar = () => {
     document.querySelectorAll('.form-control-actualizar').forEach(input => input.value = "");
@@ -54,12 +74,7 @@ const limpiarFormularioActualizar = () => {
         var label = fileInput.nextElementSibling;
         label.innerHTML = 'Seleccionar imagen';
     });
-    document.querySelectorAll('.imageAc').forEach(image => image.style.display = 'none');
-}
-
-// Const para limpiar formulario 
-const limpiarFormulario = () => {
-    document.querySelectorAll('.preview-image-agregar').forEach(image => image.style.display = 'none');
+    document.querySelectorAll('.imagede').forEach(image => image.style.display = 'none');
 }
 
 //Funcion para abrir modal de agregar
@@ -67,7 +82,11 @@ function abrirAgregar() {
     abrirModal(myAgregar);
 }
 
-//Funcion para agregar las imagenes de ese inventario
+// Const para limpiar formulario 
+const limpiarFormulario = () => {
+    document.querySelectorAll('.preview-image-agregar').forEach(image => image.style.display = 'none');
+}
+
 const agregarImagenes = async () => {
     try {
         const idInven = idInventario;
@@ -100,65 +119,12 @@ const agregarImagenes = async () => {
     }
 };
 
-const abrirModalAc = (idImagenes, imagen) =>{
-    if(idImagenes){
-        mostrarImagen(imagen);
-        idImagen = idImagenes;
-        abrirModal(myActualizar);
-    }
-    else{
-        manejarError();
-    }
-}
-
-//Funcion para actualizar cada imagen
-const actualizarImagenes = async(idImagen) =>{
+const actualizarImagenes = async() =>{
     try{
-        const imagen = obtenerElemento("imagen_actualizar").files[0];
-        const formData = new FormData();
-        formData.append("id_imagen", idImagen);
-        formData.append("imagen", imagen);
-        formData.append("id_inventario", idInventario);
-        const { success } = await updateData("/imagenes/update", formData);
 
-        if(success){
-            
-            obtenerImagenes();
-            limpiarFormularioActualizar();
-            cerrarModal(myActualizar);
-            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento("actualizado"))), 500);
-        }else{
-            manejarError();
-        }
 
     }catch(error){
-        console.log(error);
-        manejarError();
-    }
-};
 
-const abrirModalEliminar = (idImagenes) =>{
-    if(idImagenes){
-        idImagen = idImagenes;
-        abrirModal(myEliminar);
-    }else{
-        manejarError();
-    }
-
-}
-
-const eliminarImagenes = async (idImagen) => {
-    try{
-        const { success } = await deleteData(`/imagenes/delete/${idImagen}`);
-        if(success){
-            obtenerImagenes();
-            cerrarModal(myEliminar);
-            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('eliminadoModal'))));
-        }else {
-            manejarError();
-        }
-    }catch (error) {
-        manejarError();
     }
 
 };
@@ -167,24 +133,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // Obtener cuando recarga pagina 
     obtenerImagenes();
     // Variable de Eliminar
-    
-    const confirmarEliminarBtn = obtenerElemento('eliminarBtn');
+    /*
+    const confirmarEliminarBtn = obtenerElemento('confirmarEliminarBtn');
     confirmarEliminarBtn.addEventListener('click', async () => {
         // Validacion del id 
-        if (idImagen) {
-            await eliminarImagenes(idImagen);
-            idImagen = null;
+        if (idCategoria) {
+            await eliminarCategoria(idCategoria);
+            idCategoria = null;
         }
     });
     // Variable de Actualizar
     const confirmarActualizarBtn = obtenerElemento('actualizarImagenesBtn');
     confirmarActualizarBtn.addEventListener('click', async () => {
         // Validacion del id
-        if (idImagen) {
-            await actualizarImagenes(idImagen);
-            idImagen = null;
+        if (idCategoria) {
+            await actualizar(idCategoria);
+            idCategoria = null;
         }
-    });
+    });*/
     // Variable de Agregar
     const agregarCategoriaBtn = obtenerElemento("agregarImagenBtn");
     agregarCategoriaBtn.addEventListener('click', async () => {
@@ -192,12 +158,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-const mostrarImagen = (imagen) =>{
+const mostrarImagen = (ruta_imagen) =>{
     try{
         limpiarFormularioActualizar();
-        const imagenPreview = document.querySelector('.imageAc');
+        const imagenPreview = document.querySelector('imagede');
         if(imagenPreview){
-            const url = imagen;
+            const url = ruta_imagen;
             imagenPreview.src = url;
             imagenPreview.style.display = 'block';
         }else{
@@ -206,6 +172,6 @@ const mostrarImagen = (imagen) =>{
     }catch(error){
         manejarError();
     }
-    
+
 }
 
