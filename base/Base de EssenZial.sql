@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS tb_clientes (
     apellido_cliente VARCHAR(255) NOT NULL,
     correo_cliente VARCHAR(255) UNIQUE NOT NULL,
     telefono_cliente VARCHAR(20) UNIQUE,
-    clave_cliente VARCHAR(255) NOT NULL,
+    clave_cliente VARCHAR(300) NOT NULL,
     estado_cliente BOOLEAN DEFAULT TRUE
 ) ENGINE=INNODB;
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS tb_admins (
     id_admin INT AUTO_INCREMENT PRIMARY KEY,
     nombre_admin VARCHAR(255) NOT NULL,
     apellido_admin VARCHAR(255) NOT NULL,
-    correo_admin VARCHAR(255) UNIQUE NOT NULL,
+    correo_admin VARCHAR(300) UNIQUE NOT NULL,
     clave_admin TEXT NOT NULL
 ) ENGINE=InnoDB;
 
