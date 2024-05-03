@@ -105,6 +105,12 @@ async function login(tabla, correo, clave) {
     }
 }
 
+// Función para detalles pedidos
+function datellesPedidos(tabla, id, campoIdentificacion) {
+    const sql = `SELECT * FROM ?? WHERE ?? = ?`;
+    return ejecutarConsulta(sql, [tabla, campoIdentificacion, id]);
+}
+
 
 // Exportar las funciones para su uso fuera del módulo
 module.exports = {
@@ -116,5 +122,6 @@ module.exports = {
     query,
     querySelect,
     ejecutarProcedimiento,
-    login
+    login,
+    datellesPedidos
 };
