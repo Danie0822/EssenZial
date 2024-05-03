@@ -1,8 +1,8 @@
 const fs = require('fs').promises;
-
+// Nombres de campos de tabla
 const TABLE_NAME = 'tb_olores';
 const ID_FIELD = 'id_olor';
-
+// Funciones y llamadas de db 
 module.exports = function (db) {
     async function todos() {
         const olor = await db.todos(TABLE_NAME);

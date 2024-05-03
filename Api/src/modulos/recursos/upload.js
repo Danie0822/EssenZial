@@ -1,6 +1,7 @@
+// Variable de dependecias 
 const multer = require('multer');
 const { v4: uuidv4 } = require('uuid');
-
+// Funcion que guarda la imagen en el server 
 const configureMulter = (destinationDirectory) => {
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {

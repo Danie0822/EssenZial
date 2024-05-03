@@ -1,6 +1,7 @@
+// Nombre de campos de la tabla 
 const TABLE_NAME = 'tb_clientes';
 const ID_FIELD = 'id_cliente';
-
+// funciones y llamadas de db
 module.exports = function (db) {
     async function todos() {
         return db.todos(TABLE_NAME);

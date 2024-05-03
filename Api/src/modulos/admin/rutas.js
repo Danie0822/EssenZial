@@ -1,3 +1,4 @@
+// variables de dependecias 
 const express = require('express');
 const router = express.Router();
 const respuestas = require('../../red/respuestas');
@@ -13,7 +14,7 @@ function validarDatos(nombreAdmin, apellidoAdmin, correoAdmin, claveAdmin, req, 
     const contra = Validador.validarLongitud(claveAdmin, 300, 'El clave debe ser obligatorio', req, res, next);
     return { nombre_admin: nombreValidado, apellido_admin: apellidoValidado, correo_admin: correo, clave_admin: contra };
 }
-
+// Middleware para validar el formato de los datos a actualizar 
 function validarFormatoActualizar(nombreAdmin, apellidoAdmin, correoAdmin, id, req, res, next) {
     const nombreValidado = Validador.validarLongitud(nombreAdmin, 255, 'El nombre debe ser obligatorio', req, res, next);
     const apellidoValidado = Validador.validarLongitud(apellidoAdmin, 255, 'El apellido debe ser obligatorio', req, res, next);
@@ -38,7 +39,6 @@ router.post('/save', seguridad('admin'), agregar);
 router.put('/update', seguridad('admin'), actualizar);
 
 // Funciones
-
 async function obtenerTodos(req, res, next) {
     try {
         const items = await controlador.todos();

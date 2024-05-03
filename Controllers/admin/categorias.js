@@ -6,7 +6,7 @@ const manejarError = () => abrirModal(myError);
 const manejarValidaciones = () => abrirModal(validationsModal);
 // Const de modals 
 const myActualizar = new bootstrap.Modal(obtenerElemento('actualizar'));
-const myAgregar = new bootstrap.Modal(obtenerElemento('agregado'));
+const myAgregar = new bootstrap.Modal(obtenerElemento('agregar'));
 const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));

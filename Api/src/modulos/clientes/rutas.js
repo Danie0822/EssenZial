@@ -1,3 +1,4 @@
+// variables de depedencias 
 const express = require('express');
 const router = express.Router();
 const respuestas = require('../../red/respuestas');
@@ -15,7 +16,7 @@ function validarDatos(nombreCliente, apellidoCLiente, correoCliente, claveClient
     const estadoCliente = Validador.validarBooleano(estado, 'El estado debe ser un formato valido', req, res, next)
     return { nombre_cliente: nombreValidado, apellido_cliente: apellidoValidado, correo_cliente: correo, clave_cliente: contra, telefono_cliente: telefono, estado_cliente: estadoCliente};
 }
-
+// Middleware para validar el formato de los datos a actualizar
 function validarFormatoActualizar(id, estado, req, res, next) {
     const idUnico = Validador.validarNumeroEntero(id, 'El id debe ser un numero ', req, res, next)
     const estado_cliente = Validador.validarBooleano(estado, 'El estado debe ser un formato valido', req, res, next)
@@ -38,7 +39,6 @@ router.post('/save', seguridad('cliente'), agregar);
 router.put('/update', seguridad('admin'), actualizar);
 
 // Funciones
-
 async function obtenerTodos(req, res, next) {
     try {
         const items = await controlador.todos();

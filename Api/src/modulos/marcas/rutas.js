@@ -1,3 +1,4 @@
+// Variables de depedencias 
 const express = require('express');
 const router = express.Router();
 const respuestas = require('../../red/respuestas');
@@ -13,7 +14,7 @@ function validarDatos(nombre, imagen, req, res, next) {
     const imagenValidada = Validador.validarCampo(imagen, 'La imagen es obligatoria', req, res, next);
     return { nombre_marca: nombreValidado, imagen_marca: imagenValidada };
 }
-
+// Middleware para validar el formato de los datos a actualizar 
 function validarFormatoActualizar(imagen, nombre, req, res, next) {
     const nombreValidado = Validador.validarLongitud(nombre, 255, 'El nombre debe ser obligatorio', req, res, next);
     const imagenCategoria = (imagen && imagen.trim()) || null;

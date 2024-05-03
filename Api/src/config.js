@@ -1,5 +1,5 @@
 require('dotenv').config();
-
+// conexion y token con secretos: variables de entorno 
 module.exports = {
     app: {
         port: process.env.PORT ,
