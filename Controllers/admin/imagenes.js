@@ -206,5 +206,6 @@ const mostrarImagen = (imagen) =>{
     }catch(error){
         manejarError();
     }
+    
 }
 
