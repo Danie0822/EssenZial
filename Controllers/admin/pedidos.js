@@ -18,7 +18,7 @@ const obtenerPedidos = async () => {
         tbody.innerHTML = "";
 
         if (success) {
-            data.forEach(({ id_pedido, fecha_pedido, estado_pedido, tipo_pago}) => {
+            data.forEach(({ id_pedido, fecha_pedido, estado_pedido, tipo_pago }) => {
                 // Formatear la fecha
                 const fechaFormateada = new Date(fecha_pedido).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
                 const formaPago = tipo_pago === 1 ? 'Efectivo' : 'Tarjeta';
@@ -46,11 +46,12 @@ const obtenerPedidos = async () => {
 const obtenerPedidosString = async (id, fecha_pedido, tipo_pago) => {
     try {
         const { success, data } = await fetchData(`/pedidos/detalle/${id}`);
-       
+        console.log(data)
         if (success) {
-            data.forEach(({id_correlativo, nombre_cliente, perfume, total_precio }) => {
-                abrirModalDetalles(nombre_cliente,fecha_pedido,tipo_pago,perfume,total_precio)
+            data.forEach(({ id_correlativo, nombre_cliente, perfume, total_precio, imagen }) => {
+                abrirModalDetalles(nombre_cliente, fecha_pedido, tipo_pago, perfume, total_precio,imagen)
             });
+
         } else {
             manejarError();
         }
@@ -63,7 +64,7 @@ const obtenerPedidosString = async (id, fecha_pedido, tipo_pago) => {
 
 // Const para pasar cosas que se necesita para actualizar en el modal 
 const abrirModalEditar = (id_pedido, estado_pedido) => {
-    if (id_pedido) {    
+    if (id_pedido) {
         abrirModal(myActualizar);
         id = id_pedido;
         if (estado_pedido == 'Finalizado') {
@@ -123,8 +124,10 @@ const limpiarFormulario = () => {
     obtenerElemento("totalPago").textContent = "";
 }
 
-const abrirModalDetalles = (nombre_cliente, fecha_pedido,tipo_pago, perfume, total_precio) => {
-    mostrar(nombre_cliente, fecha_pedido,tipo_pago, perfume, total_precio);
+const abrirModalDetalles = (nombre_cliente, fecha_pedido, tipo_pago, perfume, total_precio,imagenPedido) => {
+    const imagens = `http://localhost:4000/${imagenPedido}`; 
+    console.log(imagens); 
+    mostrar(nombre_cliente, fecha_pedido, tipo_pago, perfume, total_precio,imagens);
     abrirModal(myInfo);
 };
 
@@ -151,7 +154,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     obtenerPedidos();
 
- // Variable de actualizar
+    // Variable de actualizar
     const confirmarActualizarBtn = obtenerElemento('confirmarActualizar');
     confirmarActualizarBtn.addEventListener('click', async () => {
         // Validacion del id
@@ -161,18 +164,18 @@ document.addEventListener("DOMContentLoaded", function () {
             estadoPedidosCambio = null;
         }
     });
-        // Variable de Eliminar
-        const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
-        confirmarEliminarBtn.addEventListener('click', async () => {
-            // Validacion del id
-            if (id) {
-                await eliminarPedido(id);
-                id = null;
-            }
-        });
+    // Variable de Eliminar
+    const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
+    confirmarEliminarBtn.addEventListener('click', async () => {
+        // Validacion del id
+        if (id) {
+            await eliminarPedido(id);
+            id = null;
+        }
+    });
 });
 // Const de llenar el modal de actualizar con los valores 
-const mostrar = (nombre_cliente, fecha_pedido,tipo_pago ,perfume, total_precio) => {
+const mostrar = (nombre_cliente, fecha_pedido, tipo_pago, perfume, total_precio,imagenCategoria) => {
     try {
         limpiarFormulario(); // Limpia los campos antes de llenarlos
         obtenerElemento("nombreCliente").textContent = nombre_cliente;
@@ -180,6 +183,13 @@ const mostrar = (nombre_cliente, fecha_pedido,tipo_pago ,perfume, total_precio) 
         obtenerElemento("tipoPago").textContent = tipo_pago;
         obtenerElemento("perfume").textContent = perfume;
         obtenerElemento("totalPago").textContent = total_precio;
+        const imagenPreview = document.querySelector('.imagede');
+        if (imagenPreview) {
+            const urlImagen = imagenCategoria;
+            imagenPreview.src = urlImagen;
+            imagenPreview.style.display = 'block';
+        }
+        
     } catch (error) {
         manejarError();
     }
