@@ -10,7 +10,7 @@ const myAgregar = new bootstrap.Modal(obtenerElemento('imagenes'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 
 // Obtener el parámetro 'id' de la URL
-const urlParams = new URLSearchParams(window.location.search);
+//const urlParams = new URLSearchParams(window.location.search);
 const idInventario = urlParams.get('id');
 
 //Funcion para obtener imagenes
@@ -21,8 +21,7 @@ const obtenerImagenes = async (idInventario) => {
             console.error("El ID del inventario es inválido.");
             return;
         }
-
-        const { success, data } = await fetchData(`/imagenes/view/${idInventario}`);
+        const { success, data } = await fetchData(`/imagenes/${idInventario}`);
 
         if (success) {
             const tbody = obtenerElemento('tableBody');
@@ -131,7 +130,7 @@ const actualizarImagenes = async() =>{
 
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener cuando recarga pagina 
-    obtenerImagenes();
+    obtenerImagenes(idInventario);
     // Variable de Eliminar
     /*
     const confirmarEliminarBtn = obtenerElemento('confirmarEliminarBtn');
