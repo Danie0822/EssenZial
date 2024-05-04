@@ -12,6 +12,7 @@ const cliente = require('./modulos/clientes/rutas');
 const olores = require('./modulos/olores/rutas');
 const imagenes = require('./modulos/imagenes/rutas');
 const descuentos = require('./modulos/descuentos/rutas');
+const valoraciones = require('./modulos/valoraciones/rutas');
 const app = express(); 
 const error = require('./red/errors'); 
 const cors = require('cors');
@@ -36,6 +37,7 @@ app.use('/api/marcas', marcas);
 app.use('/api/olores', olores);
 app.use('/api/pedidos', pedidos);
 app.use('/api/descuentos', descuentos);
+app.use('/api/valoraciones', valoraciones);
 app.use(error); 
 
 module.exports = app; 

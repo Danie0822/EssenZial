@@ -111,6 +111,25 @@ function datellesPedidos(tabla, id, campoIdentificacion) {
     return ejecutarConsulta(sql, [tabla, campoIdentificacion, id]);
 }
 
+//Funcion para obtener detalles para la parte de valoraciones
+function detalleValoraciones(id) {
+    const sql = `SELECT 
+        iv.id_inventario,
+        iv.nombre_inventario,
+        v.calificacion_producto,
+        c.nombre_cliente 
+        FROM tb_valoraciones v
+        INNER JOIN tb_detalle_pedido dp ON v.id_detalle_pedido = dp.id_detalle_pedido
+        INNER JOIN tb_inventarios iv ON dp.id_inventario = iv.id_inventario
+        INNER JOIN tb_pedidos p ON dp.id_pedido = p.id_pedido
+        INNER JOIN tb_direcciones n ON p.id_direccion = n.id_direccion
+        INNER JOIN tb_clientes c ON n.id_cliente = c.id_cliente
+        WHERE iv.id_inventario = ?`;
+        
+    return ejecutarConsulta(sql, id); // Pasar el SQL completo y el parámetro para el ID
+}
+
+
 
 // Exportar las funciones para su uso fuera del módulo
 module.exports = {
@@ -123,5 +142,6 @@ module.exports = {
     querySelect,
     ejecutarProcedimiento,
     login,
-    datellesPedidos
+    datellesPedidos,
+    detalleValoraciones
 };

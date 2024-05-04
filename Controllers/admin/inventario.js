@@ -12,7 +12,6 @@ const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
 const myVer = new bootstrap.Modal(obtenerElemento('detalles'));
 const myPuntaje = new bootstrap.Modal(obtenerElemento('valoracionesModal'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
-const myImagenes = new bootstrap.Modal(obtenerElemento('imagenes'));
 const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
 
 
@@ -145,7 +144,7 @@ const obtenerInventario = async () => {
 
                     <button class="btn btn-dark actualizar" onclick="abrirModalEditar(${id_inventario})"><i class="fas fa-edit"></i></button>  
                     <button type="button" class="btn btn-dark" onclick="abrirModalVer(${id_inventario})"><i class="fas fa-info-circle"></i></button>
-                    <button type="button" class="btn btn-dark" onclick="abrirModalPuntaje${id_inventario}"><i class="fas fa-star"></i></button>
+                    <button type="button" class="btn btn-dark" onclick="abrirModalPuntaje(${id_inventario})"><i class="fas fa-star"></i></button>
                     <button type="button" class="btn btn-dark" onclick="abrirModalEliminar(${id_inventario})"><i class="fas fa-trash-alt"></i> </button>
                     <button type="button" class="btn btn-dark" onclick="abrirImagenes(${id_inventario})"><i class="fas fa-image"></i></button>
                     </td>
@@ -206,18 +205,6 @@ const abrirModalVer = (idInventarios) => {
     } else {
         manejarError();
     }
-
-}
-
-//Funcion para abrir modal de puntuacion
-const abrirModalPuntaje = (idInventarios) => {
-    if (idInventarios) {
-        idIventario = idInventarios;
-        abrirModal(myPuntaje);
-    } else {
-        manejarError();
-    }
-
 
 }
 
@@ -398,6 +385,7 @@ const mostrarInventariosId = async (idInventario) => {
     }
 };
 
+
 const verInventario = async (idInventario) => {
     try {
         const detalles = await obtenerInventarioDetalles(idInventario);
@@ -430,3 +418,84 @@ const verInventario = async (idInventario) => {
     }
 
 };
+
+
+//Funcion para abrir modal de puntuacion
+const abrirModalPuntaje = (idInventarios) => {
+    if (idInventarios) {
+        obtenerValoraciones(idInventarios);
+        idIventario = idInventarios;
+        abrirModal(myPuntaje);
+    } else {
+        manejarError();
+    }
+}
+
+//Funcion para obtener valoraciones
+const obtenerValoracionessDet = async (idInventario) =>{
+    try{
+        const response = await fetchData(`/valoraciones/${idInventario}`);
+        if(response.success){
+            return response.data;
+        }else{
+            throw new Error('No se pudieron obtener los detalles de las valoraciones');
+        }
+    }catch(error){
+        // Manejar cualquier error que ocurra durante la solicitud
+        console.error('Error al obtener los detalles de la categoría:', error);
+        manejarError();
+    }
+}
+
+//funcion para el modal
+const obtenerValoraciones = async (idInventario) => {
+    try {
+
+        const detalles = await obtenerValoracionessDet(idInventario);
+        const tbody = obtenerElemento('tbodyValo');
+        tbody.innerHTML = '';
+        let totalCalificaciones = 0;
+        let cantidadCalificaciones = 0;
+
+        if (detalles.length > 0) {
+            const valo = detalles[0];
+            obtenerElemento('nombrePerfume').textContent = valo.nombre_inventario;
+
+            valo.forEach(({ calificacion_producto, nombre_cliente }) => {
+                totalCalificaciones += calificacion_producto;
+                cantidadCalificaciones++;
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${nombre_cliente}</td>
+                    <td>
+                        <div class="rating">
+                            ${generarEstrellas(calificacion_producto)}
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            const promedio = totalCalificaciones / cantidadCalificaciones;
+            obtenerElemento('rating').textContent = `Promedio de Valoraciones: ${promedio.toFixed(2)}`;
+        }
+
+    } catch (error) {
+        manejarError();
+        console.log(error);
+
+    }
+}
+
+const generarEstrellas = (calificacion) => {
+    const estrellas = [];
+    for (let i = 1; i <= 5; i++) {
+        if (i <= calificacion) {
+            estrellas.push(`<label style="background-image: url('../../img/estrella-rellena.png');"></label>`);
+        } else {
+            estrellas.push(`<label style="background-image: url('../../img/estrella.png');"></label>`);
+        }
+    }
+    return estrellas.join('');
+}

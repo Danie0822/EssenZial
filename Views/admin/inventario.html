@@ -77,12 +77,11 @@
                                     <div class="modal-body">
                                         <div class="row">
                                             <div class="col-12">
-                                                <img src="../../resources/img/perfumeString.png"
-                                                    class="rounded mx-auto d-block" alt="...">
-                                                <label for="nombrePerfume" class="form-label text-center">STRONGER WITH
-                                                    U</label>
-                                                <div class=" text-center rating">
-                                                    <div class="rating">
+                                                <label for="nombrePerfume" class="form-label text-center">
+                                                    <p id="nombrePerfume"></p>
+                                                </label>
+                                                <div class=" text-center rating promedioValoraciones">
+                                                    <div class="rating" id="rating">
                                                         <label></label>
                                                         <label></label>
                                                         <label></label>
@@ -98,30 +97,11 @@
                                                         <th scope="col">Valoración</th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                <tbody id="tbodyValo">
                                                     <tr>
-                                                        <td>Daniel Alessandro</td>
-                                                        <td>
-                                                            <div class="rating">
-                                                                <label></label>
-                                                                <label></label>
-                                                                <label></label>
-                                                                <label></label>
-                                                                <label></label>
-                                                            </div>
-                                                        </td>
+
                                                     </tr>
                                                     <tr>
-                                                        <td>José Sanchéz</td>
-                                                        <td>
-                                                            <div class="rating">
-                                                                <label></label>
-                                                                <label></label>
-                                                                <label></label>
-                                                                <label></label>
-                                                                <label></label>
-                                                            </div>
-                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -517,43 +497,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!--Modal para agregar las imagenes-->
-                        <div class="modal fade" id="imagenes" tabindex="-1" role="dialog"
-                            aria-labelledby="detallesModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header custom-modal-header">
-                                        <h5 class="modal-title text-center" id="marcaModalLabel" style="width: 100%;">
-                                            Agrega las imágenes para tus productos
-                                        </h5>
-                                    </div>
-                                    <!--Inicio del cuerpo del modal de imagenes-->
-                                    <div class="modal-body">
-                                        <h6 class="modal-title text-center" id="marcaModalLabel" style="width: 100%; color: black;">
-                                           Solo puedes adjuntar 4 imágenes
-                                        </h6>
-                                        <div class="custom-file mb-3">
-                                            <input type="file" class="custom-file-input txti" id="imagen_agregar">
-                                            <label class="custom-file-label txti" for="imagen_agregar">Seleccionar
-                                                imagen</label>
-                                        </div>
-                                        <img src="" class="preview-image" id="imagenPreview"
-                                            alt="Vista previa de la imagen">
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-dark" data-dismiss="modal"><i
-                                                class="fas fa-times"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-dark" id="agregarImagenBtn"><i
-                                            class="fas fa-plus"></i>
-                                    </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </main>
