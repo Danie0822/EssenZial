@@ -169,7 +169,7 @@ function abrirImagenes(idInventario) {
 
 //Abrir modal para agregar inventario
 async function abrirAgregar() {
-    abrirModal(myImagenes);
+    abrirModal(myGuardar);
     obtenerCmb();
 }
 
