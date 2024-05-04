@@ -173,5 +173,6 @@ const mostrarImagen = (ruta_imagen) =>{
         manejarError();
     }
 
+    
 }
 
