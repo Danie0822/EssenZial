@@ -35,7 +35,7 @@ function validarID(id, req, res, next) {
 
 //RUTAS
 router.get('/', seguridad('admin'), todos);
-router.get('/:id', seguridad('admin'), uno);
+router.get('/:id', seguridad('admin'), uno); //query para traer imagenes solo por id inventario
 router.get('/view/:id', seguridad('admin'), unoId);
 router.post('/save', seguridad('admin'), upload.single('imagen'), agregar);
 router.put('/update', seguridad('admin'), upload.single('imagen'), actualizar);
@@ -61,10 +61,13 @@ async function uno(req, res, next) {
 }
 async function unoId(req, res, next){
     try {
-        //const idInventario = req.params.id_inventario; // Cambiar a req.params.id_inventario
-        const imagen = await controlador.unoId(req.params.id_inventario);
-        respuestas.success(req, res, imagen, 200);
-    } catch(error) {
+        const imagen = await controlador.obtenerRegistroPorId(req.params.id_inventario);
+        if (imagen) {
+            respuestas.success(req, res, imagen, 200);
+        } else {
+            respuestas.error(req, res, "No se encontró el registro", 404);
+        }
+    } catch (error) {
         next(error);
     }
 }

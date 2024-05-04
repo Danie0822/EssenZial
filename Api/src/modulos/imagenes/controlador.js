@@ -12,21 +12,20 @@ module.exports = function(db){
         }));
     }
 
-
     async function uno(id){
-        const imagenes = await db.uno(TABLE_NAME, id, ID_FIELD);
+        const imagenes = await db.uno(TABLE_NAME, id, ID_INVENTARIO);
         return imagenes && {
             ...imagenes,
             ruta_imagen: imagenes.ruta_imagen || null
         };
     }
 
-    async function unoId(id_inventario){
-        const imagenes = await db.uno(TABLE_NAME, id_inventario, ID_INVENTARIO);
-        return imagenes.map(imagenes => ({
+    async function unoPorID(id){
+        const imagenes = await db.uno(TABLE_NAME, id, ID_FIELD);
+        return imagenes && {
             ...imagenes,
             ruta_imagen: imagenes.ruta_imagen || null
-        }));
+        };
     }
 
     async function agregar(filePath, id_inventario){
@@ -69,7 +68,7 @@ module.exports = function(db){
     return{
         todos, 
         uno,
-        unoId,
+        unoPorID,
         agregar, 
         actualizar,
         eliminar
