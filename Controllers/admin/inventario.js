@@ -447,55 +447,65 @@ const obtenerValoracionessDet = async (idInventario) =>{
     }
 }
 
+
+
+
 //funcion para el modal
 const obtenerValoraciones = async (idInventario) => {
     try {
-
         const detalles = await obtenerValoracionessDet(idInventario);
         const tbody = obtenerElemento('tbodyValo');
         tbody.innerHTML = '';
-        let totalCalificaciones = 0;
-        let cantidadCalificaciones = 0;
 
         if (detalles.length > 0) {
             const valo = detalles[0];
             obtenerElemento('nombrePerfume').textContent = valo.nombre_inventario;
 
-            valo.forEach(({ calificacion_producto, nombre_cliente }) => {
+            let totalCalificaciones = 0;
+
+            detalles.forEach(({ calificacion_producto, nombre_cliente }) => {
                 totalCalificaciones += calificacion_producto;
-                cantidadCalificaciones++;
 
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${nombre_cliente}</td>
                     <td>
                         <div class="rating">
-                            ${generarEstrellas(calificacion_producto)}
+                            ${calificacion_producto}
                         </div>
                     </td>
                 `;
                 tbody.appendChild(tr);
             });
 
-            const promedio = totalCalificaciones / cantidadCalificaciones;
-            obtenerElemento('rating').textContent = `Promedio de Valoraciones: ${promedio.toFixed(2)}`;
+            const promedio = totalCalificaciones / detalles.length;
+            obtenerElemento('rating').innerHTML = generarEstrellas(promedio);
         }
 
     } catch (error) {
         manejarError();
         console.log(error);
-
     }
-}
+};
 
-const generarEstrellas = (calificacion) => {
+
+const generarEstrellas = (promedio) => {
     const estrellas = [];
-    for (let i = 1; i <= 5; i++) {
-        if (i <= calificacion) {
-            estrellas.push(`<label style="background-image: url('../../img/estrella-rellena.png');"></label>`);
-        } else {
-            estrellas.push(`<label style="background-image: url('../../img/estrella.png');"></label>`);
-        }
+    
+    // Asegurar que el promedio esté dentro del rango de 1 a 5
+    promedio = Math.min(Math.max(promedio, 1), 5);
+
+    // Generar estrellas llenas
+    for (let i = 1; i <= promedio; i++) {
+        estrellas.push(`<label style="background-image: url('/resources/img/estrellaRe.png');"></label>`);
     }
+
+    // Completar con estrellas vacías
+    for (let i = promedio + 1; i <= 5; i++) {
+        estrellas.push(`<label style="background-image: url('/resources/img/estrella.png');"></label>`);
+    }
+
     return estrellas.join('');
-}
+};
+
+
