@@ -1,3 +1,4 @@
+
 // Evento de cambio para el input de imágenes para agregar
 var imagenesAgregar = document.getElementById('imagenes_agregar');
 if (imagenesAgregar) {
@@ -31,7 +32,7 @@ function readURLs(input, previewClass) {
             })(i);
         }
     } else {
-        alert("Por favor selecciona exactamente 4 imágenes.");
+        manejarImagenes();
         input.value = ''; // Limpiar el input de archivo
     }
 }
@@ -46,7 +47,7 @@ function readURL2(input) {
             input.closest('.modal-content').querySelector('.preview-image-actualizar').setAttribute('src', e.target.result);
             input.closest('.modal-content').querySelector('.preview-image-actualizar').style.display = 'block';
         }
-
+        
         reader.readAsDataURL(input.files[0]); // Convertir a base64 string
     }
 }

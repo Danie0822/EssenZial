@@ -450,7 +450,7 @@ const obtenerValoracionessDet = async (idInventario) =>{
 
 
 
-//funcion para el modal
+//Función para el modal de obtener valoraciones
 const obtenerValoraciones = async (idInventario) => {
     try {
         const detalles = await obtenerValoracionessDet(idInventario);

@@ -28,6 +28,34 @@ async function fetchData(endpoint) {
     }
 }
 
+async function fetchDataWithParam(endpoint, idInventario) {
+    if (isFetchingData) {
+        console.log("Otra operación está en curso. Por favor, espere.");
+        return { success: false, message: "Otra operación está en curso. Por favor, espere." };
+    }
+
+    isFetchingData = true;
+
+    try {
+        const response = await fetch(`${baseURL}${endpoint}/${idInventario}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error("Error:", error);
+        return { success: false, message: error.message };
+    } finally {
+        isFetchingData = false;
+    }
+}
+
+
+
+
+
 async function DataAdmin(endpoint, formData, method) {
     if (isFetchingData) {
         console.log("Otra operación está en curso. Por favor, espere.");
