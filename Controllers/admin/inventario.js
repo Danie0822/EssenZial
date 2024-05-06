@@ -104,6 +104,7 @@ const obtenerMarcas = async (idCmb) => {
         console.error('Error al obtener las marcas:', error);
     }
 };
+
 //Cargando comboBoxes para modal de agregar
 async function obtenerCmb() {
     try {
@@ -115,6 +116,7 @@ async function obtenerCmb() {
         console.error('Error al cargar los datos:', error);
     }
 }
+
 //Cargando comboBoxes para modal de actualizar
 async function obtenerCmbAc() {
     try {
@@ -220,7 +222,7 @@ const agregarInventario = async () => {
         const idMarca = obtenerElemento("marcaProducto").value;
         const idDescuento = obtenerElemento("descuentoSeleccionado").value;
 
-        if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250)) {
+        if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250) || !validaciones.esNumeroEntero(cantidadInventario) || !validaciones.esNumeroDecimal(precioInventario)) {
             manejarValidaciones();
         } else {
             var inventarioData = {
@@ -263,7 +265,7 @@ const actualizarInventario = async (idInventario) => {
         const idMarca = obtenerElemento("marcaProductoAc").value;
         const idDescuento = obtenerElemento("descuentoSeleccionadoAc").value;
 
-        if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250)) {
+        if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250) || !validaciones.esNumeroEntero(cantidadInventario) || !validaciones.esNumeroDecimal(precioInventario)) {
             manejarValidaciones();
         } else {
             var inventarioData = {
