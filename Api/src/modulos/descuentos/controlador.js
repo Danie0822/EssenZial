@@ -8,6 +8,10 @@ module.exports = function(db){
         return db.todos(TABLE_NAME);
     }
 
+    async function uno(id){
+        return db.uno(TABLE_NAME, id, ID_FIELD);
+    }
+
     async function querySelect(){
         return db.querySelect(FIELDS, TABLE_NAME);
     }
@@ -26,6 +30,7 @@ module.exports = function(db){
 
     return{
         todos, 
+        uno,
         querySelect, 
         agregar, 
         actualizar,
