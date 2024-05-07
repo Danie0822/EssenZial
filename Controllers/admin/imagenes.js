@@ -46,8 +46,8 @@ const obtenerImagenes = async () => {
     catch (error) {
         console.log(error);
         manejarError();
-    }
-}
+    }
+};
 
 const limpiarFormularioActualizar = () => {
     document.querySelectorAll('.form-control-actualizar').forEach(input => input.value = "");
@@ -82,6 +82,10 @@ const agregarImagenes = async () => {
             return;
         }
 
+        if(!validaciones.validarImagen(imagenes)){
+            abrirModal(obtenerElemento('error'));
+        }
+
         // Array para almacenar los datos de todas las imágenes
         const imagenesDataArray = [];
 
@@ -103,64 +107,68 @@ const agregarImagenes = async () => {
     }
 };
 
-const abrirModalAc = (idImagenes, imagen) =>{
-    if(idImagenes){
+const abrirModalAc = (idImagenes, imagen) => {
+    if (idImagenes) {
         mostrarImagen(imagen);
         idImagen = idImagenes;
         abrirModal(myActualizar);
     }
-    else{
+    else {
         manejarError();
     }
 }
 
 //Funcion para actualizar cada imagen
-const actualizarImagenes = async(idImagen) =>{
-    try{
+const actualizarImagenes = async (idImagen) => {
+    try {
         const imagen = obtenerElemento("imagen_actualizar").files[0];
+        
+        if(!validaciones.validarImagen(imagen)){
+            abrirModal(obtenerElemento('error'));
+        }
         const formData = new FormData();
         formData.append("id_imagen", idImagen);
         formData.append("imagen", imagen);
         formData.append("id_inventario", idInventario);
         const { success } = await updateData("/imagenes/update", formData);
 
-        if(success){
-            
+        if (success) {
+
             obtenerImagenes();
             limpiarFormularioActualizar();
             cerrarModal(myActualizar);
             setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento("actualizado"))), 500);
-        }else{
+        } else {
             manejarError();
         }
 
-    }catch(error){
+    } catch (error) {
         console.log(error);
         manejarError();
     }
 };
 
-const abrirModalEliminar = (idImagenes) =>{
-    if(idImagenes){
+const abrirModalEliminar = (idImagenes) => {
+    if (idImagenes) {
         idImagen = idImagenes;
         abrirModal(myEliminar);
-    }else{
+    } else {
         manejarError();
     }
 
 }
 
 const eliminarImagenes = async (idImagen) => {
-    try{
+    try {
         const { success } = await deleteData(`/imagenes/delete/${idImagen}`);
-        if(success){
+        if (success) {
             obtenerImagenes();
             cerrarModal(myEliminar);
             setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('eliminadoModal'))));
-        }else {
+        } else {
             manejarError();
         }
-    }catch (error) {
+    } catch (error) {
         manejarError();
     }
 
@@ -170,7 +178,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Obtener cuando recarga pagina 
     obtenerImagenes();
     // Variable de Eliminar
-    
+
     const confirmarEliminarBtn = obtenerElemento('eliminarBtn');
     confirmarEliminarBtn.addEventListener('click', async () => {
         // Validacion del id 
@@ -195,18 +203,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-const mostrarImagen = (imagen) =>{
-    try{
+const mostrarImagen = (imagen) => {
+    try {
         limpiarFormularioActualizar();
         const imagenPreview = document.querySelector('.imageAc');
-        if(imagenPreview){
+        if (imagenPreview) {
             const url = imagen;
             imagenPreview.src = url;
             imagenPreview.style.display = 'block';
-        }else{
+        } else {
             manejarError();
         }
-    }catch(error){
+    } catch (error) {
         manejarError();
     }
 }
