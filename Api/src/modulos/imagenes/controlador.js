@@ -15,8 +15,7 @@ module.exports = function(db){
     async function uno(id){
         const imagenes = await db.uno(TABLE_NAME, id, ID_INVENTARIO);
         return imagenes && {
-            ...imagenes,
-            ruta_imagen: imagenes.ruta_imagen || null
+            ...imagenes
         };
     }
 

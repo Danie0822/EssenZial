@@ -165,7 +165,10 @@ const obtenerInventario = async () => {
 //Funcion para abrir pantalla y enviar id 
 function abrirImagenes(idInventario) {
     // Redirigir a la página de imágenes.html con el ID como parámetro en la URL
-    window.location.href = `imagenes.html?id=${idInventario}`;
+
+    window.location.href = `imagenes.html`;
+    sessionStorage.setItem("id_inventario", idInventario); 
+
 }
 
 //Abrir modal para agregar inventario

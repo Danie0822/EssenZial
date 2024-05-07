@@ -12,27 +12,29 @@ const myActualizar = new bootstrap.Modal(obtenerElemento('imagenesAc'));
 const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
 
 // Obtener el parámetro 'id' de la URL
-const urlParams = new URLSearchParams(window.location.search);
-const idInventario = urlParams.get('id');
+//const urlParams = new URLSearchParams(window.location.search);
+//const idInventario = urlParams.get('id');
+const idInventario = sessionStorage.getItem("id_inventario");
 let idImagen = null;
 
 //Funcion para obtener imagenes
 const obtenerImagenes = async () => {
     try {
-        const { success, data } = await fetchData('/imagenes');
+        const { success, data } = await fetchData(`/imagenes/${idInventario}`);
         const tbody = obtenerElemento('tableBody');
         tbody.innerHTML = '';
 
         if (success) {
-            data.forEach(({ id_imagen, ruta_imagen }) => {
+            // Obtener un array de los valores de data
+            const imagenes = Object.values(data);
+
+            imagenes.forEach(({ id_imagen, ruta_imagen }) => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    
                     <td><img src="${imagen}${ruta_imagen}" alt="Imagen de la categoría" width="50"></td>
                     <td>
-                    <button class="btn btn-dark actualizar" onclick="abrirModalAc(${id_imagen},'http://localhost:4000/${ruta_imagen}')"><i class="fas fa-edit"></i></button>  
-                    <button type="button" class="btn btn-dark" onclick="abrirModalEliminar(${id_imagen})"><i class="fas fa-trash-alt"></i> </button>
-                 
+                        <button class="btn btn-dark actualizar" onclick="abrirModalAc(${id_imagen},'http://localhost:4000/${ruta_imagen}')"><i class="fas fa-edit"></i></button>  
+                        <button type="button" class="btn btn-dark" onclick="abrirModalEliminar(${id_imagen})"><i class="fas fa-trash-alt"></i> </button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -42,8 +44,9 @@ const obtenerImagenes = async () => {
         }
     }
     catch (error) {
+        console.log(error);
         manejarError();
-    }
+    }
 }
 
 const limpiarFormularioActualizar = () => {
