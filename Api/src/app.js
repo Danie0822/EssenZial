@@ -13,6 +13,7 @@ const olores = require('./modulos/olores/rutas');
 const imagenes = require('./modulos/imagenes/rutas');
 const descuentos = require('./modulos/descuentos/rutas');
 const valoraciones = require('./modulos/valoraciones/rutas');
+const dashboard = require('./modulos/dashboard/rutas');
 const app = express(); 
 const error = require('./red/errors'); 
 const cors = require('cors');
@@ -38,6 +39,7 @@ app.use('/api/olores', olores);
 app.use('/api/pedidos', pedidos);
 app.use('/api/descuentos', descuentos);
 app.use('/api/valoraciones', valoraciones);
+app.use('/api/ultimospedidos',dashboard);
 app.use(error); 
 
 module.exports = app; 
