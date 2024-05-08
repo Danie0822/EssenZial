@@ -8,11 +8,20 @@ const seguridad = require('../seguridad/seguridad');
 
 // Rutas
 router.get('/', seguridad('admin'), todos);
+router.get('/ofertas', seguridad('admin'), ofertas);
 
 // Funciones
 async function todos(req, res, next) {
     try {
         const pedidos = await controlador.todos();
+        respuestas.success(req, res, pedidos, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+async function ofertas(req, res, next) {
+    try {
+        const pedidos = await controlador.ofertas();
         respuestas.success(req, res, pedidos, 200);
     } catch (error) {
         next(error);

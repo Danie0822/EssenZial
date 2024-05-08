@@ -36,5 +36,51 @@ const mostrarUltimosPedidos = async () => {
     }
 };
 
+const mostrarUltimasOfertas = async () => {
+    try {
+        const { success, data } = await fetchData("/ultimospedidos/ofertas/");
+        const pedidosContainer = document.getElementById("ofertas");
+
+        if (success) {
+            pedidosContainer.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
+            
+            data.forEach(({ descuento, fecha_inicio_descuento, fecha_fin_descuento,descripcion_descuento }) => {
+                const fechaFormateada1 = new Date(fecha_inicio_descuento).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                const fechaFormateada2 = new Date(fecha_fin_descuento).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
+                const pedidoCard = `
+                <div class="align-items-center pedidos">
+                <div class="row">
+                    <div class="col-2">
+                        <p>${descuento}</p>
+                    </div>
+                    <div class="col-3">
+                        <p>${fechaFormateada1}</p>
+                    </div>
+                    <div class="col-3">
+                        <p>${fechaFormateada2}</p>
+                    </div>
+                    <div class="col-4">
+                        <p>${descripcion_descuento}</p>
+                    </div>
+                </div>
+            </div>
+                `;
+                pedidosContainer.innerHTML += pedidoCard;
+            });
+        } else {
+            manejarError("No se pudieron obtener las ultimas ofertas."); // Proporcionar mensaje de error
+        }
+    } catch (error) {
+        console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+        manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
+    }
+};
+const llamarProcesos = async () => {
+    await mostrarUltimosPedidos();
+    await mostrarUltimasOfertas();
+} 
 // Evento al cargar el DOM para obtener y mostrar los últimos pedidos
-document.addEventListener("DOMContentLoaded", mostrarUltimosPedidos);
+document.addEventListener("DOMContentLoaded", function () {
+    // Obtener cuando recarga pagina 
+    llamarProcesos();
+});
