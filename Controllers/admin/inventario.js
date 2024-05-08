@@ -167,7 +167,7 @@ function abrirImagenes(idInventario) {
     // Redirigir a la página de imágenes.html con el ID como parámetro en la URL
 
     window.location.href = `imagenes.html`;
-    sessionStorage.setItem("id_inventario", idInventario); 
+    sessionStorage.setItem("id_inventario", idInventario);
 
 }
 
@@ -437,23 +437,20 @@ const abrirModalPuntaje = (idInventarios) => {
 }
 
 //Funcion para obtener valoraciones
-const obtenerValoracionessDet = async (idInventario) =>{
-    try{
+const obtenerValoracionessDet = async (idInventario) => {
+    try {
         const response = await fetchData(`/valoraciones/${idInventario}`);
-        if(response.success){
+        if (response.success) {
             return response.data;
-        }else{
+        } else {
             throw new Error('No se pudieron obtener los detalles de las valoraciones');
         }
-    }catch(error){
+    } catch (error) {
         // Manejar cualquier error que ocurra durante la solicitud
         console.error('Error al obtener los detalles de la categoría:', error);
         manejarError();
     }
 }
-
-
-
 
 //Función para el modal de obtener valoraciones
 const obtenerValoraciones = async (idInventario) => {
@@ -493,10 +490,9 @@ const obtenerValoraciones = async (idInventario) => {
     }
 };
 
-
 const generarEstrellas = (promedio) => {
     const estrellas = [];
-    
+
     // Asegurar que el promedio esté dentro del rango de 1 a 5
     promedio = Math.min(Math.max(promedio, 1), 5);
 
@@ -512,5 +508,3 @@ const generarEstrellas = (promedio) => {
 
     return estrellas.join('');
 };
-
-
