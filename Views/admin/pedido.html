@@ -42,19 +42,20 @@
 
                         <div class="sizebox"></div>
 
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Fecha del pedido</th>
-                                    <th scope="col">Estado del pedido</th>
-                                    <th scope="col">Tipo de pago</th>
-                                    <th scope="col" class="text-center">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tablaBody">
-                            </tbody>
-                        </table>
-
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Estado del pedido</th>
+                                        <th scope="col">Fecha del pedido</th>
+                                        <th scope="col">Tipo de pago</th>
+                                        <th scope="col" class="text-center">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tablaBody">
+                                </tbody>
+                            </table>
+                        </div>
                         <!-- Modal Actualizar-->
                         <div class="modal fade" id="Actualizar" tabindex="-1" role="dialog"
                             aria-labelledby="marcaModalLabel" aria-hidden="true">
@@ -145,12 +146,12 @@
                                     </div>
                                     <div class="modal-body">
                                         <p><strong>Cliente:</strong> <span id="nombreCliente"></span></p>
-                                        <p><strong>Fecha del pedido:</strong>  <span id="fechaPedido"></span></p>
-                                        <p><strong>Tipo de pago:</strong>  <span id="tipoPago"></span></p>
+                                        <p><strong>Fecha del pedido:</strong> <span id="fechaPedido"></span></p>
+                                        <p><strong>Tipo de pago:</strong> <span id="tipoPago"></span></p>
                                         <p><strong>Perfume:</strong> <span id="perfume"></span></p>
                                         <img src="" class="preview-image imagede" id="imagenPreview"
                                             alt="Vista previa de la imagen" style="display: none;">
-                                        <p><strong>Total:</strong>  <span id="totalPago"></span></p>
+                                        <p><strong>Total:</strong> <span id="totalPago"></span></p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-dark" data-dismiss="modal"><i
@@ -161,21 +162,21 @@
                             </div>
                         </div>
                         <div class="modal fade" id="errorModal" tabindex="-1" role="dialog"
-                        aria-labelledby="errorModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body text-center">
-                                    <i class="bi bi-exclamation-triangle-fill text-danger"
-                                        style="font-size: 5rem;"></i>
-                                    <h5 class="mt-3">¡Ups, ocurrió un error!</h5>
-                                    <p class="mt-3">Lo sentimos, parece que hubo un error interno. Por favor,
-                                        inténtalo de nuevo más
-                                        tarde.</p>
-                                    <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
+                            aria-labelledby="errorModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-body text-center">
+                                        <i class="bi bi-exclamation-triangle-fill text-danger"
+                                            style="font-size: 5rem;"></i>
+                                        <h5 class="mt-3">¡Ups, ocurrió un error!</h5>
+                                        <p class="mt-3">Lo sentimos, parece que hubo un error interno. Por favor,
+                                            inténtalo de nuevo más
+                                            tarde.</p>
+                                        <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </main>

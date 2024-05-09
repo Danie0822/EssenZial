@@ -24,8 +24,8 @@ const obtenerPedidos = async () => {
                 const formaPago = tipo_pago === 1 ? 'Efectivo' : 'Tarjeta';
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td>${fechaFormateada}</td> 
                     <td>${estado_pedido}</td> 
+                    <td>${fechaFormateada}</td> 
                     <td>${formaPago}</td> 
                     <td class="text-center">
                         <button type="button" class="btn btn-dark" onclick="abrirModalEditar(${id_pedido},'${estado_pedido}')"><i class="fas fa-edit"></i></button>
