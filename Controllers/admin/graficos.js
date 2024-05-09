@@ -1,14 +1,6 @@
 const ctx = document.getElementById('myChart');
 const ctx2 = document.getElementById('myChart2');
 const ctx3 = document.getElementById('myChart3');
-const marcas = ['Montblanc', 'Calvin Klein', 'Salvatore Ferragamo', 'Azzaro', 'Paco Rabanne'];
-const marcas2 = ['Montblanc', 'Calvin Klein', 'Salvatore Ferragamo', 'Azzaro', 'Paco Rabanne'];
-const porcentajes = [10, 15, 20, 25, 30];
-const porcentajes2 = [5, 25, 20, 35, 30];
-const meses =['Enero', 'Febrero', 'Marzo'];
-const ventas = [10, 50, 70];
-
-
 
 // Definir función para manejar errores
 function manejarError(mensaje) {
