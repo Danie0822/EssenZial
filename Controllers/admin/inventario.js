@@ -390,7 +390,6 @@ const mostrarInventariosId = async (idInventario) => {
     }
 };
 
-
 const verInventario = async (idInventario) => {
     try {
         const detalles = await obtenerInventarioDetalles(idInventario);
@@ -405,7 +404,6 @@ const verInventario = async (idInventario) => {
             const response = await fetchData(`/categorias/${idCategoria}`); // Suponiendo que '/categorias/:id' es la ruta para obtener detalles de una categoría por su ID
             if (response.success) {
                 const datos = response.data;
-                console.log(datos.nombre_categoria);
                 const nombre = datos.nombre_categoria;
                 obtenerElemento("categoriaP").innerText = nombre || 'No disponible';
             } else {
