@@ -13,7 +13,7 @@ const ventas = [10, 50, 70];
 // Definir función para manejar errores
 function manejarError(mensaje) {
   console.error("Error:", mensaje);
-  // Aquí puedes implementar lógica adicional para manejar el error, como mostrar un mensaje al usuario
+  // Aquí puedes implementar lógica adicional para manejaar el error, como mostrar un mensaje al usuario
 }
 
 // Función para mostrar los últimos pedidos en el gráfico
