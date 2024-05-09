@@ -1,5 +1,11 @@
 const obtenerElemento = (id) => document.getElementById(id);
 // Función para obtener datos de pedidos y mostrarlos en tarjetas
+
+// Definir función para manejar errores
+function manejarError(mensaje) {
+    console.error("Error:", mensaje);
+    // Aquí puedes implementar lógica adicional para manejaar el error, como mostrar un mensaje al usuario
+  }
 const mostrarUltimosPedidos = async () => {
     try {
         const { success, data } = await fetchData("/ultimospedidos/");
@@ -28,7 +34,7 @@ const mostrarUltimosPedidos = async () => {
                 pedidosContainer.innerHTML += pedidoCard;
             });
         } else {
-            manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
+            manejarError("No se pudieron obtener los últimos pedidos.");; // Proporcionar mensaje de error
         }
     } catch (error) {
         console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
@@ -78,6 +84,9 @@ const mostrarUltimasOfertas = async () => {
 const llamarProcesos = async () => {
     await mostrarUltimosPedidos();
     await mostrarUltimasOfertas();
+    await mostrarUltimosVedidas();
+    await mostrarPerfumesMasVendidos();
+    await mostrarVentas();
 } 
 // Evento al cargar el DOM para obtener y mostrar los últimos pedidos
 document.addEventListener("DOMContentLoaded", function () {

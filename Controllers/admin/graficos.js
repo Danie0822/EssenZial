@@ -17,7 +17,7 @@ function manejarError(mensaje) {
 }
 
 // Función para mostrar los últimos pedidos en el gráfico
-const mostrarUltimosPedidos = async () => {
+const mostrarUltimosVedidas = async () => {
   try {
       const { success, data } = await fetchData("/charts/marcasVendidas/");
       if (success) {
@@ -31,6 +31,50 @@ const mostrarUltimosPedidos = async () => {
           myChart.data.labels = labels;
           myChart.data.datasets[0].data = porcentajes;
           myChart.update();
+      } else {
+          manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
+      }
+  } catch (error) {
+      console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+      manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
+  }
+};
+const mostrarPerfumesMasVendidos = async () => {
+  try {
+      const { success, data } = await fetchData("/charts/perfumesVendidos/");
+      if (success) {
+          const labels = [];
+          const ventas = [];
+          data.forEach(({ nombre_producto, total_ventas }) => {
+              labels.push(nombre_producto);
+              ventas.push(total_ventas);
+          });
+          // Actualizar el gráfico con los nuevos datos
+          myChart2.data.labels = labels;
+          myChart2.data.datasets[0].data = ventas;
+          myChart2.update();
+      } else {
+          manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
+      }
+  } catch (error) {
+      console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+      manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
+  }
+};
+const mostrarVentas = async () => {
+  try {
+      const { success, data } = await fetchData("/charts/ventaMeses/");
+      if (success) {
+          const meses = [];
+          const pedidos = [];
+          data.forEach(({ mes, total_pedidos }) => {
+              meses.push(mes);
+              pedidos.push(total_pedidos);
+          });
+          // Actualizar el gráfico con los nuevos datos
+          myChart3.data.labels = meses;
+          myChart3.data.datasets[0].data = pedidos;
+          myChart3.update();
       } else {
           manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
       }
@@ -85,10 +129,10 @@ const myChart = new Chart(ctx, {
 const myChart2 = new Chart(ctx2, {
   type: 'doughnut',
   data: {
-    labels: marcas2,
+    labels:[],
     datasets: [{
-      label: 'Porcentaje',
-      data: porcentajes2,
+      label: 'Ventas',
+      data: [],
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
         'rgba(54, 162, 235, 0.2)',
@@ -130,10 +174,10 @@ const myChart2 = new Chart(ctx2, {
 const myChart3 = new Chart(ctx3, {
     type:'bar',
     data: {
-      labels: meses,
+      labels: [],
       datasets: [{
         label: 'Ventas',
-        data: ventas,
+        data: [],
         backgroundColor: [
           'rgba(255, 99, 132, 0.2)',
           'rgba(54, 162, 235, 0.2)',
@@ -167,9 +211,4 @@ const myChart3 = new Chart(ctx3, {
       }
     },
 
-});
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Obtener cuando recarga pagina 
-  mostrarUltimosPedidos();
 });
