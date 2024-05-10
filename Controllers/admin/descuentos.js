@@ -232,7 +232,7 @@ const mostrarDescuentos = async (idDescuento) => {
             let estado = descuentos.estado_descuento;
             if (estado == 1) {
                 obtenerElementoD("estadoAc").checked
-            }           
+            }
 
         } else {
             console.error('No se encontraron detalles de inventario para el ID proporcionado.');
@@ -253,7 +253,7 @@ const verDescuento = async (idDescuento) => {
         const detallesDescuento = await obtenerDescuentos(idDescuento);
         if (detallesDescuento) {
             const descuentos = detallesDescuento[0];
-            obtenerElementoD("cantidadDescVer").innerText = descuentos.cantidad_descuento;
+            obtenerElementoD("cantidadDescVer").value = descuentos.cantidad_descuento;
             obtenerElementoD("descripcionDescVer").innerText = descuentos.descripcion_descuento;
 
             // Obtener las fechas en el formato de la base de datos
@@ -273,9 +273,10 @@ const verDescuento = async (idDescuento) => {
             obtenerElementoD("fechaFinAc").innerText = fechaFinFormateada;
 
             let estado = descuentos.estado_descuento;
-            if (estado == 1) {
-                obtenerElementoD("estadoVer").checked
-            }
+            // Establecer el estado del checkbox según el valor del estado_descuento
+            obtenerElementoD("estadoVer").checked = estado == 1;
+
+
         }
     } catch (error) {
         manejarErrorD();
