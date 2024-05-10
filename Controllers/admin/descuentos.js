@@ -98,7 +98,6 @@ const agregarDescuentos = async () => {
         const fechaInicio = obtenerElementoD("fechaIDescuento").value;
         const fechaFin = obtenerElementoD("fechaFDescuento").value;
 
-
         if (check.checked) {
             estado = 1;
         } else {
@@ -133,22 +132,23 @@ const agregarDescuentos = async () => {
 const actualizarDescuentos = async (idDescuento) => {
     try {
 
-        const check = obtenerElementoD("estadoDescuento");
+        const check = obtenerElementoD("estadoAc");
         const idDesc = idDescuento;
 
-        const cantidadDescuento = obtenerElementoD("cantidadDescuento").value;
-        const descripDescuento = obtenerElementoD("descripcionDescuento").value;
-        const fechaInicio = obtenerElementoD("fechaIDescuento").value;
-        const fechaFin = obtenerElementoD("fechaFDescuento").value;
+        let estado = null;
+        const cantidadDescuento = obtenerElementoD("cantDescuentoAc").value;
+        const descripDescuento = obtenerElementoD("descripcionAc").value;
+        const fechaInicio = obtenerElementoD("fechaInicioAc").value;
+        const fechaFin = obtenerElementoD("fechaFinAc").value;
 
         if (check.checked) {
             estado = 1;
         } else {
             estado = 0;
         }
-        if (!validaciones.contieneSoloLetrasYNumeros(descripDescuento) || !validaciones.esNumeroEntero(cantidadDescuento) || !validaciones.esFechaValida(fechaInicio) || !validaciones.esFechaValida(fechaFin)) {
+        if (!validaciones.longitudMaxima(descripDescuento, 250) || !validaciones.esNumeroDecimal(cantidadDescuento) || !validaciones.esFechaValida(fechaInicio) || !validaciones.esFechaValida(fechaFin)) {
             manejarValidacionesD();
-        } else {
+        }  else {
             var descuentosData = {
                 id_descuento: idDesc,
                 cantidad_descuento: cantidadDescuento,
@@ -191,6 +191,7 @@ const eliminarDescuentos = async (idDescuento) => {
 
 }
 
+//Funcion para obtener todos los descuentos según ID para modal de ver e mostrar al actualizar
 const obtenerDescuentosDetalles = async (idDescuento) => {
     try {
         const response = await fetchData(`/descuentos/${idDescuento}`);
@@ -207,6 +208,7 @@ const obtenerDescuentosDetalles = async (idDescuento) => {
 
 }
 
+//Funcion para mostrar los datos de cierto descuento en modal de actualizar
 const mostrarDescuentos = async (idDescuento) => {
     try {
         const detalles = await obtenerDescuentosDetalles(idDescuento);
@@ -218,21 +220,15 @@ const mostrarDescuentos = async (idDescuento) => {
             const fechaInicioDB = descuentos.fecha_inicio_descuento;
             const fechaFinDB = descuentos.fecha_fin_descuento;
 
-            // Convertir las fechas a objetos Date
-            const fechaInicio = new Date(fechaInicioDB);
-            const fechaFin = new Date(fechaFinDB);
+            fechas(fechaInicioDB, fechaFinDB)
 
-            // Obtener las partes de la fecha que necesitamos
-            const fechaInicioFormateada = fechaInicio.toISOString().split('T')[0];
-            const fechaFinFormateada = fechaFin.toISOString().split('T')[0];
-
-            // Asignar los valores formateados a los campos de fecha en HTML
-            obtenerElementoD("fechaInicioAc").value = fechaInicioFormateada;
-            obtenerElementoD("fechaFinAc").value = fechaFinFormateada;
             let estado = descuentos.estado_descuento;
             if (estado == 1) {
-                obtenerElementoD("estadoAc").checked
+                obtenerElementoD("estadoAc").checked = true;
+            } else {
+                obtenerElementoD("estadoAc").checked = false;
             }
+            
 
         } else {
             console.error('No se encontraron detalles de inventario para el ID proporcionado.');
@@ -247,13 +243,14 @@ const mostrarDescuentos = async (idDescuento) => {
     }
 }
 
-//Funcion para Modal de ver
+//Funcion para modal de ver detalles acerca de un descuento
 const verDescuento = async (idDescuento) => {
     try {
-        const detallesDescuento = await obtenerDescuentos(idDescuento);
+        const detallesDescuento = await obtenerDescuentosDetalles(idDescuento);
+        
         if (detallesDescuento) {
             const descuentos = detallesDescuento[0];
-            obtenerElementoD("cantidadDescVer").value = descuentos.cantidad_descuento;
+            obtenerElementoD("cantidadDescVer").innerText = descuentos.cantidad_descuento;
             obtenerElementoD("descripcionDescVer").innerText = descuentos.descripcion_descuento;
 
             // Obtener las fechas en el formato de la base de datos
@@ -269,21 +266,54 @@ const verDescuento = async (idDescuento) => {
             const fechaFinFormateada = fechaFin.toISOString().split('T')[0];
 
             // Asignar los valores formateados a los campos de fecha en HTML
-            obtenerElementoD("fechaInicioAc").innerText = fechaInicioFormateada;
-            obtenerElementoD("fechaFinAc").innerText = fechaFinFormateada;
+            obtenerElementoD("fechaInicioVer").innerText = fechaInicioFormateada;
+            obtenerElementoD("fechaFinVer").innerText = fechaFinFormateada;
 
             let estado = descuentos.estado_descuento;
             // Establecer el estado del checkbox según el valor del estado_descuento
-            obtenerElementoD("estadoVer").checked = estado == 1;
+            if(estado == 1){
+                obtenerElementoD("estadoVer").innerText = "Disponible";
+            }else{
+                obtenerElementoD("estadoVer").innerText = "No disponible";
+            }
 
 
         }
+          
     } catch (error) {
         manejarErrorD();
         console.log(error);
     }
 };
 
+
+const fechas = async (fechaInicio, fechaFinalizacion) => {
+
+    // Convertir las fechas a objetos Date
+    const fechaIni = new Date(fechaInicio);
+    const fechaFi = new Date(fechaFinalizacion);
+
+    // Obtener las partes de la fecha que necesitamos
+    const añoInicio = fechaIni.getFullYear();
+    const mesInicio = ('0' + (fechaIni.getMonth() + 1)).slice(-2); // Agregar un cero inicial si es necesario
+    const diaInicio = ('0' + fechaIni.getDate()).slice(-2); // Agregar un cero inicial si es necesario
+
+    const añoFin = fechaFi.getFullYear();
+    const mesFin = ('0' + (fechaFi.getMonth() + 1)).slice(-2); // Agregar un cero inicial si es necesario
+    const diaFin = ('0' + fechaFi.getDate()).slice(-2); // Agregar un cero inicial si es necesario
+
+    // Formatear las fechas en el formato "aaaa-mm-dd"
+    const fechaInicioFormateada = `${añoInicio}-${mesInicio}-${diaInicio}`;
+    const fechaFinFormateada = `${añoFin}-${mesFin}-${diaFin}`;
+
+    // Asignar los valores formateados a los campos de fecha en HTML
+    obtenerElementoD("fechaInicioAc").value = fechaInicioFormateada;
+    obtenerElementoD("fechaFinAc").value = fechaFinFormateada;
+
+
+}
+
+//Funcion que sirve para ejecutar acciones cuando se cargue la
 document.addEventListener("DOMContentLoaded", function () {
 
     obtenerDescuentos();
