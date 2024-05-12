@@ -125,10 +125,22 @@ function detalleValoraciones(id) {
         INNER JOIN tb_direcciones n ON p.id_direccion = n.id_direccion
         INNER JOIN tb_clientes c ON n.id_cliente = c.id_cliente
         WHERE iv.id_inventario = ?`;
-        
+
     return ejecutarConsulta(sql, id); // Pasar el SQL completo y el parámetro para el ID
 }
 
+function detalleInventario(id) {
+    const sql = `SELECT i.id_inventario, i.nombre_inventario, i.cantidad_inventario, i.descripcion_inventario, i.precio_inventario, o.id_olor, o.nombre_olor, 
+    s.id_categoria, s.nombre_categoria, a.id_marca, a.nombre_marca, e.id_descuento, e.cantidad_descuento
+    FROM tb_inventarios i
+    INNER JOIN tb_olores o ON i.id_olor = o.id_olor
+    INNER JOIN tb_categorias s ON i.id_categoria = s.id_categoria
+    INNER JOIN tb_marcas a ON i.id_marca = a.id_marca
+    INNER JOIN tb_descuentos e ON  i.id_descuento = e.id_descuento
+    WHERE i.id_inventario = ?;`
+
+    return ejecutarConsulta(sql, id);
+}
 
 
 // Exportar las funciones para su uso fuera del módulo
@@ -143,5 +155,6 @@ module.exports = {
     ejecutarProcedimiento,
     login,
     datellesPedidos,
-    detalleValoraciones
+    detalleValoraciones,
+    detalleInventario
 };

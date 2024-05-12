@@ -11,7 +11,7 @@ module.exports = function(db){
     }
 
     async function uno(id) {
-        return db.uno(TABLE_NAME, id, ID_FIELD);
+        return db.detalleInventario(id, ID_FIELD);
     }
     async function agregar(body){
         return db.agregar(TABLE_NAME, body);

@@ -401,19 +401,8 @@ const verInventario = async (idInventario) => {
             obtenerElemento("cantidadP").innerText = inventario.cantidad_inventario;
             obtenerElemento("descriP").innerText = inventario.descripcion_inventario;
             obtenerElemento("precioP").innerText = "$" + inventario.precio_inventario;
-            const idCategoria = inventario.id_categoria;
-            const response = await fetchData(`/categorias/${idCategoria}`); // Suponiendo que '/categorias/:id' es la ruta para obtener detalles de una categoría por su ID
-            if (response.success) {
-                const datos = response.data;
-                const nombre = datos.nombre_categoria;
-                obtenerElemento("categoriaP").innerText = nombre || 'No disponible';
-            } else {
-                // Si la solicitud falla, lanzar un error
-                throw new Error('No se pudieron obtener los detalles de la categoría.');
-            }
-
-
-
+            obtenerElemento("categoriaP").innerText = inventario.nombre_categoria;
+           
         }
     } catch (error) {
         // Manejar cualquier error que ocurra durante la solicitud
