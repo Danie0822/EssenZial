@@ -82,21 +82,26 @@ const agregarImagenes = async () => {
             return;
         }
 
-        if(!validaciones.validarImagen(imagenes)){
-            abrirModal(obtenerElemento('error'));
-        }
+     
 
         // Array para almacenar los datos de todas las imágenes
         const imagenesDataArray = [];
 
         // Agregar cada imagen al array de datos
         for (let i = 0; i < imagenes.length; i++) {
-            const imagenData = new FormData();
-            imagenData.append('imagen', imagenes[i]);
-            imagenData.append('id_inventario', idInven);
-            imagenesDataArray.push(imagenData);
-
-            const success = await createData("/imagenes/save", imagenData);
+            if(!validaciones.validarImagen(imagenes[i])){
+                abrirModal(obtenerElemento('error'));
+            } 
+            else{
+                const imagenData = new FormData();
+                imagenData.append('imagen', imagenes[i]);
+    
+                imagenData.append('id_inventario', idInven);
+                imagenesDataArray.push(imagenData);
+    
+                const success = await createData("/imagenes/save", imagenData);
+            }
+           
         }
 
 
