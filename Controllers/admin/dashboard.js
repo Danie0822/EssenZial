@@ -51,6 +51,7 @@ const mostrarUltimasOfertas = async () => {
             pedidosContainer.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
             
             data.forEach(({ descuento, fecha_inicio_descuento, fecha_fin_descuento,descripcion_descuento }) => {
+                console.log(descuento);
                 const fechaFormateada1 = new Date(fecha_inicio_descuento).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
                 const fechaFormateada2 = new Date(fecha_fin_descuento).toLocaleDateString('es-ES', { year: 'numeric', month: '2-digit', day: '2-digit' });
                 const pedidoCard = `

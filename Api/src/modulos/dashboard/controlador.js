@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 // Nombres de campos de la tabla 
 const TABLE_NAME = 'ultimos_pedidos';
-const TABLE_NAMEI = 'vw_descuentos_proximos_finalizar';
+const TABLE_NAMEI = 'vw_descuentos';
 // Funciones y llamada de db 
 module.exports = function (db) {
 

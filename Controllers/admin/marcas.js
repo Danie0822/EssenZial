@@ -148,7 +148,7 @@ const actualizar = async (id) => {
             if (success) {
                 obtener();
                 limpiarFormulario();
-                cerrarModal(myAgregar);
+                cerrarModal(myActualizar);
                 setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
             } else {
                 manejarError();

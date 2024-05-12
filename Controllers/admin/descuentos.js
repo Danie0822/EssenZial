@@ -27,9 +27,10 @@ const obtenerDescuentos = async () => {
         if (success) {
             data.forEach(({ id_descuento, cantidad_descuento, estado_descuento }) => {
                 const tr = document.createElement('tr');
+                const estadoTexto = estado_descuento === 1 ? 'Activo' : 'Inactivo';
                 tr.innerHTML = `
                 <td>${cantidad_descuento}</td>
-                <td>${estado_descuento}</td>
+                <td>${estadoTexto}</td>
                 <td>
                     <button type="button" class="btn btn-dark" ><i class="fas fa-edit" onclick="abrirDescuentosActualizar(${id_descuento})"></i></button>
                     <button type="button" class="btn btn-dark" onclick="abrirDescuentosVer(${id_descuento})"><i class="fas fa-info-circle"></i></button>
@@ -152,8 +153,9 @@ const actualizarDescuentos = async (idDescuento) => {
         } else {
             estado = 0;
         }
-        if (!validaciones.longitudMaxima(descripDescuento, 250) || !validaciones.esNumeroDecimal(cantidadDescuento) || !validaciones.esFechaValida(fechaInicio) || !validaciones.esFechaValida(fechaFin)) {
+        if (!validaciones.longitudMaxima(descripDescuento, 250) || !validaciones.esNumeroEntero(cantidadDescuento) || !validaciones.esFechaValida(fechaInicio) || !validaciones.esFechaValida(fechaFin)) {
             manejarValidacionesD();
+           
         }  else {
             var descuentosData = {
                 id_descuento: idDesc,
@@ -338,7 +340,7 @@ document.addEventListener("DOMContentLoaded", function () {
             await actualizarDescuentos(idDescuento);
             idDescuento = null;
         }
-        await agregarDescuentos();
+ 
     });
 
     const agregarDescuentosBtn = obtenerElementoD("btnAgregarDesc");
