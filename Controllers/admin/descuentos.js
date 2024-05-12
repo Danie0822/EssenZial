@@ -48,6 +48,11 @@ const obtenerDescuentos = async () => {
 
 };
 
+const limpiarFormulario = () => {
+    document.querySelectorAll('.form-control').forEach(input => input.value = "");
+    document.querySelectorAll('.preview-image').forEach(image => image.style.display = 'none');
+}
+
 
 async function abrirDescuentos() {
     abrirModalD(myGuardarD);
@@ -104,7 +109,7 @@ const agregarDescuentos = async () => {
             estado = 0;
         }
 
-        if (!validaciones.contieneSoloLetrasYNumeros(descripDescuento) || !validaciones.esNumeroEntero(cantidadDescuento) || !validaciones.esFechaValida(fechaInicio) || !validaciones.esFechaValida(fechaFin)) {
+        if (!validaciones.contieneSoloLetrasYNumeros(descripDescuento) || !validaciones.esNumeroDecimal(cantidadDescuento) || !validaciones.esFechaValida(fechaInicio) || !validaciones.esFechaValida(fechaFin)) {
             manejarValidacionesD();
         } else {
             var descuentosData = {
@@ -118,6 +123,7 @@ const agregarDescuentos = async () => {
             const success = await DataAdmin("/descuentos/save", descuentosData, 'POST');
             if (success.status == 200) {
                 obtenerDescuentos();
+                limpiarFormulario();
                 cerrarModalD(myGuardarD);
                 setTimeout(() => abrirModalD(new bootstrap.Modal(obtenerElementoD('agregado'))), 500);
             }
@@ -161,7 +167,7 @@ const actualizarDescuentos = async (idDescuento) => {
             const success = await DataAdmin("/descuentos/update", descuentosData, 'PUT');
             if (success.status == 200) {
                 obtenerDescuentos();
-                cerrarModalD(myGuardarD);
+                cerrarModalD(myActualizarD);
                 setTimeout(() => abrirModalD(new bootstrap.Modal(obtenerElementoD('actualizado'))), 500);
             }
         }

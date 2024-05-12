@@ -242,6 +242,7 @@ const agregarInventario = async () => {
             const success = await DataAdmin("/inventario/save", inventarioData, 'POST');
             if (success.status == 200) {
                 obtenerInventario();
+                limpiarFormulario();
                 cerrarModal(myGuardar);
                 setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
 
