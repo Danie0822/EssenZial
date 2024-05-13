@@ -115,8 +115,10 @@ function datellesPedidos(tabla, id, campoIdentificacion) {
 function detalleValoraciones(id) {
     const sql = `SELECT 
         iv.id_inventario,
+        v.id_valoracion,
         iv.nombre_inventario,
         v.calificacion_producto,
+        v.estado_comentario, 
         c.nombre_cliente 
         FROM tb_valoraciones v
         INNER JOIN tb_detalle_pedido dp ON v.id_detalle_pedido = dp.id_detalle_pedido

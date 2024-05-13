@@ -257,46 +257,7 @@ const agregarInventario = async () => {
 };
 
 //Funcion para actualizar los datos 
-const actualizarInventario = async (idInventario) => {
-    try {
-        const idInvent = idInventario;
-        const nombreInventario = obtenerElemento("nombreProductoAc").value;
-        const cantidadInventario = obtenerElemento("cantidadProductoAc").value;
-        const descripcionInventario = obtenerElemento("descripcionProductoAc").value;
-        const precioInventario = obtenerElemento("precioProductoAc").value;
-        const idOlor = obtenerElemento("oloresProductoAc").value;
-        const idCategoria = obtenerElemento("categoriaProductoAc").value;
-        const idMarca = obtenerElemento("marcaProductoAc").value;
-        const idDescuento = obtenerElemento("descuentoSeleccionadoAc").value;
-
-        if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250) || !validaciones.esNumeroEntero(cantidadInventario) || !validaciones.esNumeroDecimal(precioInventario)) {
-            manejarValidaciones();
-        } else {
-            var inventarioData = {
-                id_inventario: idInvent,
-                nombre_inventario: nombreInventario,
-                cantidad_inventario: cantidadInventario,
-                descripcion_inventario: descripcionInventario,
-                precio_inventario: precioInventario,
-                id_olor: idOlor,
-                id_categoria: idCategoria,
-                id_marca: idMarca,
-                id_descuento: idDescuento
-            };
-
-            const success = await DataAdmin("/inventario/update", inventarioData, 'PUT');
-            if (success.status == 200) {
-                obtenerInventario();
-                cerrarModal(myActualizar);
-                setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('actualizado'))), 500);
-
-            }
-        }
-    } catch (error) {
-        console.log(error);
-        manejarError();
-    }
-}
+ 
 //Funcion para eiminar un inventario
 const eliminarInventario = async (idInventario) => {
     try {
@@ -453,16 +414,18 @@ const obtenerValoraciones = async (idInventario) => {
 
             let totalCalificaciones = 0;
 
-            detalles.forEach(({ calificacion_producto, nombre_cliente }) => {
+            detalles.forEach(({ calificacion_producto, nombre_cliente , estado_comentario, id_valoracion,id_inventario}) => {
                 totalCalificaciones += calificacion_producto;
-
+                const estadoTexto = estado_comentario === 1 ? 'Activo' : 'Inactivo';
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${nombre_cliente}</td>
+                    <td>${estadoTexto}</td>
                     <td>
                         <div class="rating">
                             ${calificacion_producto}
                         </div>
+                        <button class="btn btn-dark actualizar" onclick="ActualizarEstadoValoraciones(${id_valoracion}, ${estado_comentario}, ${id_inventario})"><i class="fas fa-edit"></i></button>  
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -477,6 +440,26 @@ const obtenerValoraciones = async (idInventario) => {
         console.log(error);
     }
 };
+const ActualizarEstadoValoraciones = async (idValoraciones, estado, idInven) => {
+    try {
+        let estadoCambio = estado == 1 ? false : true;
+
+        var valoracion = {
+            id_valoracion: idValoraciones,
+            estado_comentario: estadoCambio,
+        };
+
+        const success = await DataAdmin("/valoraciones/update", valoracion, 'PUT');
+        if (success.status == 200) {
+            // Actualizar la información de la tabla
+           await obtenerValoraciones(idInven);
+            setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
+        }
+    } catch (error) {
+        console.log(error);
+        manejarError();
+    }
+}
 
 const generarEstrellas = (promedio) => {
     const estrellas = [];
