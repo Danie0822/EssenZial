@@ -89,8 +89,7 @@ const obtenerMarcas = async (idCmb) => {
         const selectOlores = document.getElementById(idCmb);
 
         if (success) {
-            selectOlores.innerHTML = '';
-
+        
             data.forEach(({ id_marca, nombre_marca }) => {
                 const option = document.createElement('option');
                 option.value = id_marca;
@@ -257,7 +256,47 @@ const agregarInventario = async () => {
 };
 
 //Funcion para actualizar los datos 
- 
+const actualizarInventario = async (idInventario) => {
+    try {
+        const idInvent = idInventario;
+        const nombreInventario = obtenerElemento("nombreProductoAc").value;
+        const cantidadInventario = obtenerElemento("cantidadProductoAc").value;
+        const descripcionInventario = obtenerElemento("descripcionProductoAc").value;
+        const precioInventario = obtenerElemento("precioProductoAc").value;
+        const idOlor = obtenerElemento("oloresProductoAc").value;
+        const idCategoria = obtenerElemento("categoriaProductoAc").value;
+        const idMarca = obtenerElemento("marcaProductoAc").value;
+        const idDescuento = obtenerElemento("descuentoSeleccionadoAc").value;
+
+        if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250) || !validaciones.esNumeroEntero(cantidadInventario) || !validaciones.esNumeroDecimal(precioInventario)) {
+            manejarValidaciones();
+        } else {
+            var inventarioData = {
+                id_inventario: idInvent,
+                nombre_inventario: nombreInventario,
+                cantidad_inventario: cantidadInventario,
+                descripcion_inventario: descripcionInventario,
+                precio_inventario: precioInventario,
+                id_olor: idOlor,
+                id_categoria: idCategoria,
+                id_marca: idMarca,
+                id_descuento: idDescuento
+            };
+
+            const success = await DataAdmin("/inventario/update", inventarioData, 'PUT');
+            if (success.status == 200) {
+                obtenerInventario();
+                cerrarModal(myActualizar);
+                setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('actualizado'))), 500);
+
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        manejarError();
+    }
+}
+
 //Funcion para eiminar un inventario
 const eliminarInventario = async (idInventario) => {
     try {
@@ -363,7 +402,10 @@ const verInventario = async (idInventario) => {
             obtenerElemento("descriP").innerText = inventario.descripcion_inventario;
             obtenerElemento("precioP").innerText = "$" + inventario.precio_inventario;
             obtenerElemento("categoriaP").innerText = inventario.nombre_categoria;
-           
+            obtenerElemento("olorP").innerText = inventario.nombre_olor;
+            obtenerElemento("marcaP").innerText = inventario.nombre_marca;
+            obtenerElemento("descuentoP").innerText = inventario.cantidad_descuento;
+
         }
     } catch (error) {
         // Manejar cualquier error que ocurra durante la solicitud
@@ -372,7 +414,6 @@ const verInventario = async (idInventario) => {
     }
 
 };
-
 
 //Funcion para abrir modal de puntuacion
 const abrirModalPuntaje = (idInventarios) => {
@@ -414,7 +455,7 @@ const obtenerValoraciones = async (idInventario) => {
 
             let totalCalificaciones = 0;
 
-            detalles.forEach(({ calificacion_producto, nombre_cliente , estado_comentario, id_valoracion,id_inventario}) => {
+            detalles.forEach(({ calificacion_producto, nombre_cliente, estado_comentario, id_valoracion, id_inventario }) => {
                 totalCalificaciones += calificacion_producto;
                 const estadoTexto = estado_comentario === 1 ? 'Activo' : 'Inactivo';
                 const tr = document.createElement('tr');
@@ -452,7 +493,7 @@ const ActualizarEstadoValoraciones = async (idValoraciones, estado, idInven) => 
         const success = await DataAdmin("/valoraciones/update", valoracion, 'PUT');
         if (success.status == 200) {
             // Actualizar la información de la tabla
-           await obtenerValoraciones(idInven);
+            await obtenerValoraciones(idInven);
             setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
         }
     } catch (error) {
