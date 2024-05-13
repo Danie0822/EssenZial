@@ -374,7 +374,7 @@ const activarCombobox = (idCombobox) => {
     const combobox = document.getElementById(idCombobox);
     combobox.disabled = false;
 };
-
+//Funcion para cargar cmb cuando se quiere actualizar 
 const obtenerMarcaPorId = async (idCmb, id, nombre) => {
     try {
         desactivarCombobox(idCmb);
@@ -400,6 +400,7 @@ const obtenerMarcaPorId = async (idCmb, id, nombre) => {
     }
 };
 
+//Funcion para cargar cmb cuando se quiere actualizar 
 const obtenerDescuentoPorId = async (idCmb, id, nombre) => {
     try {
         desactivarCombobox(idCmb);
@@ -425,6 +426,7 @@ const obtenerDescuentoPorId = async (idCmb, id, nombre) => {
     }
 };
 
+//Funcion para cargar cmb cuando se quiere actualizar 
 const obtenerCategoriaPorId = async (idCmb, id, nombre) => {
     try {
         desactivarCombobox(idCmb);
@@ -450,6 +452,7 @@ const obtenerCategoriaPorId = async (idCmb, id, nombre) => {
     }
 };
 
+//Funcion para cargar cmb cuando se quiere actualizar 
 const obtenerOloresPorId = async (idCmb, id, nombre) => {
     try {
         desactivarCombobox(idCmb);
@@ -475,9 +478,6 @@ const obtenerOloresPorId = async (idCmb, id, nombre) => {
     }
 };
 
-
-
-
 //Funcion para asignar valores de la peticion select/id
 const mostrarInventariosId = async (idInventario) => {
     try {
@@ -494,11 +494,12 @@ const mostrarInventariosId = async (idInventario) => {
             obtenerElemento("descripcionProductoAc").value = inventario.descripcion_inventario;
             obtenerElemento("precioProductoAc").value = inventario.precio_inventario;
             obtenerMarcaPorId("marcaProductoAc",inventario.id_marca, inventario.nombre_marca);
-           await obtenerCategoriaPorId("categoriaProductoAc", inventario.id_categoria, inventario.nombre_categoria);
+            obtenerCategoriaPorId("categoriaProductoAc", inventario.id_categoria, inventario.nombre_categoria);
             obtenerDescuentoPorId("descuentoSeleccionadoAc", inventario.id_descuento, inventario.cantidad_descuento);
             obtenerOloresPorId("oloresProductoAc", inventario.id_olor, inventario.nombre_olor);
         
         } else {
+            //Si algo falla lanzar el error
             console.error('No se encontraron detalles de inventario para el ID proporcionado.');
             manejarError();
         }
@@ -508,9 +509,7 @@ const mostrarInventariosId = async (idInventario) => {
     }
 };
 
-
-
-
+//Funcion para modal de ver inventario
 const verInventario = async (idInventario) => {
     try {
         const detalles = await obtenerInventarioDetalles(idInventario);
@@ -601,6 +600,7 @@ const obtenerValoraciones = async (idInventario) => {
         console.log(error);
     }
 };
+//Funcion para actualizar el estado de las valoraciones es decir, activo y desactivo
 const ActualizarEstadoValoraciones = async (idValoraciones, estado, idInven) => {
     try {
         let estadoCambio = estado == 1 ? false : true;
@@ -622,6 +622,7 @@ const ActualizarEstadoValoraciones = async (idValoraciones, estado, idInven) => 
     }
 }
 
+//Funcion para datos que se muestran con estrellas
 const generarEstrellas = (promedio) => {
     const estrellas = [];
 
