@@ -1,3 +1,4 @@
+
 //Declaración de constantes para uso general
 const obtenerElemento = (id) => document.getElementById(id);
 const abrirModal = (modal) => modal.show();
@@ -42,16 +43,16 @@ const obtenerOlores = async (idCombobox) => {
 const obtenerCategorias = async (idCmb) => {
     try {
         const { success, data } = await fetchData('/categorias/');
-        const selectOlores = document.getElementById(idCmb);
+        const selectCat = document.getElementById(idCmb);
 
         if (success) {
-            selectOlores.innerHTML = '';
+            selectCat.innerHTML = '';
 
             data.forEach(({ id_categoria, nombre_categoria }) => {
                 const option = document.createElement('option');
                 option.value = id_categoria;
                 option.text = nombre_categoria;
-                selectOlores.appendChild(option);
+                selectCat.appendChild(option);
             });
         } else {
             throw new Error('No se pudieron obtener las categorías.');
@@ -64,16 +65,16 @@ const obtenerCategorias = async (idCmb) => {
 const obtenerDescuentos = async (idCmb) => {
     try {
         const { success, data } = await fetchData('/descuentos/especifico');
-        const selectOlores = document.getElementById(idCmb);
+        const selectDesc = document.getElementById(idCmb);
 
         if (success) {
-            selectOlores.innerHTML = '';
+            selectDesc.innerHTML = '';
 
             data.forEach(({ id_descuento, cantidad_descuento }) => {
                 const option = document.createElement('option');
                 option.value = id_descuento;
                 option.text = cantidad_descuento;
-                selectOlores.appendChild(option);
+                selectDesc.appendChild(option);
             });
         } else {
             throw new Error('No se pudieron obtener los descuentos.');
@@ -86,16 +87,16 @@ const obtenerDescuentos = async (idCmb) => {
 const obtenerMarcas = async (idCmb) => {
     try {
         const { success, data } = await fetchData('/marcas/');
-        const selectOlores = document.getElementById(idCmb);
+        const selectMarcas = document.getElementById(idCmb);
 
         if (success) {
-            selectOlores.innerHTML = '';
+            selectMarcas.innerHTML = '';
 
             data.forEach(({ id_marca, nombre_marca }) => {
                 const option = document.createElement('option');
                 option.value = id_marca;
                 option.text = nombre_marca;
-                selectOlores.appendChild(option);
+                selectMarcas.appendChild(option);
             });
         } else {
             throw new Error('No se pudieron obtener las marcas.');
@@ -165,10 +166,8 @@ const obtenerInventario = async () => {
 //Funcion para abrir pantalla y enviar id 
 function abrirImagenes(idInventario) {
     // Redirigir a la página de imágenes.html con el ID como parámetro en la URL
-
     window.location.href = `imagenes.html`;
     sessionStorage.setItem("id_inventario", idInventario);
-
 }
 
 //Abrir modal para agregar inventario
@@ -257,7 +256,47 @@ const agregarInventario = async () => {
 };
 
 //Funcion para actualizar los datos 
- 
+const actualizarInventario = async (idInventario) => {
+    try {
+        const idInvent = idInventario;
+        const nombreInventario = obtenerElemento("nombreProductoAc").value;
+        const cantidadInventario = obtenerElemento("cantidadProductoAc").value;
+        const descripcionInventario = obtenerElemento("descripcionProductoAc").value;
+        const precioInventario = obtenerElemento("precioProductoAc").value;
+        const idOlor = obtenerElemento("oloresProductoAc").value;
+        const idCategoria = obtenerElemento("categoriaProductoAc").value;
+        const idMarca = obtenerElemento("marcaProductoAc").value;
+        const idDescuento = obtenerElemento("descuentoSeleccionadoAc").value;
+
+        if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250) || !validaciones.esNumeroEntero(cantidadInventario) || !validaciones.esNumeroDecimal(precioInventario)) {
+            manejarValidaciones();
+        } else {
+            var inventarioData = {
+                id_inventario: idInvent,
+                nombre_inventario: nombreInventario,
+                cantidad_inventario: cantidadInventario,
+                descripcion_inventario: descripcionInventario,
+                precio_inventario: precioInventario,
+                id_olor: idOlor,
+                id_categoria: idCategoria,
+                id_marca: idMarca,
+                id_descuento: idDescuento
+            };
+
+            const success = await DataAdmin("/inventario/update", inventarioData, 'PUT');
+            if (success.status == 200) {
+                obtenerInventario();
+                cerrarModal(myActualizar);
+                setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('actualizado'))), 500);
+
+            }
+        }
+    } catch (error) {
+        console.log(error);
+        manejarError();
+    }
+}
+
 //Funcion para eiminar un inventario
 const eliminarInventario = async (idInventario) => {
     try {
@@ -325,6 +364,120 @@ const obtenerInventarioDetalles = async (idIventario) => {
     }
 }
 
+
+const desactivarCombobox = (idCombobox) => {
+    const combobox = document.getElementById(idCombobox);
+    combobox.disabled = true;
+};
+
+const activarCombobox = (idCombobox) => {
+    const combobox = document.getElementById(idCombobox);
+    combobox.disabled = false;
+};
+//Funcion para cargar cmb cuando se quiere actualizar 
+const obtenerMarcaPorId = async (idCmb, id, nombre) => {
+    try {
+        desactivarCombobox(idCmb);
+        const selectMarcas = document.getElementById(idCmb);
+        selectMarcas.innerHTML = '';
+        // Crear una opción para la marca recuperada
+        const option = document.createElement('option');
+        option.value = id;
+        option.text = nombre;
+        selectMarcas.appendChild(option); 
+       
+        activarCombobox(idCmb);
+        //Agregar un controlador de eventos que se activará solo la primera vez que hagas clic en el combobox
+        const clickHandler = async () => {
+            selectMarcas.removeEventListener('click', clickHandler); // Eliminar el controlador de eventos después del primer clic
+             // Activar el combobox después del primer clic
+             await obtenerMarcas(idCmb);
+        };
+        
+        selectMarcas.addEventListener('click', clickHandler);
+    } catch (error) {
+        console.error('Error al obtener la marca:', error);
+    }
+};
+
+//Funcion para cargar cmb cuando se quiere actualizar 
+const obtenerDescuentoPorId = async (idCmb, id, nombre) => {
+    try {
+        desactivarCombobox(idCmb);
+        const selectMarcas = document.getElementById(idCmb);
+        selectMarcas.innerHTML = '';
+        // Crear una opción para la marca recuperada
+        const option = document.createElement('option');
+        option.value = id;
+        option.text = nombre;
+        selectMarcas.appendChild(option); 
+       
+        activarCombobox(idCmb);
+        //Agregar un controlador de eventos que se activará solo la primera vez que hagas clic en el combobox
+        const clickHandler = async () => {
+            selectMarcas.removeEventListener('click', clickHandler); // Eliminar el controlador de eventos después del primer clic
+             // Activar el combobox después del primer clic
+            await obtenerDescuentos(idCmb);
+        };
+        
+        selectMarcas.addEventListener('click', clickHandler);
+    } catch (error) {
+        console.error('Error al obtener la marca:', error);
+    }
+};
+
+//Funcion para cargar cmb cuando se quiere actualizar 
+const obtenerCategoriaPorId = async (idCmb, id, nombre) => {
+    try {
+        desactivarCombobox(idCmb);
+        const selectMarcas = document.getElementById(idCmb);
+        selectMarcas.innerHTML = '';
+        // Crear una opción para la marca recuperada
+        const option = document.createElement('option');
+        option.value = id;
+        option.text = nombre;
+        selectMarcas.appendChild(option); 
+
+        activarCombobox(idCmb);
+        const clickHandler = async () => {
+            // Desactivar el evento de clic mientras se obtienen las categorías para evitar problemas
+            selectMarcas.removeEventListener('click', clickHandler);
+            await obtenerCategorias(idCmb); // Llamar a la función para obtener las categorías
+        };
+        
+        // Agregar el evento de clic al combobox
+        selectMarcas.addEventListener('click', clickHandler);
+    } catch (error) {
+        console.error('Error al obtener la marca:', error);
+    }
+};
+
+//Funcion para cargar cmb cuando se quiere actualizar 
+const obtenerOloresPorId = async (idCmb, id, nombre) => {
+    try {
+        desactivarCombobox(idCmb);
+        const selectMarcas = document.getElementById(idCmb);
+        selectMarcas.innerHTML = '';
+        // Crear una opción para la marca recuperada
+        const option = document.createElement('option');
+        option.value = id;
+        option.text = nombre;
+        selectMarcas.appendChild(option); 
+       
+        activarCombobox(idCmb);
+        //Agregar un controlador de eventos que se activará solo la primera vez que hagas clic en el combobox
+        const clickHandler = async () => {
+            selectMarcas.removeEventListener('click', clickHandler); // Eliminar el controlador de eventos después del primer clic
+             // Activar el combobox después del primer clic
+           await obtenerOlores(idCmb);
+        };
+        
+        selectMarcas.addEventListener('click', clickHandler);
+    } catch (error) {
+        console.error('Error al obtener la marca:', error);
+    }
+};
+
 //Funcion para asignar valores de la peticion select/id
 const mostrarInventariosId = async (idInventario) => {
     try {
@@ -340,9 +493,13 @@ const mostrarInventariosId = async (idInventario) => {
             obtenerElemento("cantidadProductoAc").value = inventario.cantidad_inventario;
             obtenerElemento("descripcionProductoAc").value = inventario.descripcion_inventario;
             obtenerElemento("precioProductoAc").value = inventario.precio_inventario;
-            obtenerCmbAc();
-
+            obtenerMarcaPorId("marcaProductoAc",inventario.id_marca, inventario.nombre_marca);
+            obtenerCategoriaPorId("categoriaProductoAc", inventario.id_categoria, inventario.nombre_categoria);
+            obtenerDescuentoPorId("descuentoSeleccionadoAc", inventario.id_descuento, inventario.cantidad_descuento);
+            obtenerOloresPorId("oloresProductoAc", inventario.id_olor, inventario.nombre_olor);
+        
         } else {
+            //Si algo falla lanzar el error
             console.error('No se encontraron detalles de inventario para el ID proporcionado.');
             manejarError();
         }
@@ -352,6 +509,7 @@ const mostrarInventariosId = async (idInventario) => {
     }
 };
 
+//Funcion para modal de ver inventario
 const verInventario = async (idInventario) => {
     try {
         const detalles = await obtenerInventarioDetalles(idInventario);
@@ -363,7 +521,10 @@ const verInventario = async (idInventario) => {
             obtenerElemento("descriP").innerText = inventario.descripcion_inventario;
             obtenerElemento("precioP").innerText = "$" + inventario.precio_inventario;
             obtenerElemento("categoriaP").innerText = inventario.nombre_categoria;
-           
+            obtenerElemento("olorP").innerText = inventario.nombre_olor;
+            obtenerElemento("marcaP").innerText = inventario.nombre_marca;
+            obtenerElemento("descuentoP").innerText = inventario.cantidad_descuento;
+
         }
     } catch (error) {
         // Manejar cualquier error que ocurra durante la solicitud
@@ -372,7 +533,6 @@ const verInventario = async (idInventario) => {
     }
 
 };
-
 
 //Funcion para abrir modal de puntuacion
 const abrirModalPuntaje = (idInventarios) => {
@@ -414,7 +574,7 @@ const obtenerValoraciones = async (idInventario) => {
 
             let totalCalificaciones = 0;
 
-            detalles.forEach(({ calificacion_producto, nombre_cliente , estado_comentario, id_valoracion,id_inventario}) => {
+            detalles.forEach(({ calificacion_producto, nombre_cliente, estado_comentario, id_valoracion, id_inventario }) => {
                 totalCalificaciones += calificacion_producto;
                 const estadoTexto = estado_comentario === 1 ? 'Activo' : 'Inactivo';
                 const tr = document.createElement('tr');
@@ -440,6 +600,7 @@ const obtenerValoraciones = async (idInventario) => {
         console.log(error);
     }
 };
+//Funcion para actualizar el estado de las valoraciones es decir, activo y desactivo
 const ActualizarEstadoValoraciones = async (idValoraciones, estado, idInven) => {
     try {
         let estadoCambio = estado == 1 ? false : true;
@@ -452,7 +613,7 @@ const ActualizarEstadoValoraciones = async (idValoraciones, estado, idInven) => 
         const success = await DataAdmin("/valoraciones/update", valoracion, 'PUT');
         if (success.status == 200) {
             // Actualizar la información de la tabla
-           await obtenerValoraciones(idInven);
+            await obtenerValoraciones(idInven);
             setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
         }
     } catch (error) {
@@ -461,6 +622,7 @@ const ActualizarEstadoValoraciones = async (idValoraciones, estado, idInven) => 
     }
 }
 
+//Funcion para datos que se muestran con estrellas
 const generarEstrellas = (promedio) => {
     const estrellas = [];
 
