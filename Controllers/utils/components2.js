@@ -1,4 +1,4 @@
-
+// Función para cargar el contenido del nav dinámicamente
 function loadNav(){
     var navContent = `<div class="col-lg-2 col-md-12 col-cm-12">
     <div class="div1">
@@ -23,6 +23,7 @@ function loadNav(){
         </li>
     </ul>
 </div>`
+// Seleccionar el header
 var nav = document.querySelector(".row");
 nav.innerHTML = navContent + nav.innerHTML
 

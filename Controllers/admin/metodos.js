@@ -1,9 +1,10 @@
 const baseURL = "http://localhost:4000/api";
 const imagen = "http://localhost:4000/";
 const token = sessionStorage.getItem("token");
-
+// Variable para controlar si se está realizando una operació
 let isFetchingData = false;
 
+// Función asincrónica para realizar solicitudes GET a la API
 async function fetchData(endpoint) {
     if (isFetchingData) {
         console.log("Otra operación está en curso. Por favor, espere.");
@@ -27,7 +28,7 @@ async function fetchData(endpoint) {
         isFetchingData = false;
     }
 }
-
+// Función asincrónica para realizar solicitudes GET con un parámetro a la API
 async function fetchDataWithParam(endpoint, idInventario) {
     if (isFetchingData) {
         console.log("Otra operación está en curso. Por favor, espere.");
@@ -52,10 +53,7 @@ async function fetchDataWithParam(endpoint, idInventario) {
     }
 }
 
-
-
-
-
+// Función asincrónica para realizar solicitudes POST, PUT
 async function DataAdmin(endpoint, formData, method) {
     if (isFetchingData) {
         console.log("Otra operación está en curso. Por favor, espere.");
@@ -81,6 +79,7 @@ async function DataAdmin(endpoint, formData, method) {
         isFetchingData = false;
     }
 }
+// Función asincrónica para realizar solicitudes POST con FORM DATA
 async function createData(endpoint, formData) {
     if (isFetchingData) {
         console.log("Otra operación está en curso. Por favor, espere.");
@@ -106,7 +105,7 @@ async function createData(endpoint, formData) {
         isFetchingData = false;
     }
 }
-
+// Función asincrónica para realizar solicitudes PUT con FORM DATA
 async function updateData(endpoint, formData) {
     if (isFetchingData) {
         console.log("Otra operación está en curso. Por favor, espere.");
@@ -132,7 +131,7 @@ async function updateData(endpoint, formData) {
         isFetchingData = false;
     }
 }
-
+// Función asincrónica para realizar solicitudes DELETE
 async function deleteData(endpoint) {
     if (isFetchingData) {
         console.log("Otra operación está en curso. Por favor, espere.");

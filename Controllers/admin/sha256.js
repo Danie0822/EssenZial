@@ -1,3 +1,4 @@
+// Función asincrónica para realizar incriptacion 
 async function sha256(str) {
   const buffer = new TextEncoder().encode(str);
   const hashBuffer = await crypto.subtle.digest("SHA-256", buffer);

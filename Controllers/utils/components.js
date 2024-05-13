@@ -1,3 +1,4 @@
+// Función para cargar el contenido del footer dinámicamente
 function loadFooter(){
     var footerContent = `        
     <div class="container-fluid foot">
@@ -30,6 +31,7 @@ function loadFooter(){
     </div>
 
 </div>`
+// Seleccionar el footer
 var footer = document.querySelector("footer");
 footer.innerHTML = footerContent + footer.innerHTML;
 
@@ -38,7 +40,7 @@ footer.innerHTML = footerContent + footer.innerHTML;
 document.addEventListener("DOMContentLoaded", loadFooter);
 
 
-
+// Función para cargar el contenido del header dinámicamente
 function loadHeader(){
     var headerContent = `    <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="../../Views/public/homepage.html">
@@ -68,7 +70,7 @@ function loadHeader(){
         </div>
     </div>
 </nav>`
-
+// Seleccionar el header
 var header = document.querySelector("header");
 header.innerHTML = headerContent + header.innerHTML;
 };
