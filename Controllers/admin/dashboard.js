@@ -1,11 +1,12 @@
 const obtenerElemento = (id) => document.getElementById(id);
 // Función para obtener datos de pedidos y mostrarlos en tarjetas
 
-// Definir función para manejar errores
+// Función para manejar errores
 function manejarError(mensaje) {
     console.error("Error:", mensaje);
-    // Aquí puedes implementar lógica adicional para manejaar el error, como mostrar un mensaje al usuario
+    
   }
+  // Función para mostrar los ultimos pedidos e insentar la información en html
 const mostrarUltimosPedidos = async () => {
     try {
         const { success, data } = await fetchData("/ultimospedidos/");
@@ -42,6 +43,7 @@ const mostrarUltimosPedidos = async () => {
     }
 };
 
+// Función para mostrar las ultimas ofertas e insentar la información en html
 const mostrarUltimasOfertas = async () => {
     try {
         const { success, data } = await fetchData("/ultimospedidos/ofertas/");
@@ -82,6 +84,7 @@ const mostrarUltimasOfertas = async () => {
         manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
     }
 };
+// Funcion para esperar que se carguen todos las funciones al abrir el documento 
 const llamarProcesos = async () => {
     await mostrarUltimosPedidos();
     await mostrarUltimasOfertas();

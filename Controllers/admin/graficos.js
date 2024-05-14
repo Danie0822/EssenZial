@@ -5,10 +5,9 @@ const ctx3 = document.getElementById('myChart3');
 // Definir función para manejar errores
 function manejarError(mensaje) {
   console.error("Error:", mensaje);
-  // Aquí puedes implementar lógica adicional para manejaar el error, como mostrar un mensaje al usuario
 }
 
-// Función para mostrar los últimos pedidos en el gráfico
+// Función para mostrar las ultimas marcas mas vendidas en la chart 
 const mostrarUltimosVedidas = async () => {
   try {
       const { success, data } = await fetchData("/charts/marcasVendidas/");
@@ -31,6 +30,7 @@ const mostrarUltimosVedidas = async () => {
       manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
   }
 };
+// Función para mostrar los perfumes mas vendidos en la chart 
 const mostrarPerfumesMasVendidos = async () => {
   try {
       const { success, data } = await fetchData("/charts/perfumesVendidos/");
@@ -53,6 +53,7 @@ const mostrarPerfumesMasVendidos = async () => {
       manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
   }
 };
+// Función para mostrar las ventas de cada mes
 const mostrarVentas = async () => {
   try {
       const { success, data } = await fetchData("/charts/ventaMeses/");
