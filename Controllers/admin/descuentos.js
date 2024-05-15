@@ -52,12 +52,11 @@ const obtenerDescuentos = async () => {
 const limpiarFormulario = () => {
     document.querySelectorAll('.form-control').forEach(input => input.value = "");
     document.querySelectorAll('.preview-image').forEach(image => image.style.display = 'none');
-}
-
+};
 
 async function abrirDescuentos() {
     abrirModalD(myGuardarD);
-}
+};
 
 const abrirDescuentosActualizar = (idDescuentos) => {
     if (idDescuentos) {
@@ -68,7 +67,7 @@ const abrirDescuentosActualizar = (idDescuentos) => {
         manejarErrorD();
     }
 
-}
+};
 
 const abrirDescuentosEliminar = (idDescuentos) => {
     if (idDescuentos) {
@@ -78,7 +77,7 @@ const abrirDescuentosEliminar = (idDescuentos) => {
         manejarError();
     }
 
-}
+};
 
 const abrirDescuentosVer = (idDescuentos) => {
     if (idDescuentos) {
@@ -88,9 +87,7 @@ const abrirDescuentosVer = (idDescuentos) => {
     } else {
         manejarError();
     }
-}
-
-
+};
 
 //Funcion para agregar descuentos
 const agregarDescuentos = async () => {
@@ -197,7 +194,7 @@ const eliminarDescuentos = async (idDescuento) => {
 
     }
 
-}
+};
 
 //Funcion para obtener todos los descuentos según ID para modal de ver e mostrar al actualizar
 const obtenerDescuentosDetalles = async (idDescuento) => {
@@ -214,7 +211,7 @@ const obtenerDescuentosDetalles = async (idDescuento) => {
         manejarErrorD();
     }
 
-}
+};
 
 //Funcion para mostrar los datos de cierto descuento en modal de actualizar
 const mostrarDescuentos = async (idDescuento) => {
@@ -249,7 +246,7 @@ const mostrarDescuentos = async (idDescuento) => {
         console.log(error);
 
     }
-}
+};
 
 //Funcion para modal de ver detalles acerca de un descuento
 const verDescuento = async (idDescuento) => {
@@ -294,7 +291,7 @@ const verDescuento = async (idDescuento) => {
     }
 };
 
-
+//Función para cambiar formato de las fechas ingresadas
 const fechas = async (fechaInicio, fechaFinalizacion) => {
 
     // Convertir las fechas a objetos Date
@@ -319,7 +316,7 @@ const fechas = async (fechaInicio, fechaFinalizacion) => {
     obtenerElementoD("fechaFinAc").value = fechaFinFormateada;
 
 
-}
+};
 
 //Funcion que sirve para ejecutar acciones cuando se cargue la
 document.addEventListener("DOMContentLoaded", function () {

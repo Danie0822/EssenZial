@@ -18,6 +18,7 @@ const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal')
 
 let idInventario = null;
 
+//Función para obtener los datos para cargar Combobox
 const obtenerOlores = async (idCombobox) => {
     try {
         const { success, data } = await fetchData('/olores/'); // Suponiendo que '/olores' es la ruta para obtener los olores
@@ -40,6 +41,8 @@ const obtenerOlores = async (idCombobox) => {
     }
 };
 
+
+//Función para obtener los datos para cargar Combobox
 const obtenerCategorias = async (idCmb) => {
     try {
         const { success, data } = await fetchData('/categorias/');
@@ -62,6 +65,8 @@ const obtenerCategorias = async (idCmb) => {
     }
 };
 
+
+//Función para obtener los datos para cargar Combobox
 const obtenerDescuentos = async (idCmb) => {
     try {
         const { success, data } = await fetchData('/descuentos/especifico');
@@ -84,6 +89,8 @@ const obtenerDescuentos = async (idCmb) => {
     }
 };
 
+
+//Función para obtener los datos para cargar Combobox
 const obtenerMarcas = async (idCmb) => {
     try {
         const { success, data } = await fetchData('/marcas/');
@@ -215,6 +222,7 @@ const abrirModalVer = (idInventarios) => {
 //Creando funcion para agregar inventario
 const agregarInventario = async () => {
     try {
+        //Obtenemos el valor de cada campo
         const nombreInventario = obtenerElemento("nombreProducto").value;
         const cantidadInventario = obtenerElemento("cantidadProducto").value;
         const descripcionInventario = obtenerElemento("descripcionProducto").value;
@@ -224,9 +232,12 @@ const agregarInventario = async () => {
         const idMarca = obtenerElemento("marcaProducto").value;
         const idDescuento = obtenerElemento("descuentoSeleccionado").value;
 
+        //Manejamos las validaciones
         if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250) || !validaciones.esNumeroEntero(cantidadInventario) || !validaciones.esNumeroDecimal(precioInventario)) {
             manejarValidaciones();
         } else {
+
+            //Creamos el objeto con la información
             var inventarioData = {
                 nombre_inventario: nombreInventario,
                 cantidad_inventario: cantidadInventario,
@@ -238,16 +249,15 @@ const agregarInventario = async () => {
                 id_descuento: idDescuento
             };
 
+            //Creamos la ruta en la que se enviarán los datos
             const success = await DataAdmin("/inventario/save", inventarioData, 'POST');
             if (success.status == 200) {
                 obtenerInventario();
                 limpiarFormulario();
                 cerrarModal(myGuardar);
                 setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('agregado'))), 500);
-
             }
         }
-
     } catch (error) {
 
         console.log(error);
@@ -258,6 +268,7 @@ const agregarInventario = async () => {
 //Funcion para actualizar los datos 
 const actualizarInventario = async (idInventario) => {
     try {
+        //Obtenemos el valor de los campos
         const idInvent = idInventario;
         const nombreInventario = obtenerElemento("nombreProductoAc").value;
         const cantidadInventario = obtenerElemento("cantidadProductoAc").value;
@@ -268,9 +279,12 @@ const actualizarInventario = async (idInventario) => {
         const idMarca = obtenerElemento("marcaProductoAc").value;
         const idDescuento = obtenerElemento("descuentoSeleccionadoAc").value;
 
+        //Manejamos validaciones
         if (!validaciones.contieneSoloLetrasYNumeros(nombreInventario) || !validaciones.longitudMaxima(nombreInventario, 250) || !validaciones.esNumeroEntero(cantidadInventario) || !validaciones.esNumeroDecimal(precioInventario)) {
             manejarValidaciones();
         } else {
+
+            //Creamos objeto con toda la información necesaria
             var inventarioData = {
                 id_inventario: idInvent,
                 nombre_inventario: nombreInventario,
@@ -283,9 +297,11 @@ const actualizarInventario = async (idInventario) => {
                 id_descuento: idDescuento
             };
 
+            //Creamos ruta por la cuál se enviará la información
             const success = await DataAdmin("/inventario/update", inventarioData, 'PUT');
             if (success.status == 200) {
                 obtenerInventario();
+                limpiarFormulario();
                 cerrarModal(myActualizar);
                 setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('actualizado'))), 500);
 
@@ -300,12 +316,15 @@ const actualizarInventario = async (idInventario) => {
 //Funcion para eiminar un inventario
 const eliminarInventario = async (idInventario) => {
     try {
+        //Creamos ruta por la cuál enviaremos la información para realizar la petición al servidor
         const { success } = await deleteData(`/inventario/delete/${idInventario}`);
         if (success) {
+            //Recargamos nuestra tabla para que aparezcan datos actualizados
             obtenerInventario();
             cerrarModal(myEliminar);
             setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('eliminado'))), 500);
         } else {
+            //Manejamos los errores
             manejarError();
         }
 
@@ -320,6 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     obtenerInventario();
 
+    //Confirmamos los cambios a través del botón
     const confirmar_eliminar_button = obtenerElemento('confirmarEliminar');
     confirmar_eliminar_button.addEventListener('click', async () => {
         if (idInventario) {
@@ -328,6 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    //Confirmamos los cambios a través del botón
     const confirmar_actualizar_btn = obtenerElemento("actualizarBtn");
     confirmar_actualizar_btn.addEventListener('click', async () => {
         if (idInventario) {
@@ -338,6 +359,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     });
 
+    //Confirmamos los cambios a través del botón
     const agregarInventarioBtn = obtenerElemento("agregarBtnInventario");
     agregarInventarioBtn.addEventListener('click', async () => {
         await agregarInventario();
@@ -363,17 +385,18 @@ const obtenerInventarioDetalles = async (idIventario) => {
         manejarError();
     }
 }
-
-
+//Funciíon para desactivar un combobox
 const desactivarCombobox = (idCombobox) => {
     const combobox = document.getElementById(idCombobox);
     combobox.disabled = true;
 };
 
+//Función para activar un combobox
 const activarCombobox = (idCombobox) => {
     const combobox = document.getElementById(idCombobox);
     combobox.disabled = false;
 };
+
 //Funcion para cargar cmb cuando se quiere actualizar 
 const obtenerMarcaPorId = async (idCmb, id, nombre) => {
     try {
@@ -384,16 +407,16 @@ const obtenerMarcaPorId = async (idCmb, id, nombre) => {
         const option = document.createElement('option');
         option.value = id;
         option.text = nombre;
-        selectMarcas.appendChild(option); 
-       
+        selectMarcas.appendChild(option);
+
         activarCombobox(idCmb);
         //Agregar un controlador de eventos que se activará solo la primera vez que hagas clic en el combobox
         const clickHandler = async () => {
             selectMarcas.removeEventListener('click', clickHandler); // Eliminar el controlador de eventos después del primer clic
-             // Activar el combobox después del primer clic
-             await obtenerMarcas(idCmb);
+            // Activar el combobox después del primer clic
+            await obtenerMarcas(idCmb);
         };
-        
+
         selectMarcas.addEventListener('click', clickHandler);
     } catch (error) {
         console.error('Error al obtener la marca:', error);
@@ -410,16 +433,16 @@ const obtenerDescuentoPorId = async (idCmb, id, nombre) => {
         const option = document.createElement('option');
         option.value = id;
         option.text = nombre;
-        selectMarcas.appendChild(option); 
-       
+        selectMarcas.appendChild(option);
+
         activarCombobox(idCmb);
         //Agregar un controlador de eventos que se activará solo la primera vez que hagas clic en el combobox
         const clickHandler = async () => {
             selectMarcas.removeEventListener('click', clickHandler); // Eliminar el controlador de eventos después del primer clic
-             // Activar el combobox después del primer clic
+            // Activar el combobox después del primer clic
             await obtenerDescuentos(idCmb);
         };
-        
+
         selectMarcas.addEventListener('click', clickHandler);
     } catch (error) {
         console.error('Error al obtener la marca:', error);
@@ -436,7 +459,7 @@ const obtenerCategoriaPorId = async (idCmb, id, nombre) => {
         const option = document.createElement('option');
         option.value = id;
         option.text = nombre;
-        selectMarcas.appendChild(option); 
+        selectMarcas.appendChild(option);
 
         activarCombobox(idCmb);
         const clickHandler = async () => {
@@ -444,7 +467,7 @@ const obtenerCategoriaPorId = async (idCmb, id, nombre) => {
             selectMarcas.removeEventListener('click', clickHandler);
             await obtenerCategorias(idCmb); // Llamar a la función para obtener las categorías
         };
-        
+
         // Agregar el evento de clic al combobox
         selectMarcas.addEventListener('click', clickHandler);
     } catch (error) {
@@ -462,21 +485,29 @@ const obtenerOloresPorId = async (idCmb, id, nombre) => {
         const option = document.createElement('option');
         option.value = id;
         option.text = nombre;
-        selectMarcas.appendChild(option); 
-       
+        selectMarcas.appendChild(option);
+
         activarCombobox(idCmb);
         //Agregar un controlador de eventos que se activará solo la primera vez que hagas clic en el combobox
         const clickHandler = async () => {
             selectMarcas.removeEventListener('click', clickHandler); // Eliminar el controlador de eventos después del primer clic
-             // Activar el combobox después del primer clic
-           await obtenerOlores(idCmb);
+            // Activar el combobox después del primer clic
+            await obtenerOlores(idCmb);
         };
-        
+
         selectMarcas.addEventListener('click', clickHandler);
     } catch (error) {
         console.error('Error al obtener la marca:', error);
     }
 };
+
+//Función para obtener los datos para cargar Combobox con su ID especifíco al editar y cargar nuevos cuando se editen
+const obtenerCombo = async (inventario) => {
+    await obtenerMarcaPorId("marcaProductoAc", inventario.id_marca, inventario.nombre_marca);
+    await obtenerCategoriaPorId("categoriaProductoAc", inventario.id_categoria, inventario.nombre_categoria);
+    await obtenerDescuentoPorId("descuentoSeleccionadoAc", inventario.id_descuento, inventario.cantidad_descuento);
+    await obtenerOloresPorId("oloresProductoAc", inventario.id_olor, inventario.nombre_olor);
+}
 
 //Funcion para asignar valores de la peticion select/id
 const mostrarInventariosId = async (idInventario) => {
@@ -493,11 +524,8 @@ const mostrarInventariosId = async (idInventario) => {
             obtenerElemento("cantidadProductoAc").value = inventario.cantidad_inventario;
             obtenerElemento("descripcionProductoAc").value = inventario.descripcion_inventario;
             obtenerElemento("precioProductoAc").value = inventario.precio_inventario;
-            obtenerMarcaPorId("marcaProductoAc",inventario.id_marca, inventario.nombre_marca);
-            obtenerCategoriaPorId("categoriaProductoAc", inventario.id_categoria, inventario.nombre_categoria);
-            obtenerDescuentoPorId("descuentoSeleccionadoAc", inventario.id_descuento, inventario.cantidad_descuento);
-            obtenerOloresPorId("oloresProductoAc", inventario.id_olor, inventario.nombre_olor);
-        
+            obtenerCombo(inventario);
+
         } else {
             //Si algo falla lanzar el error
             console.error('No se encontraron detalles de inventario para el ID proporcionado.');
@@ -512,10 +540,12 @@ const mostrarInventariosId = async (idInventario) => {
 //Funcion para modal de ver inventario
 const verInventario = async (idInventario) => {
     try {
+        //Obtenemos todos los datos segun un id inventario especifico
         const detalles = await obtenerInventarioDetalles(idInventario);
         if (detalles.length > 0) {
             const inventario = detalles[0];
 
+            //Asignamos cada valor a su debido campo
             obtenerElemento("nombreP").innerText = inventario.nombre_inventario;
             obtenerElemento("cantidadP").innerText = inventario.cantidad_inventario;
             obtenerElemento("descriP").innerText = inventario.descripcion_inventario;
@@ -524,7 +554,6 @@ const verInventario = async (idInventario) => {
             obtenerElemento("olorP").innerText = inventario.nombre_olor;
             obtenerElemento("marcaP").innerText = inventario.nombre_marca;
             obtenerElemento("descuentoP").innerText = inventario.cantidad_descuento;
-
         }
     } catch (error) {
         // Manejar cualquier error que ocurra durante la solicitud
@@ -536,6 +565,7 @@ const verInventario = async (idInventario) => {
 
 //Funcion para abrir modal de puntuacion
 const abrirModalPuntaje = (idInventarios) => {
+    //Evaluamos el ID y si existe abrimos la función correspondiente
     if (idInventarios) {
         obtenerValoraciones(idInventarios);
         idIventario = idInventarios;
@@ -548,6 +578,7 @@ const abrirModalPuntaje = (idInventarios) => {
 //Funcion para obtener valoraciones
 const obtenerValoracionessDet = async (idInventario) => {
     try {
+        //Obtenemos información de las valoraciones según un ID inventario
         const response = await fetchData(`/valoraciones/${idInventario}`);
         if (response.success) {
             return response.data;
@@ -564,12 +595,15 @@ const obtenerValoracionessDet = async (idInventario) => {
 //Función para el modal de obtener valoraciones
 const obtenerValoraciones = async (idInventario) => {
     try {
+        //Obtenemos la información que nos trae la función 
         const detalles = await obtenerValoracionessDet(idInventario);
         const tbody = obtenerElemento('tbodyValo');
         tbody.innerHTML = '';
 
+        //Verificamos el tamaño del arreglo
         if (detalles.length > 0) {
             const valo = detalles[0];
+            //Asignamos la información a campos y columnas correspondientes
             obtenerElemento('nombrePerfume').textContent = valo.nombre_inventario;
 
             let totalCalificaciones = 0;
@@ -591,6 +625,7 @@ const obtenerValoraciones = async (idInventario) => {
                 tbody.appendChild(tr);
             });
 
+            //Obtenemos el promedio de las calificaciones de todos los resultados en la consulta (clientes)
             const promedio = totalCalificaciones / detalles.length;
             obtenerElemento('rating').innerHTML = generarEstrellas(promedio);
         }
@@ -600,6 +635,7 @@ const obtenerValoraciones = async (idInventario) => {
         console.log(error);
     }
 };
+
 //Funcion para actualizar el estado de las valoraciones es decir, activo y desactivo
 const ActualizarEstadoValoraciones = async (idValoraciones, estado, idInven) => {
     try {
