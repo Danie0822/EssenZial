@@ -29,13 +29,13 @@ function validarID(id, req, res, next) {
         return next('route');
     }
     return id;
-}
+}   
 
 // Rutas
 router.get('/', seguridad('admin'), obtenerTodos);
 router.get('/:id', seguridad('admin'), obtenerPorId);
 router.delete('/delete/:id', seguridad('admin'), eliminarPorId);
-router.post('/save', seguridad('cliente'), agregar);
+router.post('/save', agregar);
 router.put('/update', seguridad('admin'), actualizar);
 
 // Funciones

@@ -23,6 +23,13 @@ var validaciones = {
     validarCorreoElectronico: function (correo) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo);
     },
+    validarTelefono: function(telefono) {
+        return /^\d{8}$/.test(telefono);
+    },
+    validarConfirmacionContrasena: function(contrasena, confirmacion) {
+        // Verificar si la contraseña y la confirmación son iguales
+        return contrasena === confirmacion;
+    }, 
     // Función para validar la longitud de una cadena, con un máximo especificado
     longitudMaxima: function (valor, maximo) {
         return valor.length >= 4 && valor.length <= maximo;

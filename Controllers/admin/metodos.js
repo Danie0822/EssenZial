@@ -79,6 +79,31 @@ async function DataAdmin(endpoint, formData, method) {
         isFetchingData = false;
     }
 }
+// Función asincrónica para realizar solicitudes POST, PUT
+async function DataNoToken(endpoint, formData, method) {
+    if (isFetchingData) {
+        console.log("Otra operación está en curso. Por favor, espere.");
+        return { success: false, message: "Otra operación está en curso. Por favor, espere." };
+    }
+
+    isFetchingData = true;
+
+    try {
+        const response = await fetch(`${baseURL}${endpoint}`, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData)
+        });
+        return response;
+    } catch (error) {
+        console.error("Error:", error);
+        return { success: false, message: error.message };
+    } finally {
+        isFetchingData = false;
+    }
+}
 // Función asincrónica para realizar solicitudes POST con FORM DATA
 async function createData(endpoint, formData) {
     if (isFetchingData) {
