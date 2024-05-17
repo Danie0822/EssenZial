@@ -41,7 +41,7 @@
         </div>
         <!-- Contenido del inicio de sesion -->
         <div class="col-md-6">
-          <form>
+          <form id="loginForm" >
             <h2>Iniciar sesión</h2>
             <div class="form-group">
               <label for="correo">Correo electrónico</label>
@@ -50,9 +50,9 @@
             <div class="form-group">
               <label for="contrasena">Contraseña</label>
               <input type="password" class="form-control" id="contrasena" placeholder="Contraseña">
-              <small class="forgot-password"><a href="#">Olvidé mi contraseña</a></small>
+
             </div>
-            <a href="./homepage.html" class="btn btn-dark">Ingresar</a>
+            <button type="submit" class="btn btn-dark">Ingresar</button>
           </form>
           <p class="forgot-password mt-3">¿No tienes una cuenta? <a href="./registrar.html">Regístrate</a></p>
         </div>
@@ -62,6 +62,8 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="../../Controllers/admin/sha256.js"></script>
+  <script src="../../Controllers/public/login.js"></script>
 </body>
 
 </html>

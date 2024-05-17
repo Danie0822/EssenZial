@@ -19,7 +19,7 @@ function loadNav(){
             <a class="nav-link" href="../../Views/public/resenias.html"><i class="fa-solid fa-star"></i>Reseñas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="../../Views/public/index.html"> <i class="fa-solid fa-right-from-bracket"></i>Cerrar sesión</a>
+        <a class="nav-link" href="#" onclick="cerrarSesion()"> <i class="fa-solid fa-right-from-bracket"></i>Cerrar sesión</a>
         </li>
     </ul>
 </div>`
@@ -29,3 +29,9 @@ nav.innerHTML = navContent + nav.innerHTML
 
 };
 document.addEventListener("DOMContentLoaded", loadNav);
+function cerrarSesion() {
+    // Redireccionar a otra página
+    window.location.href = 'index.html';
+    sessionStorage.setItem("token", 'Daniel'); 
+    sessionStorage.setItem("id_cliente", 0);
+}

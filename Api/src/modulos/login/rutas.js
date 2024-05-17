@@ -29,8 +29,8 @@ async function loginCliente(req, res, next) {
         const { usuario, token, error } = await controlador.loginCliente(correo, clave);
 
         if (token) {
-            const { id_cliente, nombre_cliente } = usuario;
-            respuestas.success(req, res, { id_cliente, nombre_cliente, token }, 200);
+            const { id_cliente, nombre_cliente ,telefono_cliente, correo_cliente,apellido_cliente} = usuario;
+            respuestas.success(req, res, { id_cliente, nombre_cliente,apellido_cliente,telefono_cliente, correo_cliente,token }, 200);
         } else {
             respuestas.error(req, res, error, 401);
         }

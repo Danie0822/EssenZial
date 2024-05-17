@@ -11,6 +11,7 @@ const pedidos = require('./modulos/pedidos/rutas');
 const cliente = require('./modulos/clientes/rutas');
 const olores = require('./modulos/olores/rutas');
 const imagenes = require('./modulos/imagenes/rutas');
+const dirreciones = require('./modulos/dirreciones/rutas');
 const descuentos = require('./modulos/descuentos/rutas');
 const valoraciones = require('./modulos/valoraciones/rutas');
 const dashboard = require('./modulos/dashboard/rutas');
@@ -42,6 +43,7 @@ app.use('/api/descuentos', descuentos);
 app.use('/api/valoraciones', valoraciones);
 app.use('/api/ultimospedidos',dashboard);
 app.use('/api/charts',charts);
+app.use('/api/dirreciones',dirreciones);
 app.use(error); 
 
 module.exports = app; 
