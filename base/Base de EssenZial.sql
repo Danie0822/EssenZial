@@ -99,11 +99,13 @@ CREATE TABLE IF NOT EXISTS tb_imagenes (
 CREATE TABLE IF NOT EXISTS tb_pedidos (
     id_pedido INT AUTO_INCREMENT PRIMARY KEY,
     total_pago DECIMAL(10,2) NOT NULL DEFAULT '0.00',
-    numero_pedido VARCHAR(10) NOT NULL UNIQUE,
     fecha_pedido DATE DEFAULT (CURRENT_DATE),
-    estado_pedido ENUM('En proceso', 'Finalizado') DEFAULT ('En proceso'),
     tipo_pago BOOLEAN DEFAULT TRUE,
-    id_direccion INT NOT NULL,
+    estado_pedido ENUM('Preparandose', 'Enviando', 'Finalizado') DEFAULT ('Preparandose'),
+    estado_carrito ENUM('Carrito', 'Realizado') DEFAULT ('Carrito'),
+    id_direccion INT ,
+    id_cliente INT NOT NULL, 
+    CONSTRAINT FK_pedido_cliente FOREIGN KEY (id_cliente) REFERENCES tb_clientes(id_cliente), 
     CONSTRAINT FK_pedido_direccion FOREIGN KEY (id_direccion) REFERENCES tb_direcciones(id_direccion)
 ) ENGINE=InnoDB;
 
