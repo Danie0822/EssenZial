@@ -53,10 +53,6 @@ function loadHeader(){
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-            <a class="nav-link" href="../../Views/public/lista_productos.html">Hombre <span class="sr-only">(current)</span></a>
-            <a class="nav-link" href="../../Views/public/lista_mujeres.html">Mujer</a>
-            <a class="nav-link" href="../../Views/public/lista_ninos.html">Niños</a>
-            <a class="nav-link" href="../../Views/public/lista_unisex.html">Unisex</a>
             <button class="btn btn-sm bg-light peque " type="button">
                 <a class="navbar-brand align-items-center justify-content-center" href="../../Views/public/pedidos.html">
                 <i class="fa-regular fa-user fa-xs"></i>
