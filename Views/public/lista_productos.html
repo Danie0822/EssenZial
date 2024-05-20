@@ -28,37 +28,17 @@
                 <div class="col-lg-2  col-md-4 col-sm-12">
                     <div class="container estilos">
                         <!-- Filtro de busqueda -->
-                        <div class="container">
+                        <div class="container" >
                             <div class="labely">
                                 <label for="">
                                     <h5>Filtros</h5>
                                 </label>
                                 <i class="fa-solid fa-filter"></i>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkParfum">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Parfum
-                                </label>
+                            <div id="containerCheckCategorias">
+
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkEau" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Eau de parfum
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkToi" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Eau de toilette
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkFrai" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Eau de fraíche
-                                </label>
-                            </div>
+
                         </div>
                         <div class="container">
                             <!-- Filtro de busqueda por marcas -->
@@ -67,95 +47,36 @@
                                     <h5>Top marcas</h5>
                                 </label>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkCaro">
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    Carolina Herrera
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkBurberry" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Burberry
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkCalvin" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Calvin Klein
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkGiorgio" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Giorgio Armani
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkHugo" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Hugo boss
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkGivenchy" checked>
-                                <label class="form-check-label" for="flexCheckChecked">
-                                    Givenchy
-                                </label>
+                            <div id="containerCheckMarcas">
+
                             </div>
                         </div>
-                        <div class="container">
-                            <!-- Filtro de busqueda por rango de precio -->
-                            <div class="labely1">
-                                <label for="">
-                                    <h5>Precios</h5>
-                                </label>
-                            </div>
-                            <div>
-                                <label for="customRange1" class="form-label">$10</label>
-                                <input type="range" class="form-range" id="customRange1">
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <!-- Carta con el catalogo  -->
                 <div class="col-6 productos">
                     <!-- Titulo  -->
                     <label for="nombreCategoria">
-                        <h5>Perfumes para hombres</h5>
+                        <h5>Perfumes</h5>
                     </label>
-                    <div class="row">
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/gio.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-text" style="color: black;">Acqua Di Gio</h6>
-                                <p class="textBrand">Giorgio Armani</p>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <label for="">$150.00</label>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <a href="../../Views/public/detalles_productos.html" type="button"
-                                            class="btn btn-outline-secondary btn-sm"> Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card" style="width: 18rem;">
-                            <img src="../../resources/img/gio.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="card-text" style="color: black;">Acqua Di Gio</h6>
-                                <p class="textBrand">Giorgio Armani</p>
-                                <div class="row">
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <label for="">$150.00</label>
-                                    </div>
-                                    <div class="col-lg-6 col-md-12 col-sm-12">
-                                        <a href="../../Views/public/detalles_productos.html" type="button"
-                                            class="btn btn-outline-secondary btn-sm"> Comprar</a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row" id="filaTarjeta">
+
+                    </div>
+                </div>
+            </div>
+            <!-- Modal para mostrar mensaje de error -->
+            <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 5rem;"></i>
+                            <h5 class="mt-3">¡Ups, ocurrió un error!</h5>
+                            <p class="mt-3">Lo sentimos, parece que hubo un error interno. Por favor,
+                                inténtalo de nuevo más
+                                tarde.</p>
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
                         </div>
                     </div>
                 </div>
@@ -165,14 +86,17 @@
     <footer>
     </footer>
 
-    <!--Script para plantilla del header y footer-->
-    <script src="../../Controllers/utils/components.js"></script>
+
     <!--Script para uso de iconos-->
     <script src="https://kit.fontawesome.com/186c8fdf5b.js" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!--Script para plantilla del header y footer-->
+    <script src="../../Controllers/utils/components.js"></script>
+    <script src="../../Controllers/admin/metodos.js"></script>
+    <script src="../../Controllers/public/listado_productos.js"></script>
 </body>
 
 </html>

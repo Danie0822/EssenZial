@@ -145,6 +145,7 @@ function detalleInventario(id) {
 }
 
 
+
 // Exportar las funciones para su uso fuera del módulo
 module.exports = {
     todos,

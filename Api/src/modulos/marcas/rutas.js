@@ -33,7 +33,7 @@ function validarID(id, req, res, next) {
 }
 
 // Rutas
-router.get('/', seguridad('admin'), todos);
+router.get('/', todos);
 router.get('/:id', seguridad('admin'), uno);
 router.delete('/delete/:id', seguridad('admin'), eliminar);
 router.post('/save', seguridad('admin'), upload.single('imagen'), agregar);
