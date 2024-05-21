@@ -6,6 +6,7 @@ const manejarError = () => abrirModal(myError);
 
 //const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 
+//Funcion para obtener todos los productos
 const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionadas = [], rangoPrecio = 300) => {
     try {
         const { success, data } = await fetchData('/inventario/vistaPrueba/view');
@@ -53,7 +54,7 @@ const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionada
         console.log(error);
     }
 };
-
+//Funcion para obtener todas las categorias para los filtros
 const obtenerCategorias = async () => {
     try {
         const { success, data } = await fetchData('/categorias/');
@@ -78,7 +79,7 @@ const obtenerCategorias = async () => {
         console.log(error);
     }
 };
-
+//Funcion para obtener todas las marcas para filtros
 const obtenerMarcas = async () => {
     try {
         const { success, data } = await fetchData('/marcas/');
@@ -112,13 +113,13 @@ const obtenerMarcas = async () => {
         console.log(error);
     }
 };
-
+//Funcion asincrona para ejecutar el código de manera correcta
 const obtenerData = async () => {
     await obtenerCategorias();
     await obtenerProductos();
     await obtenerMarcas();
 };
-
+//Funcion para aplicar los filtros y actualizarlos
 const actualizarFiltros = () => {
     const categoriasSeleccionadas = Array.from(document.querySelectorAll('.categoria-checkbox:checked')).map(cb => cb.value);
     const marcasSeleccionadas = Array.from(document.querySelectorAll('.marca-checkbox:checked')).map(cb => cb.value);
@@ -127,6 +128,7 @@ const actualizarFiltros = () => {
     obtenerProductos(categoriasSeleccionadas, marcasSeleccionadas, rangoPrecio);
 };
 
+//Funcion DOM para cargar acciones
 document.addEventListener("DOMContentLoaded", function () {
     obtenerData();
 
