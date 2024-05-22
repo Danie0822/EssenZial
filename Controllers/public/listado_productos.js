@@ -7,7 +7,7 @@ const manejarError = () => abrirModal(myError);
 //const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 
 //Funcion para obtener todos los productos
-const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionadas = [], rangoPrecio = 300) => {
+const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionadas = []) => {
     try {
         const { success, data } = await fetchData('/inventario/vistaPrueba/view');
         const contenedor = document.getElementById('filaTarjeta');
@@ -17,10 +17,9 @@ const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionada
             const productosFiltrados = data.filter(({ id_categoria, id_marca, precio_inventario }) => {
                 const enCategoria = categoriasSeleccionadas.length === 0 || categoriasSeleccionadas.includes(String(id_categoria));
                 const enMarca = marcasSeleccionadas.length === 0 || marcasSeleccionadas.includes(String(id_marca));
-                const enRango = rangoPrecio == 300 || precio_inventario <= rangoPrecio; // Manejar el rango de precio
 
                 // Aplicar filtros de manera independiente
-                return enCategoria && enMarca && enRango;
+                return enCategoria && enMarca;
             });
 
             productosFiltrados.forEach(({ id_imagen, ruta_imagen, nombre_inventario, precio_inventario, nombre_marca }) => {
@@ -123,9 +122,8 @@ const obtenerData = async () => {
 const actualizarFiltros = () => {
     const categoriasSeleccionadas = Array.from(document.querySelectorAll('.categoria-checkbox:checked')).map(cb => cb.value);
     const marcasSeleccionadas = Array.from(document.querySelectorAll('.marca-checkbox:checked')).map(cb => cb.value);
-    const rangoPrecio = document.getElementById('inputRango').value || 300;
 
-    obtenerProductos(categoriasSeleccionadas, marcasSeleccionadas, rangoPrecio);
+    obtenerProductos(categoriasSeleccionadas, marcasSeleccionadas);
 };
 
 //Funcion DOM para cargar acciones
@@ -134,11 +132,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById('containerCheckCategorias').addEventListener('change', actualizarFiltros);
     document.getElementById('containerCheckMarcas').addEventListener('change', actualizarFiltros);
-
-    const rangeInput = document.getElementById("inputRango");
-    const rangeLabel = document.getElementById("textoRango");
-    rangeInput.addEventListener("input", function () {
-        rangeLabel.textContent = `$${rangeInput.value}`;
-        actualizarFiltros();
-    });
 });
