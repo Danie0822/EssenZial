@@ -15,6 +15,7 @@ const dirreciones = require('./modulos/dirreciones/rutas');
 const descuentos = require('./modulos/descuentos/rutas');
 const valoraciones = require('./modulos/valoraciones/rutas');
 const dashboard = require('./modulos/dashboard/rutas');
+const valoracion = require('./modulos/valoracion/rutas');
 const charts = require('./modulos/charts/rutas'); 
 const app = express(); 
 const error = require('./red/errors'); 
@@ -44,6 +45,7 @@ app.use('/api/valoraciones', valoraciones);
 app.use('/api/ultimospedidos',dashboard);
 app.use('/api/charts',charts);
 app.use('/api/dirreciones',dirreciones);
+app.use('/api/public/valoraciones',valoracion);
 app.use(error); 
 
 module.exports = app; 

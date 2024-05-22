@@ -42,6 +42,14 @@ class Validador {
         }
         return numero;
     }
+    static validarNumeroRango(numero, min, max, mensajeError, req, res, next) {
+        numero = parseInt(numero);
+        if (!Number.isInteger(numero) || numero < min || numero > max) {
+            respuestas.error(req, res, mensajeError, 401);
+            return next('route');
+        }
+        return numero;
+    }
 }
 // Exportar la clase Validador para su uso en otros archivos
 module.exports = Validador;
