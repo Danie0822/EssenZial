@@ -144,6 +144,13 @@ function detalleInventario(id) {
     return ejecutarConsulta(sql, id);
 }
 
+function estadoPedido(estado){
+    const sql = `SELECT p.id_pedido, p.fecha_pedido, p.estado_pedido
+    FROM tb_pedidos p
+    WHERE p.estado_pedido = ?;`;
+    return ejecutarConsulta(sql, estado);
+}
+
 
 
 // Exportar las funciones para su uso fuera del módulo
@@ -159,5 +166,6 @@ module.exports = {
     login,
     datellesPedidos,
     detalleValoraciones,
-    detalleInventario
+    detalleInventario,
+    estadoPedido
 };

@@ -3,6 +3,7 @@ const ID_FIELD = 'id_pedido';
 const VISTA = 'vista_pedidos'; 
 const ID_VISTA = 'id_correlativo'
 
+
 module.exports = function (db) {
     async function todos() {
         return db.todos(TABLE_NAME);
@@ -22,12 +23,18 @@ module.exports = function (db) {
         return db.datellesPedidos(VISTA, id, ID_VISTA);
     }
 
+    async function estadoPedido(estado){
+        return db.estadoPedido(estado);
+
+    }
+
     return {
         todos,
         uno,
         eliminar,
         actualizar,
-        detallePedido
+        detallePedido,
+        estadoPedido
     };
     
 }
