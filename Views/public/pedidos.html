@@ -27,63 +27,27 @@
                     <!-- Navegador-->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#activas" role="tab"
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#preparandoseTab" onclick="pedidos()" role="tab"
                                 aria-controls="home" aria-selected="true">Preparandose</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#completadas" role="tab"
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#enviandoTab" onclick="pedidoEnviado()" role="tab"
                                 aria-controls="profile" aria-selected="false">Enviando</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#canceladas" role="tab"
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#finalizadoTab" onclick="pedidoFinalizado()" role="tab"
                                 aria-controls="contact" aria-selected="false">Finalizado</a>
                         </li>
                     </ul>
                     <!-- Contenido del navegador-->
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="activas" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row paneles">
-                                <div class="col-6">
-                                    <h6>Pedido numero #<label for="">44</label></h6>
-                                    <p class="titleTwo">Fecha del pedido: <label for="" class="lb">05 de marzo de
-                                            2024</label></p>
-                                    <button type="button" class="btn detalles">Ver detalles</button>
-                                </div>
-                                <div class="col-6">
-                                    <p class="titleTwo">Método de pago: <label for="" class="lb">Contra entrega</label>
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="tab-pane fade show active" id="preparandoseTab" role="tabpanel" aria-labelledby="home-tab">
+                            <!-- Contenido para Preparandose -->
                         </div>
-                        <!-- Contenido del navegador-->
-                        <div class="tab-pane fade" id="completadas" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row paneles">
-                                <div class="col-6">
-                                    <h6>Pedido numero #<label for="">34</label></h6>
-                                    <p class="titleTwo">Fecha del pedido: <label for="" class="lb">05 de marzo de
-                                            2024</label></p>
-                                    <button type="button" class="btn detalles">Ver detalles</button>
-                                </div>
-                                <div class="col-6">
-                                    <p class="titleTwo">Método de pago: <label for="" class="lb">Contra entrega</label>
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="tab-pane fade" id="enviandoTab" role="tabpanel" aria-labelledby="profile-tab">
+                            <!-- Contenido para Enviando -->
                         </div>
-                        <!-- Contenido del navegador-->
-                        <div class="tab-pane fade" id="canceladas" role="tabpanel" aria-labelledby="contact-tab">
-                            <div class="row paneles">
-                                <div class="col-6">
-                                    <h6>Pedido numero #<label for="">35</label></h6>
-                                    <p class="titleTwo">Fecha del pedido: <label for="" class="lb">05 de marzo de
-                                            2024</label></p>
-                                    <button type="button" class="btn detalles">Ver detalles</button>
-                                </div>
-                                <div class="col-6">
-                                    <p class="titleTwo">Método de pago: <label for="" class="lb">Contra entrega</label>
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="tab-pane fade" id="finalizadoTab" role="tabpanel" aria-labelledby="contact-tab">
                         </div>
                     </div>
                 </div>
@@ -93,7 +57,6 @@
     <footer>
     </footer>
 
-
     <!--Script para uso de iconos-->
     <script src="https://kit.fontawesome.com/186c8fdf5b.js" crossorigin="anonymous"></script>
 
@@ -102,8 +65,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <!--Script para plantilla del header y footer-->
+    <script src="../../Controllers/admin/metodos.js"></script>
     <script src="../../Controllers/utils/components.js"></script>
     <script src="../../Controllers/utils/components2.js"></script>
+    <script src="../../Controllers/public/pedidos.js"></script>
 
 </body>
 
