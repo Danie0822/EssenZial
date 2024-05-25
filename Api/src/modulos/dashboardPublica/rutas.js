@@ -6,7 +6,7 @@ const seguridad = require('../seguridad/seguridad');
 const clientes = require('../clientes');
 
 // Rutas
-router.get('/', seguridad("cliente"), todos);
+router.get('/', todos);
 
 // Funciones
 async function todos(req, res, next) {

@@ -16,8 +16,9 @@ const descuentos = require('./modulos/descuentos/rutas');
 const valoraciones = require('./modulos/valoraciones/rutas');
 const dashboard = require('./modulos/dashboard/rutas');
 const valoracion = require('./modulos/valoracion/rutas');
-const dashboardP = require('./modulos/dashboardPublica/rutas');
+const dashboardP = require('./modulos/dashboardpublica/rutas');
 const charts = require('./modulos/charts/rutas'); 
+const producto_publica = require ('./modulos/detalleproductopublica/rutas'); 
 const app = express(); 
 const error = require('./red/errors'); 
 const cors = require('cors');
@@ -48,6 +49,7 @@ app.use('/api/charts',charts);
 app.use('/api/dashboard/public',dashboardP);
 app.use('/api/dirreciones',dirreciones);
 app.use('/api/public/valoraciones',valoracion);
+app.use('/api/public/producto',producto_publica); 
 app.use(error); 
 
 module.exports = app; 
