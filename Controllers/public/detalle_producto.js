@@ -1,5 +1,6 @@
 const obtenerElemento = (id) => document.getElementById(id);
 
+//Funcion para generar las valoraciones
 const generarEstrellas = (valoracion) => {
     let estrellas = '';
     for (let i = 1; i <= 5; i++) {
@@ -12,6 +13,7 @@ const generarEstrellas = (valoracion) => {
     return estrellas;
 };
 
+//Funcion para obtener el producto
 const obtenerProducto = async () => {
     try {
         const id_producto = 1;
@@ -63,6 +65,7 @@ const obtenerProducto = async () => {
     }
 };
 
+//Funcion para obtener el detalle del producto
 const obtenerDetalle = async () => {
     try {
         const id_producto = 1;
@@ -114,9 +117,100 @@ const obtenerDetalle = async () => {
         manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
     }
 };
+//Funcion para obtener las demas imagenes
+const obtenerImagenes = async () => {
+    try {
+        const id_producto = 1;
+        const { success, data } = await fetchData(`/public/producto/imagenes/${id_producto}`);
+        const recienAgregados = document.getElementById("imagenes");
+
+        if (success) {
+            recienAgregados.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
+
+            data.forEach(({ imagenes }) => {
+                const imagenesArray = imagenes.split(', '); // Separar las URLs de las imágenes
+                let carouselItems = '';
+                
+                imagenesArray.forEach((imagenes, index) => {
+                    carouselItems += `
+                        <div class="carousel-item ${index === 0 ? 'active' : ''}">
+                            <img src="${imagen}${imagenes}" class="d-block w-100" alt="Imagen ${index + 1}">
+                        </div>
+                    `;
+                });
+
+                const recienAgregadosCard = `
+                    <!-- Imágenes rotativas -->
+                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            ${carouselItems}
+                        </div>
+                        <!-- Controles del carousel -->
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Anterior</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Siguiente</span>
+                        </a>
+                    </div>
+                `;
+
+                recienAgregados.innerHTML += recienAgregadosCard;
+            });
+
+        } else {
+            manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
+        }
+    } catch (error) {
+        console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+        manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
+    }
+};
+
+//Funcion para obtener las valoraciones
+const obtenerValoraciones = async () => {
+    try {
+        const id_producto = 1;
+        const { success, data } = await fetchData(`/public/producto/valoraciones/${id_producto}`);
+        const recienAgregados = document.getElementById("valoraciones");
+
+        if (success) {
+            recienAgregados.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
+
+            data.forEach(({ nombre_cliente, calificacion_producto, comentario_producto}) => {
+                const recienAgregadosCard = `
+                <div class="d-flex flex-row justify-content-start flex-wrap scrollable">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${nombre_cliente}</h5>
+                                <div class="mb-3">
+                                    <!-- Ejemplo de estrellas -->
+                                    ${generarEstrellas(calificacion_producto)}
+                                </div>
+                                <p class="card-text">${comentario_producto}</p>
+                            </div>
+                        </div>
+                    </div>
+                
+                `;
+                recienAgregados.innerHTML += recienAgregadosCard;
+            });
+
+        } else {
+            manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
+        }
+    } catch (error) {
+        console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+        manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
+    }
+};
 const llamarProcesos = async () => {
     await obtenerProducto();
     await obtenerDetalle();
+    await obtenerImagenes();
+    await obtenerValoraciones();
 } 
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener cuando recarga página 
