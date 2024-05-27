@@ -5,7 +5,8 @@ const seguridad = require('../seguridad/seguridad');
 const controlador = require('./index');
 
 //endpoint
-router.get('/view/status/:estado', Estadospedidos);
+router.get('/view/status/:estado', estadosPedidos);
+router.get('/procedure/details/:id_pedido', procedimientoDetalle);
 router.get('/',seguridad('admin'), todos);
 router.get('/:id',seguridad('admin'), uno);
 router.get('/detalle/:id',seguridad('admin'), detallePedido);
@@ -67,12 +68,24 @@ async function actualizar(req, res, next) {
     }
 }
 
-async function Estadospedidos(req, res, next) {
+async function estadosPedidos(req, res, next) {
     try {
         const { estado } = req.params;
         const pedidos = await controlador.estadoPedido(estado);
         respuestas.success(req, res, pedidos, 200);
     } catch (error) {
+        next(error);
+    }
+}
+
+async function procedimientoDetalle(req, res, next){
+    try{
+
+        const { id_pedido } = req.params;
+        const detalle_pedidos = await controlador.procedimientoDetalle(id_pedido);
+        respuestas.success(req, res, detalle_pedidos, 200);
+
+    }catch(error){
         next(error);
     }
 }

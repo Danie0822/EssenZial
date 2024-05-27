@@ -27,60 +27,22 @@
                     <div class="info mt-4 p-4 border rounded shadow-sm">
                         <div class="row">
                             <div class="col-md-4">
-                                <h5 class="ml-3">Pedido no: #443</h5>
-                                <p>Pedido el 31 de enero de 2024 3:00 PM</p>
+                                <h5  id="numPedido"></h5>
+                                <p id="fechaPedido"></p>
                             </div>
                             <div class="col-md-8 text-right">
-                                <p>Total : $243.47</p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Linea de tiempo con estado que se encuntra el pedido-->
-                    <div class="row mt-4">
-                        <div class="col-md-12">
-                            <div class="timeline-container">
-                                <div class="timeline-item">
-                                    <div class="timeline-circle"></div>
-                                    <div class="timeline-content">
-                                        <p>Pedido realizado</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-line"></div>
-                                <div class="timeline-item">
-                                    <div class="timeline-circle"></div>
-                                    <div class="timeline-content">
-                                        <p>En progreso</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-line"></div>
-                                <div class="timeline-item">
-                                    <div class="timeline-circle2"></div>
-                                    <div class="timeline-content">
-                                        <p>Enviado</p>
-                                    </div>
-                                </div>
-                                <div class="timeline-line"></div>
-                                <div class="timeline-item">
-                                    <div class="timeline-circle2"></div>
-                                    <div class="timeline-content">
-                                        <p>Entregado</p>
-                                    </div>
-                                </div>
+                                <p id="totalPedido"></p>
                             </div>
                         </div>
                     </div>
                     <!-- Contenedor con informacion de la hora y fecha que se despacho el pedido-->
                     <div class="container">
                         <div class="row justify-content-center">
-                            <div class="col-lg-9">
+                            <div class="col-lg-8">
                                 <div class="info mt-2 p-4 border rounded shadow-sm ">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <p>8 febrero 2024 3:40 PM </p>
-
-                                        </div>
-                                        <div class="col-md-8 text-right">
-                                            <h6>Tu orden ha sido despachada con éxito</h6>
+                                        <div class="col-md-12 text-center">
+                                            <h6 id="estadoPedido">Tu orden ha sido despachada con éxito</h6>
                                         </div>
                                     </div>
                                 </div>
@@ -88,47 +50,7 @@
                         </div>
                     </div>
                     <!-- Contenedor con informacion de lo que se ha pedido -->
-                    <div class="info mt-4 p-4 col-lg-11">
-                        <div class="row">
-                            <div class="col-md-2 text-center">
-                                <img src="../../resources/img/boss.jpg" alt="Perfume" style="max-width: 100%;">
-                            </div>
-                            <div class="col-md-6 pt-4">
-                                <h5>MYSLF</h5>
-                                <p>Yves Saint Laurent</p>
-                            </div>
-                            <div class="col-md-4 col-xs-12 text-right pt-4">
-                                <div class="row">
-                                    <div class="col-cm-6 pr-5 pl-3">
-                                        <h5>Cant : 1</h5>
-                                    </div>
-                                    <div class="col-cm-6">
-                                        <h5>$29.00</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-2 text-center">
-                                <img src="../../resources/img/boss.jpg" alt="Perfume" style="max-width: 100%;">
-                            </div>
-                            <div class="col-md-6 pt-4">
-                                <h5>ACQUA DI GIO</h5>
-                                <p>Giorgio Armani</p>
-                            </div>
-                            <div class="col-md-4 col-xs-12 text-right pt-4">
-                                <div class="row">
-                                    <div class="col-cm-6 pr-5 pl-3">
-                                        <h5>Cant : 1</h5>
-                                    </div>
-                                    <div class="col-cm-6">
-                                        <h5>$29.00</h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <hr>
+                    <div class="info mt-4 p-4 col-lg-11" id="contenedorProductos">
                     </div>
                     <!-- Contenedor con informacion del cliente -->
                     <h3 class="mb-4 mt-4">Detalles de Contacto </h3>
@@ -136,18 +58,18 @@
                         <div class="row mt-3">
                             <div class="col-md-12">
                                 <h5>Tu nombre</h5>
-                                <p>Adriana</p>
+                                <p id="nombreCliente"></p>
                                 <hr>
                                 <h5>Tu apellido</h5>
-                                <p>Orellana</p>
+                                <p id="apellidoCliente"></p>
                                 <hr>
                             </div>
                             <div class="col-md-12">
                                 <h5>Correo electrónico</h5>
-                                <p>adrianaorellana68@gmail.com</p>
+                                <p id="correoCliente"></p>
                                 <hr>
                                 <h5>Teléfono</h5>
-                                <p>7090-7925</p>
+                                <p id="telCliente"></p>
                             </div>
                         </div>
                     </div>
@@ -157,32 +79,19 @@
                         <div class="row mt-4">
                             <div class="col-md-12">
                                 <h5>Nombre</h5>
-                                <p>Casa</p>
+                                <p id="nombreDireccion"></p>
                                 <hr>
                                 <h5>Dirección</h5>
-                                <p>Col. Jardines del Norte 2, casa #2 psj 7 Block I</p>
+                                <p id="direccion"></p>
                                 <hr>
                                 <div class="d-flex align-items-center">
-                                    <!-- Contenedor para Departamento y Municipio -->
-                                    <div>
-                                        <h5>Departamento</h5>
-                                        <p>San Salvador</p>
-                                    </div>
-                                    <div class="ml-auto text-right"> <!-- Municipio alineado a la derecha -->
-                                        <h5>Municipio</h5>
-                                        <p>Apopa</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="d-flex align-items-center">
-                                    <!-- Contenedor para Departamento y Municipio -->
                                     <div>
                                         <h5>Teléfono</h5>
-                                        <p>7090- 7925</p>
+                                        <p id="telDireccion"></p>
                                     </div>
                                     <div class="ml-auto text-right"> <!-- Municipio alineado a la derecha -->
                                         <h5>Código postal</h5>
-                                        <p>0011</p>
+                                        <p id="codigoPostal"></p>
                                     </div>
                                 </div>
                             </div>
@@ -205,15 +114,18 @@
     <footer>
     </footer>
 
-    <!--Script para plantilla del header y footer-->
-    <script src="../../Controllers/utils/components.js"></script>
-    <script src="../../Controllers/utils/components2.js"></script>
     <!--Script para uso de iconos-->
     <script src="https://kit.fontawesome.com/186c8fdf5b.js" crossorigin="anonymous"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!--Script para plantilla del header y footer-->
+    <script src="../../Controllers/utils/components.js"></script>
+    <script src="../../Controllers/utils/components2.js"></script>
+    <script src="../../Controllers/admin/metodos.js"></script>
+    <script src="../../Controllers/public/detalle_pedido.js"></script>
 </body>
 
 </html>

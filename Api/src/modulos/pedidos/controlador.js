@@ -1,7 +1,8 @@
 const TABLE_NAME = 'tb_pedidos';
 const ID_FIELD = 'id_pedido';
 const VISTA = 'vista_pedidos'; 
-const ID_VISTA = 'id_correlativo'
+const ID_VISTA = 'id_correlativo';
+const NOMBRE_PROCEDIMIENTO= 'obtenerDetallePedido';
 
 
 module.exports = function (db) {
@@ -28,13 +29,18 @@ module.exports = function (db) {
 
     }
 
+    async function procedimientoDetalle(id){
+        return db.ejecutarProcedimiento(NOMBRE_PROCEDIMIENTO, [id]);
+    }
+
     return {
         todos,
         uno,
         eliminar,
         actualizar,
         detallePedido,
-        estadoPedido
+        estadoPedido,
+        procedimientoDetalle
     };
     
 }

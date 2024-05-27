@@ -4,6 +4,8 @@ const abrirModal = (modal) => modal.show();
 const cerrarModal = (modal) => modal.hide();
 
 
+let idPedido = null;
+
 //Funcion para formatear la fecha a una legible por el usuario
 const formatearFecha = (fechaISO) => {
     const fecha = new Date(fechaISO);
@@ -13,6 +15,8 @@ const formatearFecha = (fechaISO) => {
         day: 'numeric'
     });
 };
+
+
 
 //Funcion para obtener los pedidos segun estado especifico 
 const obtenerPedidos = async (estado, tabId) => {
@@ -31,7 +35,7 @@ const obtenerPedidos = async (estado, tabId) => {
                     <div class="col-6">
                         <h6>Pedido numero #<label>${id_pedido}</label></h6>
                         <p class="titleTwo">Fecha del pedido: <label class="lb">${fechaFormateada}</label></p>
-                        <button type="button" class="btn detalles">Ver detalles</button>
+                        <button type="button" class="btn detalles" onclick="abrirDetalles(${id_pedido})">Ver detalles</button>
                     </div>
                     <div class="col-6">
                         <p class="titleTwo">Método de pago: <label class="lb">Contra entrega</label></p>
@@ -48,6 +52,13 @@ const obtenerPedidos = async (estado, tabId) => {
     }
 };
 
+//funcion para abrir detalles
+function abrirDetalles(idPedido){
+     // Redirigir a la página de imágenes.html con el ID como parámetro en la URL
+     window.location.href = `detalle_orden.html`;
+     sessionStorage.setItem("id_pedido", idPedido);
+};
+
 //Funcion para asignar pedidos segun estado en tab bar
 const pedidos = async () => {
     await obtenerPedidos('preparandose', 'preparandoseTab');
@@ -57,12 +68,12 @@ const pedidos = async () => {
 //Funcion para asignar pedidos segun estado en tab bar
 const pedidoEnviado = async () => {
     await obtenerPedidos('enviando', 'enviandoTab');
-}
+};
 
 //Funcion para asignar pedidos segun estado en tab bar
 const pedidoFinalizado = async () => {
     await obtenerPedidos('finalizado', 'finalizadoTab');
-}
+};
 
 // Llamar a la función para obtener 'preparandose' al cargar la página
 document.addEventListener('DOMContentLoaded', () => {
