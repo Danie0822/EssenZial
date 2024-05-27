@@ -27,7 +27,7 @@
                     <div class="info mt-4 p-4 border rounded shadow-sm">
                         <div class="row">
                             <div class="col-md-4">
-                                <h5  id="numPedido"></h5>
+                                <h5 id="numPedido"></h5>
                                 <p id="fechaPedido"></p>
                             </div>
                             <div class="col-md-8 text-right">
@@ -109,6 +109,21 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal para mostrar mensaje de error -->
+            <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 5rem;"></i>
+                            <h5 class="mt-3">¡Ups, ocurrió un error!</h5>
+                            <p class="mt-3">Lo sentimos, parece que hubo un error al intentar cargar los datos. Vuelve a intentarlo.</p>
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </main>
     <footer>

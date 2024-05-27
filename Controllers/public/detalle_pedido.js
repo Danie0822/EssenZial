@@ -2,6 +2,9 @@
 const obtenerElemento = (id) => document.getElementById(id);
 const abrirModal = (modal) => modal.show();
 const cerrarModal = (modal) => modal.hide();
+const manejarError = () => abrirModal(myError);
+
+const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 
 const idPedido = sessionStorage.getItem("id_pedido");
 
@@ -19,37 +22,49 @@ const formatearFecha = (fechaISO) => {
 const obtenerDetalles = async () => {
     try {
         const { success, data } = await fetchData(`/pedidos/procedure/details/${idPedido}`);
-        
+
         if (success) {
             actualizarDetallesPedido(data[0]);
         } else {
             console.error("Error al obtener los detalles del pedido");
         }
     } catch (error) {
+        manejarError();
         console.error("Error en la solicitud:", error);
     }
 };
 
-
+// Funcion para setear datos del pedido
 const actualizarDetallesPedido = (data) => {
     const pedido = data[0]; // Acceder al primer elemento del array de datos
     const fechaFormateada = formatearFecha(pedido.fecha_pedido);
 
-    // Actualizar la información del pedido
-    obtenerElemento('numPedido').innerText = `Pedido número: #${pedido.id_pedido}`;
-    obtenerElemento('fechaPedido').innerText = fechaFormateada;
-    obtenerElemento('totalPedido').innerText = pedido.total_pago;
-    obtenerElemento('estadoPedido').innerText = `Tu orden ha sido ${pedido.estado_pedido} con éxito`;
+    try {
+        // Actualizar la información del pedido
+        obtenerElemento('numPedido').innerText = `Pedido número: #${pedido.id_pedido}`;
+        obtenerElemento('fechaPedido').innerText = fechaFormateada;
+        obtenerElemento('totalPedido').innerText = pedido.total_pago;
 
-    // Limpiar el contenedor de productos
-    const contenedorProductos = document.getElementById('contenedorProductos');
-    contenedorProductos.innerHTML = '';
+        if (pedido.estado_pedido === 'Preparandose') {
+            obtenerElemento('estadoPedido').innerText = `Tu orden está siendo preparada con éxito`;
+        }
+        else if (pedido.estado_pedido === 'Enviando') {
+            obtenerElemento('estadoPedido').innerText = `Tu orden está siendo enviada con éxito`;
+        }
+        else {
+            obtenerElemento('estadoPedido').innerText = `Tu orden ha finalizado con éxito`;
+        }
 
-    // Añadir los productos al contenedor
-    data.forEach(producto => {
-        const productoElemento = document.createElement('div');
-        productoElemento.className = 'row';
-        productoElemento.innerHTML = `
+
+        // Limpiar el contenedor de productos
+        const contenedorProductos = document.getElementById('contenedorProductos');
+        contenedorProductos.innerHTML = '';
+
+        // Añadir los productos al contenedor
+        data.forEach(producto => {
+            const productoElemento = document.createElement('div');
+            productoElemento.className = 'row';
+            productoElemento.innerHTML = `
             <div class="col-md-2 text-center">
                 <img src="${imagen}${producto.ruta_imagen}" style="max-width: 100%;">
             </div>
@@ -69,24 +84,29 @@ const actualizarDetallesPedido = (data) => {
             </div>
             <hr>
         `;
-        contenedorProductos.appendChild(productoElemento);
-    });
+            contenedorProductos.appendChild(productoElemento);
+        });
 
-    // Actualizar la información del cliente
-    obtenerElemento('nombreCliente').innerText = pedido.nombre_cliente;
-    obtenerElemento('apellidoCliente').innerText = pedido.apellido_cliente;
-    obtenerElemento('correoCliente').innerText = pedido.correo_cliente;
-    obtenerElemento('telCliente').innerText = pedido.telefono_cliente;
+        // Actualizar la información del cliente
+        obtenerElemento('nombreCliente').innerText = pedido.nombre_cliente;
+        obtenerElemento('apellidoCliente').innerText = pedido.apellido_cliente;
+        obtenerElemento('correoCliente').innerText = pedido.correo_cliente;
+        obtenerElemento('telCliente').innerText = pedido.telefono_cliente;
 
-    // Actualizar la información de la dirección
-    obtenerElemento('nombreDireccion').innerText = pedido.nombre_direccion;
-    obtenerElemento('direccion').innerText = pedido.direccion_cliente;
-    obtenerElemento('telDireccion').innerText = pedido.telefono_cliente;
-    obtenerElemento('codigoPostal').innerText = pedido.codigo_postal;
+        // Actualizar la información de la dirección
+        obtenerElemento('nombreDireccion').innerText = pedido.nombre_direccion;
+        obtenerElemento('direccion').innerText = pedido.direccion_cliente;
+        obtenerElemento('telDireccion').innerText = pedido.telefono_cliente;
+        obtenerElemento('codigoPostal').innerText = pedido.codigo_postal;
+    } catch (error) {
+        manejarError();
+        console.error("Error al cargar los datos:", error);
+
+    }
 };
 
-
-document.addEventListener('DOMContentLoaded', () =>{
+//Funcion que ejecuta el codigo al cargar la pagina
+document.addEventListener('DOMContentLoaded', () => {
 
     obtenerDetalles();
 

@@ -2,8 +2,10 @@
 const obtenerElemento = (id) => document.getElementById(id);
 const abrirModal = (modal) => modal.show();
 const cerrarModal = (modal) => modal.hide();
+const manejarError = () => abrirModal(myError);
 
 
+const myError = new bootstrap.Modal(obtenerElemento('errorModalPe'));
 let idPedido = null;
 
 //Funcion para formatear la fecha a una legible por el usuario
@@ -45,9 +47,11 @@ const obtenerPedidos = async (estado, tabId) => {
                 tabContent.insertAdjacentHTML('beforeend', pedidoHtml);
             });
         } else {
-            console.error('Error fetching data:', result.message);
+            manejarError();
+            console.error('Error al enviar solicitud:', result.message);
         }
     } catch (error) {
+        manejarError();
         console.error(error);
     }
 };

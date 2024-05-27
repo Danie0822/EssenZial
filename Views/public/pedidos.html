@@ -27,27 +27,45 @@
                     <!-- Navegador-->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#preparandoseTab" onclick="pedidos()" role="tab"
-                                aria-controls="home" aria-selected="true">Preparandose</a>
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#preparandoseTab"
+                                onclick="pedidos()" role="tab" aria-controls="home"
+                                aria-selected="true">Preparandose</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#enviandoTab" onclick="pedidoEnviado()" role="tab"
-                                aria-controls="profile" aria-selected="false">Enviando</a>
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#enviandoTab"
+                                onclick="pedidoEnviado()" role="tab" aria-controls="profile"
+                                aria-selected="false">Enviando</a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#finalizadoTab" onclick="pedidoFinalizado()" role="tab"
-                                aria-controls="contact" aria-selected="false">Finalizado</a>
+                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#finalizadoTab"
+                                onclick="pedidoFinalizado()" role="tab" aria-controls="contact"
+                                aria-selected="false">Finalizado</a>
                         </li>
                     </ul>
                     <!-- Contenido del navegador-->
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="preparandoseTab" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="tab-pane fade show active" id="preparandoseTab" role="tabpanel"
+                            aria-labelledby="home-tab">
                             <!-- Contenido para Preparandose -->
                         </div>
                         <div class="tab-pane fade" id="enviandoTab" role="tabpanel" aria-labelledby="profile-tab">
                             <!-- Contenido para Enviando -->
                         </div>
                         <div class="tab-pane fade" id="finalizadoTab" role="tabpanel" aria-labelledby="contact-tab">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal para mostrar mensaje de error -->
+            <div class="modal fade" id="errorModalPe" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body text-center">
+                            <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 5rem;"></i>
+                            <h5 class="mt-3">¡Ups, ocurrió un error!</h5>
+                            <p class="mt-3">Lo sentimos, parece que hubo un error al cargar los datos, inténtalo más tarde.</p>
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Aceptar</button>
                         </div>
                     </div>
                 </div>

@@ -4,7 +4,7 @@ const abrirModal = (modal) => modal.show();
 const cerrarModal = (modal) => modal.hide();
 const manejarError = () => abrirModal(myError);
 
-//const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
+const myError = new bootstrap.Modal(obtenerElemento('errorModalPro'));
 
 //Funcion para obtener todos los productos
 const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionadas = []) => {
@@ -46,11 +46,11 @@ const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionada
                 contenedor.appendChild(card);
             });
         } else {
-            // manejarError();
+            manejarError();
         }
     } catch (error) {
-        // manejarError();
-        console.log(error);
+        manejarError();
+        console.error("Error en la solicitud:", error);
     }
 };
 //Funcion para obtener todas las categorias para los filtros
