@@ -9,6 +9,7 @@ router.get('/:id', obtenerPorId);
 router.get('/detalle/:id', detalle);
 router.get('/imagenes/:id', imagenes);
 router.get('/valoraciones/:id', valoraciones);
+router.get ('/similares/:id',similares);
 
 async function obtenerPorId(req, res, next) {
     try {
@@ -37,6 +38,14 @@ async function imagenes(req, res, next) {
 async function valoraciones(req, res, next) {
     try {
         const item = await controlador.valoracion(req.params.id);
+        respuestas.success(req, res, item, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+async function similares(req, res, next) {
+    try {
+        const item = await controlador.similares(req.params.id);
         respuestas.success(req, res, item, 200);
     } catch (error) {
         next(error);

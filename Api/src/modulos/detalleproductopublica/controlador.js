@@ -4,6 +4,7 @@ const TABLE_NAME = 'vw_perfume_info';
 const VIEW_NAME = 'vw_productos_detalle';
 const VIEW_IMAGEN = 'vw_imagenes_detalle';
 const VIEW_VALORACIONES = 'vw_valoraciones_producto';
+const PROCEDIUR = 'sp_productos_relacionados' ;
 const ID_FIELD_VIEW = 'id_inventario'; 
 const ID_FIELD_VALORACIONES = 'identificador';
 const ID_FIELD = 'id_producto';
@@ -23,11 +24,15 @@ module.exports = function (db) {
     async function valoracion(id) {
         return db.uno(VIEW_VALORACIONES, id, ID_FIELD_VALORACIONES);
     }
+    async function similares(id) {
+        return db.procediur(PROCEDIUR, id );
+    }
 
     return {
         uno,
         detalle,
         imagenes,
-        valoracion
+        valoracion,
+        similares
     };
 };

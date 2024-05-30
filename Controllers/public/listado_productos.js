@@ -22,7 +22,7 @@ const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionada
                 return enCategoria && enMarca;
             });
 
-            productosFiltrados.forEach(({ id_imagen, ruta_imagen, nombre_inventario, precio_inventario, nombre_marca }) => {
+            productosFiltrados.forEach(({ id_imagen, ruta_imagen, nombre_inventario, precio_inventario, nombre_marca, id_inventario }) => {
                 const card = document.createElement('div');
                 card.className = 'col-sm-12 col-md-6 col-lg-3';
                 card.innerHTML = `
@@ -36,13 +36,14 @@ const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionada
                                     <label for="">$${precio_inventario}</label>
                                 </div>
                                 <div class="col-lg-6 col-md-12 col-sm-12">
-                                    <a href="../../Views/public/detalles_productos.html" type="button"
+                                    <a onclick = "obtenerId(${id_inventario})" type="button"
                                         class="btn btn-outline-secondary btn-sm"> Comprar</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
+                
                 contenedor.appendChild(card);
             });
         } else {
@@ -112,6 +113,12 @@ const obtenerMarcas = async () => {
         console.log(error);
     }
 };
+
+const obtenerId = async (data) => { 
+     await  sessionStorage.setItem("id_producto", data); 
+   window.location.href = "detalles_productos.html";
+};
+
 //Funcion asincrona para ejecutar el código de manera correcta
 const obtenerData = async () => {
     await obtenerCategorias();

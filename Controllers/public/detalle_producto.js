@@ -16,7 +16,7 @@ const generarEstrellas = (valoracion) => {
 //Funcion para obtener el producto
 const obtenerProducto = async () => {
     try {
-        const id_producto = 1;
+        const id_producto = sessionStorage.getItem("id_producto");
         const { success, data } = await fetchData(`/public/producto/${id_producto}`);
         const recienAgregados = document.getElementById("producto_inicio");
 
@@ -68,7 +68,7 @@ const obtenerProducto = async () => {
 //Funcion para obtener el detalle del producto
 const obtenerDetalle = async () => {
     try {
-        const id_producto = 1;
+        const id_producto = sessionStorage.getItem("id_producto");
         const { success, data } = await fetchData(`/public/producto/detalle/${id_producto}`);
         const recienAgregados = document.getElementById("detalle");
 
@@ -120,7 +120,7 @@ const obtenerDetalle = async () => {
 //Funcion para obtener las demas imagenes
 const obtenerImagenes = async () => {
     try {
-        const id_producto = 1;
+        const id_producto = sessionStorage.getItem("id_producto");
         const { success, data } = await fetchData(`/public/producto/imagenes/${id_producto}`);
         const recienAgregados = document.getElementById("imagenes");
 
@@ -172,7 +172,7 @@ const obtenerImagenes = async () => {
 //Funcion para obtener las valoraciones
 const obtenerValoraciones = async () => {
     try {
-        const id_producto = 1;
+        const id_producto = sessionStorage.getItem("id_producto");
         const { success, data } = await fetchData(`/public/producto/valoraciones/${id_producto}`);
         const recienAgregados = document.getElementById("valoraciones");
 
@@ -206,11 +206,50 @@ const obtenerValoraciones = async () => {
         manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
     }
 };
+
+//Funcion para obtener las valoraciones
+const obtenerProdcutoSimilares = async () => {
+    try {
+        const id_producto = sessionStorage.getItem("id_producto");
+        const { success, data } = await fetchData(`/public/producto/similares/${id_producto}`);
+        console.log(data,success); 
+        const recienAgregados = document.getElementById("similares");
+
+        if (success) {
+            recienAgregados.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
+
+            data[0].forEach(({ nombre_producto,primera_imagen_producto,precio_producto}) => {
+                console.log (nombre_producto,primera_imagen_producto,precio_producto); 
+                const recienAgregadosCard = `
+                <div class="product-item">
+                        <img src="${imagen}${primera_imagen_producto}"
+                            class="rounded mx-auto d-block" alt="Perfume Similar 1">
+                        <div class="product-info">
+                            <h5>${nombre_producto}</h5>
+                            <p class="product-price">Precio: $${precio_producto}</p>
+                        </div>
+                    </div>
+
+                `;
+                recienAgregados.innerHTML += recienAgregadosCard;
+            });
+
+        } else {
+            manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
+        }
+    } catch (error) {
+        console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+        manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
+    }
+};
+
+
 const llamarProcesos = async () => {
     await obtenerProducto();
     await obtenerDetalle();
     await obtenerImagenes();
     await obtenerValoraciones();
+    await obtenerProdcutoSimilares();
 } 
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener cuando recarga página 

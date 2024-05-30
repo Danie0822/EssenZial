@@ -150,7 +150,11 @@ function estadoPedido(estado){
     WHERE p.estado_pedido = ?;`;
     return ejecutarConsulta(sql, estado);
 }
+function procediur (id, procs) {
+    const sql = `CALL ?? (?);`;
+    return ejecutarConsulta(sql, [id,procs]);
 
+}
 // Exportar las funciones para su uso fuera del módulo
 module.exports = {
     todos,
@@ -165,5 +169,6 @@ module.exports = {
     datellesPedidos,
     detalleValoraciones,
     detalleInventario,
-    estadoPedido
+    estadoPedido, 
+    procediur
 };
