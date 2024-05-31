@@ -5,8 +5,8 @@ const seguridad = require('../seguridad/seguridad');
 const controlador = require('./index');
 
 //endpoint
-router.get('/view/status/:estado', estadosPedidos);
-router.get('/procedure/details/:id_pedido', procedimientoDetalle);
+router.get('/view/status/:estado', seguridad('cliente'), estadosPedidos);
+router.get('/procedure/details/:id_pedido', seguridad('cliente'), procedimientoDetalle);
 router.get('/',seguridad('admin'), todos);
 router.get('/:id',seguridad('admin'), uno);
 router.get('/detalle/:id',seguridad('admin'), detallePedido);
