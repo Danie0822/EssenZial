@@ -26,7 +26,7 @@ const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionada
                 const card = document.createElement('div');
                 card.className = 'col-sm-12 col-md-6 col-lg-4';
                 card.innerHTML = `
-                    <div class="card me-6" style="width: 18rem;">
+                    <div class="card me-4" style="width: 18rem;">
                         <img src="${imagen}${ruta_imagen}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h6 class="card-text" style="color: black;">${nombre_inventario}</h6>
