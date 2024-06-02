@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 // Nombres de campos de la tabla 
 const TABLE_NAME = 'vw_perfume_info';
+const PROCEDIUR_ADMIN = 'InsertarDetallePedido';
 const VIEW_NAME = 'vw_productos_detalle';
 const VIEW_IMAGEN = 'vw_imagenes_detalle';
 const VIEW_VALORACIONES = 'vw_valoraciones_producto';
@@ -27,12 +28,15 @@ module.exports = function (db) {
     async function similares(id) {
         return db.procediur(PROCEDIUR, id );
     }
-
+    async function insertar (cantidad_producto, costo_actual, id_inventario, id_cliente) { 
+        return db.procediurAgregar(cantidad_producto, costo_actual, id_inventario, id_cliente);
+    }
     return {
         uno,
         detalle,
         imagenes,
         valoracion,
-        similares
+        similares,
+        insertar
     };
 };

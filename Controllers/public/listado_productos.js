@@ -115,8 +115,8 @@ const obtenerMarcas = async () => {
 };
 
 const obtenerId = async (data) => { 
-     await  sessionStorage.setItem("id_producto", data); 
-   window.location.href = "detalles_productos.html";
+    await  sessionStorage.setItem("id_producto", data); 
+    window.location.href = "detalles_productos.html";
 };
 
 //Funcion asincrona para ejecutar el código de manera correcta

@@ -10,6 +10,7 @@ router.get('/detalle/:id', detalle);
 router.get('/imagenes/:id', imagenes);
 router.get('/valoraciones/:id', valoraciones);
 router.get ('/similares/:id',similares);
+router.post('/save',insertar);
 
 async function obtenerPorId(req, res, next) {
     try {
@@ -46,6 +47,15 @@ async function valoraciones(req, res, next) {
 async function similares(req, res, next) {
     try {
         const item = await controlador.similares(req.params.id);
+        respuestas.success(req, res, item, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+async function insertar(req, res, next) {
+    try {
+        const {cantidad_producto,costo_actual,id_inventario,id_cliente}= req.body
+        const item = await controlador.insertar(cantidad_producto,costo_actual,id_inventario,id_cliente);
         respuestas.success(req, res, item, 200);
     } catch (error) {
         next(error);

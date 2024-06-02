@@ -73,6 +73,9 @@ var validaciones = {
             fechaObj.getMonth() + 1 == parseInt(mes) &&
             fechaObj.getDate() == parseInt(dia)
         );
+    },
+    noEstaVacio: function (valor) {
+        return valor.trim() !== "";
     }
 
 

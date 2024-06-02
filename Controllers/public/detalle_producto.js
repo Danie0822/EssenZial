@@ -1,6 +1,11 @@
 const obtenerElemento = (id) => document.getElementById(id);
+const abrirModal = (modal) => modal.show();
+const cerrarModal = (modal) => modal.hide();
+const manejarValidaciones = () => abrirModal(validationsModal);
 
-//Funcion para generar las valoraciones
+let validationsModal; // Declarar la variable fuera
+let productoPrecio; 
+// Funcion para generar las valoraciones
 const generarEstrellas = (valoracion) => {
     let estrellas = '';
     for (let i = 1; i <= 5; i++) {
@@ -13,7 +18,7 @@ const generarEstrellas = (valoracion) => {
     return estrellas;
 };
 
-//Funcion para obtener el producto
+// Funcion para obtener el producto
 const obtenerProducto = async () => {
     try {
         const id_producto = sessionStorage.getItem("id_producto");
@@ -24,6 +29,7 @@ const obtenerProducto = async () => {
             recienAgregados.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
 
             data.forEach(({ titulo_perfume, valoracion_calculada, precio, unidades_disponibles, primera_imagen }) => {
+                productoPrecio = precio;
                 const recienAgregadosCard = `
                 <div class="col-md-6">
                     <!-- Imagen del producto -->
@@ -42,15 +48,17 @@ const obtenerProducto = async () => {
 
                     <!-- Precio y cantidad -->
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="$ ${precio}" aria-label="Disabled input example" disabled>
-                        <input type="number" class="form-control" placeholder="Cantidad">
+                        <input type="text" class="form-control"  placeholder="$ ${precio}" aria-label="Disabled input example" disabled>
+                        <input type="number" class="form-control" id="cantidad" placeholder="Cantidad">
                     </div>
 
                     <!-- Disponibilidad -->
                     <p>Disponibilidad: ${unidades_disponibles}</p>
 
                     <!-- Botón de añadir al carrito -->
-                    <a href="../../Views/public/carrito.html" type="button" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> Añadir al Carrito</a>
+                    <a type="button" onclick ="agregarCarrito()" class="btn btn-dark"><i class="fas fa-shopping-cart"></i> Añadir al Carrito</a>
+                    
+                
                 </div>
                 `;
                 recienAgregados.innerHTML += recienAgregadosCard;
@@ -65,7 +73,7 @@ const obtenerProducto = async () => {
     }
 };
 
-//Funcion para obtener el detalle del producto
+// Funcion para obtener el detalle del producto
 const obtenerDetalle = async () => {
     try {
         const id_producto = sessionStorage.getItem("id_producto");
@@ -75,7 +83,7 @@ const obtenerDetalle = async () => {
         if (success) {
             recienAgregados.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
 
-            data.forEach(({ descripcion_producto, marca, categoria, aroma}) => {
+            data.forEach(({ descripcion_producto, marca, categoria, aroma }) => {
                 const recienAgregadosCard = `
                 <!-- Descripción Detallada -->
                 <div class="description mt-4">
@@ -117,7 +125,7 @@ const obtenerDetalle = async () => {
         manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
     }
 };
-//Funcion para obtener las demas imagenes
+// Funcion para obtener las demas imagenes
 const obtenerImagenes = async () => {
     try {
         const id_producto = sessionStorage.getItem("id_producto");
@@ -169,7 +177,7 @@ const obtenerImagenes = async () => {
     }
 };
 
-//Funcion para obtener las valoraciones
+// Funcion para obtener las valoraciones
 const obtenerValoraciones = async () => {
     try {
         const id_producto = sessionStorage.getItem("id_producto");
@@ -179,7 +187,7 @@ const obtenerValoraciones = async () => {
         if (success) {
             recienAgregados.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
 
-            data.forEach(({ nombre_cliente, calificacion_producto, comentario_producto}) => {
+            data.forEach(({ nombre_cliente, calificacion_producto, comentario_producto }) => {
                 const recienAgregadosCard = `
                 <div class="d-flex flex-row justify-content-start flex-wrap scrollable">
                         <div class="card mb-3">
@@ -207,19 +215,18 @@ const obtenerValoraciones = async () => {
     }
 };
 
-//Funcion para obtener las valoraciones
+// Funcion para obtener las valoraciones
 const obtenerProdcutoSimilares = async () => {
     try {
         const id_producto = sessionStorage.getItem("id_producto");
         const { success, data } = await fetchData(`/public/producto/similares/${id_producto}`);
-        console.log(data,success); 
         const recienAgregados = document.getElementById("similares");
 
         if (success) {
             recienAgregados.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
 
-            data[0].forEach(({ nombre_producto,primera_imagen_producto,precio_producto}) => {
-                console.log (nombre_producto,primera_imagen_producto,precio_producto); 
+            data[0].forEach(({ nombre_producto, primera_imagen_producto, precio_producto }) => {
+                console.log(nombre_producto, primera_imagen_producto, precio_producto);
                 const recienAgregadosCard = `
                 <div class="product-item">
                         <img src="${imagen}${primera_imagen_producto}"
@@ -242,16 +249,61 @@ const obtenerProdcutoSimilares = async () => {
         manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
     }
 };
+// Funcion para obtener las valoraciones
+const agregarCarrito = async () => {
+    try {
+        const id_cliente = sessionStorage.getItem("id_cliente");
+        const id_producto = sessionStorage.getItem("id_producto");
 
-
+        const cantidad = obtenerElemento("cantidad").value;
+        const costo = productoPrecio; 
+        
+        if (!validaciones.noEstaVacio(cantidad)){ 
+            mostrarModal("Seleccione una cantidad.");
+        }
+        else if (id_cliente == null || id_cliente !== 0){ 
+            mostrarModal("Ingrese sesión para poder agregar un pedido al carrito.");
+        }
+        else{ 
+             // Form data para json de body 
+            var carrito = {
+                cantidad_producto: cantidad,
+                costo_actual: costo,
+                id_inventario: id_producto,
+                id_cliente: id_cliente
+            };
+            const response = await DataAdmin("/public/producto/save", carrito, 'POST');
+            if (response.status == 200) {
+                window.location.href = "carrito.html";
+            } else {
+                manejarError();
+            }
+        }
+        
+       
+    } catch (error) {
+        console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+        manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
+    }
+};
 const llamarProcesos = async () => {
     await obtenerProducto();
     await obtenerDetalle();
     await obtenerImagenes();
     await obtenerValoraciones();
     await obtenerProdcutoSimilares();
-} 
+    
+}
+
 document.addEventListener("DOMContentLoaded", function () {
+    // Inicializar el modal cuando el DOM esté completamente cargado
+    validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
     // Obtener cuando recarga página 
+
     llamarProcesos();
 });
+
+function mostrarModal(mensaje) {
+    $('#validationsModal .modal-body p').text(mensaje);
+    $('#validationsModal').modal('show');
+}

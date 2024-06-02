@@ -155,6 +155,11 @@ function procediur (id, procs) {
     return ejecutarConsulta(sql, [id,procs]);
 
 }
+function procediurAgregar (cantidad_producto,costo_actual,id_inventario,id_cliente) {
+    const sql = `CALL InsertarDetallePedido (?,?,?,?);`;
+    return ejecutarConsulta(sql, [cantidad_producto,costo_actual,id_inventario,id_cliente]);
+
+}
 // Exportar las funciones para su uso fuera del módulo
 module.exports = {
     todos,
@@ -170,5 +175,6 @@ module.exports = {
     detalleValoraciones,
     detalleInventario,
     estadoPedido, 
-    procediur
+    procediur,
+    procediurAgregar
 };
