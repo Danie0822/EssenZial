@@ -92,7 +92,7 @@ async function login(tabla, correo, clave) {
         const columnaCorreo = `correo_${tipoUsuario}`;
         const columnaClave = `clave_${tipoUsuario}`;
 
-        const sql = tabla === 'admin' ? `SELECT * FROM ?? WHERE ?? = ? AND ?? = ? LIMIT 1` : `SELECT * FROM ?? WHERE ?? = ? AND ?? = ? AND estado_cliente = true  LIMIT 1`;
+        const sql = tabla === 'tb_admins' ? `SELECT * FROM ?? WHERE ?? = ? AND ?? = ? LIMIT 1` : `SELECT * FROM ?? WHERE ?? = ? AND ?? = ? AND estado_cliente = true  LIMIT 1`;
         const result = await ejecutarConsulta(sql, [tabla, columnaCorreo, correo, columnaClave, clave]);
 
         if (result.length > 0) {
