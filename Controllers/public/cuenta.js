@@ -16,7 +16,7 @@ const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal')
 // Variable global para almacenar el cliente actual
 let clienteActual = {};
 const clientes = [];
-
+let claveActualizar = null;
 function limpiarFormularioUsuario() {
     // Selecciona todos los elementos de formulario dentro del modal
     const inputs = document.querySelectorAll('.info input[type="text"], .info input[type="email"]');
@@ -85,6 +85,7 @@ const mostrarCuenta = () => {
     obtenerElemento("apellido").value = clienteActual.apellido;
     obtenerElemento("email").value = clienteActual.correo;
     obtenerElemento("telefono").value = clienteActual.telefono;
+    claveActualizar = clienteActual.clave;
 };
 
 // Const de llenar el modal de actualizar con los valores 
@@ -95,6 +96,7 @@ const mostrarCuentaModal = () => {
         obtenerElemento("apellidoClienteActualizar").value = clienteActual.apellido;
         obtenerElemento("telefonClienteActualizar").value = clienteActual.telefono;
         obtenerElemento("correoClienteActualizar").value = clienteActual.correo;
+        claveActualizar = clienteActual.clave;
     } catch (error) { 
         console.log(error)
     }
@@ -108,6 +110,10 @@ const actualizarCliente = async () => {
         const apellido = obtenerElemento("apellidoClienteActualizar").value;
         const telefono = obtenerElemento("telefonClienteActualizar").value;
         const correo = obtenerElemento("correoClienteActualizar").value;
+        const clave = obtenerElemento("contrasena").value.trim();
+        const confirmar = obtenerElemento("confirmar").value.trim();
+        const contra = clave === '' ? claveActualizar : await sha256(clave);
+        const confirmarFinal = confirmar === '' ? claveActualizar : await sha256(confirmar);
         // If para validaciones
         if (!validaciones.contieneSoloLetrasYNumeros(nombre)) {
             mostrarModal("El nombre solo puede contener letras y números.");
@@ -121,6 +127,12 @@ const actualizarCliente = async () => {
             mostrarModal("El teléfono ingresado no es válido.");
         } else if (!validaciones.validarCorreoElectronico(correo)) {
             mostrarModal("El correo electrónico ingresado no es válido.");
+        }
+        else if (!validaciones.validarContra(contra)) {
+            mostrarModal( "La contraseña debe tener al menos 8 caracteres.");
+        }
+        else if (!validaciones.validarConfirmacionContrasena(contra, confirmarFinal)) {
+            mostrarModal("Las contraseñas no coinciden.");
         }  else {
             const idCliente = sessionStorage.getItem("id_cliente");
             // Form data para json de body 
@@ -129,7 +141,8 @@ const actualizarCliente = async () => {
                 nombre_cliente: nombre,
                 apellido_cliente: apellido,
                 correo_cliente: correo,
-                telefono_cliente: telefono
+                telefono_cliente: telefono,
+                clave_cliente: contra,
             };
             const response = await DataAdmin("/cliente/update/Cliente", adminData, 'PUT');
             // Status de la api 
@@ -143,6 +156,7 @@ const actualizarCliente = async () => {
             }
         }
     } catch (error) {
+        console.log(error);
         manejarError();
     }
 };

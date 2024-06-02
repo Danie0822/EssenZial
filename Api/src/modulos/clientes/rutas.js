@@ -30,13 +30,14 @@ function validarID(id, req, res, next) {
     }
     return id;
 }  
-function validarFormatoActualizarCliente(id,nombreCliente,apellidoCLiente,telefonoCliente,correoCliente, req, res, next) {
+function validarFormatoActualizarCliente(id,nombreCliente,apellidoCLiente,telefonoCliente,correoCliente, claveCliente,req, res, next) {
     const idUnico = Validador.validarNumeroEntero(id, 'El id debe ser un numero ', req, res, next)
     const nombreValidado = Validador.validarLongitud(nombreCliente, 255, 'El nombre debe ser obligatorio', req, res, next);
     const apellidoValidado = Validador.validarLongitud(apellidoCLiente, 255, 'El apellido debe ser obligatorio', req, res, next);
     const telefono = Validador.validarLongitud(telefonoCliente, 255, 'El Telefono debe ser obligatorio', req, res, next);
     const correo = Validador.validarCorreo(correoCliente, 'El correo debe ser un formato correo', req, res, next);
-    return {id_cliente: idUnico, nombre_cliente: nombreValidado, apellido_cliente: apellidoValidado, correo_cliente: correo,telefono_cliente: telefono };
+    const contra = Validador.validarLongitud(claveCliente, 300, 'El clave debe ser obligatorio', req, res, next);
+    return {id_cliente: idUnico, nombre_cliente: nombreValidado, apellido_cliente: apellidoValidado,clave_cliente: contra, correo_cliente: correo,telefono_cliente: telefono };
 
 } 
 
@@ -98,7 +99,7 @@ async function actualizar(req, res, next) {
 }
 async function actualizarCliente(req, res, next) {
     try {
-        const validaciones = validarFormatoActualizarCliente(req.body.id_cliente, req.body.nombre_cliente, req.body.apellido_cliente, req.body.telefono_cliente, req.body.correo_cliente, req, res, next);
+        const validaciones = validarFormatoActualizarCliente(req.body.id_cliente, req.body.nombre_cliente, req.body.apellido_cliente, req.body.telefono_cliente, req.body.correo_cliente,req.body.clave_cliente, req, res, next);
         await controlador.actualizar(validaciones);
         respuestas.success(req, res, 'Elemento actualizado', 200);
     } catch (error) {
