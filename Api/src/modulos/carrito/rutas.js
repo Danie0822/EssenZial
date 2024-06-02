@@ -7,6 +7,7 @@ router.get('/:id', obtenerPorId);
 router.get('/direcciones/:id', direcciones);
 router.get('/campo/:id', uncampo);
 router.delete('/delete/:id', eliminarPorId);
+router.put('/update',finalizarPedido);
 
 async function obtenerPorId(req, res, next) {
     try {
@@ -36,6 +37,15 @@ async function eliminarPorId(req, res, next) {
 async function direcciones(req, res, next) {
     try {
         const item = await controlador.direcciones(req.params.id);
+        respuestas.success(req, res, item, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+async function finalizarPedido(req, res, next) {
+    try {
+        const {p_id_cliente,p_id_direccion}= req.body
+        const item = await controlador.confrimarPedido(p_id_cliente,p_id_direccion);
         respuestas.success(req, res, item, 200);
     } catch (error) {
         next(error);

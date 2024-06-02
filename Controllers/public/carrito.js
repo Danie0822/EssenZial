@@ -50,40 +50,34 @@ const obtenerCarrito = async () => {
     }
 };
 
-// Funcion para obtener el producto
+// Función para obtener el producto
 const obtenerTotal = async () => {
     try {
         const id_cliente = sessionStorage.getItem("id_cliente");
         const { success, data } = await fetchData(`/public/carrito/campo/${id_cliente}`);
         const recienAgregados = document.getElementById("pago");
 
-
         if (success) {
             recienAgregados.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
-
-            data.forEach(({ total_pago }) => {
-                const recienAgregadosCard = `
-                <div class="col-6">
-                <h6>Total</h6>
-                
-                <div>
-                <label for="categoriaProducto"
-                    class="form-label">Direcciones</label>
-                <select class="form-select combobox" id="direcciones"
-                    name="categoriaProducto" required>
-                </select>
-            </div>
-            </div>
-            <div class="col-6">
-                <label for="" class="precio"> $${total_pago}</label>
-            </div>
             
-            <a href="../../Views/public/confirmacion_pedido.html" type="button" class="btn button" >
-                <h6>Confirmar pedido</h6>
-            </a>
+            if (data.length > 0) { // Verificar que data no esté vacío
+                const { total_pago } = data[0]; // Obtener el primer elemento
+                const recienAgregadosCard = `
+                    <div class="col-6">
+                        <h6>Total</h6>
+                        <div></div>
+                    </div>
+                    <div class="col-6">
+                        <label for="" class="precio"> $${total_pago}</label>
+                    </div>
+                    <a onclick="finalizarPedido()" type="button" class="btn button">
+                        <h6>Confirmar pedido</h6>
+                    </a>
                 `;
-                recienAgregados.innerHTML += recienAgregadosCard;
-            });
+                recienAgregados.innerHTML += recienAgregadosCard; // Agregar el contenido HTML
+            } else {
+              // Proporcionar mensaje de error si data está vacío
+            }
 
         } else {
             manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
@@ -94,27 +88,27 @@ const obtenerTotal = async () => {
     }
 };
 
-//Función para obtener los datos para cargar Combobox
+
 const obtenerDirecciones = async (direcciones) => {
     try {
         const id_cliente = sessionStorage.getItem("id_cliente");
-        const { success, data } = await fetchData(`/public/carrito/direcciones/${id_cliente}`); // Suponiendo que '/olores' es la ruta para obtener los olores
-        const selectDirecciones = document.getElementById(direcciones); // Obtener el elemento select usando el ID proporcionado
+        const { success, data } = await fetchData(`/public/carrito/direcciones/${id_cliente}`);
+        const selectDirecciones = document.getElementById(direcciones);
 
         if (success) {
             selectDirecciones.innerHTML = ''; // Limpiar opciones anteriores
 
-            data.forEach(({id_direccion, nombre_direccion }) => {
+            data.forEach(({ id_direccion, nombre_direccion }) => {
                 const option = document.createElement('option');
                 option.value = id_direccion; // Asignar el id como valor de la opción
                 option.text = nombre_direccion; // Asignar el nombre como texto de la opción
-                selectOlores.appendChild(option);
+                selectDirecciones.appendChild(option);
             });
         } else {
-            throw new Error('No se pudieron obtener los olores.');
+            throw new Error('No se pudieron obtener las direcciones.');
         }
     } catch (error) {
-        console.error('Error al obtener los olores:', error);
+        console.error('Error al obtener las direcciones:', error);
     }
 };
 
@@ -135,7 +129,7 @@ const eliminarProduc = async (id_detalle_pedido) => {
         const { success } = await deleteData(`/public/carrito/delete/${id_detalle_pedido}`);
         // If para status de la api
         if (success) {
-            obtenerCarrito();
+            llamarProcesos();
             cerrarModal(myEliminar);
             setTimeout(() => abrirModal(new bootstrap.Modal(obtenerElemento('eliminadoExitosoModal'))), 500);
         } else {
@@ -145,19 +139,39 @@ const eliminarProduc = async (id_detalle_pedido) => {
         manejarError();
     }
 };
-
-//Cargando comboBoxes para modal de agregar
-async function obtenerCmb() {
+// Funcion para obtener las valoraciones
+const finalizarPedido = async () => {
     try {
-        await obtenerDirecciones("olorProducto");
+        const id_cliente = sessionStorage.getItem("id_cliente");
+        const id_direccion =obtenerElemento("direcciones").value;
+        
+        if (!validaciones.noEstaVacio(id_direccion)){ 
+            mostrarModal("Seleccione una cantidad.");
+        }
+        else{ 
+             // Form data para json de body 
+            var carrito = {
+                p_id_cliente: id_cliente,
+                p_id_direccion: id_direccion
+            };
+            const response = await DataAdmin("/public/carrito/update", carrito, 'PUT');
+            if (response.status == 200) {
+                window.location.href = "pedidos.html";
+            } else {
+                manejarError();
+            }
+        }
     } catch (error) {
-        console.error('Error al cargar los datos:', error);
+        console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+        manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
     }
-}
+};
 
 const llamarProcesos = async () => {
     await obtenerCarrito();
     await obtenerTotal();
+    await obtenerDirecciones('direcciones');
+    
     
 }
 document.addEventListener("DOMContentLoaded", function () {
