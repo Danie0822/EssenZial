@@ -22,10 +22,15 @@ module.exports = function (db) {
     async function direcciones(id) {
         return db.direcciones( id);
     }
+    async function confrimarPedido(id_cliente,id_direccion) {
+        return db.confrimarPedido( id_cliente,id_direccion);
+    }
+
     return {
         uno,
         precio,
         eliminar,
-        direcciones
+        direcciones,
+        confrimarPedido
     };
 };
