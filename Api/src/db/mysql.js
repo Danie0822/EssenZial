@@ -160,6 +160,20 @@ function procediurAgregar (cantidad_producto,costo_actual,id_inventario,id_clien
     return ejecutarConsulta(sql, [cantidad_producto,costo_actual,id_inventario,id_cliente]);
 
 }
+// Función para obtener un solo registro de una tabla por su ID
+function uncampo(tabla, id, campoIdentificacion) {
+    const sql = `SELECT total_pago FROM ?? WHERE ?? = ?`;
+    return ejecutarConsulta(sql, [tabla, campoIdentificacion, id]);
+}
+function carrito (id) {
+    const sql = `CALL eliminar_detalle_pedido (?);`;
+    return ejecutarConsulta(sql, [id]);
+
+}
+function direcciones(consulta) {
+    const sql = `SELECT * FROM vw_direcciones_cliente WHERE id_cliente = ?`;
+    return ejecutarConsulta(sql, [ consulta]);
+}
 // Exportar las funciones para su uso fuera del módulo
 module.exports = {
     todos,
@@ -176,5 +190,8 @@ module.exports = {
     detalleInventario,
     estadoPedido, 
     procediur,
-    procediurAgregar
+    procediurAgregar,
+    uncampo,
+    carrito,
+    direcciones
 };

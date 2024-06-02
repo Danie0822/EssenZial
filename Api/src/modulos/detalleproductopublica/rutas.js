@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
-const seguridad = require('../seguridad/seguridad');
-const Validador = require('../recursos/validator');
 
 router.get('/:id', obtenerPorId);
 router.get('/detalle/:id', detalle);

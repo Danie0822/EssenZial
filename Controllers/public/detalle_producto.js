@@ -5,6 +5,7 @@ const manejarValidaciones = () => abrirModal(validationsModal);
 
 let validationsModal; // Declarar la variable fuera
 let productoPrecio; 
+let Disponibilidad;
 // Funcion para generar las valoraciones
 const generarEstrellas = (valoracion) => {
     let estrellas = '';
@@ -30,6 +31,7 @@ const obtenerProducto = async () => {
 
             data.forEach(({ titulo_perfume, valoracion_calculada, precio, unidades_disponibles, primera_imagen }) => {
                 productoPrecio = precio;
+                Disponibilidad = unidades_disponibles;
                 const recienAgregadosCard = `
                 <div class="col-md-6">
                     <!-- Imagen del producto -->
@@ -261,8 +263,11 @@ const agregarCarrito = async () => {
         if (!validaciones.noEstaVacio(cantidad)){ 
             mostrarModal("Seleccione una cantidad.");
         }
-        else if (id_cliente == null || id_cliente !== 0){ 
+        else if (id_cliente == null || id_cliente == 0){ 
             mostrarModal("Ingrese sesión para poder agregar un pedido al carrito.");
+        }
+        else if (cantidad > Disponibilidad ){ 
+            mostrarModal("La cantidad solicitada es mayor a la que hay en inventario.");
         }
         else{ 
              // Form data para json de body 
@@ -279,8 +284,6 @@ const agregarCarrito = async () => {
                 manejarError();
             }
         }
-        
-       
     } catch (error) {
         console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
         manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error

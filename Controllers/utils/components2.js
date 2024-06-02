@@ -32,6 +32,6 @@ document.addEventListener("DOMContentLoaded", loadNav);
 function cerrarSesion() {
     // Redireccionar a otra página
     window.location.href = 'index.html';
-    sessionStorage.setItem("token", 'Daniel'); 
+    sessionStorage.setItem("token", 0); 
     sessionStorage.setItem("id_cliente", 0);
 }
