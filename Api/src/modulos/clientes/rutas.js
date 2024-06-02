@@ -42,6 +42,7 @@ function validarFormatoActualizarCliente(id,nombreCliente,apellidoCLiente,telefo
 } 
 
 // Rutas
+router.get('/view/destacados', seguridad('cliente'), vistaTodos);
 router.get('/', seguridad('admin'), obtenerTodos);
 router.get('/:id', seguridad('cliente'), obtenerPorId);
 router.delete('/delete/:id', seguridad('admin'), eliminarPorId);
@@ -102,6 +103,15 @@ async function actualizarCliente(req, res, next) {
         const validaciones = validarFormatoActualizarCliente(req.body.id_cliente, req.body.nombre_cliente, req.body.apellido_cliente, req.body.telefono_cliente, req.body.correo_cliente,req.body.clave_cliente, req, res, next);
         await controlador.actualizar(validaciones);
         respuestas.success(req, res, 'Elemento actualizado', 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function vistaTodos(req, res, next){
+    try {
+        const items = await controlador.todosVista();
+        respuestas.success(req, res, items, 200);
     } catch (error) {
         next(error);
     }
