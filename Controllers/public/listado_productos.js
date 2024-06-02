@@ -24,7 +24,7 @@ const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionada
 
             productosFiltrados.forEach(({ id_imagen, ruta_imagen, nombre_inventario, precio_inventario, nombre_marca, id_inventario }) => {
                 const card = document.createElement('div');
-                card.className = 'col-sm-12 col-md-6 col-lg-3';
+                card.className = 'col-sm-12 col-md-6 col-lg-4';
                 card.innerHTML = `
                     <div class="card me-2" style="width: 18rem;">
                         <img src="${imagen}${ruta_imagen}" class="card-img-top" alt="...">
