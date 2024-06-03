@@ -5,15 +5,14 @@ function loadFooter(){
     <div class="row">
         <div class="col-lg-4 col-sm-12 columnas">
             <h3>Ayuda</h3>
-            <a href="../../Views/public/contactanos.html#form" class="link-no-underline"><p>Contáctanos</p></a>
+            
             <a href="../../Views/public/terminos_codiciones.html#devoluciones" class="link-no-underline"><p>Devoluciones y reembolsos</p></a> 
             <a href="../../Views/public/terminos_codiciones.html" class="link-no-underline"><p>Términos y condiciones</p></a>
 
         </div>
         <div class="col-lg-4 col-sm-12 columnas">
             <h3>Acerca de nosotros</h3>
-            <a href="../../Views/public/quienes_somos.html#info" class="link-no-underline"> <p>Acerca de EssenZial</p></a>
-            <a href="#" class="link-no-underline"> <p>Blog</p></a>
+            <a href="../../Views/public/historia_perfume.html" class="link-no-underline"> <p>Historia del Perfume</p></a>
             <a href="../../Views/public/quienes_somos.html#descripcion" class="link-no-underline"> <p>Quiénes somos</p></a>
             
 
