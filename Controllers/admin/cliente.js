@@ -10,6 +10,7 @@ const myInfo = new bootstrap.Modal(obtenerElemento('detallesModal'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 let id = null;
 let estadoClienteCambio = null;
+
 // Función de Obtener 
 const obtener = async () => {
     try {

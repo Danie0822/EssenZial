@@ -11,6 +11,7 @@ const myEliminar = new bootstrap.Modal(obtenerElemento('eliminar'));
 const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
 let idCategoria = null;
+
 // Función de Obtener 
 const obtenerCategorias = async () => {
     try {

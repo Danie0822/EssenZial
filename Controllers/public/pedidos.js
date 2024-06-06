@@ -18,8 +18,6 @@ const formatearFecha = (fechaISO) => {
     });
 };
 
-
-
 //Funcion para obtener los pedidos segun estado especifico 
 const obtenerPedidos = async (estado, tabId) => {
     try {
