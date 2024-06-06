@@ -46,7 +46,7 @@ const obtenerClientes = async (clientesArray) => {
         // Llamada de la función para obtener datos
         const idCliente = sessionStorage.getItem("id_cliente");
         const { success, data } = await fetchData(`/cliente/${idCliente}`);
-        
+
         // Comprobación de éxito en la obtención de datos
         if (success) {
             data.forEach(({ id_cliente, nombre_cliente, apellido_cliente, correo_cliente, telefono_cliente, estado_cliente, clave_cliente }) => {
@@ -60,7 +60,7 @@ const obtenerClientes = async (clientesArray) => {
                     estado: estado_cliente,
                     clave: clave_cliente
                 };
-                
+
                 // Agregar el objeto al arreglo de clientes pasado como parámetro
                 clientesArray.push(cliente);
             });
@@ -97,7 +97,7 @@ const mostrarCuentaModal = () => {
         obtenerElemento("telefonClienteActualizar").value = clienteActual.telefono;
         obtenerElemento("correoClienteActualizar").value = clienteActual.correo;
         claveActualizar = clienteActual.clave;
-    } catch (error) { 
+    } catch (error) {
         console.log(error)
     }
 }
@@ -129,11 +129,11 @@ const actualizarCliente = async () => {
             mostrarModal("El correo electrónico ingresado no es válido.");
         }
         else if (!validaciones.validarContra(contra)) {
-            mostrarModal( "La contraseña debe tener al menos 8 caracteres.");
+            mostrarModal("La contraseña debe tener al menos 8 caracteres.");
         }
         else if (!validaciones.validarConfirmacionContrasena(contra, confirmarFinal)) {
             mostrarModal("Las contraseñas no coinciden.");
-        }  else {
+        } else {
             const idCliente = sessionStorage.getItem("id_cliente");
             // Form data para json de body 
             var adminData = {
@@ -147,10 +147,10 @@ const actualizarCliente = async () => {
             const response = await DataAdmin("/cliente/update/Cliente", adminData, 'PUT');
             // Status de la api 
             if (response.status == 200) {
-               await obtenerClientes(clientes).then(mostrarCuenta);
-               manejarExito();
-               limpiarFormularioActualizarCliente();
-               cerrarModal(myUsuario);
+                await obtenerClientes(clientes).then(mostrarCuenta);
+                manejarExito();
+                limpiarFormularioActualizarCliente();
+                cerrarModal(myUsuario);
             } else {
                 manejarError();
             }

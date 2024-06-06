@@ -11,12 +11,12 @@ const obtenerCarrito = async () => {
     try {
         const id_cliente = sessionStorage.getItem("id_cliente");
         const { success, data } = await fetchData(`/public/carrito/${id_cliente}`);
-        
+
         const tbody = obtenerElemento("tbCarrito");
         tbody.innerHTML = "";
         // Comprobación de status de la respuesta  
         if (success) {
-            data.forEach(({ imagen_produc, producto, precio, cantidad, marca,id_detalle_pedido }) => {
+            data.forEach(({ imagen_produc, producto, precio, cantidad, marca, id_detalle_pedido }) => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                 <td>
@@ -59,7 +59,7 @@ const obtenerTotal = async () => {
 
         if (success) {
             recienAgregados.innerHTML = ""; // Limpiar contenedor antes de agregar nuevas tarjetas
-            
+
             if (data.length > 0) { // Verificar que data no esté vacío
                 const { total_pago } = data[0]; // Obtener el primer elemento
                 const recienAgregadosCard = `
@@ -76,7 +76,7 @@ const obtenerTotal = async () => {
                 `;
                 recienAgregados.innerHTML += recienAgregadosCard; // Agregar el contenido HTML
             } else {
-              // Proporcionar mensaje de error si data está vacío
+                // Proporcionar mensaje de error si data está vacío
             }
 
         } else {
@@ -88,7 +88,7 @@ const obtenerTotal = async () => {
     }
 };
 
-
+//Funcion para obtener direcciones y poder seleccionarlas posteriormente
 const obtenerDirecciones = async (direcciones) => {
     try {
         const id_cliente = sessionStorage.getItem("id_cliente");
@@ -111,7 +111,6 @@ const obtenerDirecciones = async (direcciones) => {
         console.error('Error al obtener las direcciones:', error);
     }
 };
-
 
 const abrirModalEliminar = (id_detalle_pedido) => {
     if (id_detalle_pedido) {
@@ -139,17 +138,18 @@ const eliminarProduc = async (id_detalle_pedido) => {
         manejarError();
     }
 };
+
 // Funcion para obtener las valoraciones
 const finalizarPedido = async () => {
     try {
         const id_cliente = sessionStorage.getItem("id_cliente");
-        const id_direccion =obtenerElemento("direcciones").value;
-        
-        if (!validaciones.noEstaVacio(id_direccion)){ 
+        const id_direccion = obtenerElemento("direcciones").value;
+
+        if (!validaciones.noEstaVacio(id_direccion)) {
             mostrarModal("Seleccione una cantidad.");
         }
-        else{ 
-             // Form data para json de body 
+        else {
+            // Form data para json de body 
             var carrito = {
                 p_id_cliente: id_cliente,
                 p_id_direccion: id_direccion
@@ -171,13 +171,12 @@ const llamarProcesos = async () => {
     await obtenerCarrito();
     await obtenerTotal();
     await obtenerDirecciones('direcciones');
-    
-    
 }
+
 document.addEventListener("DOMContentLoaded", function () {
     const confirmarEliminarBtn = obtenerElemento('confirmarEliminar');
     confirmarEliminarBtn.addEventListener('click', async () => {
-        await eliminarProduc(idDetalle) ;
+        await eliminarProduc(idDetalle);
     });
     // Inicializar el modal cuando el DOM esté completamente cargado
     llamarProcesos();

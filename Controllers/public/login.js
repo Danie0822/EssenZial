@@ -9,16 +9,17 @@ async function handleLoginFormSubmit(event) {
     const password = document.getElementById("contrasena").value;
     try {
         // Calcular el hash de la contraseña utilizando la función sha256
-        const contra = await sha256(password); 
+        const contra = await sha256(password);
         // Autenticar al usuario con el correo electrónico y la contraseña proporcionados
         const token = await authenticateUser(email, contra);
         // Guardar el token de sesión en sessionStorage
-        saveTokenToSessionStorage(token); 
+        saveTokenToSessionStorage(token);
         window.location.href = "homepage.html";
     } catch (error) {
         alert(error.message);
     }
-}
+};
+
 // Función asincrónica para autenticar al usuario 
 async function authenticateUser(email, password) {
     try {
@@ -40,20 +41,21 @@ async function authenticateUser(email, password) {
     } catch (error) {
         throw new Error("Credenciales inválidas");
     }
-}
+};
+
 // Función para guardar la info
 function saveTokenToSessionStorage(data) {
     console.log(data);
-    const tokenG = data.data.token; 
+    const tokenG = data.data.token;
     const id = data.data.id_cliente;
     const nombre = data.data.nombre_cliente;
-    const apellido = data.data.apellido_cliente; 
+    const apellido = data.data.apellido_cliente;
     const telefono_cliente = data.data.telefono_cliente;
     const correo_cliente = data.data.correo_cliente;
-    sessionStorage.setItem("nombre_cliente", nombre); 
-    sessionStorage.setItem("token", tokenG); 
+    sessionStorage.setItem("nombre_cliente", nombre);
+    sessionStorage.setItem("token", tokenG);
     sessionStorage.setItem("id_cliente", id);
-    sessionStorage.setItem("apellido_cliente", apellido); 
-    sessionStorage.setItem("telefono_cliente", telefono_cliente); 
-    sessionStorage.setItem("correo_cliente", correo_cliente); 
-}
+    sessionStorage.setItem("apellido_cliente", apellido);
+    sessionStorage.setItem("telefono_cliente", telefono_cliente);
+    sessionStorage.setItem("correo_cliente", correo_cliente);
+};

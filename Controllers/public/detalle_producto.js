@@ -4,7 +4,7 @@ const cerrarModal = (modal) => modal.hide();
 const manejarValidaciones = () => abrirModal(validationsModal);
 
 let validationsModal; // Declarar la variable fuera
-let productoPrecio; 
+let productoPrecio;
 let Disponibilidad;
 // Funcion para generar las valoraciones
 const generarEstrellas = (valoracion) => {
@@ -127,6 +127,7 @@ const obtenerDetalle = async () => {
         manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
     }
 };
+
 // Funcion para obtener las demas imagenes
 const obtenerImagenes = async () => {
     try {
@@ -140,7 +141,7 @@ const obtenerImagenes = async () => {
             data.forEach(({ imagenes }) => {
                 const imagenesArray = imagenes.split(', '); // Separar las URLs de las imágenes
                 let carouselItems = '';
-                
+
                 imagenesArray.forEach((imagenes, index) => {
                     carouselItems += `
                         <div class="carousel-item ${index === 0 ? 'active' : ''}">
@@ -251,6 +252,7 @@ const obtenerProdcutoSimilares = async () => {
         manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
     }
 };
+
 // Funcion para obtener las valoraciones
 const agregarCarrito = async () => {
     try {
@@ -258,19 +260,19 @@ const agregarCarrito = async () => {
         const id_producto = sessionStorage.getItem("id_producto");
 
         const cantidad = obtenerElemento("cantidad").value;
-        const costo = productoPrecio; 
-        
-        if (!validaciones.noEstaVacio(cantidad)){ 
+        const costo = productoPrecio;
+
+        if (!validaciones.noEstaVacio(cantidad)) {
             mostrarModal("Seleccione una cantidad.");
         }
-        else if (id_cliente == null || id_cliente == 0){ 
+        else if (id_cliente == null || id_cliente == 0) {
             mostrarModal("Ingrese sesión para poder agregar un pedido al carrito.");
         }
-        else if (cantidad > Disponibilidad ){ 
+        else if (cantidad > Disponibilidad) {
             mostrarModal("La cantidad solicitada es mayor a la que hay en inventario.");
         }
-        else{ 
-             // Form data para json de body 
+        else {
+            // Form data para json de body 
             var carrito = {
                 cantidad_producto: cantidad,
                 costo_actual: costo,
@@ -289,14 +291,15 @@ const agregarCarrito = async () => {
         manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
     }
 };
+
 const llamarProcesos = async () => {
     await obtenerProducto();
     await obtenerDetalle();
     await obtenerImagenes();
     await obtenerValoraciones();
     await obtenerProdcutoSimilares();
-    
-}
+
+};
 
 document.addEventListener("DOMContentLoaded", function () {
     // Inicializar el modal cuando el DOM esté completamente cargado
@@ -309,4 +312,4 @@ document.addEventListener("DOMContentLoaded", function () {
 function mostrarModal(mensaje) {
     $('#validationsModal .modal-body p').text(mensaje);
     $('#validationsModal').modal('show');
-}
+};

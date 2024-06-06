@@ -27,7 +27,7 @@ const obtenerClientes = async () => {
     } catch (error) {
         console.error("Error en la solicitud:", error);
     }
-}
+};
 
 document.addEventListener('DOMContentLoaded', function() {
     obtenerClientes();
