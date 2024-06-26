@@ -38,6 +38,11 @@ function validarFormatoActualizarCliente(id,nombreCliente,apellidoCLiente,telefo
     const correo = Validador.validarCorreo(correoCliente, 'El correo debe ser un formato correo', req, res, next);
     const contra = Validador.validarLongitud(claveCliente, 300, 'El clave debe ser obligatorio', req, res, next);
     return {id_cliente: idUnico, nombre_cliente: nombreValidado, apellido_cliente: apellidoValidado,clave_cliente: contra, correo_cliente: correo,telefono_cliente: telefono };
+} 
+function validarFormatoActualizarClienteClave(correoCliente, claveCliente,req, res, next) {
+    const correo = Validador.validarCorreo(correoCliente, 'El correo debe ser un formato correo', req, res, next);
+    const contra = Validador.validarLongitud(claveCliente, 300, 'El clave debe ser obligatorio', req, res, next);
+    return {clave_cliente: contra, correo_cliente: correo};
 
 } 
 
@@ -49,7 +54,7 @@ router.delete('/delete/:id', seguridad('admin'), eliminarPorId);
 router.post('/save', agregar);
 router.put('/update', seguridad('admin'), actualizar);
 router.put('/update/cliente', seguridad('cliente'), actualizarCliente);
-
+router.put('/update/cliente/clave', actualizarClave);
 // Funciones
 async function obtenerTodos(req, res, next) {
     try {
@@ -102,6 +107,16 @@ async function actualizarCliente(req, res, next) {
     try {
         const validaciones = validarFormatoActualizarCliente(req.body.id_cliente, req.body.nombre_cliente, req.body.apellido_cliente, req.body.telefono_cliente, req.body.correo_cliente,req.body.clave_cliente, req, res, next);
         await controlador.actualizar(validaciones);
+        respuestas.success(req, res, 'Elemento actualizado', 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function actualizarClave(req, res, next) {
+    try {
+        const validaciones = validarFormatoActualizarClienteClave(req.body.correo_cliente,req.body.clave_cliente, req, res, next);
+        await controlador.actualizarClave(validaciones);
         respuestas.success(req, res, 'Elemento actualizado', 200);
     } catch (error) {
         next(error);
