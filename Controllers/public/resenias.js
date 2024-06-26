@@ -11,6 +11,7 @@ const myError = new bootstrap.Modal(obtenerElemento('errorModal'));
 const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal'));
 const myExito = new bootstrap.Modal(obtenerElemento('agregado'));
 let id = null;
+
 const obtener = async () => {
     try {
         const idCliente = sessionStorage.getItem("id_cliente");
@@ -54,13 +55,14 @@ const abrirModalCrearReseña = (idDetalle) => {
 const limpiarModal = () => {
     // Limpiar el campo de comentario
     obtenerElemento("comment").value = "";
-    
+
     // Desmarcar todas las estrellas
     const estrellas = document.querySelectorAll('input[name="rating"]');
     estrellas.forEach(estrella => {
         estrella.checked = false;
     });
 };
+
 // Función para Agregar cliente 
 const Agregar = async () => {
     try {
@@ -89,7 +91,7 @@ const Agregar = async () => {
                 limpiarModal();
                 await cerrarModal(myAgregar);
                 manejarExito();
-                id = null; 
+                id = null;
             } else {
                 manejarError();
             }
@@ -103,7 +105,8 @@ const Agregar = async () => {
 function mostrarModal(mensaje) {
     $('#validationsModal .modal-body p').text(mensaje);
     $('#validationsModal').modal('show');
-}
+};
+
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener cuando recarga pagina 
     obtener();

@@ -3,7 +3,7 @@ function loadNav(){
     var navContent = `<div class="col-lg-2 col-md-12 col-cm-12">
     <div class="div1">
         <h4 class="titulo">
-            Hola Adriana
+            Hola usuario 
         </h4>
         <p class="det">Bienvenido a tu cuenta</p>
     </div>

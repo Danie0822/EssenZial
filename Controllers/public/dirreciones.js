@@ -38,6 +38,7 @@ const obtener = async () => {
         manejarError();
     }
 };
+
 const limpiarFormulario = () => {
     // Selecciona todos los elementos con la clase .form-control dentro del modal
     document.querySelectorAll('.modal.fade .form-control').forEach(input => {
@@ -58,13 +59,16 @@ const abrirModalEditar = (id_direccion, nombre_direccion, direccion_cliente, tel
         manejarError();
     }
 };
+
 // Función para abrir agregar 
 function AbrirAgregar() {
     abrirModal(myAgregar);
-}
+};
+
 function cerrarModalActualizar() {
     cerrarModal(myActualizar);
-}
+};
+
 // Const para pasar cosas que se necesita para eleminar en el modal
 const abrirModalEliminar = (id_unico) => {
     if (id_unico) {
@@ -192,6 +196,7 @@ const actualizar = async () => {
         id = null;
     }
 };
+
 const eliminar = async () => {
     try {
         // Llamada de metodo para eliminar 
@@ -223,6 +228,7 @@ const esperar = async () => {
         id = null;
     }
 };
+
 // Dom del html 
 document.addEventListener("DOMContentLoaded", function () {
     // Obtener cuando recarga pagina
@@ -241,13 +247,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const btnactualizarClientes = obtenerElemento("btActualizarCliente");
     btnactualizarClientes.addEventListener("click", actualizarCliente);
 });
+
 const limpiarFormularioActualizar = () => {
     // Selecciona todos los elementos con la clase .form-control dentro del modal de actualización
     document.querySelectorAll('.modal.fade .form-control').forEach(input => {
         // Establece el valor de cada elemento en una cadena vacía
         input.value = "";
     });
-}
+};
 
 // Const de llenar el modal de actualizar con los valores 
 const mostrar = (nombre_direccion, direccion_cliente, telefono_cliente, codigo_postal, instrucciones_entrega) => {
@@ -261,7 +268,7 @@ const mostrar = (nombre_direccion, direccion_cliente, telefono_cliente, codigo_p
     } catch (error) {
         manejarError();
     }
-}
+};
 
 
 

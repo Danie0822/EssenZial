@@ -43,7 +43,7 @@ const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionada
                         </div>
                     </div>
                 `;
-                
+
                 contenedor.appendChild(card);
             });
         } else {
@@ -54,6 +54,7 @@ const obtenerProductos = async (categoriasSeleccionadas = [], marcasSeleccionada
         console.error("Error en la solicitud:", error);
     }
 };
+
 //Funcion para obtener todas las categorias para los filtros
 const obtenerCategorias = async () => {
     try {
@@ -79,6 +80,7 @@ const obtenerCategorias = async () => {
         console.log(error);
     }
 };
+
 //Funcion para obtener todas las marcas para filtros
 const obtenerMarcas = async () => {
     try {
@@ -114,8 +116,8 @@ const obtenerMarcas = async () => {
     }
 };
 
-const obtenerId = async (data) => { 
-    await  sessionStorage.setItem("id_producto", data); 
+const obtenerId = async (data) => {
+    await sessionStorage.setItem("id_producto", data);
     window.location.href = "detalles_productos.html";
 };
 

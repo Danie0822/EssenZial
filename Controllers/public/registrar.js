@@ -13,7 +13,7 @@ const validationsModal = new bootstrap.Modal(obtenerElemento('validationsModal')
 // Const para limpiar formulario 
 const limpiarFormulario = () => {
     document.querySelectorAll('.form-control').forEach(input => input.value = '');
-}
+};
 
 
 // Función para agregar 
@@ -39,11 +39,11 @@ const agregar = async () => {
             mostrarModal("El teléfono ingresado no es válido.");
         } else if (!validaciones.validarCorreoElectronico(correo)) {
             mostrarModal("El correo electrónico ingresado no es válido.");
-        }else if (!validaciones.validarContra(clave)) {
+        } else if (!validaciones.validarContra(clave)) {
             mostrarModal("La contraseña debe cumplir con ciertos criterios de seguridad.");
         } else if (!validaciones.validarConfirmacionContrasena(clave, confirmar)) {
             mostrarModal("La confirmación de la contraseña no coincide con la contraseña ingresada.");
-        }  else {
+        } else {
             // Encriptación de la contraseña 
             const contra = await sha256(clave);
             // Form data para json de body 
@@ -58,8 +58,8 @@ const agregar = async () => {
             const response = await DataNoToken("/cliente/save", adminData, 'POST');
             // Status de la api 
             if (response.status == 200) {
-               manejarExito();
-               limpiarFormulario();
+                manejarExito();
+                limpiarFormulario();
 
             } else {
                 manejarError();
@@ -80,4 +80,4 @@ document.addEventListener("DOMContentLoaded", function () {
 function mostrarModal(mensaje) {
     $('#validationsModal .modal-body p').text(mensaje);
     $('#validationsModal').modal('show');
-}
+};
