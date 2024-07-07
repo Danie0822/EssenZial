@@ -39,6 +39,16 @@ function validarFormatoActualizarCliente(id,nombreCliente,apellidoCLiente,telefo
     const contra = Validador.validarLongitud(claveCliente, 300, 'El clave debe ser obligatorio', req, res, next);
     return {id_cliente: idUnico, nombre_cliente: nombreValidado, apellido_cliente: apellidoValidado,clave_cliente: contra, correo_cliente: correo,telefono_cliente: telefono };
 } 
+
+function validarFormatoActualizarClienteVa(id,nombreCliente,apellidoCLiente,telefonoCliente,correoCliente,req, res, next) {
+    const idUnico = Validador.validarNumeroEntero(id, 'El id debe ser un numero ', req, res, next)
+    const nombreValidado = Validador.validarLongitud(nombreCliente, 255, 'El nombre debe ser obligatorio', req, res, next);
+    const apellidoValidado = Validador.validarLongitud(apellidoCLiente, 255, 'El apellido debe ser obligatorio', req, res, next);
+    const telefono = Validador.validarLongitud(telefonoCliente, 255, 'El Telefono debe ser obligatorio', req, res, next);
+    const correo = Validador.validarCorreo(correoCliente, 'El correo debe ser un formato correo', req, res, next);
+    return {id_cliente: idUnico, nombre_cliente: nombreValidado, apellido_cliente: apellidoValidado, correo_cliente: correo,telefono_cliente: telefono };
+} 
+
 function validarFormatoActualizarClienteClave(correoCliente, claveCliente,req, res, next) {
     const correo = Validador.validarCorreo(correoCliente, 'El correo debe ser un formato correo', req, res, next);
     const contra = Validador.validarLongitud(claveCliente, 300, 'El clave debe ser obligatorio', req, res, next);
@@ -55,6 +65,7 @@ router.post('/save', agregar);
 router.put('/update', seguridad('admin'), actualizar);
 router.put('/update/cliente', seguridad('cliente'), actualizarCliente);
 router.put('/update/cliente/clave', actualizarClave);
+router.put('/update/vali/cliente', seguridad('cliente'), actualizarVa);
 // Funciones
 async function obtenerTodos(req, res, next) {
     try {
@@ -123,6 +134,15 @@ async function actualizarClave(req, res, next) {
     }
 }
 
+async function actualizarVa(req, res, next) {
+    try {
+        const validaciones = validarFormatoActualizarClienteVa(req.body.id_cliente, req.body.nombre_cliente, req.body.apellido_cliente, req.body.telefono_cliente, req.body.correo_cliente, req, res, next);
+        await controlador.actualizar(validaciones);
+        respuestas.success(req, res, 'Elemento actualizado', 200);
+    } catch (error) {
+        next(error);
+    }
+}
 async function vistaTodos(req, res, next){
     try {
         const items = await controlador.todosVista();
