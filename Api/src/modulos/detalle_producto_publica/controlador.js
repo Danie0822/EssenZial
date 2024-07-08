@@ -9,6 +9,8 @@ const PROCEDIUR = 'sp_productos_relacionados' ;
 const ID_FIELD_VIEW = 'id_inventario'; 
 const ID_FIELD_VALORACIONES = 'identificador';
 const ID_FIELD = 'id_producto';
+const VISTA_PRODUCTOS = 'vw_inventario_detalles';
+const ID_PRODUCTOS = 'identificador';  
 
 // Funciones y llamada de db 
 module.exports = function (db) {
@@ -31,12 +33,16 @@ module.exports = function (db) {
     async function insertar (cantidad_producto, costo_actual, id_inventario, id_cliente) { 
         return db.procediurAgregar(cantidad_producto, costo_actual, id_inventario, id_cliente);
     }
+    async function todosProductos(id){
+        return db.uno(VISTA_PRODUCTOS, id, ID_PRODUCTOS);
+    }
     return {
         uno,
         detalle,
         imagenes,
         valoracion,
         similares,
-        insertar
+        insertar,
+        todosProductos
     };
 };

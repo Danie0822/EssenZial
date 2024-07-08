@@ -8,6 +8,7 @@ router.get('/detalle/:id', detalle);
 router.get('/imagenes/:id', imagenes);
 router.get('/valoraciones/:id', valoraciones);
 router.get ('/similares/:id',similares);
+router.get('/productos/:id', vistaProductos);
 router.post('/save',insertar);
 
 async function obtenerPorId(req, res, next) {
@@ -55,6 +56,14 @@ async function insertar(req, res, next) {
         const {cantidad_producto,costo_actual,id_inventario,id_cliente}= req.body
         const item = await controlador.insertar(cantidad_producto,costo_actual,id_inventario,id_cliente);
         respuestas.success(req, res, item, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+async function vistaProductos(req, res, next){
+    try{
+        const view = await controlador.todosProductos(req.params.id);
+        respuestas.success(req, res, view, 200);
     } catch (error) {
         next(error);
     }
