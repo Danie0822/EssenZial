@@ -144,20 +144,21 @@ function detalleInventario(id) {
     return ejecutarConsulta(sql, id);
 }
 
-function estadoPedido(estado){
-    const sql = `SELECT p.id_pedido, p.fecha_pedido, p.estado_pedido
-    FROM tb_pedidos p
-    WHERE p.estado_pedido = ?;`;
-    return ejecutarConsulta(sql, estado);
+function estadoPedido(estado, id) {
+    const sql = `SELECT p.id_pedido, p.fecha_pedido, p.estado_pedido, c.id_cliente
+                FROM tb_pedidos p
+                INNER JOIN tb_clientes c ON p.id_cliente = c.id_cliente
+                WHERE p.estado_pedido = ? AND c.id_cliente = ?;`;
+    return ejecutarConsulta(sql, [estado, id]);
 }
-function procediur (id, procs) {
+function procediur(id, procs) {
     const sql = `CALL ?? (?);`;
-    return ejecutarConsulta(sql, [id,procs]);
+    return ejecutarConsulta(sql, [id, procs]);
 
 }
-function procediurAgregar (cantidad_producto,costo_actual,id_inventario,id_cliente) {
+function procediurAgregar(cantidad_producto, costo_actual, id_inventario, id_cliente) {
     const sql = `CALL InsertarDetallePedido (?,?,?,?);`;
-    return ejecutarConsulta(sql, [cantidad_producto,costo_actual,id_inventario,id_cliente]);
+    return ejecutarConsulta(sql, [cantidad_producto, costo_actual, id_inventario, id_cliente]);
 
 }
 // Función para obtener un solo registro de una tabla por su ID
@@ -165,16 +166,16 @@ function uncampo(tabla, id, campoIdentificacion) {
     const sql = `SELECT total_pago FROM ?? WHERE ?? = ? AND estado_carrito = 'Carrito';`;
     return ejecutarConsulta(sql, [tabla, campoIdentificacion, id]);
 }
-function carrito (id) {
+function carrito(id) {
     const sql = `CALL eliminar_detalle_pedido (?);`;
     return ejecutarConsulta(sql, [id]);
 }
 function direcciones(consulta) {
     const sql = `SELECT * FROM vw_direcciones_cliente WHERE id_cliente = ?`;
-    return ejecutarConsulta(sql, [ consulta]);
+    return ejecutarConsulta(sql, [consulta]);
 }
 
-function confrimarPedido (id_cliente, id_direccion) {
+function confrimarPedido(id_cliente, id_direccion) {
     const sql = `CALL actualizar_pedido (?,?);`;
     return ejecutarConsulta(sql, [id_cliente, id_direccion]);
 }
@@ -192,7 +193,7 @@ module.exports = {
     datellesPedidos,
     detalleValoraciones,
     detalleInventario,
-    estadoPedido, 
+    estadoPedido,
     procediur,
     procediurAgregar,
     uncampo,

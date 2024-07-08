@@ -3,6 +3,7 @@ const ID_FIELD = 'id_pedido';
 const VISTA = 'vista_pedidos'; 
 const ID_VISTA = 'id_correlativo';
 const NOMBRE_PROCEDIMIENTO= 'obtenerDetallePedido';
+const ID_CLIENTE = 'id_cliente';
 
 
 module.exports = function (db) {
@@ -24,9 +25,8 @@ module.exports = function (db) {
         return db.datellesPedidos(VISTA, id, ID_VISTA);
     }
 
-    async function estadoPedido(estado){
-        return db.estadoPedido(estado);
-
+    async function estadoPedido(estado, id){
+        return db.estadoPedido(estado, id);
     }
 
     async function procedimientoDetalle(id){
