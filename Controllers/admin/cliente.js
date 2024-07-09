@@ -42,6 +42,22 @@ const obtener = async () => {
         manejarError();
     }
 };
+
+const obtenerReporte = async () => {
+    try {
+        const blobResponse = await fetchPdfAndBlob("/cliente/reporte/view/", token);
+        if (!blobResponse.ok) {
+            throw new Error('Error al descargar el reporte PDF');
+        }
+        const blob = await blobResponse.blob();
+        descargarArchivo(blob, 'reporte_clientes.pdf');
+    } catch (error) {
+        console.error('Error al obtener el reporte:', error);
+        manejarError();
+    }
+};
+
+
 // Const para limpiar formulario 
 const limpiarFormulario = () => {
     obtenerElemento("nombreCliente").textContent = "";

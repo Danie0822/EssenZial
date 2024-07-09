@@ -28,6 +28,28 @@ async function fetchData(endpoint) {
         isFetchingData = false;
     }
 }
+
+// Función para realizar la solicitud de un reporte en formato PDF
+const fetchPdf = async (endpoint) => {
+    const nombre_admins = sessionStorage.getItem("nombre_admin");
+    try {
+        const response = await fetch(`${baseURL}${endpoint}${nombre_admins}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al obtener el reporte');
+        }
+
+        return { success: true, data: response.url }; // Devolver el URL directo del PDF
+    } catch (error) {
+        console.error('Error al obtener el reporte:', error);
+        return { success: false, message: error.message };
+    }
+};
+
 // Función asincrónica para realizar solicitudes GET con un parámetro a la API
 async function fetchDataWithParam(endpoint, idInventario) {
     if (isFetchingData) {
@@ -182,3 +204,30 @@ async function deleteData(endpoint) {
         isFetchingData = false;
     }
 }
+
+
+// funciones funcionar descargar pdf 
+const fetchPdfAndBlob = async (pdfUrl, token) => {
+    const pdfResponse = await fetchPdf(pdfUrl);
+
+    if (!pdfResponse.success) {
+        throw new Error(pdfResponse.message || 'Error al obtener el reporte');
+    }
+
+    return await fetch(pdfResponse.data, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+};
+
+const descargarArchivo = (blob, nombreArchivo) => {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = nombreArchivo;
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(url);
+};
