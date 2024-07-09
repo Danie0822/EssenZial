@@ -5,7 +5,7 @@ const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
 const Validador = require('../recursos/validator');
-
+const PDFDocument = require('pdfkit'); // Asegúrate de que esta línea esté correcta
 // Middleware para validar el formato de los datos
 function validarDatos(nombreCliente, apellidoCLiente, correoCliente, claveCliente, telefonoCliente, estado, req, res, next) {
     const nombreValidado = Validador.validarLongitud(nombreCliente, 255, 'El nombre debe ser obligatorio', req, res, next);
@@ -66,7 +66,78 @@ router.put('/update', seguridad('admin'), actualizar);
 router.put('/update/cliente', seguridad('cliente'), actualizarCliente);
 router.put('/update/cliente/clave', actualizarClave);
 router.put('/update/vali/cliente', seguridad('cliente'), actualizarVa);
+router.get('/reporte/view', generarReportePDF);
+
 // Funciones
+
+async function generarReportePDF(req, res, next) {
+    try {
+        const items = await controlador.todos();
+
+        const doc = new PDFDocument({ size: 'A4', margin: 50 });
+
+        let filename = `reporte_clientes_${new Date().toISOString()}.pdf`;
+        res.setHeader('Content-disposition', `attachment; filename="${filename}"`);
+        res.setHeader('Content-type', 'application/pdf');
+
+        // Encabezado
+        doc
+            .fillColor('#444444')
+            .fontSize(20)
+            .text('Reporte de Clientes', { align: 'center' })
+            .fontSize(10)
+            .text(`Fecha: ${new Date().toLocaleDateString()}`, { align: 'right' });
+
+        // Linea de separación
+        doc
+            .moveTo(50, 80)
+            .lineTo(550, 80)
+            .stroke();
+
+        // Estilo de tabla
+        const tableTop = 100;
+        const itemHeight = 30;
+
+        // Columnas de la tabla
+        doc
+            .fontSize(10)
+            .text('ID', 50, tableTop)
+            .text('Nombre', 100, tableTop)
+            .text('Apellido', 200, tableTop)
+            .text('Correo', 300, tableTop)
+            .text('Teléfono', 400, tableTop)
+            .text('Estado', 500, tableTop);
+
+        // Datos de la tabla
+        let i = 0;
+        items.forEach(item => {
+            const y = tableTop + 25 + (i * itemHeight);
+            doc
+                .fontSize(10)
+                .text(item.id_cliente, 50, y)
+                .text(item.nombre_cliente, 100, y)
+                .text(item.apellido_cliente, 200, y)
+                .text(item.correo_cliente, 300, y)
+                .text(item.telefono_cliente, 400, y)
+                .text(item.estado_cliente ? 'Activo' : 'Inactivo', 500, y);
+            i++;
+        });
+
+        // Pie de página
+        doc
+            .moveTo(50, doc.page.height - 50)
+            .lineTo(doc.page.width - 50, doc.page.height - 50)
+            .stroke()
+            .fontSize(10)
+            .text('Reporte generado automáticamente', 50, doc.page.height - 40, { align: 'center', width: doc.page.width - 100 });
+
+        // Finalizar y enviar el PDF
+        doc.pipe(res);
+        doc.end();
+    } catch (error) {
+        next(error);
+    }
+}
 async function obtenerTodos(req, res, next) {
     try {
         const items = await controlador.todos();
