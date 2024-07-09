@@ -5,7 +5,9 @@ const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
 const Validador = require('../recursos/validator');
-const PDFDocument = require('pdfkit'); // Asegúrate de que esta línea esté correcta
+const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
+const fs = require('fs');
+const path = require('path');
 // Middleware para validar el formato de los datos
 function validarDatos(nombreCliente, apellidoCLiente, correoCliente, claveCliente, telefonoCliente, estado, req, res, next) {
     const nombreValidado = Validador.validarLongitud(nombreCliente, 255, 'El nombre debe ser obligatorio', req, res, next);
@@ -69,71 +71,162 @@ router.put('/update/vali/cliente', seguridad('cliente'), actualizarVa);
 router.get('/reporte/view', generarReportePDF);
 
 // Funciones
-
 async function generarReportePDF(req, res, next) {
     try {
         const items = await controlador.todos();
+        const username = req.user && req.user.nombre ? req.user.nombre : 'Administrador';
 
-        const doc = new PDFDocument({ size: 'A4', margin: 50 });
+        const pdfDoc = await PDFDocument.create();
+        const page = pdfDoc.addPage([612, 792]); // Tamaño carta en puntos (8.5 x 11 pulgadas)
 
-        let filename = `reporte_clientes_${new Date().toISOString()}.pdf`;
-        res.setHeader('Content-disposition', `attachment; filename="${filename}"`);
-        res.setHeader('Content-type', 'application/pdf');
+        // Configuración de márgenes y dimensiones
+        const margin = 42.5; // 1.5 cm ~ 42.5 puntos
+        const contentWidth = page.getWidth() - 2 * margin;
+        const contentHeight = page.getHeight() - 2 * margin;
 
-        // Encabezado
-        doc
-            .fillColor('#444444')
-            .fontSize(20)
-            .text('Reporte de Clientes', { align: 'center' })
-            .fontSize(10)
-            .text(`Fecha: ${new Date().toLocaleDateString()}`, { align: 'right' });
+        // Encabezado y Pie de página
+        const headerHeight = 50;
+        const footerHeight = 50;
 
-        // Linea de separación
-        doc
-            .moveTo(50, 80)
-            .lineTo(550, 80)
-            .stroke();
+        // Cargar logo de la empresa
+        const logoPath = path.resolve(__dirname, '../../../uploads/logo/logo.jpeg'); // Ruta del logo
+        let logoImage;
+        try {
+            const logoBytes = fs.readFileSync(logoPath);
+            logoImage = await pdfDoc.embedJpg(logoBytes);
+        } catch (error) {
+            console.error('Error al cargar el logo:', error.message);
+            return res.status(500).send('Error al cargar el logo.');
+        }
+        const logoDims = logoImage.scale(0.1);
 
-        // Estilo de tabla
-        const tableTop = 100;
-        const itemHeight = 30;
-
-        // Columnas de la tabla
-        doc
-            .fontSize(10)
-            .text('ID', 50, tableTop)
-            .text('Nombre', 100, tableTop)
-            .text('Apellido', 200, tableTop)
-            .text('Correo', 300, tableTop)
-            .text('Teléfono', 400, tableTop)
-            .text('Estado', 500, tableTop);
-
-        // Datos de la tabla
-        let i = 0;
-        items.forEach(item => {
-            const y = tableTop + 25 + (i * itemHeight);
-            doc
-                .fontSize(10)
-                .text(item.id_cliente, 50, y)
-                .text(item.nombre_cliente, 100, y)
-                .text(item.apellido_cliente, 200, y)
-                .text(item.correo_cliente, 300, y)
-                .text(item.telefono_cliente, 400, y)
-                .text(item.estado_cliente ? 'Activo' : 'Inactivo', 500, y);
-            i++;
+        // Dibujar logo en la esquina superior derecha
+        page.drawImage(logoImage, {
+            x: page.getWidth() - margin - logoDims.width,
+            y: page.getHeight() - margin - logoDims.height,
+            width: logoDims.width,
+            height: logoDims.height,
         });
 
-        // Pie de página
-        doc
-            .moveTo(50, doc.page.height - 50)
-            .lineTo(doc.page.width - 50, doc.page.height - 50)
-            .stroke()
-            .fontSize(10)
-            .text('Reporte generado automáticamente', 50, doc.page.height - 40, { align: 'center', width: doc.page.width - 100 });
+        // Fecha y hora del sistema
+        const now = new Date();
+        const formattedDate = now.toLocaleDateString();
+        const formattedTime = now.toLocaleTimeString();
 
-        // Finalizar y enviar el PDF
-        doc.pipe(res);
-        doc.end();
+        // Dibujar encabezado
+        page.drawText(`Fecha: ${formattedDate} ${formattedTime}`, {
+            x: margin,
+            y: page.getHeight() - margin - 20,
+            size: 12,
+        });
+
+        page.drawText(`Usuario: ${username}`, {
+            x: margin,
+            y: page.getHeight() - margin - 40,
+            size: 12,
+        });
+
+        // Título centrado
+        page.drawText('Reporte de Clientes', {
+            x: (page.getWidth() - 200) / 2,
+            y: page.getHeight() - margin - headerHeight - 20,
+            size: 20,
+            color: rgb(0, 0, 0),
+        });
+
+        // Configuración de fuente
+        const fontSize = 10;
+        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+
+        // Dibujar la tabla
+        const tableTop = page.getHeight() - margin - headerHeight - 60;
+        let y = tableTop;
+        const rowHeight = 20;
+        const colWidths = [30, 100, 100, 150, 100, 50];
+
+        // Dibujar encabezado de la tabla con fondo azul claro
+        page.drawRectangle({
+            x: margin,
+            y: y - rowHeight,
+            width: contentWidth,
+            height: rowHeight,
+            color: rgb(0.8, 0.9, 1),
+        });
+
+        const headers = ['ID', 'Nombre', 'Apellido', 'Correo', 'Teléfono', 'Estado'];
+        headers.forEach((header, i) => {
+            page.drawText(header, {
+                x: margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0) + 5,
+                y: y - 15,
+                size: fontSize,
+                font,
+                color: rgb(0, 0, 0),
+            });
+        });
+
+        y -= rowHeight;
+
+        // Dibujar datos de la tabla
+        items.forEach((item, index) => {
+            const bgColor = index % 2 === 0 ? rgb(1, 1, 1) : rgb(0.95, 0.95, 0.95);
+            page.drawRectangle({
+                x: margin,
+                y: y - rowHeight,
+                width: contentWidth,
+                height: rowHeight,
+                color: bgColor,
+            });
+
+            const row = [
+                item.id_cliente.toString(),
+                item.nombre_cliente,
+                item.apellido_cliente,
+                item.correo_cliente,
+                item.telefono_cliente,
+                item.estado_cliente ? 'Activo' : 'Inactivo'
+            ];
+
+            row.forEach((text, i) => {
+                page.drawText(text, {
+                    x: margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0) + 5,
+                    y: y - 15,
+                    size: fontSize,
+                    font,
+                    color: rgb(0, 0, 0),
+                });
+            });
+
+            y -= rowHeight;
+        });
+
+        // Dibujar pie de página con fondo azul
+        const footerY = margin - footerHeight;
+        page.drawRectangle({
+            x: 0,
+            y: footerY,
+            width: page.getWidth(),
+            height: footerHeight,
+            color: rgb(0.8, 0.9, 1),
+        });
+
+        // Número de página
+        const numberOfPages = pdfDoc.getPageCount();
+        for (let i = 0; i < numberOfPages; i++) {
+            const currentPage = pdfDoc.getPage(i);
+            currentPage.drawText(`Página ${i + 1} de ${numberOfPages}`, {
+                x: (page.getWidth() / 2) - 20,
+                y: footerY + 15,
+                size: 12,
+                font,
+                color: rgb(0, 0, 0),
+            });
+        }
+
+        const pdfBytes = await pdfDoc.save();
+
+        res.setHeader('Content-disposition', 'attachment; filename=reporte_clientes.pdf');
+        res.setHeader('Content-Type', 'application/pdf');
+        res.send(Buffer.from(pdfBytes));
     } catch (error) {
         next(error);
     }
