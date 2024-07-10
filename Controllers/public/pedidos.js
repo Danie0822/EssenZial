@@ -8,6 +8,8 @@ const manejarError = () => abrirModal(myError);
 const myError = new bootstrap.Modal(obtenerElemento('errorModalPe'));
 let idPedido = null;
 
+const idCliente = sessionStorage.getItem('id_cliente');
+
 //Funcion para formatear la fecha a una legible por el usuario
 const formatearFecha = (fechaISO) => {
     const fecha = new Date(fechaISO);
@@ -21,7 +23,7 @@ const formatearFecha = (fechaISO) => {
 //Funcion para obtener los pedidos segun estado especifico 
 const obtenerPedidos = async (estado, tabId) => {
     try {
-        const { success, data } = await fetchData(`/pedidos/view/status/${estado}`);
+        const { success, data } = await fetchData(`/pedidos/view/status/${estado}/${idCliente}`);
 
         if (success) {
             const tabContent = obtenerElemento(tabId);
