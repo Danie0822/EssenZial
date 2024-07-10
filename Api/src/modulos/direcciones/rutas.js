@@ -38,8 +38,8 @@ function validarID(id, req, res, next) {
 
 // Rutas
 router.get('/', seguridad('admin'), obtenerTodos);
-router.get('/:id', seguridad('cliente'), obtenerPorId);
-router.get('/cliente/dire/:id',seguridad('cliente'), obtenerDirrecion);
+router.get('/:id', obtenerPorId);
+router.get('/especifico/:id', seguridad('cliente'), obtenerDirrecion);
 router.delete('/delete/:id', seguridad('cliente'), eliminarPorId);
 router.post('/save', seguridad('cliente'),agregar);
 router.put('/update', seguridad('cliente'), actualizar);
@@ -78,6 +78,7 @@ async function eliminarPorId(req, res, next) {
         await controlador.eliminar(id);
         respuestas.success(req, res, 'Elemento eliminado', 200);
     } catch (error) {
+        console.log(error);
         next(error);
     }
 }
