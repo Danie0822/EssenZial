@@ -11,6 +11,10 @@ module.exports = function (db) {
     async function uno(id) {
         return db.uno(TABLE_NAME, id, CLIENTE);
     }
+    
+    async function unoDirrecion(id) {
+        return db.uno(TABLE_NAME, id, ID_FIELD);
+    }
 
     async function eliminar(id) {
         return db.eliminar(TABLE_NAME, id, ID_FIELD);
@@ -30,6 +34,7 @@ module.exports = function (db) {
         uno,
         eliminar,
         agregar,
-        actualizar
+        actualizar, 
+        unoDirrecion
     };
 };

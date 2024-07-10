@@ -39,6 +39,7 @@ function validarID(id, req, res, next) {
 // Rutas
 router.get('/', seguridad('admin'), obtenerTodos);
 router.get('/:id', seguridad('cliente'), obtenerPorId);
+router.get('/cliente/dire/:id',seguridad('cliente'), obtenerDirrecion);
 router.delete('/delete/:id', seguridad('cliente'), eliminarPorId);
 router.post('/save', seguridad('cliente'),agregar);
 router.put('/update', seguridad('cliente'), actualizar);
@@ -56,6 +57,15 @@ async function obtenerTodos(req, res, next) {
 async function obtenerPorId(req, res, next) {
     try {
         const item = await controlador.uno(req.params.id);
+        respuestas.success(req, res, item, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function obtenerDirrecion(req, res, next) {
+    try {
+        const item = await controlador.unoDirrecion(req.params.id);
         respuestas.success(req, res, item, 200);
     } catch (error) {
         next(error);

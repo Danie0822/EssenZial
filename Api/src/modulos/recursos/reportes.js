@@ -5,7 +5,8 @@ const path = require('path');
 async function generarReportePDF({ items, username, titulo, columnas, nombreArchivo }, res) {
     try {
         const pdfDoc = await PDFDocument.create();
-        const page = pdfDoc.addPage([612, 792]); // Tamaño carta en puntos (8.5 x 11 pulgadas)
+        // Tamaño carta en puntos (8.5 x 11 pulgadas)
+        const page = pdfDoc.addPage([612, 792]); 
 
         // Configuración de márgenes y dimensiones
         const margin = 42.5; // 1.5 cm ~ 42.5 puntos
