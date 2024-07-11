@@ -6,7 +6,7 @@ async function enviar(req, next) {
         const resultado = await enviarCorreo({ destinatario, codigoRecuperacion });
         return resultado;
     } catch (error) {
-        next(error); 
+       console.log(error);
     }
 }
 

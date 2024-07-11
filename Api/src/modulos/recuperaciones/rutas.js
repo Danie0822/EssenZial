@@ -27,6 +27,7 @@ async function correoEnviar(req, res, next) {
         await controlador.enviar(req, res, next);
         respuestas.success(req, res, "Correo enviado correctamente", 200);
     } catch (error) {
+        console.log(error);
         respuestas.error(req, res, 'Error al enviar el correo', 500, error);
     }
 }

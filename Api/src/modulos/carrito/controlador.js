@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 // Nombres de campos de la tabla 
-const TABLE_NAME = 'vw_carrito';
+const TABLE_NAME = 'vw_carrito'; 
 const TABLE = 'tb_pedidos';
 const DIRECCIONES = 'vw_direcciones_cliente';
 const PROCEDIUR = 'eliminar_detalle_pedido' ;

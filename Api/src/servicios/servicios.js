@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const config = require('../config');
-const generarCorreoHTML =  require('./html');
+const generarCorreoHTML = require('./html');
+
 // Crear y configurar el transportador de nodemailer
 const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -14,7 +15,7 @@ const transporter = nodemailer.createTransport({
 async function enviarCorreo({ destinatario, codigoRecuperacion }) {
     const html = generarCorreoHTML({ codigoRecuperacion });
     const mailOptions = {
-        from: 'alessandromorales0822@gmail.com',
+        from: 'w0lf3ryxd@gmail.com',
         to: destinatario,
         subject: 'Essenzial - Recuperación de Contraseña',
         text: `Hola,\n\nHas solicitado recuperar tu contraseña. Utiliza el siguiente código para restablecerla:\n\n${codigoRecuperacion}`,
@@ -22,9 +23,12 @@ async function enviarCorreo({ destinatario, codigoRecuperacion }) {
     };
 
     try {
+        console.log('Attempting to send email...');
         let info = await transporter.sendMail(mailOptions);
+        console.log('Email sent: ', info.response);
         return info;
     } catch (error) {
+        console.error('Error sending email:', error.message);
         throw new Error(`Error enviando correo: ${error.message}`);
     }
 }
@@ -32,3 +36,4 @@ async function enviarCorreo({ destinatario, codigoRecuperacion }) {
 module.exports = {
     enviarCorreo
 };
+ 

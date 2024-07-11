@@ -3,8 +3,8 @@ const router = express.Router();
 const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 
-router.get('/:id', obtenerPorId);
-router.get('/direcciones/:id', direcciones);
+router.get('/:id', obtenerPorId); // estas de aca tengo que usar para la vista de carrito
+router.get('/direcciones/:id', direcciones); // combobox
 router.get('/campo/:id', uncampo);
 router.delete('/delete/:id', eliminarPorId);
 router.put('/update',finalizarPedido);
