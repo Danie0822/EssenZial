@@ -86,11 +86,11 @@ const mostrarUltimasOfertas = async () => {
 };
 // Funcion para esperar que se carguen todos las funciones al abrir el documento 
 const llamarProcesos = async () => {
-    await mostrarUltimosPedidos();
-    await mostrarUltimasOfertas();
     await mostrarUltimosVedidas();
     await mostrarPerfumesMasVendidos();
     await mostrarVentas();
+    await mostrarCategorias();
+    await mostrarOlores(); 
 } 
 // Evento al cargar el DOM para obtener y mostrar los últimos pedidos
 document.addEventListener("DOMContentLoaded", function () {

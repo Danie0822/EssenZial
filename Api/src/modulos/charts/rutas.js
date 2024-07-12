@@ -9,6 +9,8 @@ const seguridad = require('../seguridad/seguridad');
 router.get('/marcasVendidas', seguridad('admin'), marcasVendidas);
 router.get('/perfumesVendidos', seguridad('admin'), perfumesVendidos);
 router.get('/ventaMeses', seguridad('admin'), ventaMeses);
+router.get('/topCategorias', seguridad('admin'), categorias);
+router.get('/topOlores', seguridad('admin'), olores);
 
 // Funciones
 async function marcasVendidas(req, res, next) {
@@ -30,6 +32,22 @@ async function perfumesVendidos(req, res, next) {
 async function ventaMeses(req, res, next) {
     try {
         const ventas = await controlador.ventaMeses();
+        respuestas.success(req, res, ventas, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+async function categorias(req, res, next) {
+    try {
+        const ventas = await controlador.topCategorias();
+        respuestas.success(req, res, ventas, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+async function olores(req, res, next) {
+    try {
+        const ventas = await controlador.topOlores();
         respuestas.success(req, res, ventas, 200);
     } catch (error) {
         next(error);
