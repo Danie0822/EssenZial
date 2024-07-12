@@ -43,6 +43,10 @@ router.get('/reporte/view/:nombre',seguridad('admin'), generarReporte);
 async function generarReporte(req, res, next) {
     try {
         let items = await controlador.todos();
+        items = items.map(item => ({
+            ...item,
+            nombre_completo: `${item.nombre_admin} ${item.apellido_admin}`
+        }));
         const { nombre: username = 'Administrador' } = req.params;
         // Configuración del reporte
         const config = {
@@ -50,8 +54,7 @@ async function generarReporte(req, res, next) {
             username,
             titulo: 'Reporte de administradores',
             columnas: [
-                { key: 'nombre_admin', label: 'Nombre' },
-                { key: 'apellido_admin', label: 'Apellido' },
+                { key: 'nombre_completo', label: 'Nombre completo' },
                 { key: 'correo_admin', label: 'Correo' }
             ],
             nombreArchivo: 'reporte_administradores.pdf'
@@ -61,6 +64,7 @@ async function generarReporte(req, res, next) {
         next(error);
     }
 }
+
 
 async function obtenerTodos(req, res, next) {
     try {

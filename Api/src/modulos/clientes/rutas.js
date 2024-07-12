@@ -74,6 +74,7 @@ async function generarReporte(req, res, next) {
         let items = await controlador.todos();
         items = items.map(item => ({
             ...item,
+            nombre_completo: `${item.nombre_cliente} ${item.apellido_cliente}`,
             estado_cliente: item.estado_cliente ? 'Activo' : 'Inactivo'
         }));
         const { nombre: username = 'Administrador' } = req.params;
@@ -83,10 +84,8 @@ async function generarReporte(req, res, next) {
             username,
             titulo: 'Reporte de Clientes',
             columnas: [
-                { key: 'nombre_cliente', label: 'Nombre' },
-                { key: 'apellido_cliente', label: 'Apellido' },
+                { key: 'nombre_completo', label: 'Nombre completo' },
                 { key: 'correo_cliente', label: 'Correo' },
-                { key: 'telefono_cliente', label: 'Teléfono' },
                 { key: 'estado_cliente', label: 'Estado' },
             ],
             nombreArchivo: 'reporte_clientes'
@@ -96,6 +95,7 @@ async function generarReporte(req, res, next) {
         next(error);
     }
 }
+
 
 async function obtenerTodos(req, res, next) {
     try {
