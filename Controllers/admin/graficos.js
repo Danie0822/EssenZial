@@ -252,7 +252,7 @@ const myChart3 = new Chart(ctx3, {
 });
 // Crear el gráfico
 const myChart4 = new Chart(ctx4, {
-  type: 'doughnut',
+  type: 'polarArea',
   data: {
       labels: [],
       datasets: [{
@@ -293,7 +293,7 @@ const myChart4 = new Chart(ctx4, {
 });
 // Crear el gráfico
 const myChart5 = new Chart(ctx5, {
-  type: 'doughnut',
+  type: 'line',
   data: {
       labels: [],
       datasets: [{
