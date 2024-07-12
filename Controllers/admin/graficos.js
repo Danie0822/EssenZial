@@ -1,7 +1,8 @@
 const ctx = document.getElementById('myChart');
 const ctx2 = document.getElementById('myChart2');
 const ctx3 = document.getElementById('myChart3');
-
+const ctx4 = document.getElementById('myChart4');
+const ctx5 = document.getElementById('myChart5');
 // Definir función para manejar errores
 function manejarError(mensaje) {
   console.error("Error:", mensaje);
@@ -73,6 +74,50 @@ const mostrarVentas = async () => {
       }
   } catch (error) {
       console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+      manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
+  }
+};
+const mostrarCategorias = async () => {
+  try {
+      const { success, data } = await fetchData("/charts/topCategorias/");
+      if (success) {
+          const labels = [];
+          const ventas = [];
+          data.forEach(({ nombre_categoria, total_vendido }) => {
+              labels.push(nombre_categoria);
+              ventas.push(total_vendido);
+          });
+          // Actualizar el gráfico con los nuevos datos
+          myChart4.data.labels = labels;
+          myChart4.data.datasets[0].data = ventas;
+          myChart4.update();
+      } else {
+          manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
+      }
+  } catch (error) {
+      console.log("Error al obtener los últimos pedidos:", error); // Imprimir error en consola para depuración
+      manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
+  }
+};
+const mostrarOlores = async () => {
+  try {
+      const { success, data } = await fetchData("/charts/topOlores/");
+      if (success) {
+          const labels = [];
+          const ventas = [];
+          data.forEach(({ nombre_olor, total_vendido }) => {
+              labels.push(nombre_olor);
+              ventas.push(total_vendido);
+          });
+          // Actualizar el gráfico con los nuevos datos
+          myChart5.data.labels = labels;
+          myChart5.data.datasets[0].data = ventas;
+          myChart5.update();
+      } else {
+          manejarError("No se pudieron obtener los últimos pedidos."); // Proporcionar mensaje de error
+      }
+  } catch (error) {
+      console.log( error); // Imprimir error en consola para depuración
       manejarError("Hubo un error al procesar la solicitud."); // Proporcionar mensaje de error
   }
 };
@@ -204,4 +249,86 @@ const myChart3 = new Chart(ctx3, {
       }
     },
 
+});
+// Crear el gráfico
+const myChart4 = new Chart(ctx4, {
+  type: 'polarArea',
+  data: {
+      labels: [],
+      datasets: [{
+          label: 'Ventas',
+          data: [],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+          ],
+      }]
+  },
+  options: {
+      borderWidth: 2,
+      hoverBorderWidth:0,
+      plugins: {
+          legend: {
+              display: false,
+          },
+      },
+      layout: {
+          padding: {
+              left: 50,
+              right: 50,
+              bottom: 50,
+          }
+      }
+  },
+});
+// Crear el gráfico
+const myChart5 = new Chart(ctx5, {
+  type: 'line',
+  data: {
+      labels: [],
+      datasets: [{
+          label: 'Ventas',
+          data: [],
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)'
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)',
+          ],
+      }]
+  },
+  options: {
+      borderWidth: 2,
+      hoverBorderWidth:0,
+      plugins: {
+          legend: {
+              display: false,
+          },
+      },
+      layout: {
+          padding: {
+              left: 50,
+              right: 50,
+              bottom: 50,
+          }
+      }
+  },
 });
