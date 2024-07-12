@@ -22,7 +22,7 @@ async function generarReportePDF({ items, username, titulo, columnas, nombreArch
         }
         const logoDims = logoImage.scale(0.15);
 
-        // Encabezado moderno
+        // Encabezado 
         const headerColor = rgb(0.15, 0.35, 0.55);
         page.drawRectangle({
             x: 0,
