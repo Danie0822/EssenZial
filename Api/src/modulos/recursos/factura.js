@@ -2,7 +2,7 @@ const { PDFDocument, rgb, StandardFonts } = require('pdf-lib');
 const fs = require('fs');
 const path = require('path');
 
-async function generarFacturaPDF({ items, username, titulo, columnas, nombreArchivo }, res) {
+async function generarFacturaPDF({ items, username, fecha, total, titulo, columnas, nombreArchivo }, res) {
     try {
         const pdfDoc = await PDFDocument.create();
         const page = pdfDoc.addPage([612, 792]); // Tamaño carta
@@ -50,27 +50,35 @@ async function generarFacturaPDF({ items, username, titulo, columnas, nombreArch
             color: rgb(1, 1, 1),
         });
 
-        // Espacio entre el título y la información adicional
-        const infoSpace = 5;
-
         // Información adicional centrada
         const now = new Date();
         const formattedDate = now.toLocaleDateString();
         const formattedTime = now.toLocaleTimeString();
 
-        const userInfoY = page.getHeight() - margin - 45 - infoSpace - 25;
+        const infoY = page.getHeight() - margin - 60;
 
-        page.drawText(`Fecha: ${formattedDate} ${formattedTime}`, {
-            x: (page.getWidth() - font.widthOfTextAtSize(`Fecha: ${formattedDate} ${formattedTime}`, 12)) / 2,
-            y: userInfoY,
+        // Usuario
+        page.drawText(`Usuario: ${username}`, {
+            x: (page.getWidth() - font.widthOfTextAtSize(`Usuario: ${username}`, 12)) / 2,
+            y: infoY,
             size: 12,
             font: font,
             color: rgb(1, 1, 1),
         });
 
-        page.drawText(`Usuario: ${username}`, {
-            x: (page.getWidth() - font.widthOfTextAtSize(`Usuario: ${username}`, 12)) / 2,
-            y: userInfoY - 15,
+        // Fecha de pedido
+        page.drawText(`Fecha pedido: ${fecha}`, {
+            x: (page.getWidth() - font.widthOfTextAtSize(`Fecha pedido: ${fecha}`, 12)) / 2,
+            y: infoY - 15,
+            size: 12,
+            font: font,
+            color: rgb(1, 1, 1),
+        });
+
+        // Total
+        page.drawText(`Total: ${total}`, {
+            x: (page.getWidth() - font.widthOfTextAtSize(`Total: ${total}`, 12)) / 2,
+            y: infoY - 50,
             size: 12,
             font: font,
             color: rgb(1, 1, 1),
@@ -80,7 +88,7 @@ async function generarFacturaPDF({ items, username, titulo, columnas, nombreArch
         const tableSpace = 20;
 
         // Tabla
-        const tableTop = page.getHeight() - margin - 130 - tableSpace;
+        const tableTop = infoY - 45 - tableSpace;
         let y = tableTop;
         const rowHeight = 30;
 
