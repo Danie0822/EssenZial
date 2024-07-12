@@ -40,6 +40,21 @@ const obtener = async () => {
         manejarError();
     }
 };
+// Función para obtener el reporte
+const obtenerReporte = async () => {
+    try {
+        const blobResponse = await fetchPdfAndBlob("/admin/reporte/view/", token);
+        if (!blobResponse.ok) {
+            throw new Error('Error al descargar el reporte PDF');
+        }
+        const blob = await blobResponse.blob();
+        descargarArchivo(blob, 'reporte_administradores.pdf');
+    } catch (error) {
+        console.error('Error al obtener el reporte:', error);
+        manejarError();
+    }
+};
+
 // Const para limpiar formulario 
 const limpiarFormulario = () => {
     document.querySelectorAll('.form-control').forEach(input => input.value = "");

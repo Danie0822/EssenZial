@@ -42,7 +42,7 @@ const obtener = async () => {
         manejarError();
     }
 };
-
+// Obtener reporte 
 const obtenerReporte = async () => {
     try {
         const blobResponse = await fetchPdfAndBlob("/cliente/reporte/view/", token);

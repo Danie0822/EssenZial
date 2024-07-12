@@ -5,7 +5,7 @@ const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
 const Validador = require('../recursos/validator');
-
+const { generarReportePDF } = require('../recursos/reportes');
 // Middleware para validar el formato de los datos
 function validarDatos(nombreAdmin, apellidoAdmin, correoAdmin, claveAdmin, req, res, next) {
     const nombreValidado = Validador.validarLongitud(nombreAdmin, 255, 'El nombre debe ser obligatorio', req, res, next);
@@ -37,8 +37,31 @@ router.get('/:id', seguridad('admin'), obtenerPorId);
 router.delete('/delete/:id', seguridad('admin'), eliminarPorId);
 router.post('/save', seguridad('admin'), agregar);
 router.put('/update', seguridad('admin'), actualizar);
+router.get('/reporte/view/:nombre',seguridad('admin'), generarReporte);
 
 // Funciones
+async function generarReporte(req, res, next) {
+    try {
+        let items = await controlador.todos();
+        const { nombre: username = 'Administrador' } = req.params;
+        // Configuración del reporte
+        const config = {
+            items,
+            username,
+            titulo: 'Reporte de administradores',
+            columnas: [
+                { key: 'nombre_admin', label: 'Nombre' },
+                { key: 'apellido_admin', label: 'Apellido' },
+                { key: 'correo_admin', label: 'Correo' }
+            ],
+            nombreArchivo: 'reporte_administradores.pdf'
+        };
+        await generarReportePDF(config, res); // Generar el reporte
+    } catch (error) {
+        next(error);
+    }
+}
+
 async function obtenerTodos(req, res, next) {
     try {
         const items = await controlador.todos();
