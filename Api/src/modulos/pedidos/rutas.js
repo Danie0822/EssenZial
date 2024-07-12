@@ -4,6 +4,7 @@ const respuestas = require('../../red/respuestas');
 const seguridad = require('../seguridad/seguridad');
 const controlador = require('./index');
 const { generarReportePDF } = require('../recursos/reportes');
+const { generarFacturaPDF } = require('../recursos/factura');
 //endpoint
 router.get('/view/status/:estado/:id', seguridad('cliente'), estadosPedidos);
 router.get('/procedure/details/:id_pedido', seguridad('cliente'), procedimientoDetalle);
@@ -13,6 +14,7 @@ router.get('/detalle/:id',seguridad('admin'), detallePedido);
 router.delete('/delete/:id',seguridad('admin'), eliminarPorId);
 router.put('/update',seguridad('admin'), actualizar);
 router.get('/reporte/view/:nombre',seguridad('admin'), generarReporte);
+router.get('/reporte/factura/:id_pedido/:nombre', seguridad('cliente'), generarFactura);
 
 
 // Middleware para validar el ID
@@ -23,6 +25,57 @@ function validarID(id, req, res, next) {
     return id;
 }
 // Funciones
+async function generarFactura(req, res, next) {
+    try {
+        const { id_pedido, nombre } = req.params;
+        let result = await controlador.procedimientoDetalle(id_pedido);
+
+        if (!result || !Array.isArray(result[0])) {
+            console.log('Detalles del pedido no encontrados o en formato incorrecto.');
+            return res.status(404).send('No se encontraron detalles del pedido.');
+        }
+
+        let items = result[0];
+
+        if (items.length === 0) {
+            console.log('Detalles del pedido vacíos.');
+            return res.status(404).send('No se encontraron detalles del pedido.');
+        }
+
+        const username = nombre || 'Cliente';
+
+        // Formatear la fecha del pedido
+        items.forEach(item => {
+            item.fecha_pedido = new Date(item.fecha_pedido).toLocaleDateString('es-ES');
+        });
+
+        // Configuración del reporte
+        const config = {
+            items,
+            username,
+            titulo: 'Factura de pedidos',
+            columnas: [
+                { key: 'fecha_pedido', label: 'Fecha del pedido' },
+                { key: 'total_pago', label: 'Total' },
+                { key: 'nombre_inventario', label: 'Nombre producto' },
+                { key: 'precio_inventario', label: 'Precio' },
+                { key: 'cantidad_producto', label: 'Cantidad producto' },
+            ],
+            nombreArchivo: 'factura_pedido'
+        };
+
+        await generarFacturaPDF(config, res);
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}
+
+
+
+
+
+
 async function generarReporte(req, res, next) {
     try {
         let items = await controlador.todosCliente();
@@ -103,7 +156,6 @@ async function estadosPedidos(req, res, next) {
 
 async function procedimientoDetalle(req, res, next){
     try{
-
         const { id_pedido } = req.params;
         const detalle_pedidos = await controlador.procedimientoDetalle(id_pedido);
         respuestas.success(req, res, detalle_pedidos, 200);

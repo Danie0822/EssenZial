@@ -49,6 +49,26 @@ const fetchPdf = async (endpoint) => {
         return { success: false, message: error.message };
     }
 };
+// Función para realizar la solicitud de un reporte en formato PDF
+const fetchPdfCliente = async (endpoint) => {
+    const nombre_admins = sessionStorage.getItem("nombre_cliente");
+    try {
+        const response = await fetch(`${baseURL}${endpoint}${nombre_admins}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al obtener el reporte');
+        }
+
+        return { success: true, data: response.url }; // Devolver el URL directo del PDF
+    } catch (error) {
+        console.error('Error al obtener el reporte:', error);
+        return { success: false, message: error.message };
+    }
+};
 
 // Función asincrónica para realizar solicitudes GET con un parámetro a la API
 async function fetchDataWithParam(endpoint, idInventario) {
@@ -209,6 +229,21 @@ async function deleteData(endpoint) {
 // funciones funcionar descargar pdf 
 const fetchPdfAndBlob = async (pdfUrl, token) => {
     const pdfResponse = await fetchPdf(pdfUrl);
+
+    if (!pdfResponse.success) {
+        throw new Error(pdfResponse.message || 'Error al obtener el reporte');
+    }
+
+    return await fetch(pdfResponse.data, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+};
+
+// funciones funcionar descargar pdf 
+const fetchPdfAndBlobCliente = async (pdfUrl, token) => {
+    const pdfResponse = await fetchPdfCliente(pdfUrl);
 
     if (!pdfResponse.success) {
         throw new Error(pdfResponse.message || 'Error al obtener el reporte');

@@ -105,6 +105,20 @@ const actualizarDetallesPedido = (data) => {
     }
 };
 
+const obtenerFactura = async () =>{
+    try{
+        const blobResponse = await fetchPdfAndBlobCliente(`/pedidos/reporte/factura/${idPedido}/`, token);
+        if(!blobResponse.ok){
+            throw new Error('Error al descargar el reporte en PDF');
+        }
+        const blob = await blobResponse.blob();
+        descargarArchivo(blob, 'factura.pdf');
+    }catch(error){
+        console.error('Error al obtener el reporte:', error);
+        manejarError();
+    }
+}
+
 //Funcion que ejecuta el codigo al cargar la pagina
 document.addEventListener('DOMContentLoaded', () => {
 
