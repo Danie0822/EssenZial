@@ -43,6 +43,22 @@ const obtenerPedidos = async () => {
     }
 };
 
+const obtenerReporte = async () => {
+    try {
+        const blobResponse = await fetchPdfAndBlob("/pedidos/reporte/view/", token);
+        if (!blobResponse.ok) {
+            throw new Error('Error al descargar el reporte PDF');
+        }
+        const blob = await blobResponse.blob();
+        descargarArchivo(blob, 'reporte_pedidos.pdf');
+    } catch (error) {
+        console.error('Error al obtener el reporte:', error);
+        manejarError();
+    }
+};
+
+
+// Obtener pedidos  String 
 const obtenerPedidosString = async (id, fecha_pedido, tipo_pago) => {
     try {
         const { success, data } = await fetchData(`/pedidos/detalle/${id}`);

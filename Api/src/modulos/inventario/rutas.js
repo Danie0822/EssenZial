@@ -7,7 +7,7 @@ const seguridad = require('../seguridad/seguridad');
 const Validador = require('../recursos/validator');
 const multerConfig = require('../recursos/upload');
 const upload = multerConfig('inventarios');
-
+const { generarReportePDF } = require('../recursos/reportes');
 // Middleware para validar el ID
 const validarId = [
     param('id').notEmpty().isInt({ min: 1 }).withMessage('El ID debe ser un número entero mayor que cero')
@@ -41,8 +41,29 @@ router.get('/vistaPrueba/view', vistaProductos);
 router.post('/save', seguridad('admin'), validarInventario, validar, agregar);
 router.put('/update', seguridad('admin'), validarInventario, validar, actualizar);
 router.delete('/delete/:id', seguridad('admin'), validarId, eliminar);
-
-
+router.get('/reporte/view/:nombre',seguridad('admin'), generarReporte);
+// Funciones
+async function generarReporte(req, res, next) {
+    try {
+        let items = await controlador.todos();
+        const { nombre: username = 'Administrador' } = req.params;
+        // Configuración del reporte
+        const config = {
+            items,
+            username,
+            titulo: 'Reporte de inventario',
+            columnas: [
+                { key: 'nombre_inventario', label: 'Nombre del producto' },
+                { key: 'cantidad_inventario', label: 'Cantidad de inventario' },
+                { key: 'precio_inventario', label: 'Precio' }
+            ],
+            nombreArchivo: 'reporte_inventario'
+        };
+        await generarReportePDF(config, res); // Generar el reporte
+    } catch (error) {
+        next(error);
+    }
+}
 async function todos(req, res, next) {
     try {
         const inventario = await controlador.todos()

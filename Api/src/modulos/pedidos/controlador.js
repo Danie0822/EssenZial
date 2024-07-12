@@ -4,11 +4,15 @@ const VISTA = 'vista_pedidos';
 const ID_VISTA = 'id_correlativo';
 const NOMBRE_PROCEDIMIENTO= 'obtenerDetallePedido';
 const ID_CLIENTE = 'id_cliente';
+const VISTANOMBRE = 'vw_pedidos_clientes';
 
 
 module.exports = function (db) {
     async function todos() {
         return db.todos(TABLE_NAME);
+    }
+    async function todosCliente(){
+        return db.todos(VISTANOMBRE)
     }
     async function uno(id) {
         return db.uno(TABLE_NAME, id, ID_FIELD);
@@ -40,7 +44,8 @@ module.exports = function (db) {
         actualizar,
         detallePedido,
         estadoPedido,
-        procedimientoDetalle
+        procedimientoDetalle, 
+        todosCliente
     };
     
 }

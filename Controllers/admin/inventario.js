@@ -41,6 +41,20 @@ const obtenerOlores = async (idCombobox) => {
     }
 };
 
+// Obtener un reporte
+const obtenerReporte = async () => {
+    try {
+        const blobResponse = await fetchPdfAndBlob("/inventario/reporte/view/", token);
+        if (!blobResponse.ok) {
+            throw new Error('Error al descargar el reporte PDF');
+        }
+        const blob = await blobResponse.blob();
+        descargarArchivo(blob, 'reporte_inventario.pdf');
+    } catch (error) {
+        console.error('Error al obtener el reporte:', error);
+        manejarError();
+    }
+};
 
 //Función para obtener los datos para cargar Combobox
 const obtenerCategorias = async (idCmb) => {

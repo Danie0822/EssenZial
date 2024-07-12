@@ -5,20 +5,13 @@ const path = require('path');
 async function generarReportePDF({ items, username, titulo, columnas, nombreArchivo }, res) {
     try {
         const pdfDoc = await PDFDocument.create();
-        // Tamaño carta en puntos (8.5 x 11 pulgadas)
-        const page = pdfDoc.addPage([612, 792]); 
+        const page = pdfDoc.addPage([612, 792]); // Tamaño carta
 
-        // Configuración de márgenes y dimensiones
-        const margin = 42.5; // 1.5 cm ~ 42.5 puntos
+        const margin = 50; // Márgenes
         const contentWidth = page.getWidth() - 2 * margin;
-        const contentHeight = page.getHeight() - 2 * margin;
 
-        // Encabezado y Pie de página
-        const headerHeight = 50;
-        const footerHeight = 50;
-
-        // Cargar logo de la empresa
-        const logoPath = path.resolve(__dirname, '../../../uploads/logo/logo.jpeg'); // Ruta del logo
+        // Cargar logo
+        const logoPath = path.resolve(__dirname, '../../../uploads/logo/logo.jpeg');
         let logoImage;
         try {
             const logoBytes = fs.readFileSync(logoPath);
@@ -27,96 +20,115 @@ async function generarReportePDF({ items, username, titulo, columnas, nombreArch
             console.error('Error al cargar el logo:', error.message);
             return res.status(500).send('Error al cargar el logo.');
         }
-        const logoDims = logoImage.scale(0.1);
+        const logoDims = logoImage.scale(0.15);
 
-        // Dibujar logo en la esquina superior derecha
+        // Encabezado moderno
+        const headerColor = rgb(0.15, 0.35, 0.55);
+        page.drawRectangle({
+            x: 0,
+            y: page.getHeight() - margin - 100,
+            width: page.getWidth(),
+            height: 100,
+            color: headerColor,
+        });
+
+        // Logo
         page.drawImage(logoImage, {
-            x: page.getWidth() - margin - logoDims.width,
-            y: page.getHeight() - margin - logoDims.height,
+            x: margin,
+            y: page.getHeight() - margin - 80,
             width: logoDims.width,
             height: logoDims.height,
         });
 
-        // Fecha y hora del sistema
+        // Título centrado
+        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+        page.drawText(titulo, {
+            x: (page.getWidth() - font.widthOfTextAtSize(titulo, 30)) / 2,
+            y: page.getHeight() - margin - 50,
+            size: 30,
+            font: font,
+            color: rgb(1, 1, 1),
+        });
+
+        // Espacio entre el título y la información adicional
+        const infoSpace = 5;
+
+        // Información adicional centrada
         const now = new Date();
         const formattedDate = now.toLocaleDateString();
         const formattedTime = now.toLocaleTimeString();
 
-        // Dibujar encabezado
+        const userInfoY = page.getHeight() - margin - 45 - infoSpace - 25;
+
         page.drawText(`Fecha: ${formattedDate} ${formattedTime}`, {
-            x: margin,
-            y: page.getHeight() - margin - 20,
+            x: (page.getWidth() - font.widthOfTextAtSize(`Fecha: ${formattedDate} ${formattedTime}`, 12)) / 2,
+            y: userInfoY,
             size: 12,
+            font: font,
+            color: rgb(1, 1, 1),
         });
 
         page.drawText(`Usuario: ${username}`, {
-            x: margin,
-            y: page.getHeight() - margin - 40,
+            x: (page.getWidth() - font.widthOfTextAtSize(`Usuario: ${username}`, 12)) / 2,
+            y: userInfoY - 15,
             size: 12,
+            font: font,
+            color: rgb(1, 1, 1),
         });
 
-        // Cargar fuente antes de usarla
-        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+        // Espacio entre la información y la tabla
+        const tableSpace = 20;
 
-        // Título centrado
-        page.drawText(titulo, {
-            x: (page.getWidth() - font.widthOfTextAtSize(titulo, 20)) / 2,
-            y: page.getHeight() - margin - headerHeight - 20,
-            size: 20,
-            color: rgb(0, 0, 0),
-            font: font, // Usar la fuente cargada
-        });
-
-        // Configuración de fuente
-        const fontSize = 10;
-
-        // Dibujar la tabla
-        const tableTop = page.getHeight() - margin - headerHeight - 60;
+        // Tabla
+        const tableTop = page.getHeight() - margin - 130 - tableSpace;
         let y = tableTop;
-        const rowHeight = 20;
+        const rowHeight = 30;
 
-        // Calcular el ancho de las columnas dinámicamente
-        const colWidths = columnas.map(col => contentWidth / columnas.length);
+        const colWidths = columnas.map(() => contentWidth / columnas.length);
 
-        // Dibujar encabezado de la tabla con fondo azul claro
+        // Encabezado de tabla
+        const tableHeaderColor = rgb(0.25, 0.5, 0.75);
         page.drawRectangle({
             x: margin,
-            y: y - rowHeight,
+            y: y,
             width: contentWidth,
             height: rowHeight,
-            color: rgb(0.8, 0.9, 1),
+            color: tableHeaderColor,
         });
 
         columnas.forEach((header, i) => {
             page.drawText(header.label, {
                 x: margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0) + 5,
-                y: y - 15,
-                size: fontSize,
-                font: font, // Usar la fuente cargada
-                color: rgb(0, 0, 0),
+                y: y + 7,
+                size: 12,
+                font: font,
+                color: rgb(1, 1, 1),
+                bold: true,
             });
         });
 
         y -= rowHeight;
 
-        // Dibujar datos de la tabla
+        // Datos de la tabla
         items.forEach((item, index) => {
             const bgColor = index % 2 === 0 ? rgb(1, 1, 1) : rgb(0.95, 0.95, 0.95);
             page.drawRectangle({
                 x: margin,
-                y: y - rowHeight,
+                y: y,
                 width: contentWidth,
                 height: rowHeight,
                 color: bgColor,
+                borderColor: rgb(0.8, 0.8, 0.8),
+                borderWidth: 0.5,
             });
 
             columnas.forEach((col, i) => {
                 const text = item[col.key].toString();
                 page.drawText(text, {
                     x: margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0) + 5,
-                    y: y - 15,
-                    size: fontSize,
-                    font: font, // Usar la fuente cargada
+                    y: y + 7,
+                    size: 11,
+                    font: font,
                     color: rgb(0, 0, 0),
                 });
             });
@@ -124,14 +136,15 @@ async function generarReportePDF({ items, username, titulo, columnas, nombreArch
             y -= rowHeight;
         });
 
-        // Dibujar pie de página con fondo azul
-        const footerY = margin - footerHeight;
+        // Pie de página moderno, alineado al fondo
+        const footerY = 20; // Altura del pie de página
+        const footerColor = rgb(0.15, 0.35, 0.55);
         page.drawRectangle({
             x: 0,
             y: footerY,
             width: page.getWidth(),
-            height: footerHeight,
-            color: rgb(0.8, 0.9, 1),
+            height: footerY,
+            color: footerColor,
         });
 
         // Número de página
@@ -139,16 +152,15 @@ async function generarReportePDF({ items, username, titulo, columnas, nombreArch
         for (let i = 0; i < numberOfPages; i++) {
             const currentPage = pdfDoc.getPage(i);
             currentPage.drawText(`Página ${i + 1} de ${numberOfPages}`, {
-                x: (page.getWidth() / 2) - 20,
-                y: footerY + 15,
+                x: page.getWidth() - margin - 100,
+                y: footerY + 5,
                 size: 12,
-                font: font, // Usar la fuente cargada
-                color: rgb(0, 0, 0),
+                font: font,
+                color: rgb(1, 1, 1),
             });
         }
 
         const pdfBytes = await pdfDoc.save();
-
         res.setHeader('Content-disposition', `attachment; filename=${nombreArchivo}.pdf`);
         res.setHeader('Content-Type', 'application/pdf');
         res.send(Buffer.from(pdfBytes));
