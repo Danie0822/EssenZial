@@ -61,7 +61,7 @@ async function generarFactura(req, res, next) {
             titulo: 'Factura de pedidos',
             columnas: [
                 { key: 'nombre_inventario', label: 'Nombre producto' },
-                { key: 'precio_inventario', label: 'Precio' },
+                { key: 'precio_inventario', label: 'Precio $' },
                 { key: 'cantidad_producto', label: 'Cantidad' },
             ],
             nombreArchivo: 'factura_pedido'

@@ -24,18 +24,19 @@ async function generarFacturaPDF({ items, username, fecha, total, titulo, column
 
         // Encabezado moderno
         const headerColor = rgb(0.15, 0.35, 0.55);
+        const headerHeight = 120;
         page.drawRectangle({
             x: 0,
-            y: page.getHeight() - margin - 100,
+            y: page.getHeight() - margin - headerHeight,
             width: page.getWidth(),
-            height: 100,
+            height: headerHeight,
             color: headerColor,
         });
 
         // Logo
         page.drawImage(logoImage, {
             x: margin,
-            y: page.getHeight() - margin - 80,
+            y: page.getHeight() - margin - headerHeight + 20,
             width: logoDims.width,
             height: logoDims.height,
         });
@@ -55,42 +56,51 @@ async function generarFacturaPDF({ items, username, fecha, total, titulo, column
         const formattedDate = now.toLocaleDateString();
         const formattedTime = now.toLocaleTimeString();
 
-        const infoY = page.getHeight() - margin - 60;
+        const infoY = page.getHeight() - margin - 90;
 
-        // Usuario
-        page.drawText(`Usuario: ${username}`, {
-            x: (page.getWidth() - font.widthOfTextAtSize(`Usuario: ${username}`, 12)) / 2,
+        page.drawText(`Emitido: ${formattedDate} ${formattedTime}`, {
+            x: (page.getWidth() - font.widthOfTextAtSize(`Emitido: ${formattedDate} ${formattedTime}`, 12)) / 2,
             y: infoY,
             size: 12,
             font: font,
             color: rgb(1, 1, 1),
         });
 
-        // Fecha de pedido
-        page.drawText(`Fecha pedido: ${fecha}`, {
-            x: (page.getWidth() - font.widthOfTextAtSize(`Fecha pedido: ${fecha}`, 12)) / 2,
+        // Usuario
+        page.drawText(`Usuario: ${username}`, {
+            x: (page.getWidth() - font.widthOfTextAtSize(`Usuario: ${username}`, 12)) / 2,
             y: infoY - 15,
             size: 12,
             font: font,
             color: rgb(1, 1, 1),
         });
 
-        // Total
-        page.drawText(`Total: ${total}`, {
-            x: (page.getWidth() - font.widthOfTextAtSize(`Total: ${total}`, 12)) / 2,
-            y: infoY - 50,
+        // Información adicional antes de la tabla
+        const additionalInfoY = infoY - 100;
+
+        page.drawText(`Fecha pedido: ${fecha}`, {
+            x: margin,
+            y: additionalInfoY,
             size: 12,
             font: font,
-            color: rgb(1, 1, 1),
+            color: rgb(0, 0, 0),
+        });
+
+        page.drawText(`Total: $${total}`, {
+            x: margin + 200,
+            y: additionalInfoY,
+            size: 12,
+            font: font,
+            color: rgb(0, 0, 0),
         });
 
         // Espacio entre la información y la tabla
-        const tableSpace = 20;
+        const tableSpace = 40;
 
         // Tabla
-        const tableTop = infoY - 45 - tableSpace;
+        const tableTop = additionalInfoY - tableSpace - 20;
         let y = tableTop;
-        const rowHeight = 30;
+        const rowHeight = 40;
 
         const colWidths = columnas.map(() => contentWidth / columnas.length);
 
@@ -107,7 +117,7 @@ async function generarFacturaPDF({ items, username, fecha, total, titulo, column
         columnas.forEach((header, i) => {
             page.drawText(header.label, {
                 x: margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0) + 5,
-                y: y + 7,
+                y: y + 10,
                 size: 12,
                 font: font,
                 color: rgb(1, 1, 1),
@@ -137,7 +147,7 @@ async function generarFacturaPDF({ items, username, fecha, total, titulo, column
                 }
                 page.drawText(text, {
                     x: margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0) + 5,
-                    y: y + 7,
+                    y: y + 10,
                     size: 11,
                     font: font,
                     color: rgb(0, 0, 0),
