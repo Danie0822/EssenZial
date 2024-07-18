@@ -43,23 +43,26 @@ async function generarFactura(req, res, next) {
         }
 
         const username = nombre || 'Cliente';
+        let fecha = null; // Array para almacenar todas las fechas
+        let total = 0; // Inicializar el total
 
-        // Formatear la fecha del pedido
+        // Recorrer los items para acumular fechas y total
         items.forEach(item => {
-            item.fecha_pedido = new Date(item.fecha_pedido).toLocaleDateString('es-ES');
+            fecha = new Date(item.fecha_pedido).toLocaleDateString('es-ES');
+            total += item.total_pago; // Acumular el total_pago de cada item
         });
 
         // Configuración del reporte
         const config = {
             items,
             username,
+            fecha,
+            total, // Usar el total acumulado
             titulo: 'Factura de pedidos',
             columnas: [
-                { key: 'fecha_pedido', label: 'Fecha del pedido' },
-                { key: 'total_pago', label: 'Total' },
                 { key: 'nombre_inventario', label: 'Nombre producto' },
-                { key: 'precio_inventario', label: 'Precio' },
-                { key: 'cantidad_producto', label: 'Cantidad producto' },
+                { key: 'precio_inventario', label: 'Precio $' },
+                { key: 'cantidad_producto', label: 'Cantidad' },
             ],
             nombreArchivo: 'factura_pedido'
         };
@@ -70,6 +73,7 @@ async function generarFactura(req, res, next) {
         next(error);
     }
 }
+
 
 
 
