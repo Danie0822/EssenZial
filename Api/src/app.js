@@ -1,4 +1,4 @@
-// Depedencias 
+// Dependencias
 const express = require('express'); 
 const morgan = require('morgan');
 const config = require('./config'); 
@@ -18,23 +18,24 @@ const dashboard = require('./modulos/dashboard/rutas');
 const valoracion = require('./modulos/valoracion/rutas');
 const dashboardP = require('./modulos/dashboard_publica/rutas');
 const charts = require('./modulos/charts/rutas'); 
-const producto_publica = require ('./modulos/detalle_producto_publica/rutas'); 
+const producto_publica = require('./modulos/detalle_producto_publica/rutas'); 
 const carrito = require('./modulos/carrito/rutas');
 const recuperaciones = require('./modulos/recuperaciones/rutas');   
 const app = express(); 
 const error = require('./red/errors'); 
 const cors = require('cors');
 
-//Middleware
+// Middleware
 app.use(morgan('dev')); 
 app.use(express.json());
-app.use(cors());
+app.use(cors()); // Activar CORS para todos los orígenes
 app.use(express.urlencoded({extended: true}));
 app.use('/uploads', express.static('uploads'));
 
-//configuracion
+// Configuración
 app.set('port', config.app.port);
-//rutas 
+
+// Rutas 
 app.use('/api/categorias', categoria); 
 app.use('/api/inventario', inventarios);
 app.use('/api/login', Login); 
@@ -47,13 +48,13 @@ app.use('/api/olores', olores);
 app.use('/api/pedidos', pedidos);
 app.use('/api/descuentos', descuentos);
 app.use('/api/valoraciones', valoraciones);
-app.use('/api/ultimospedidos',dashboard);
-app.use('/api/charts',charts);
-app.use('/api/dashboard/public',dashboardP);
-app.use('/api/dirreciones',dirreciones);
-app.use('/api/public/valoraciones',valoracion);
-app.use('/api/public/producto',producto_publica); 
+app.use('/api/ultimospedidos', dashboard);
+app.use('/api/charts', charts);
+app.use('/api/dashboard/public', dashboardP);
+app.use('/api/dirreciones', dirreciones);
+app.use('/api/public/valoraciones', valoracion);
+app.use('/api/public/producto', producto_publica); 
 app.use('/api/public/carrito', carrito); 
 app.use(error); 
 
-module.exports = app; 
+module.exports = app;

@@ -10,7 +10,9 @@ const ID_FIELD_VIEW = 'id_inventario';
 const ID_FIELD_VALORACIONES = 'identificador';
 const ID_FIELD = 'id_producto';
 const VISTA_PRODUCTOS = 'vw_inventario_detalles';
+const VISTA_VALORACIONES = 'valoraciones_producto' ;
 const ID_PRODUCTOS = 'identificador';  
+const ID_PR = 'id_producto' ;
 
 // Funciones y llamada de db 
 module.exports = function (db) {
@@ -36,6 +38,9 @@ module.exports = function (db) {
     async function todosProductos(id){
         return db.uno(VISTA_PRODUCTOS, id, ID_PRODUCTOS);
     }
+    async function validaciones(id){
+        return db.uno(VISTA_VALORACIONES, id, ID_PR);
+    }
     return {
         uno,
         detalle,
@@ -43,6 +48,7 @@ module.exports = function (db) {
         valoracion,
         similares,
         insertar,
-        todosProductos
+        todosProductos,
+        validaciones
     };
 };

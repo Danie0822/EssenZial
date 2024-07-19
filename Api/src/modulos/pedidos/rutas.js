@@ -58,7 +58,7 @@ async function generarFactura(req, res, next) {
             username,
             fecha,
             total, // Usar el total acumulado
-            titulo: 'Factura de pedidos',
+            titulo: 'Factura del pedido',
             columnas: [
                 { key: 'nombre_inventario', label: 'Nombre producto' },
                 { key: 'precio_inventario', label: 'Precio $' },

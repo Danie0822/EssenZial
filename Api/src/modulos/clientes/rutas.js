@@ -58,7 +58,7 @@ function validarFormatoActualizarClienteClave(correoCliente, claveCliente, req, 
 
 // Rutas
 router.get('/view/destacados', seguridad('cliente'), vistaTodos);
-router.get('/', seguridad('admin'), obtenerTodos);
+router.get('/',  obtenerTodos);
 router.get('/:id', seguridad('cliente'), obtenerPorId);
 router.delete('/delete/:id', seguridad('admin'), eliminarPorId);
 router.post('/save', agregar);
