@@ -7,7 +7,7 @@ const seguridad = require('../seguridad/seguridad');
 const Validador = require('../recursos/validator');
 const multerConfig = require('../recursos/upload');
 const upload = multerConfig('categorias');
-
+const { generarReportePDF } = require('../recursos/reportes');
 // Middleware para validar el formato de los datos
 function validarDatos(nombre, imagen, req, res, next) {
     const nombreValidado = Validador.validarLongitud(nombre, 255, 'El nombre debe ser obligatorio', req, res, next);
@@ -38,12 +38,33 @@ router.get('/:id', seguridad('admin'), uno);
 router.delete('/delete/:id', seguridad('admin'), eliminar);
 router.post('/save', seguridad('admin'), upload.single('imagen'), agregar);
 router.put('/update', seguridad('admin'), upload.single('imagen'), actualizar);
+router.get('/reporte/view/:nombre',seguridad('admin'), generarReporte);
 
 // Funciones
 async function todos(req, res, next) {
     try {
         const categoria = await controlador.todos();
         respuestas.success(req, res, categoria, 200);
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function generarReporte(req, res, next) {
+    try {
+        const items = await controlador.todos();
+        const { nombre: username = 'Administrador' } = req.params;
+        // Configuración del reporte
+        const config = {
+            items,
+            username,
+            titulo: 'Reporte de categorías',
+            columnas: [
+                { key: 'nombre_categoria', label: 'Nombre de categoría' }
+            ],
+            nombreArchivo: 'reportes_categoria.pdf'
+        };
+        await generarReportePDF(config, res); // Generar el reporte
     } catch (error) {
         next(error);
     }
