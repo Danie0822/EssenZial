@@ -28,7 +28,7 @@ function validarID(id, req, res, next) {
 async function generarFactura(req, res, next) {
     try {
         const { id_pedido, nombre } = req.params;
-        let result = await controlador.procedimientoDetalle(id_pedido);
+        let result = await controlador.vistaDetalle(id_pedido);
 
         if (!result || !Array.isArray(result[0])) {
             console.log('Detalles del pedido no encontrados o en formato incorrecto.');
@@ -43,13 +43,12 @@ async function generarFactura(req, res, next) {
         }
 
         const username = nombre || 'Cliente';
-        let fecha = null; // Array para almacenar todas las fechas
+        let fecha = new Date(items[0].fecha_pedido).toLocaleDateString('es-ES'); // Tomar la fecha del primer elemento
         let total = 0; // Inicializar el total
 
-        // Recorrer los items para acumular fechas y total
+        // Recorrer los items para acumular el total
         items.forEach(item => {
-            fecha = new Date(item.fecha_pedido).toLocaleDateString('es-ES');
-            total += item.total_pago; // Acumular el total_pago de cada item
+            total += item.subtotal; // Acumular el subtotal de cada item
         });
 
         // Configuración del reporte
@@ -63,6 +62,7 @@ async function generarFactura(req, res, next) {
                 { key: 'nombre_inventario', label: 'Nombre producto' },
                 { key: 'precio_inventario', label: 'Precio $' },
                 { key: 'cantidad_producto', label: 'Cantidad' },
+                { key: 'subtotal', label: 'Subtotal $' }
             ],
             nombreArchivo: 'factura_pedido'
         };
@@ -73,11 +73,6 @@ async function generarFactura(req, res, next) {
         next(error);
     }
 }
-
-
-
-
-
 
 
 async function generarReporte(req, res, next) {
