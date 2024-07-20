@@ -5,12 +5,14 @@ const path = require('path');
 async function generarReportePDF({ items, username, titulo, columnas, nombreArchivo }, res) {
     try {
         const pdfDoc = await PDFDocument.create();
-        const page = pdfDoc.addPage([612, 792]); // Tamaño carta
+        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-        const margin = 50; // Márgenes
-        const contentWidth = page.getWidth() - 2 * margin;
+        const margin = 50; // Márgenes de la página en puntos (1 punto = 1/72 pulgadas)
+        const rowHeight = 30;
+        const tableHeaderColor = rgb(0.25, 0.5, 0.75);
+        const contentWidth = 612 - 2 * margin;
+        const colWidths = columnas.map(() => contentWidth / columnas.length);
 
-        // Cargar logo
         const logoPath = path.resolve(__dirname, '../../../uploads/logo/logo.jpeg');
         let logoImage;
         try {
@@ -22,95 +24,99 @@ async function generarReportePDF({ items, username, titulo, columnas, nombreArch
         }
         const logoDims = logoImage.scale(0.15);
 
-        // Encabezado 
-        const headerColor = rgb(0.15, 0.35, 0.55);
-        page.drawRectangle({
-            x: 0,
-            y: page.getHeight() - margin - 100,
-            width: page.getWidth(),
-            height: 100,
-            color: headerColor,
-        });
+        function addPage() {
+            const page = pdfDoc.addPage([612, 792]); // Tamaño carta en puntos (1 punto = 1/72 pulgadas)
+            const pageHeight = page.getHeight();
 
-        // Logo
-        page.drawImage(logoImage, {
-            x: margin,
-            y: page.getHeight() - margin - 80,
-            width: logoDims.width,
-            height: logoDims.height,
-        });
+            // Encabezado
+            const headerColor = rgb(0.15, 0.35, 0.55);
+            page.drawRectangle({
+                x: 0,
+                y: pageHeight - margin - 100,
+                width: page.getWidth(),
+                height: 100,
+                color: headerColor,
+            });
 
-        // Título centrado
-        const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-        page.drawText(titulo, {
-            x: (page.getWidth() - font.widthOfTextAtSize(titulo, 30)) / 2,
-            y: page.getHeight() - margin - 50,
-            size: 30,
-            font: font,
-            color: rgb(1, 1, 1),
-        });
+            // Logo
+            page.drawImage(logoImage, {
+                x: margin,
+                y: pageHeight - margin - 80,
+                width: logoDims.width,
+                height: logoDims.height,
+            });
 
-        // Espacio entre el título y la información adicional
-        const infoSpace = 5;
+            // Título centrado
+            page.drawText(titulo, {
+                x: (page.getWidth() - font.widthOfTextAtSize(titulo, 30)) / 2,
+                y: pageHeight - margin - 50,
+                size: 30,
+                font: font,
+                color: rgb(1, 1, 1),
+            });
 
-        // Información adicional centrada
-        const now = new Date();
-        const formattedDate = now.toLocaleDateString();
-        const formattedTime = now.toLocaleTimeString();
+            // Información adicional centrada
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString();
+            const formattedTime = now.toLocaleTimeString();
 
-        const userInfoY = page.getHeight() - margin - 45 - infoSpace - 25;
+            const userInfoY = pageHeight - margin - 45 - 5 - 25;
 
-        page.drawText(`Fecha: ${formattedDate} ${formattedTime}`, {
-            x: (page.getWidth() - font.widthOfTextAtSize(`Fecha: ${formattedDate} ${formattedTime}`, 12)) / 2,
-            y: userInfoY,
-            size: 12,
-            font: font,
-            color: rgb(1, 1, 1),
-        });
-
-        page.drawText(`Usuario: ${username}`, {
-            x: (page.getWidth() - font.widthOfTextAtSize(`Usuario: ${username}`, 12)) / 2,
-            y: userInfoY - 15,
-            size: 12,
-            font: font,
-            color: rgb(1, 1, 1),
-        });
-
-        // Espacio entre la información y la tabla
-        const tableSpace = 20;
-
-        // Tabla
-        const tableTop = page.getHeight() - margin - 130 - tableSpace;
-        let y = tableTop;
-        const rowHeight = 30;
-
-        const colWidths = columnas.map(() => contentWidth / columnas.length);
-
-        // Encabezado de tabla
-        const tableHeaderColor = rgb(0.25, 0.5, 0.75);
-        page.drawRectangle({
-            x: margin,
-            y: y,
-            width: contentWidth,
-            height: rowHeight,
-            color: tableHeaderColor,
-        });
-
-        columnas.forEach((header, i) => {
-            page.drawText(header.label, {
-                x: margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0) + 5,
-                y: y + 7,
+            page.drawText(`Fecha: ${formattedDate} ${formattedTime}`, {
+                x: (page.getWidth() - font.widthOfTextAtSize(`Fecha: ${formattedDate} ${formattedTime}`, 12)) / 2,
+                y: userInfoY,
                 size: 12,
                 font: font,
                 color: rgb(1, 1, 1),
-                bold: true,
             });
-        });
 
-        y -= rowHeight;
+            page.drawText(`Usuario: ${username}`, {
+                x: (page.getWidth() - font.widthOfTextAtSize(`Usuario: ${username}`, 12)) / 2,
+                y: userInfoY - 15,
+                size: 12,
+                font: font,
+                color: rgb(1, 1, 1),
+            });
 
-        // Datos de la tabla
+            // Espacio entre la información y la tabla
+            const tableSpace = 20;
+
+            // Tabla
+            const tableTop = pageHeight - margin - 130 - tableSpace;
+            let y = tableTop;
+
+            // Encabezado de tabla
+            page.drawRectangle({
+                x: margin,
+                y: y,
+                width: contentWidth,
+                height: rowHeight,
+                color: tableHeaderColor,
+            });
+
+            columnas.forEach((header, i) => {
+                page.drawText(header.label, {
+                    x: margin + colWidths.slice(0, i).reduce((a, b) => a + b, 0) + 5,
+                    y: y + 7,
+                    size: 12,
+                    font: font,
+                    color: rgb(1, 1, 1),
+                    bold: true,
+                });
+            });
+
+            y -= rowHeight;
+
+            return { page, y, tableTop };
+        }
+
+        let { page, y, tableTop } = addPage();
+
         items.forEach((item, index) => {
+            if (y < margin + 20) { // Check if there's enough space for another row
+                ({ page, y, tableTop } = addPage());
+            }
+
             const bgColor = index % 2 === 0 ? rgb(1, 1, 1) : rgb(0.95, 0.95, 0.95);
             page.drawRectangle({
                 x: margin,
@@ -137,22 +143,21 @@ async function generarReportePDF({ items, username, titulo, columnas, nombreArch
         });
 
         // Pie de página moderno, alineado al fondo
-        const footerY = 20; // Altura del pie de página
-        const footerColor = rgb(0.15, 0.35, 0.55);
-        page.drawRectangle({
-            x: 0,
-            y: footerY,
-            width: page.getWidth(),
-            height: footerY,
-            color: footerColor,
-        });
-
-        // Número de página
         const numberOfPages = pdfDoc.getPageCount();
         for (let i = 0; i < numberOfPages; i++) {
             const currentPage = pdfDoc.getPage(i);
+            const footerY = 20; // Altura del pie de página
+            const footerColor = rgb(0.15, 0.35, 0.55);
+            currentPage.drawRectangle({
+                x: 0,
+                y: footerY,
+                width: currentPage.getWidth(),
+                height: footerY,
+                color: footerColor,
+            });
+
             currentPage.drawText(`Página ${i + 1} de ${numberOfPages}`, {
-                x: page.getWidth() - margin - 100,
+                x: currentPage.getWidth() - margin - 100,
                 y: footerY + 5,
                 size: 12,
                 font: font,
