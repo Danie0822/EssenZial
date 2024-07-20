@@ -36,7 +36,7 @@ async function generarFacturaPDF({ items, username, fecha, total, titulo, column
         // Logo
         page.drawImage(logoImage, {
             x: margin,
-            y: page.getHeight() - margin - headerHeight + 20,
+            y: page.getHeight() - margin - headerHeight + 42,
             width: logoDims.width,
             height: logoDims.height,
         });

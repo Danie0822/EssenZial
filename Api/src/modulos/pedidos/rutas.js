@@ -30,13 +30,14 @@ async function generarFactura(req, res, next) {
         const { id_pedido, nombre } = req.params;
         let result = await controlador.vistaDetalle(id_pedido);
 
-        if (!result || !Array.isArray(result[0])) {
+        // Verificar si el resultado es un array y contiene datos
+        if (!result || !Array.isArray(result) || result.length === 0) {
             console.log('Detalles del pedido no encontrados o en formato incorrecto.');
             return res.status(404).send('No se encontraron detalles del pedido.');
         }
 
-        let items = result[0];
-
+        let items = result;
+        
         if (items.length === 0) {
             console.log('Detalles del pedido vacíos.');
             return res.status(404).send('No se encontraron detalles del pedido.');
@@ -46,9 +47,8 @@ async function generarFactura(req, res, next) {
         let fecha = new Date(items[0].fecha_pedido).toLocaleDateString('es-ES'); // Tomar la fecha del primer elemento
         let total = 0; // Inicializar el total
 
-        // Recorrer los items para acumular el total
         items.forEach(item => {
-            total += item.subtotal; // Acumular el subtotal de cada item
+            total += item.subtotal; 
         });
 
         // Configuración del reporte
@@ -73,6 +73,7 @@ async function generarFactura(req, res, next) {
         next(error);
     }
 }
+
 
 
 async function generarReporte(req, res, next) {
