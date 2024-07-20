@@ -5,7 +5,7 @@ const respuestas = require('../../red/respuestas');
 const controlador = require('./index');
 const seguridad = require('../seguridad/seguridad');
 const Validador = require('../recursos/validator');
-const { generarReportePDF } = require('../recursos/reportes');
+const { generarReportePDF } = require('../recursos/reportes_seccionados');
 // Middleware para validar el formato de los datos
 function validarDatos(nombreCliente, apellidoCLiente, correoCliente, claveCliente, telefonoCliente, estado, req, res, next) {
     const nombreValidado = Validador.validarLongitud(nombreCliente, 255, 'El nombre debe ser obligatorio', req, res, next);
@@ -68,7 +68,7 @@ router.put('/update/cliente/clave', actualizarClave);
 router.put('/update/vali/cliente', seguridad('cliente'), actualizarVa);
 router.get('/reporte/view/:nombre',seguridad('admin'), generarReporte);
 
-// Funciones
+// Funciones 
 async function generarReporte(req, res, next) {
     try {
         let items = await controlador.todos();
@@ -78,18 +78,28 @@ async function generarReporte(req, res, next) {
             estado_cliente: item.estado_cliente ? 'Activo' : 'Inactivo'
         }));
         const { nombre: username = 'Administrador' } = req.params;
+
+        // Crear secciones separadas
+        const activos = items.filter(item => item.estado_cliente === 'Activo');
+        const inactivos = items.filter(item => item.estado_cliente === 'Inactivo');
+
+        const secciones = [
+            { titulo: 'Clientes activos', items: activos },
+            { titulo: 'Clientes inactivos', items: inactivos }
+        ];
+
         // Configuración del reporte
         const config = {
-            items,
+            secciones,
             username,
-            titulo: 'Reporte de Clientes',
-            columnas: [
+            titulo: 'Reporte de clientes',
+            columnas: [ 
                 { key: 'nombre_completo', label: 'Nombre completo' },
-                { key: 'correo_cliente', label: 'Correo' },
-                { key: 'estado_cliente', label: 'Estado' },
+                { key: 'correo_cliente', label: 'Correo' }
             ],
             nombreArchivo: 'reporte_clientes'
         };
+
         await generarReportePDF(config, res); // Generar el reporte
     } catch (error) {
         next(error);
